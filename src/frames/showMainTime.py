@@ -28,8 +28,8 @@ class MyMainTimeFrame(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
 
-        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=('Radioland', 50), text_color="green")
-        self.lblTime.grid(row=0, column=0, padx=20, pady=20, sticky="e")
+        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=('Pendule Ornamental', 100), text_color="green", fg_color="black")
+        self.lblTime.pack(expand=True)
 
 
     def timeString(self):

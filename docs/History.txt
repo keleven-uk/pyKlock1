@@ -28,6 +28,20 @@ Current version of Klock is written in Python using different GUI frameworks
 	Klock 2 - Flet.
 
 
+V2024.2     [12 September 2024]
+
+	Completed the update of the status bar.
+		The status bar shows the date, the status of Caps Lock, Scroll Lock and Num Lock, idle time of the PC.
+		The three elements of the status bat are laid out okay, but not ideal.
+		The background is set to black and the foreground colour is green.
+	Changed the font for the main time to be The Display St - it looks better especially since it is monospaced.
+		The background is set to black and the foreground colour is green.
+	Changed the position of the menu buttons to be at the top centre of the app
+		The background is set to black and the foreground colour is green.
+
+	The colours are hard coded for the moment as is the font.
+
+
 V2024.1		[9 September 2024]
 
 	Basic implementation of Klock.

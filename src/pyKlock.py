@@ -46,11 +46,11 @@ class Klock(ctk.CTk):
         ctk.set_default_color_theme("dark-blue")
 
         #  Dimensions of the window
-        appWidth, appHeight = (300, 240)
+        appWidth, appHeight = (350, 240)
 
         self.title("Klock")
         self.geometry(f"{appWidth}x{appHeight}")
-        #self.grid_rowconfigure((1), weight=1)
+        self.configure(fg_color="black")
 
         #  Create the fram for the menu/buttons.
         self.menuButtons = myMenuButtons.MyMenuButtonsFrame(self)
@@ -59,12 +59,17 @@ class Klock(ctk.CTk):
         #  Create the frame for the main time text.
         self.mainTime = myMainTime.MyMainTimeFrame(self)
         self.mainTime.pack(expand=True)
-        self.after(1000, self.mainTime.update)              #  Will update the time and the status bar.
+        self.after(1000, self.update)              #  Will update the time and status bar.
 
         #  Create the fram for the status bar.
         self.StatusBar = myStatusBar.MyStatusBarFrame(self)
         self.StatusBar.pack()
 
+    def update(self):
+        """  Update the time and status bar.
+        """
+        self.mainTime.update()
+        self.StatusBar.update()
 
 
 

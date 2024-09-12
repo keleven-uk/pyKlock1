@@ -17,7 +17,11 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import time
+
 import customtkinter as ctk
+
+import src.utils.klock_utils as utils
 
 
 class MyStatusBarFrame(ctk.CTkFrame):
@@ -26,14 +30,24 @@ class MyStatusBarFrame(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
 
-        self.lblDate = ctk.CTkLabel(master=self, text="date")
-        self.lblDate.grid(row=0, column=0, sticky="w")
+        self.configure(fg_color="black")
 
-        self.lblStatus = ctk.CTkLabel(master=self, text="status")
-        self.lblStatus.grid(row=0, column=1, padx=20, pady=20, sticky="ew")
+        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color="green", fg_color="black")       #  padx - left/right
+        self.lblDate.grid(row=0, column=0, padx=(0,20), pady=(0,0), sticky="sw")                          #  pady - top/bottom
 
-        self.lblIdle = ctk.CTkLabel(master=self, text="idle")
-        self.lblIdle.grid(row=0, column=2, sticky="e")
+        self.lblStatus = ctk.CTkLabel(master=self, text="status", text_color="green", fg_color="black")
+        self.lblStatus.grid(row=0, column=1, padx=(20,20), pady=(0,0), sticky="sew")
+
+        self.lblIdle = ctk.CTkLabel(master=self, text="idle", text_color="green", fg_color="black")
+        self.lblIdle.grid(row=0, column=2, padx=(20,0), pady=(0,0), sticky="se")
+
+    def update(self):
+        """  Update the status bar [date - status - idle time]
+        """
+        self.lblDate.configure(text=time.strftime("%A %d %B %Y"))
+        self.lblStatus.configure(text=utils.get_state())
+        self.lblIdle.configure(text=utils.get_idle_duration())
+        self.after(1000, self.update)
 
 
 
