@@ -20,9 +20,6 @@
 
 import customtkinter as ctk
 
-#import src.selectTime as time
-import src.utils.klock_utils as utils
-
 import src.frames.showMenuButtons as myMenuButtons
 import src.frames.showMainTime    as myMainTime
 import src.frames.showStatusBar   as myStatusBar
@@ -33,26 +30,31 @@ class Klock(ctk.CTk):
     """
     def __init__(self):
 
-        #  Call the constructor method of the parent class
+        #  Call the constructor method of the parent class.
         super().__init__()
 
-        #  Sets the appearance of the window
-        #  Supported modes : Light, Dark, System
-        #  "System" sets the appearance mode to the appearance mode of the system
+        #  Sets the appearance of the window.
+        #  Supported modes : Light, Dark, System.
+        #  "System" sets the appearance mode to the appearance mode of the system.
         ctk.set_appearance_mode("Dark")
 
-        #  Sets the colour of the widgets in the window
-        #  Supported themes : green, dark-blue, blue
+        #  Sets the colour of the widgets in the window.
+        #  Supported themes : green, dark-blue, blue.
         ctk.set_default_color_theme("dark-blue")
 
         #  Dimensions of the window
-        appWidth, appHeight = (350, 240)
+        appWidth, appHeight = (300, 160)
 
         self.title("Klock")
         self.geometry(f"{appWidth}x{appHeight}")
         self.configure(fg_color="black")
 
-        #  Create the fram for the menu/buttons.
+        # Using tkinter direct to remove the default title bar. transparency and always on top.
+        self.overrideredirect(True)
+        self.wm_attributes("-transparentcolor", "black")
+        self.attributes("-topmost", True)
+
+        #  Create the from for the menu/buttons.
         self.menuButtons = myMenuButtons.MyMenuButtonsFrame(self)
         self.menuButtons.pack()
 
@@ -61,7 +63,7 @@ class Klock(ctk.CTk):
         self.mainTime.pack(expand=True)
         self.after(1000, self.update)              #  Will update the time and status bar.
 
-        #  Create the fram for the status bar.
+        #  Create the from for the status bar.
         self.StatusBar = myStatusBar.MyStatusBarFrame(self)
         self.StatusBar.pack()
 

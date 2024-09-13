@@ -28,8 +28,20 @@ class MyMainTimeFrame(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
 
-        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=('Pendule Ornamental', 100), text_color="green", fg_color="black")
+        self.master = master
+
+        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=("Pendule Ornamental", 100), text_color="green", fg_color="black")
         self.lblTime.pack(expand=True)
+
+        #  Using tkinter direct to bind the move window function to the left moue button press.
+        self.lblTime.bind("<B1-Motion>", self.move_window)
+
+
+    def move_window(self, event):
+        """  Moves the window when the mouse is left clicked and moved.
+
+        """
+        self.master.geometry(f"+{event.x_root}+{event.y_root}")
 
 
     def timeString(self):

@@ -32,8 +32,8 @@ class MyStatusBarFrame(ctk.CTkFrame):
 
         self.configure(fg_color="black")
 
-        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color="green", fg_color="black")       #  padx - left/right
-        self.lblDate.grid(row=0, column=0, padx=(0,20), pady=(0,0), sticky="sw")                          #  pady - top/bottom
+        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color="green", fg_color="black")       #  padx - left/right.
+        self.lblDate.grid(row=0, column=0, padx=(0,20), pady=(0,0), sticky="sw")                          #  pady - top/bottom.
 
         self.lblStatus = ctk.CTkLabel(master=self, text="status", text_color="green", fg_color="black")
         self.lblStatus.grid(row=0, column=1, padx=(20,20), pady=(0,0), sticky="sew")
@@ -42,7 +42,7 @@ class MyStatusBarFrame(ctk.CTkFrame):
         self.lblIdle.grid(row=0, column=2, padx=(20,0), pady=(0,0), sticky="se")
 
     def update(self):
-        """  Update the status bar [date - status - idle time]
+        """  Update the status bar [date - status - idle time].
         """
         self.lblDate.configure(text=time.strftime("%A %d %B %Y"))
         self.lblStatus.configure(text=utils.get_state())

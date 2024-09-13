@@ -48,9 +48,9 @@ if __name__ == "__main__":
     my_logger.info(f"  Logger path {LOGGER_PATH}")
 
 
-    # Create an instance of the App class
+    # Create an instance of the App class.
     app = Klock.Klock()
-    # Run the mainloop() method to start the application
+    # Run the mainloop() method to start the application.
     app.mainloop()
 
 

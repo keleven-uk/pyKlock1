@@ -26,15 +26,22 @@ class MyMenuButtonsFrame(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
 
+        self.master = master
+
         self.configure(fg_color="black")
 
-        self.se = ctk.CTkSegmentedButton(self, values=["Type", "Colour", "Font"], command=self.callback, unselected_color="black", text_color="green", fg_color="black")
+        self.se = ctk.CTkSegmentedButton(self, values=["Type", "Colour", "Font", "Exit"],
+                                         command=self.callback, unselected_color="black", text_color="green", fg_color="black")
         self.se.grid(row=0, column=1, padx=(20, 20), sticky="new")
 
 
-    # Callback function to handle segmented button clicks
+    # Callback function to handle segmented button clicks.
     def callback(self, value):
-        pass
+        print(f"{value}")
+
+        match value:
+            case "Exit":
+                self.master.destroy()
 
 
 
