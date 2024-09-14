@@ -33,26 +33,26 @@ from src.projectPaths import LOGGER_PATH, CONFIG_PATH
 
 if __name__ == "__main__":
 
-    my_logger  = Logger.get_logger(str(LOGGER_PATH))    # Create the logger.
+    myLogger = Logger.get_logger(str(LOGGER_PATH))    # Create the logger.
 
-    my_logger.info("-" * 100)
+    myLogger.info("-" * 100)
 
-    my_config  = Config.Config(CONFIG_PATH, my_logger)  # Create the config.
+    myConfig  = Config.Config(CONFIG_PATH, myLogger)  # Create the config.
 
-    my_logger.info(f"  Running {my_config.NAME} Version {my_config.VERSION} ")
-    my_logger.debug(f" {platform.uname()}")
-    my_logger.debug(f" Python Version {platform.python_version()}")
-    my_logger.debug("")
+    myLogger.info(f"  Running {myConfig.NAME} Version {myConfig.VERSION} ")
+    myLogger.debug(f" {platform.uname()}")
+    myLogger.debug(f" Python Version {platform.python_version()}")
+    myLogger.debug("")
 
-    my_logger.info(f"  Config path {CONFIG_PATH}")
-    my_logger.info(f"  Logger path {LOGGER_PATH}")
+    myLogger.info(f"  Config path {CONFIG_PATH}")
+    myLogger.info(f"  Logger path {LOGGER_PATH}")
 
 
     # Create an instance of the App class.
-    app = Klock.Klock()
+    app = Klock.Klock(myLogger, myConfig)
     # Run the mainloop() method to start the application.
     app.mainloop()
 
 
-    my_logger.info(f"  Ending {my_config.NAME} Version {my_config.VERSION} ")
-    my_logger.info("=" * 100)
+    myLogger.info(f"  Ending {myConfig.NAME} Version {myConfig.VERSION} ")
+    myLogger.info("=" * 100)

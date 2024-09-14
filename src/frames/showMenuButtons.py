@@ -23,21 +23,47 @@ import customtkinter as ctk
 class MyMenuButtonsFrame(ctk.CTkFrame):
     """  A class that creates the frame for the menu / buttons.
     """
-    def __init__(self, master):
+    def __init__(self, master, myConfig, myLogger):
         super().__init__(master)
 
-        self.master = master
+        self.master   = master
+        self.myConfig = myConfig
+        self.myLogger = myLogger
 
-        self.configure(fg_color="black")
+        self.configure(fg_color=myConfig.BACKGROUND)
 
         self.se = ctk.CTkSegmentedButton(self, values=["Type", "Colour", "Font", "Exit"],
-                                         command=self.callback, unselected_color="black", text_color="green", fg_color="black")
+                                         command=self.callback, unselected_color=myConfig.BACKGROUND, text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)
         self.se.grid(row=0, column=1, padx=(20, 20), sticky="new")
 
 
     # Callback function to handle segmented button clicks.
     def callback(self, value):
-        print(f"{value}")
+        """  Called when the Exit button is pressed.
+             Saves the window position before calling destroy.
+                The windows position is obtained using tkinter direct.
+
+             The app's size if fixed at 300x150 at the moment, but might not be in the future - so we save for the future.
+        """
+        self.master.update_idletasks()              #  To make sure the app location had been updated.
+        appGeometry = self.master.geometry()
+        appWidth    = self.master.winfo_width()
+        appHeight   = self.master.winfo_height()
+        appXpos     = self.master.winfo_rootx()
+        appYpos     = self.master.winfo_rooty()
+
+        self.myLogger.debug(f" Window Geom   = {appGeometry}")
+        self.myLogger.debug(f" Window Width  = {appWidth}")
+        self.myLogger.debug(f" Window Height = {appHeight}")
+        self.myLogger.debug(f" Window X pos  = {appXpos}")
+        self.myLogger.debug(f" Window Y pos  = {appYpos}")
+
+        self.myConfig.WIN_WIDTH  = appWidth
+        self.myConfig.WIN_HEIGHT = appHeight
+        self.myConfig.X_POS      = appXpos
+        self.myConfig.Y_POS      = appYpos
+
+        self.myConfig.writeConfig()
 
         match value:
             case "Exit":

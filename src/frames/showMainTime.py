@@ -25,12 +25,12 @@ import customtkinter as ctk
 class MyMainTimeFrame(ctk.CTkFrame):
     """  A class that creates the frame for the main time display.
     """
-    def __init__(self, master):
+    def __init__(self, master, myConfig):
         super().__init__(master)
 
         self.master = master
 
-        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=("Pendule Ornamental", 100), text_color="green", fg_color="black")
+        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=("Pendule Ornamental", 100), text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)
         self.lblTime.pack(expand=True)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.

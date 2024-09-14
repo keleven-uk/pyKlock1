@@ -192,15 +192,15 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.3",
+        config["INFO"] = {"myVERSION": "2024.4",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#ffffff",
                             "background" : "#80ff80",
                             "transparent": True}
 
-        config["WINDOW"] = {"width" :550,
-                            "height":200,
+        config["WINDOW"] = {"width" :300,
+                            "height":150,
                             "x_pos" :100,
                             "y_pos" :100}
 

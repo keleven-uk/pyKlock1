@@ -132,6 +132,7 @@ $RECYCLE.BIN/
 *.log.*
 
 # local files
+output/
 ruff.toml
 
 # End of https://www.gitignore.io/api/python,windows

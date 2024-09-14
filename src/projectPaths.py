@@ -25,14 +25,18 @@
      Also, holds some common constants used in the project.
 """
 
+import sys
 import pathlib
 
 
 PROJECT_PATH  = pathlib.Path(__file__).parent
 MAIN_PATH     = pathlib.Path(__file__).parent.parent
 
-CONFIG_PATH   = MAIN_PATH / "config.toml"
-LOGGER_PATH   = MAIN_PATH / "logs/pyKlock.log"
-
-
-
+#  If running as an executable i.e. from using auto-py-to-exe.
+#  Some of the paths needs to be the working directory.
+if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+    CONFIG_PATH   = "config.toml"
+    LOGGER_PATH   = "pyKlock.log"
+else:
+    CONFIG_PATH   = MAIN_PATH / "config.toml"
+    LOGGER_PATH   = MAIN_PATH / "logs/pyKlock.log"

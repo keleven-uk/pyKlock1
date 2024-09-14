@@ -27,19 +27,19 @@ import src.utils.klock_utils as utils
 class MyStatusBarFrame(ctk.CTkFrame):
     """  A class that creates the frame for the status bar.
     """
-    def __init__(self, master):
+    def __init__(self, master, myConfig):
         super().__init__(master)
 
-        self.configure(fg_color="black")
+        self.configure(fg_color=myConfig.BACKGROUND)
 
-        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color="green", fg_color="black")       #  padx - left/right.
-        self.lblDate.grid(row=0, column=0, padx=(0,20), pady=(0,0), sticky="sw")                          #  pady - top/bottom.
+        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)       #  padx - left/right.
+        self.lblDate.grid(row=0, column=0, padx=(0,0), pady=(0,0), sticky="sw")                                                  #  pady - top/bottom.
 
-        self.lblStatus = ctk.CTkLabel(master=self, text="status", text_color="green", fg_color="black")
+        self.lblStatus = ctk.CTkLabel(master=self, text="status", text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)
         self.lblStatus.grid(row=0, column=1, padx=(20,20), pady=(0,0), sticky="sew")
 
-        self.lblIdle = ctk.CTkLabel(master=self, text="idle", text_color="green", fg_color="black")
-        self.lblIdle.grid(row=0, column=2, padx=(20,0), pady=(0,0), sticky="se")
+        self.lblIdle = ctk.CTkLabel(master=self, text="idle", text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)
+        self.lblIdle.grid(row=0, column=2, padx=(0,0), pady=(0,0), sticky="se")
 
     def update(self):
         """  Update the status bar [date - status - idle time].

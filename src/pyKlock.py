@@ -28,7 +28,7 @@ class Klock(ctk.CTk):
     """  The main Klock class, when call will create the Klock main window.
          The class should be called from the main script.
     """
-    def __init__(self):
+    def __init__(self, myLogger, myConfig):
 
         #  Call the constructor method of the parent class.
         super().__init__()
@@ -43,28 +43,34 @@ class Klock(ctk.CTk):
         ctk.set_default_color_theme("dark-blue")
 
         #  Dimensions of the window
-        appWidth, appHeight = (300, 160)
+
+        myLogger.debug(f" Window Width  = {myConfig.WIN_WIDTH}")
+        myLogger.debug(f" Window Height = {myConfig.WIN_HEIGHT}")
 
         self.title("Klock")
-        self.geometry(f"{appWidth}x{appHeight}")
-        self.configure(fg_color="black")
+        self.geometry(f"{myConfig.WIN_WIDTH}x{myConfig.WIN_HEIGHT}+{myConfig.X_POS}+{myConfig.Y_POS}")
+        self.resizable(False, False)
+        self.configure(fg_color=myConfig.BACKGROUND)
 
         # Using tkinter direct to remove the default title bar. transparency and always on top.
         self.overrideredirect(True)
-        self.wm_attributes("-transparentcolor", "black")
+        self.wm_attributes("-transparentcolor", myConfig.BACKGROUND)
         self.attributes("-topmost", True)
 
         #  Create the from for the menu/buttons.
-        self.menuButtons = myMenuButtons.MyMenuButtonsFrame(self)
+        myLogger.info(f"  Creating Menu Buttons")
+        self.menuButtons = myMenuButtons.MyMenuButtonsFrame(self, myConfig, myLogger)
         self.menuButtons.pack()
 
         #  Create the frame for the main time text.
-        self.mainTime = myMainTime.MyMainTimeFrame(self)
+        myLogger.info(f"  Creating Main Time")
+        self.mainTime = myMainTime.MyMainTimeFrame(self, myConfig)
         self.mainTime.pack(expand=True)
         self.after(1000, self.update)              #  Will update the time and status bar.
 
         #  Create the from for the status bar.
-        self.StatusBar = myStatusBar.MyStatusBarFrame(self)
+        myLogger.info(f"  Creating Status Bar")
+        self.StatusBar = myStatusBar.MyStatusBarFrame(self, myConfig)
         self.StatusBar.pack()
 
     def update(self):

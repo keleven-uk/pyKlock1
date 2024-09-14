@@ -27,15 +27,26 @@ Current version of Klock is written in Python using different GUI frameworks
 	Klock 1 - CustomTkinter  [this]
 	Klock 2 - Flet.
 
+V2024.4	    [14 September 2024]
+
+	Load and saves options to a config file - config.toml.
+		Option are - App Name, App Version.
+		             App X position, App Y position - SO, the screen location is remembered and re-used.
+		             App width and height - cannot be changed at the moment.
+		             Foreground colour and background colour - cannot be changed at the moment.
+
+	Added pyinstaller.jason so that auto-py-to-exe.exe can do it's stuff.
+		Needs to be to a directory and not a single file, because CustomTKinter says so.
+
 
 V2024.3     [13 September 2024]
 
-		Using tkinter direct commands to
-			Remove the default title bar.
-			Make the main window transparent - current transparent colour is black [still hard wired].
-			Make the app always on top.
-			Drag the app when left mouse click on the main time text.
-		Added an Exit option to the menu buttons.
+	Using tkinter direct commands to
+		Remove the default title bar.
+		Make the main window transparent - current transparent colour is black [still hard wired].
+		Make the app always on top.
+		Drag the app when left mouse click on the main time text.
+	Added an Exit option to the menu buttons.
 
 
 V2024.2     [12 September 2024]
