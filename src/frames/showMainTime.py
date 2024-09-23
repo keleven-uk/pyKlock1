@@ -28,9 +28,17 @@ class MyMainTimeFrame(ctk.CTkFrame):
     def __init__(self, master, myConfig):
         super().__init__(master)
 
-        self.master = master
+        self.master   = master
+        self.myConfig = myConfig
+        self.create_widgets()
 
-        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=("Pendule Ornamental", 100), text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)
+
+    def create_widgets(self):
+        """  Create the main time display.
+        """
+        self.configure(fg_color=self.myConfig.BACKGROUND)
+        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=("Pendule Ornamental", 100),
+                                    text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.lblTime.pack(expand=True)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.
@@ -53,6 +61,11 @@ class MyMainTimeFrame(ctk.CTkFrame):
     def update(self):
         """  Updates the main time text.
         """
+        print("Update Time")
         self.lblTime.configure(text=self.timeString())
-        self.after(1000, self.update)
+        self.lblTime.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+
+
+
+
 

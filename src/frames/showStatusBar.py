@@ -29,25 +29,40 @@ class MyStatusBarFrame(ctk.CTkFrame):
     """
     def __init__(self, master, myConfig):
         super().__init__(master)
+        self.myConfig = myConfig
+        self.create_widgets()
 
-        self.configure(fg_color=myConfig.BACKGROUND)
 
-        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)       #  padx - left/right.
-        self.lblDate.grid(row=0, column=0, padx=(0,0), pady=(0,0), sticky="sw")                                                  #  pady - top/bottom.
+    def create_widgets(self):
+        """  Create the main time display.
+        """
+        self.configure(fg_color=self.myConfig.BACKGROUND)
 
-        self.lblStatus = ctk.CTkLabel(master=self, text="status", text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)
+        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)       #  padx - left/right.
+        self.lblDate.grid(row=0, column=0, padx=(0,0), pady=(0,0), sticky="sw")                                                             #  pady - top/bottom.
+
+        self.lblStatus = ctk.CTkLabel(master=self, text="status", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.lblStatus.grid(row=0, column=1, padx=(20,20), pady=(0,0), sticky="sew")
 
-        self.lblIdle = ctk.CTkLabel(master=self, text="idle", text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)
+        self.lblIdle = ctk.CTkLabel(master=self, text="idle", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.lblIdle.grid(row=0, column=2, padx=(0,0), pady=(0,0), sticky="se")
 
     def update(self):
         """  Update the status bar [date - status - idle time].
         """
+        print("Update Status Bar")
         self.lblDate.configure(text=time.strftime("%A %d %B %Y"))
         self.lblStatus.configure(text=utils.get_state())
         self.lblIdle.configure(text=utils.get_idle_duration())
-        self.after(1000, self.update)
+        self.configure(fg_color=self.myConfig.BACKGROUND)
+        self.lblDate.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+        self.lblStatus.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+        self.lblIdle.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+
+
+
+
+
 
 
 

@@ -33,6 +33,8 @@ class Klock(ctk.CTk):
         #  Call the constructor method of the parent class.
         super().__init__()
 
+        self.myConfig = myConfig
+
         #  Sets the appearance of the window.
         #  Supported modes : Light, Dark, System.
         #  "System" sets the appearance mode to the appearance mode of the system.
@@ -50,7 +52,7 @@ class Klock(ctk.CTk):
         self.title("Klock")
         self.geometry(f"{myConfig.WIN_WIDTH}x{myConfig.WIN_HEIGHT}+{myConfig.X_POS}+{myConfig.Y_POS}")
         self.resizable(False, False)
-        self.configure(fg_color=myConfig.BACKGROUND)
+        self.configure(fg_color=self.myConfig.BACKGROUND)
 
         # Using tkinter direct to remove the default title bar. transparency and always on top.
         self.overrideredirect(True)
@@ -66,6 +68,7 @@ class Klock(ctk.CTk):
         myLogger.info(f"  Creating Main Time")
         self.mainTime = myMainTime.MyMainTimeFrame(self, myConfig)
         self.mainTime.pack(expand=True)
+
         self.after(1000, self.update)              #  Will update the time and status bar.
 
         #  Create the from for the status bar.
@@ -76,8 +79,14 @@ class Klock(ctk.CTk):
     def update(self):
         """  Update the time and status bar.
         """
+        self.configure(fg_color=self.myConfig.BACKGROUND)
+        self.menuButtons.update()
         self.mainTime.update()
         self.StatusBar.update()
+        self.after(1000, self.update)
+
+
+
 
 
 

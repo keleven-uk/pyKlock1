@@ -19,6 +19,8 @@
 
 import customtkinter as ctk
 
+import src.windows.SelectColourWindow as cw
+
 
 class MyMenuButtonsFrame(ctk.CTkFrame):
     """  A class that creates the frame for the menu / buttons.
@@ -29,12 +31,17 @@ class MyMenuButtonsFrame(ctk.CTkFrame):
         self.master   = master
         self.myConfig = myConfig
         self.myLogger = myLogger
+        self.create_widgets()
 
-        self.configure(fg_color=myConfig.BACKGROUND)
 
-        self.se = ctk.CTkSegmentedButton(self, values=["Type", "Colour", "Font", "Exit"],
-                                         command=self.callback, unselected_color=myConfig.BACKGROUND, text_color=myConfig.FOREGROUND, fg_color=myConfig.BACKGROUND)
-        self.se.grid(row=0, column=1, padx=(20, 20), sticky="new")
+    def create_widgets(self):
+        """  Create the main time display.
+        """
+        self.configure(fg_color=self.myConfig.BACKGROUND)
+        self.sbMenu = ctk.CTkSegmentedButton(self, values=["Type", "Colour", "Font", "Exit"],
+                                             command=self.callback, unselected_color=self.myConfig.BACKGROUND,
+                                             text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+        self.sbMenu .grid(row=0, column=1, padx=(20, 20), sticky="new")
 
 
     # Callback function to handle segmented button clicks.
@@ -45,6 +52,20 @@ class MyMenuButtonsFrame(ctk.CTkFrame):
 
              The app's size if fixed at 300x150 at the moment, but might not be in the future - so we save for the future.
         """
+        match value:
+            case "Exit":
+                self.savePosition()
+                self.master.destroy()
+            case "Colour":
+                self.showColourWindow()
+                self.sbMenu.configure(unselected_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+
+
+    def showColourWindow(self):
+        cw.ColourWindow(self.master, self.myConfig)
+
+
+    def savePosition(self):
         self.master.update_idletasks()              #  To make sure the app location had been updated.
         appGeometry = self.master.geometry()
         appWidth    = self.master.winfo_width()
@@ -65,9 +86,10 @@ class MyMenuButtonsFrame(ctk.CTkFrame):
 
         self.myConfig.writeConfig()
 
-        match value:
-            case "Exit":
-                self.master.destroy()
-
+    def update(self):
+        """  Update the Menu Buttons].
+        """
+        print("Update Menu Bar")
+        self.sbMenu.configure(unselected_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
 
 

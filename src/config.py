@@ -74,24 +74,30 @@ class Config():
     def FOREGROUND(self):
         """  Returns the window foreground colour.
         """
-        return self.config["COLOUR"].get("foreground", "#ffffff")
+        value = self.config["COLOUR"].get("foreground", "#00ff00")
+        #print(f"getting foreground to {value}")
+        return value
 
     @FOREGROUND.setter
     def FOREGROUND(self, value):
         """  Sets the window foreground colour.
         """
+        #print(f"setting foreground to {value}")
         self.config["COLOUR"]["foreground"] = value
 
     @property
     def BACKGROUND(self):
         """  Returns the window background colour.
         """
-        return self.config["COLOUR"].get("background", "400")
+        value = self.config["COLOUR"].get("background", "000000")
+        #print(f"getting background to {value}")
+        return value
 
     @BACKGROUND.setter
     def BACKGROUND(self, value):
         """  Sets the window background colour.
         """
+        #print(f"setting background to {value}")
         self.config["COLOUR"]["background"] = value
 
     @property
@@ -170,6 +176,8 @@ class Config():
     def writeConfig(self):
         """ Write the current config file.
         """
+        print("Write the current config file.")
+        self.logger.info("writing config.")
         strNow  = datetime.datetime.now()
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         st_toml = toml.dumps(self.config)
@@ -188,15 +196,16 @@ class Config():
         """ Write a default configure file.
             This is hard coded  ** TO KEEP UPDATED **
         """
+        print("Write a default configure file.")
         strNow  = datetime.datetime.now()
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.4",
+        config["INFO"] = {"myVERSION": "2024.5",
                           "myNAME"   : "pyKlock"}
 
-        config["COLOUR"] = {"foreground" : "#ffffff",
-                            "background" : "#80ff80",
+        config["COLOUR"] = {"foreground" : "#00ff00",
+                            "background" : "#000000",
                             "transparent": True}
 
         config["WINDOW"] = {"width" :300,
