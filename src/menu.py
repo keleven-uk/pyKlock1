@@ -1,6 +1,8 @@
 ###############################################################################################################
-#    showMainTime   Copyright (C) <2024>  <Kevin Scott>                                                       #
+#    SelectColourWindow.py   Copyright (C) <2024>  <Kevin Scott>                                              #
 #    For changes see history.txt                                                                              #
+#                                                                                                             #
+#    Menu used is from https://github.com/Akascape/CTkMenuBar.                                                #
 #                                                                                                             #
 ###############################################################################################################
 #                                                                                                             #
@@ -17,54 +19,42 @@
 #                                                                                                             #
 ###############################################################################################################
 
-import time
 
-import customtkinter as ctk
-
-
-class MyMainTimeFrame(ctk.CTkFrame):
-    """  A class that creates the frame for the main time display.
-    """
-    def __init__(self, master, myConfig):
-        super().__init__(master)
-
-        self.master   = master
-        self.myConfig = myConfig
-        self.create_widgets()
+from CTkMenuBar import *
 
 
-    def create_widgets(self):
-        """  Create the main time display.
-        """
-        self.configure(fg_color=self.myConfig.BACKGROUND)
-        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=("Pendule Ornamental", 100),
-                                    text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
-        self.lblTime.pack(expand=True)
+class myMenu(CTkMenuBar):
 
-        #  Using tkinter direct to bind the move window function to the left moue button press.
-        self.lblTime.bind("<B1-Motion>", self.move_window)
+        def __init__(self, master):
+            super().__init__(master)
 
+            menu = CTkMenuBar(master)
+            button_1 = menu.add_cascade("File")
+            button_2 = menu.add_cascade("Edit")
+            button_3 = menu.add_cascade("Settings")
+            button_4 = menu.add_cascade("About")
 
-    def move_window(self, event):
-        """  Moves the window when the mouse is left clicked and moved.
+            dropdown1 = CustomDropdownMenu(widget=button_1)
+            dropdown1.add_option(option="Open", command=lambda: print("Open"))
+            dropdown1.add_option(option="Save")
 
-        """
-        self.master.geometry(f"+{event.x_root}+{event.y_root}")
+            dropdown1.add_separator()
 
+            sub_menu = dropdown1.add_submenu("Export As")
+            sub_menu.add_option(option=".TXT")
+            sub_menu.add_option(option=".PDF")
 
-    def timeString(self):
-        """  Returns the current time as a text string.
-        """
-        return time.strftime("%H:%M:%S")
+            dropdown2 = CustomDropdownMenu(widget=button_2)
+            dropdown2.add_option(option="Cut")
+            dropdown2.add_option(option="Copy")
+            dropdown2.add_option(option="Paste")
 
+            dropdown3 = CustomDropdownMenu(widget=button_3)
+            dropdown3.add_option(option="Preferences")
+            dropdown3.add_option(option="Update")
 
-    def update(self):
-        """  Updates the main time text.
-        """
-        self.lblTime.configure(text=self.timeString())
-        self.lblTime.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+            dropdown4 = CustomDropdownMenu(widget=button_4)
+            dropdown4.add_option(option="Hello World")
 
-
-
-
+            button_1.configure(text_color="green")
 

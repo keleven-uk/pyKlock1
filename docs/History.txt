@@ -30,15 +30,21 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
-V2025.5     [23 September 2024]
+V2.24.6     [23 Septemebr 2024]
+
+	Found an example of a dropdown menu at https://github.com/Akascape/CTkMenuBar.
+	Added the example to Klock - lives in src.menu.py.
+	Not sure if I will use it, so added a option menu visible - set to false.
+
+
+V2024.5     [23 September 2024]
 
 	Added a colour chooser for the foreground and background.
 		Colour picker used is from https://github.com/Akascape/CTkColorPicker.
-		This opens in a new windows, with option of Apply, Reset and Cancel.
-		Apply, writes the new coulours to config.toml.
+		This opens in a new windows, with option of Apply, Reset and Cancel - lives in src.windows.SelectColourWindow.py.
+		Apply, writes the new colours to config.toml.
 		Reset, reverts to foreground of green and a background of black.  N.B. need to apply.
-		Cancel - closed the window.
-
+		Cancel - closes the window.
 
 	Found a problem with the Segmented Button used in the main and colour picker menu.
 		The same option can not be selected twice, need to select an other first then return.

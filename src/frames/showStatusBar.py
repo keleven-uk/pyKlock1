@@ -50,7 +50,6 @@ class MyStatusBarFrame(ctk.CTkFrame):
     def update(self):
         """  Update the status bar [date - status - idle time].
         """
-        print("Update Status Bar")
         self.lblDate.configure(text=time.strftime("%A %d %B %Y"))
         self.lblStatus.configure(text=utils.get_state())
         self.lblIdle.configure(text=utils.get_idle_duration())

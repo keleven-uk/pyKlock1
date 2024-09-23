@@ -89,7 +89,6 @@ class MyMenuButtonsFrame(ctk.CTkFrame):
     def update(self):
         """  Update the Menu Buttons].
         """
-        print("Update Menu Bar")
         self.sbMenu.configure(unselected_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
 
 

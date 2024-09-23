@@ -172,11 +172,15 @@ class Config():
         """
         self.config["TIME"]["type"] = value
 
+    @property
+    def MENU_VISIBLE(self):
+        """  Return the type [format] of the displayed time.
+        """
+        return self.config["MENU"].get("visible", True)
 
     def writeConfig(self):
         """ Write the current config file.
         """
-        print("Write the current config file.")
         self.logger.info("writing config.")
         strNow  = datetime.datetime.now()
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
@@ -196,12 +200,11 @@ class Config():
         """ Write a default configure file.
             This is hard coded  ** TO KEEP UPDATED **
         """
-        print("Write a default configure file.")
         strNow  = datetime.datetime.now()
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.5",
+        config["INFO"] = {"myVERSION": "2024.6.beta",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#00ff00",
@@ -214,6 +217,8 @@ class Config():
                             "y_pos" :100}
 
         config["TIME"] = {"type": "Fuzzy Time"}
+
+        config["MENU"] = {"visible": True}
 
 
         st_toml = toml.dumps(config)

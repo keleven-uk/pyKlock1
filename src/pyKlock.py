@@ -23,6 +23,8 @@ import customtkinter as ctk
 import src.frames.showMenuButtons as myMenuButtons
 import src.frames.showMainTime    as myMainTime
 import src.frames.showStatusBar   as myStatusBar
+import src.menu as myMenu
+
 
 class Klock(ctk.CTk):
     """  The main Klock class, when call will create the Klock main window.
@@ -59,6 +61,10 @@ class Klock(ctk.CTk):
         self.wm_attributes("-transparentcolor", myConfig.BACKGROUND)
         self.attributes("-topmost", True)
 
+        if self.myConfig.MENU_VISIBLE:
+            self.menu = myMenu.myMenu(self)
+
+
         #  Create the from for the menu/buttons.
         myLogger.info(f"  Creating Menu Buttons")
         self.menuButtons = myMenuButtons.MyMenuButtonsFrame(self, myConfig, myLogger)
@@ -80,6 +86,8 @@ class Klock(ctk.CTk):
         """  Update the time and status bar.
         """
         self.configure(fg_color=self.myConfig.BACKGROUND)
+        if self.myConfig.MENU_VISIBLE:
+            self.menu.configure(bg_color=self.myConfig.BACKGROUND)
         self.menuButtons.update()
         self.mainTime.update()
         self.StatusBar.update()
