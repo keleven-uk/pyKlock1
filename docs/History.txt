@@ -3,7 +3,6 @@
 #                                                                                                             #
 #    History file for pyKlock                                                                                 #
 #                                                                                                             #
-#                                                                                                             #
 ###############################################################################################################
 #                                                                                                             #
 #    This program is free software: you can redistribute it and/or modify it under the terms of the           #
@@ -28,6 +27,12 @@ Current version of Klock is written in Python using different GUI frameworks
 	Klock 2 - Flet.
 
 Note : I use the correct spelling of colour on my side of the code.  :-)
+
+
+V2024.8     [24 September 2024]
+
+	Added a new option under Help - History.
+		This option loads the history text file into a text box for display.
 
 
 V2024.7     [24 September 2024]

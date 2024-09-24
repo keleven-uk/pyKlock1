@@ -1,4 +1,4 @@
-pyKlock2.
+pyKlock.
 
 Previous versions of Klock have existed in VB.net, Lazarus [Free Pascal] and Free Basic - and may again.
 
@@ -14,11 +14,8 @@ Using python 3.12.6 and CustonTKinter 5.2.2.
 
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
-
-
 The Klock displays the time [local], date, key status and the computers idle time.
  Key status is the status of Caps Lock, Scroll lock and Num lock.
-
 
 The foreground and background colours can be selected.
 
@@ -28,12 +25,8 @@ The Klock currently has a transparent background.
 
 The Klock should remain on top of other other windows.
 
-
-
-
-
 To install dependencies pip install -r requirements.txt
 
 For changes see history.txt
 
-Kevin Scott (C) 2024 :: pyKlock V2024.7
+Kevin Scott (C) 2024 :: pyKlock V2024.8

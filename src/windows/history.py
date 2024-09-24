@@ -1,10 +1,6 @@
 ###############################################################################################################
-#    projectPaths.py   Copyright (C) <2024>  <Kevin Scott>                                                    #
-#                                                                                                             #
-#    Holds common directory paths for the project.                                                            #
-#        Must sit in src directory                                                                            #
-#                                                                                                             #
-#     For changes see history.txt                                                                             #
+#    history.py   Copyright (C) <2024>  <Kevin Scott>                                                         #
+#    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
 #                                                                                                             #
@@ -21,24 +17,43 @@
 #                                                                                                             #
 ###############################################################################################################
 
-"""  A place to hold all the common project paths.
-     Also, holds some common constants used in the project.
-"""
+from pathlib import Path
 
-import sys
-import pathlib
+import customtkinter as ctk
+
+from src.projectPaths import HISTORY_PATH
+
+class App(ctk.CTkToplevel):
+    def __init__(self, master):
+        super().__init__(master)
+        ctk.set_appearance_mode("Dark")
+        ctk.set_default_color_theme("dark-blue")
+
+        self.geometry("1000x800+200+200")
+        self.resizable(False, False)
+
+        self.text = "History Not Found"
+        self.loadHistory()
+
+        self._create_widgets()
 
 
-PROJECT_PATH  = pathlib.Path(__file__).parent
-MAIN_PATH     = pathlib.Path(__file__).parent.parent
+    def _create_widgets(self):
+        """  Create the history display display.
+        """
+        self.grid_rowconfigure(0, weight=1)  # configure grid system
+        self.grid_columnconfigure(0, weight=1)
 
-#  If running as an executable i.e. from using auto-py-to-exe.
-#  Some of the paths needs to be the working directory.
-if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-    CONFIG_PATH  = "config.toml"
-    LOGGER_PATH  = "pyKlock.log"
-    HISTORY_PATH = "History.txt"
-else:
-    CONFIG_PATH  = MAIN_PATH / "config.toml"
-    LOGGER_PATH  = MAIN_PATH / "logs/pyKlock.log"
-    HISTORY_PATH = MAIN_PATH / "docs/History.txt"
+        self.textbox = ctk.CTkTextbox(master=self, width=400, corner_radius=0)
+        self.textbox.grid(row=0, column=0, sticky="nsew")
+        self.textbox.insert("0.0", self.historyText)
+
+    def loadHistory(self):
+        """  Loads the history file.
+             If the file is not present, the initial string is set to "History Not Found",
+             so we can ignore exceptions - can we?
+        """
+        self.historyText = HISTORY_PATH.read_text()
+
+
+

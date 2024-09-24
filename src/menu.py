@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    SelectColourWindow.py   Copyright (C) <2024>  <Kevin Scott>                                              #
+#    menu.py   Copyright (C) <2024>  <Kevin Scott>                                                            #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    Menu used is from https://github.com/Akascape/CTkMenuBar.                                                #
@@ -23,6 +23,7 @@
 import CTkMenuBar as CTkmenu
 
 import src.windows.SelectColourWindow as cw
+import src.windows.history as hist
 
 class myMenu(CTkmenu.CTkMenuBar):
     """  A class the creates the menu.
@@ -57,10 +58,16 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.dropdown2.add_option(option="Colour", command=self._showColourWindow)
 
         self.dropdown3 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp)
+        self.dropdown3.add_option(option="History", command=self._showHistory)
         self.dropdown3.add_option(option="About")
 
         self.update()
 
+
+    def _showHistory(self):
+        """  Loads the history text file into a new window.
+        """
+        hist.App(self.master)
 
     def _close(self):
         """  Called when the Exit option is chosen.  First saves the window position and colours and them closes app.
