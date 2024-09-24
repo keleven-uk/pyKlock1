@@ -24,35 +24,37 @@ import customtkinter as ctk
 
 class MyMainTimeFrame(ctk.CTkFrame):
     """  A class that creates the frame for the main time display.
+
+         mt = MyStatusBarFrame()
+         mt.update() - to update the main time colours.
     """
     def __init__(self, master, myConfig):
         super().__init__(master)
 
         self.master   = master
         self.myConfig = myConfig
-        self.create_widgets()
+        self._create_widgets()
 
 
-    def create_widgets(self):
+    def _create_widgets(self):
         """  Create the main time display.
         """
         self.configure(fg_color=self.myConfig.BACKGROUND)
-        self.lblTime = ctk.CTkLabel(master=self, text=self.timeString(), font=("Pendule Ornamental", 100),
+        self.lblTime = ctk.CTkLabel(master=self, text=self._timeString(), font=("Pendule Ornamental", 100),
                                     text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.lblTime.pack(expand=True)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.
-        self.lblTime.bind("<B1-Motion>", self.move_window)
+        self.lblTime.bind("<B1-Motion>", self._move_window)
 
 
-    def move_window(self, event):
+    def _move_window(self, event):
         """  Moves the window when the mouse is left clicked and moved.
-
         """
         self.master.geometry(f"+{event.x_root}+{event.y_root}")
 
 
-    def timeString(self):
+    def _timeString(self):
         """  Returns the current time as a text string.
         """
         return time.strftime("%H:%M:%S")
@@ -60,8 +62,9 @@ class MyMainTimeFrame(ctk.CTkFrame):
 
     def update(self):
         """  Updates the main time text.
+        Method is externally called.
         """
-        self.lblTime.configure(text=self.timeString())
+        self.lblTime.configure(text=self._timeString())
         self.lblTime.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
 
 

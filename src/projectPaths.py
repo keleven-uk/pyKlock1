@@ -34,7 +34,7 @@ MAIN_PATH     = pathlib.Path(__file__).parent.parent
 
 #  If running as an executable i.e. from using auto-py-to-exe.
 #  Some of the paths needs to be the working directory.
-if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
     CONFIG_PATH   = "config.toml"
     LOGGER_PATH   = "pyKlock.log"
 else:

@@ -30,7 +30,22 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
-V2.24.6     [23 Septemebr 2024]
+V2024.7     [24 September 2024]
+
+	Because of the sight problem with the Segmented buttons below - decided to implement the menus.
+		Current menus -
+			File - exit
+			Edit - colour [launches the colour picker]
+			Help - About  [not yet implemented]
+		The Segmented menu buttons have been removed, but not the file.
+	Also removed the Segmented button from the colour chooser window and implanted option is single buttons.
+
+	Passes ruff check .
+	Compiles to executable using pyInstaller.
+	Using python 3.12.6 and CustonTKinter 5.2.2.
+
+
+V2024.6     [23 Septemebr 2024]
 
 	Found an example of a dropdown menu at https://github.com/Akascape/CTkMenuBar.
 	Added the example to Klock - lives in src.menu.py.

@@ -26,6 +26,10 @@
    "value": "Klock"
   },
   {
+   "optionDest": "upx_dir",
+   "value": "D:/My/upx-4.2.4-win64"
+  },
+  {
    "optionDest": "clean_build",
    "value": false
   },

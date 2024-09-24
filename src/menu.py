@@ -20,41 +20,93 @@
 ###############################################################################################################
 
 
-from CTkMenuBar import *
+import CTkMenuBar as CTkmenu
+
+import src.windows.SelectColourWindow as cw
+
+class myMenu(CTkmenu.CTkMenuBar):
+    """  A class the creates the menu.
+
+        menu = myMenu()
+        menu.update() - to update the menu colours.
+
+    """
+
+    def __init__(self, master, myConfig, myLogger):
+        super().__init__(master)
+
+        self.master = master
+        self.myConfig = myConfig
+        self.myLogger = myLogger
+
+        self._create_menu()
 
 
-class myMenu(CTkMenuBar):
+    def _create_menu(self):
+        """  Creates the menu widgets.
+        """
+        self.menu = CTkmenu.CTkMenuBar(self.master)
+        self.mnuFile = self.menu.add_cascade("File")
+        self.mnuEdit = self.menu.add_cascade("Edit")
+        self.mnuHelp = self.menu.add_cascade("Help")
 
-        def __init__(self, master):
-            super().__init__(master)
+        self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile)
+        self.dropdown1.add_option(option="Exit", command=self._close)
 
-            menu = CTkMenuBar(master)
-            button_1 = menu.add_cascade("File")
-            button_2 = menu.add_cascade("Edit")
-            button_3 = menu.add_cascade("Settings")
-            button_4 = menu.add_cascade("About")
+        self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnuEdit)
+        self.dropdown2.add_option(option="Colour", command=self._showColourWindow)
 
-            dropdown1 = CustomDropdownMenu(widget=button_1)
-            dropdown1.add_option(option="Open", command=lambda: print("Open"))
-            dropdown1.add_option(option="Save")
+        self.dropdown3 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp)
+        self.dropdown3.add_option(option="About")
 
-            dropdown1.add_separator()
+        self.update()
 
-            sub_menu = dropdown1.add_submenu("Export As")
-            sub_menu.add_option(option=".TXT")
-            sub_menu.add_option(option=".PDF")
 
-            dropdown2 = CustomDropdownMenu(widget=button_2)
-            dropdown2.add_option(option="Cut")
-            dropdown2.add_option(option="Copy")
-            dropdown2.add_option(option="Paste")
+    def _close(self):
+        """  Called when the Exit option is chosen.  First saves the window position and colours and them closes app.
+        """
+        self._savePosition()
+        self.master.destroy()
 
-            dropdown3 = CustomDropdownMenu(widget=button_3)
-            dropdown3.add_option(option="Preferences")
-            dropdown3.add_option(option="Update")
 
-            dropdown4 = CustomDropdownMenu(widget=button_4)
-            dropdown4.add_option(option="Hello World")
+    def _showColourWindow(self):
+        """   Calls the colour picker window.
+        """
+        cw.ColourWindow(self.master, self.myConfig)
 
-            button_1.configure(text_color="green")
+
+    def _savePosition(self):
+        """   Saves the relevant information to the config file.
+        """
+        self.master.update_idletasks()              #  To make sure the app location had been updated.
+        appGeometry = self.master.geometry()
+        appWidth    = self.master.winfo_width()
+        appHeight   = self.master.winfo_height()
+        appXpos     = self.master.winfo_rootx()
+        appYpos     = self.master.winfo_rooty()
+
+        self.myLogger.debug(f" Window Geom   = {appGeometry}")
+        self.myLogger.debug(f" Window Width  = {appWidth}")
+        self.myLogger.debug(f" Window Height = {appHeight}")
+        self.myLogger.debug(f" Window X pos  = {appXpos}")
+        self.myLogger.debug(f" Window Y pos  = {appYpos}")
+
+        self.myConfig.WIN_WIDTH  = appWidth
+        self.myConfig.WIN_HEIGHT = appHeight
+        self.myConfig.X_POS      = appXpos
+        self.myConfig.Y_POS      = appYpos
+
+        self.myConfig.writeConfig()
+
+    def update(self):
+        """  Updates the colours of the menu from the current config.
+             Method is externally called.
+        """
+        self.mnuFile.configure(text_color=self.myConfig.FOREGROUND)
+        self.mnuEdit.configure(text_color=self.myConfig.FOREGROUND)
+        self.mnuHelp.configure(text_color=self.myConfig.FOREGROUND)
+
+        self.dropdown1.configure(text_color=self.myConfig.FOREGROUND)
+        self.dropdown2.configure(text_color=self.myConfig.FOREGROUND)
+        self.dropdown3.configure(text_color=self.myConfig.FOREGROUND)
 

@@ -20,6 +20,7 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import sys
 import platform
 
 import src.config as Config
@@ -43,6 +44,9 @@ if __name__ == "__main__":
     myLogger.debug(f" {platform.uname()}")
     myLogger.debug(f" Python Version {platform.python_version()}")
     myLogger.debug("")
+
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        myLogger.info("  Running a frozen binary - probably via pyinstaller.")
 
     myLogger.info(f"  Config path {CONFIG_PATH}")
     myLogger.info(f"  Logger path {LOGGER_PATH}")

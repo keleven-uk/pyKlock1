@@ -26,14 +26,17 @@ import src.utils.klock_utils as utils
 
 class MyStatusBarFrame(ctk.CTkFrame):
     """  A class that creates the frame for the status bar.
+
+         sb = MyStatusBarFrame()
+         sb.update() - to update the status bar colours.
     """
     def __init__(self, master, myConfig):
         super().__init__(master)
         self.myConfig = myConfig
-        self.create_widgets()
+        self._create_widgets()
 
 
-    def create_widgets(self):
+    def _create_widgets(self):
         """  Create the main time display.
         """
         self.configure(fg_color=self.myConfig.BACKGROUND)
@@ -49,6 +52,7 @@ class MyStatusBarFrame(ctk.CTkFrame):
 
     def update(self):
         """  Update the status bar [date - status - idle time].
+             Method is externally called.
         """
         self.lblDate.configure(text=time.strftime("%A %d %B %Y"))
         self.lblStatus.configure(text=utils.get_state())

@@ -20,14 +20,13 @@
 
 import customtkinter as ctk
 
-import src.frames.showMenuButtons as myMenuButtons
 import src.frames.showMainTime    as myMainTime
 import src.frames.showStatusBar   as myStatusBar
 import src.menu as myMenu
 
 
 class Klock(ctk.CTk):
-    """  The main Klock class, when call will create the Klock main window.
+    """  The main Klock class, when called will create the Klock main window.
          The class should be called from the main script.
     """
     def __init__(self, myLogger, myConfig):
@@ -61,37 +60,30 @@ class Klock(ctk.CTk):
         self.wm_attributes("-transparentcolor", myConfig.BACKGROUND)
         self.attributes("-topmost", True)
 
-        if self.myConfig.MENU_VISIBLE:
-            self.menu = myMenu.myMenu(self)
-
-
-        #  Create the from for the menu/buttons.
-        myLogger.info(f"  Creating Menu Buttons")
-        self.menuButtons = myMenuButtons.MyMenuButtonsFrame(self, myConfig, myLogger)
-        self.menuButtons.pack()
+        #  Create the main menu.
+        myLogger.info("  Creating Menu")
+        self.menu = myMenu.myMenu(self, myConfig, myLogger)
 
         #  Create the frame for the main time text.
-        myLogger.info(f"  Creating Main Time")
+        myLogger.info("  Creating Main Time")
         self.mainTime = myMainTime.MyMainTimeFrame(self, myConfig)
         self.mainTime.pack(expand=True)
 
-        self.after(1000, self.update)              #  Will update the time and status bar.
+        self.after(1000, self._update)              #  Will update the time and status bar.
 
         #  Create the from for the status bar.
-        myLogger.info(f"  Creating Status Bar")
+        myLogger.info("  Creating Status Bar")
         self.StatusBar = myStatusBar.MyStatusBarFrame(self, myConfig)
         self.StatusBar.pack()
 
-    def update(self):
+    def _update(self):
         """  Update the time and status bar.
         """
         self.configure(fg_color=self.myConfig.BACKGROUND)
-        if self.myConfig.MENU_VISIBLE:
-            self.menu.configure(bg_color=self.myConfig.BACKGROUND)
-        self.menuButtons.update()
+        self.menu.update()
         self.mainTime.update()
         self.StatusBar.update()
-        self.after(1000, self.update)
+        self.after(1000, self._update)
 
 
 

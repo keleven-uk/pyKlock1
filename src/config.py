@@ -200,11 +200,12 @@ class Config():
         """ Write a default configure file.
             This is hard coded  ** TO KEEP UPDATED **
         """
+        self.logger.info("writing default config.")
         strNow  = datetime.datetime.now()
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.6.beta",
+        config["INFO"] = {"myVERSION": "2024.7",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#00ff00",
