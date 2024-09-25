@@ -38,7 +38,9 @@ if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
     CONFIG_PATH  = "config.toml"
     LOGGER_PATH  = "pyKlock.log"
     HISTORY_PATH = "History.txt"
+    LICENSE_PATH = "LICENSE.txt"
 else:
     CONFIG_PATH  = MAIN_PATH / "config.toml"
     LOGGER_PATH  = MAIN_PATH / "logs/pyKlock.log"
     HISTORY_PATH = MAIN_PATH / "docs/History.txt"
+    LICENSE_PATH = MAIN_PATH / "LICENSE.txt"

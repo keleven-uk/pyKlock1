@@ -1,5 +1,8 @@
+CTkColorPicker==0.9.0
+CTkMenuBar==0.8
 customtkinter==5.2.2
 darkdetect==0.8.0
 packaging==24.1
+pillow==10.4.0
 pywin32==306
 toml==0.10.2

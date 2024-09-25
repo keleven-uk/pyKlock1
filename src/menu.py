@@ -23,7 +23,7 @@
 import CTkMenuBar as CTkmenu
 
 import src.windows.SelectColourWindow as cw
-import src.windows.history as hist
+import src.windows.showInfo as si
 
 class myMenu(CTkmenu.CTkMenuBar):
     """  A class the creates the menu.
@@ -59,15 +59,23 @@ class myMenu(CTkmenu.CTkMenuBar):
 
         self.dropdown3 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp)
         self.dropdown3.add_option(option="History", command=self._showHistory)
+        self.dropdown3.add_option(option="License", command=self._showLicence)
+        self.dropdown3.add_separator()
         self.dropdown3.add_option(option="About")
 
         self.update()
 
 
+    def _showLicence(self):
+        """  Loads the license text file into a new window.
+        """
+        si.showInfo(self.master, "History")
+
+
     def _showHistory(self):
         """  Loads the history text file into a new window.
         """
-        hist.App(self.master)
+        si.showInfo(self.master, "License")
 
     def _close(self):
         """  Called when the Exit option is chosen.  First saves the window position and colours and them closes app.

@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    history.py   Copyright (C) <2024>  <Kevin Scott>                                                         #
+#    showInfo.py   Copyright (C) <2024>  <Kevin Scott>                                                        #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -17,23 +17,28 @@
 #                                                                                                             #
 ###############################################################################################################
 
-from pathlib import Path
-
 import customtkinter as ctk
 
-from src.projectPaths import HISTORY_PATH
+from src.projectPaths import HISTORY_PATH, LICENSE_PATH
 
-class App(ctk.CTkToplevel):
-    def __init__(self, master):
+class showInfo(ctk.CTkToplevel):
+    """  A class to display the contents of a text file on a new top level window.
+         The text file is displayed in a text box that fill the entire window.
+         The X in the top right corner is used to close the window.
+    """
+    def __init__(self, master, infoType):
         super().__init__(master)
+
+        self.infoType = infoType
+
         ctk.set_appearance_mode("Dark")
         ctk.set_default_color_theme("dark-blue")
 
         self.geometry("1000x800+200+200")
         self.resizable(False, False)
 
-        self.text = "History Not Found"
-        self.loadHistory()
+        self.infoText = f"{self.infoType} Not Found"
+        self._loadInfo()
 
         self._create_widgets()
 
@@ -46,14 +51,19 @@ class App(ctk.CTkToplevel):
 
         self.textbox = ctk.CTkTextbox(master=self, width=400, corner_radius=0)
         self.textbox.grid(row=0, column=0, sticky="nsew")
-        self.textbox.insert("0.0", self.historyText)
+        self.textbox.insert("0.0", self.infoText)
 
-    def loadHistory(self):
-        """  Loads the history file.
-             If the file is not present, the initial string is set to "History Not Found",
+
+    def _loadInfo(self):
+        """  Loads the info file.  The type of info file is held in self.infoText
+             If the file is not present, the initial string is set to "Info Not Found",
              so we can ignore exceptions - can we?
         """
-        self.historyText = HISTORY_PATH.read_text()
+        match self.infoType:
+            case "History":
+                self.infoText = HISTORY_PATH.read_text()
+            case "License":
+                self.infoText = LICENSE_PATH.read_text()
 
 
 

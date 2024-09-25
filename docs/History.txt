@@ -29,15 +29,23 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.9		[25 September 2024]
+
+	Added a new option under Help - License.
+		This option loads the license text file into a text box for display.
+	Added a screen shot of klock to the read.me file.
+	Klock does not run un 3.13.rc2 yes - pywin32 not compatible.
+
+
 V2024.8     [24 September 2024]
 
 	Added a new option under Help - History.
 		This option loads the history text file into a text box for display.
 
 
-V2024.7     [24 September 2024]
+V2024.7     [25 September 2024]
 
-	Because of the sight problem with the Segmented buttons below - decided to implement the menus.
+	Because of the slight problem with the Segmented buttons below - decided to implement the menus.
 		Current menus -
 			File - exit
 			Edit - colour [launches the colour picker]
