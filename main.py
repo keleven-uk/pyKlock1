@@ -26,13 +26,17 @@ import platform
 import src.config as Config
 import src.logger as Logger
 import src.pyKlock as Klock
+import src.myTimer as Timer
 
-from src.projectPaths import LOGGER_PATH, CONFIG_PATH
+from src.projectPaths import LOGGER_PATH, CONFIG_PATH, HISTORY_PATH, LICENSE_PATH, RESOURCE_PATH
 
 ############################################################################################### __main__ ######
 
 
 if __name__ == "__main__":
+
+    myTimer = Timer.Timer()                      #  Create a timer.
+    myTimer.Start(True)                          #  Pass True - app start noted.
 
     myLogger = Logger.get_logger(str(LOGGER_PATH))    # Create the logger.
 
@@ -40,7 +44,7 @@ if __name__ == "__main__":
 
     myConfig  = Config.Config(CONFIG_PATH, myLogger)  # Create the config.
 
-    myLogger.info(f"  Running {myConfig.NAME} Version {myConfig.VERSION} ")
+    myLogger.info(f"  Running {myConfig.NAME} Version {myConfig.VERSION} .::. Started at {myTimer.rightNow} ")
     myLogger.debug(f" {platform.uname()}")
     myLogger.debug(f" Python Version {platform.python_version()}")
     myLogger.debug("")
@@ -48,15 +52,18 @@ if __name__ == "__main__":
     if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
         myLogger.info("  Running a frozen binary - probably via pyinstaller.")
 
-    myLogger.info(f"  Config path {CONFIG_PATH}")
-    myLogger.info(f"  Logger path {LOGGER_PATH}")
-
+    myLogger.info(f"  Config path   : {CONFIG_PATH}")
+    myLogger.info(f"  Logger path   : {LOGGER_PATH}")
+    myLogger.info(f"  History path  : {HISTORY_PATH}")
+    myLogger.info(f"  License path  : {LICENSE_PATH}")
+    myLogger.info(f"  Resource path : {RESOURCE_PATH}")
 
     # Create an instance of the App class.
-    app = Klock.Klock(myLogger, myConfig)
+    app = Klock.Klock(myLogger, myConfig, myTimer)
     # Run the mainloop() method to start the application.
     app.mainloop()
 
+    timeStop = myTimer.Stop
 
-    myLogger.info(f"  Ending {myConfig.NAME} Version {myConfig.VERSION} ")
+    myLogger.info(f"  Ending {myConfig.NAME} Version {myConfig.VERSION} .::. Completed in {timeStop} ")
     myLogger.info("=" * 100)

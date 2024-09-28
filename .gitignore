@@ -92,6 +92,8 @@ venv/
 ENV/
 env/
 env_3.12/
+env_3.12_dev
+env_3.13
 
 # Spyder project settings
 .spyderproject

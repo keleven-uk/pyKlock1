@@ -29,7 +29,16 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
-V2024.9		[25 September 2024]
+V2024.10    [28 September 2024]
+
+	Added a new option under Help - About.
+		This option loads the about Screen.
+		This displays general information about klock [Name, version etc.] and some system info.
+		Also displayed is Klock and PC up time.
+
+
+
+V2024.9     [25 September 2024]
 
 	Added a new option under Help - License.
 		This option loads the license text file into a text box for display.

@@ -29,7 +29,7 @@ class Klock(ctk.CTk):
     """  The main Klock class, when called will create the Klock main window.
          The class should be called from the main script.
     """
-    def __init__(self, myLogger, myConfig):
+    def __init__(self, myLogger, myConfig, myTimer):
 
         #  Call the constructor method of the parent class.
         super().__init__()
@@ -53,7 +53,7 @@ class Klock(ctk.CTk):
         self.title("Klock")
         self.geometry(f"{myConfig.WIN_WIDTH}x{myConfig.WIN_HEIGHT}+{myConfig.X_POS}+{myConfig.Y_POS}")
         self.resizable(False, False)
-        self.configure(fg_color=self.myConfig.BACKGROUND)
+        self.configure(fg_color=myConfig.BACKGROUND)
 
         # Using tkinter direct to remove the default title bar. transparency and always on top.
         self.overrideredirect(True)
@@ -62,7 +62,7 @@ class Klock(ctk.CTk):
 
         #  Create the main menu.
         myLogger.info("  Creating Menu")
-        self.menu = myMenu.myMenu(self, myConfig, myLogger)
+        self.menu = myMenu.myMenu(self, myConfig, myLogger, myTimer)
 
         #  Create the frame for the main time text.
         myLogger.info("  Creating Main Time")

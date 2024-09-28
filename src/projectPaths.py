@@ -44,3 +44,4 @@ else:
     LOGGER_PATH  = MAIN_PATH / "logs/pyKlock.log"
     HISTORY_PATH = MAIN_PATH / "docs/History.txt"
     LICENSE_PATH = MAIN_PATH / "LICENSE.txt"
+    RESOURCE_PATH = MAIN_PATH / "resources"

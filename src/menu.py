@@ -23,6 +23,7 @@
 import CTkMenuBar as CTkmenu
 
 import src.windows.SelectColourWindow as cw
+import src.windows.showAbout as about
 import src.windows.showInfo as si
 
 class myMenu(CTkmenu.CTkMenuBar):
@@ -33,12 +34,14 @@ class myMenu(CTkmenu.CTkMenuBar):
 
     """
 
-    def __init__(self, master, myConfig, myLogger):
+    def __init__(self, master, myConfig, myLogger, myTimer):
         super().__init__(master)
 
-        self.master = master
+        self.master   = master
         self.myConfig = myConfig
         self.myLogger = myLogger
+        self.myTimer  = myTimer
+        self.aboutTopLevel = None
 
         self._create_menu()
 
@@ -61,21 +64,27 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.dropdown3.add_option(option="History", command=self._showHistory)
         self.dropdown3.add_option(option="License", command=self._showLicence)
         self.dropdown3.add_separator()
-        self.dropdown3.add_option(option="About")
+        self.dropdown3.add_option(option="About", command=self._showAbout)
 
         self.update()
+
+
+    def _showAbout(self):
+        """  Loads the license text file into a new window.
+        """
+        self.aboutTopLevel = about.showAbout(self.master, self.myConfig, self.myTimer)
 
 
     def _showLicence(self):
         """  Loads the license text file into a new window.
         """
-        si.showInfo(self.master, "History")
+        si.showInfo(self.master, "License")
 
 
     def _showHistory(self):
         """  Loads the history text file into a new window.
         """
-        si.showInfo(self.master, "License")
+        si.showInfo(self.master, "History")
 
     def _close(self):
         """  Called when the Exit option is chosen.  First saves the window position and colours and them closes app.
@@ -94,13 +103,11 @@ class myMenu(CTkmenu.CTkMenuBar):
         """   Saves the relevant information to the config file.
         """
         self.master.update_idletasks()              #  To make sure the app location had been updated.
-        appGeometry = self.master.geometry()
         appWidth    = self.master.winfo_width()
         appHeight   = self.master.winfo_height()
         appXpos     = self.master.winfo_rootx()
         appYpos     = self.master.winfo_rooty()
 
-        self.myLogger.debug(f" Window Geom   = {appGeometry}")
         self.myLogger.debug(f" Window Width  = {appWidth}")
         self.myLogger.debug(f" Window Height = {appHeight}")
         self.myLogger.debug(f" Window X pos  = {appXpos}")
@@ -124,4 +131,10 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.dropdown1.configure(text_color=self.myConfig.FOREGROUND)
         self.dropdown2.configure(text_color=self.myConfig.FOREGROUND)
         self.dropdown3.configure(text_color=self.myConfig.FOREGROUND)
+
+        #  Only update the about window if it exists.
+        if self.aboutTopLevel is None or not self.aboutTopLevel.winfo_exists():
+            self.aboutTopLevel = None
+        else:
+            self.aboutTopLevel.update()
 
