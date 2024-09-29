@@ -33,6 +33,7 @@ class ColourWindow(ctk.CTkToplevel):
         ctk.set_appearance_mode("Dark")
         ctk.set_default_color_theme("dark-blue")
 
+        self.title("Colour Chooser")
         self.myConfig = myConfig
         self.geometry("400x200+400+600")
         self.resizable(False, False)

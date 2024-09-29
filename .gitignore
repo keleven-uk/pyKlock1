@@ -135,6 +135,11 @@ $RECYCLE.BIN/
 
 # local files
 output/
+help/Klock.pdf
+help/Klock.chm
 ruff.toml
+
+
+
 
 # End of https://www.gitignore.io/api/python,windows

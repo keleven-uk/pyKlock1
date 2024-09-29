@@ -213,7 +213,7 @@ class Config():
                             "transparent": True}
 
         config["WINDOW"] = {"width" :300,
-                            "height":150,
+                            "height":160,
                             "x_pos" :100,
                             "y_pos" :100}
 

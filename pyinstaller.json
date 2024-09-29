@@ -64,6 +64,14 @@
   {
    "optionDest": "datas",
    "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/customtkinter;customtkinter/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/CTkColorPicker;CTkColorPicker/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/CTkMenuBar;CTkMenuBar/"
   }
  ],
  "nonPyinstallerOptions": {

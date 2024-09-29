@@ -28,7 +28,7 @@ import src.logger as Logger
 import src.pyKlock as Klock
 import src.myTimer as Timer
 
-from src.projectPaths import LOGGER_PATH, CONFIG_PATH, HISTORY_PATH, LICENSE_PATH, RESOURCE_PATH
+from src.projectPaths import LOGGER_PATH, CONFIG_PATH, HISTORY_PATH, LICENSE_PATH, RESOURCE_PATH, HELP_PATH
 
 ############################################################################################### __main__ ######
 
@@ -60,6 +60,7 @@ if __name__ == "__main__":
     myLogger.info(f"  History path  : {HISTORY_PATH}")
     myLogger.info(f"  License path  : {LICENSE_PATH}")
     myLogger.info(f"  Resource path : {RESOURCE_PATH}")
+    myLogger.info(f"  Help path     : {HELP_PATH}")
 
     # Create an instance of the App class.
     app = Klock.Klock(myLogger, myConfig, myTimer)

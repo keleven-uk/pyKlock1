@@ -29,6 +29,14 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.12	[29 September 2024]
+
+	Added a new option under Help - Help.
+		This option loads Klock's help in pdf format.
+		The pdf file is loaded by whatever your system loads pdf files.
+		The help file is generated using HelpNDoc - .pdf & .chm files are generated.
+
+
 V2024.11	[29 September 2024]
 
 	Corrected a bug where the licence and history files did not load.

@@ -19,12 +19,16 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import os
 
 import CTkMenuBar as CTkmenu
 
 import src.windows.SelectColourWindow as cw
 import src.windows.showAbout as about
 import src.windows.showInfo as si
+
+from src.projectPaths import HELP_PATH
+
 
 class myMenu(CTkmenu.CTkMenuBar):
     """  A class the creates the menu.
@@ -49,18 +53,28 @@ class myMenu(CTkmenu.CTkMenuBar):
     def _create_menu(self):
         """  Creates the menu widgets.
         """
+        menuWidth  = 24
+        menuHeight = 2
+        fontSize   = 12
+
         self.menu = CTkmenu.CTkMenuBar(self.master)
         self.mnuFile = self.menu.add_cascade("File")
         self.mnuEdit = self.menu.add_cascade("Edit")
         self.mnuHelp = self.menu.add_cascade("Help")
 
-        self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile)
+        self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile, height=menuHeight,
+                                                    width=menuWidth, font=("default", fontSize))
         self.dropdown1.add_option(option="Exit", command=self._close)
 
-        self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnuEdit)
+        self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnuEdit, height=menuHeight,
+                                                    width=menuWidth, font=("default", fontSize))
         self.dropdown2.add_option(option="Colour", command=self._showColourWindow)
 
-        self.dropdown3 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp)
+        self.dropdown3 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp, height=menuHeight,
+                                                    width=menuWidth, font=("default", fontSize))
+        self.dropdown3.add_option(option="Help", command=self._showHelp)
+
+        self.dropdown3.add_separator()
         self.dropdown3.add_option(option="History", command=self._showHistory)
         self.dropdown3.add_option(option="License", command=self._showLicence)
         self.dropdown3.add_separator()
@@ -69,17 +83,20 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.update()
 
 
+    def _showHelp(self):
+        """  Loads the Help file.
+        """
+        os.system(f"{HELP_PATH}\\Klock.pdf")
+
     def _showAbout(self):
         """  Loads the license text file into a new window.
         """
         self.aboutTopLevel = about.showAbout(self.master, self.myConfig, self.myTimer)
 
-
     def _showLicence(self):
         """  Loads the license text file into a new window.
         """
         si.showInfo(self.master, "License", self.myLogger)
-
 
     def _showHistory(self):
         """  Loads the history text file into a new window.
@@ -92,12 +109,10 @@ class myMenu(CTkmenu.CTkMenuBar):
         self._savePosition()
         self.master.destroy()
 
-
     def _showColourWindow(self):
         """   Calls the colour picker window.
         """
         cw.ColourWindow(self.master, self.myConfig)
-
 
     def _savePosition(self):
         """   Saves the relevant information to the config file.
