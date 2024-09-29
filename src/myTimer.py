@@ -35,9 +35,6 @@ class Timer():
         t.Stop      - will return the time since the time started and stop the timer.
         t.rightNow  - will Returns the current date and time in the format HH:MM:SS, DD/MM/YYYY.
 
-        if the t.start is called with an argument of True then the time is used to time the execution of an App.
-            To that end, the start time is stored and can be returned in a readable format with t.startTime.
-
         The methods have been converted to property's, makes the syntax cleaner.
         The methods above Will raise an exception is there is an error.
 
@@ -48,18 +45,15 @@ class Timer():
     def __init__(self):
         self._start_time = None
 
-    def Start(self, app=False):
+    def Start(self):
         """  Start a new timer.
 
              app - True indicates time the executable time of an App.
         """
-        self.app = app
         if self._start_time is not None:
             raise TimerError("Timer is running. Use .stop to stop it")
 
         self._start_time = time.perf_counter()
-        if app:
-            self._app_start = dt.datetime.now()
 
     @property
     def Elapsed(self):
@@ -83,23 +77,11 @@ class Timer():
         return self.formatSeconds(_elapsed_time)
 
     @property
-    def startTime(self):
-        """  Returns the current date and time in the format HH:MM:SS, DD/MM/YYYY.
-
-             If timing the executable time of an app, return the start time else return empty string.
-        """
-        if self.app:
-            return self._app_start.strftime("%H:%M:%S, %d/%m/%Y")
-        else:
-            return ""
-
-    @property
     def rightNow(self):
         """  Returns the current date and time in the format HH:MM:SS, DD/MM/YYYY.
         """
         mtime = dt.datetime.now()
         return mtime.strftime("%H:%M:%S : %d/%m/%Y")
-
 
     def formatSeconds(self, seconds):
         """  Formats number of seconds into a human readable form i.e. hours:minutes:seconds

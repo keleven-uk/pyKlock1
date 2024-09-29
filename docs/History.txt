@@ -22,19 +22,52 @@ Previous versions of Klock have existed in VB.net, Lazarus [Free Pascal] and Fre
 
 Current version of Klock is written in Python using different GUI frameworks
 
-	Klock 0 - pygubu & pySimpleGUI - finaly settled on pySimpleGUI.  Most complete.
+	Klock 0 - pygubu & pySimpleGUI - finally settled on pySimpleGUI.  Most complete.
 	Klock 1 - CustomTkinter  [this]
 	Klock 2 - Flet.
 
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.11	[29 September 2024]
+
+	Corrected a bug where the licence and history files did not load.
+		This was a logic error in the text file read bit.
+	Wrapped the text file load bits and the timer call in try ... exception.
+
+
 V2024.10    [28 September 2024]
+
+---------------------------------------------------------------------------------------------
+File                                                      blank        comment           code
+---------------------------------------------------------------------------------------------
+pyKlock1\src\selectTime.py                                  132            154            235
+pyKlock1\src\config.py                                       44             76            116
+pyKlock1\pyinstaller.json                                     0              0             81
+pyKlock1\src\utils\timeCodes.py                               5             19             78
+pyKlock1\src\windows\showAbout.py                            32             35             77
+pyKlock1\src\menu.py                                         33             42             65
+pyKlock1\src\windows\SelectColourWindow.py                   23             35             59
+pyKlock1\src\utils\klock_utils.py                            25             32             46
+pyKlock1\src\myTimer.py                                      23             49             45
+pyKlock1\src\frames\showMenuButtons.py                       20             30             44
+pyKlock1\src\pyKlock.py                                      35             34             34
+pyKlock1\ruff.toml                                            7              8             30
+pyKlock1\main.py                                             16             24             29
+pyKlock1\src\windows\showInfo.py                             16             28             25
+pyKlock1\src\frames\showStatusBar.py                         23             27             24
+pyKlock1\src\frames\showMainTime.py                          20             32             21
+pyKlock1\src\logger.py                                       11             27             18
+pyKlock1\config.toml                                          4              5             16
+pyKlock1\src\projectPaths.py                                  8             27             15
+---------------------------------------------------------------------------------------------
+SUM:                                                        477            684           1058
+---------------------------------------------------------------------------------------------
 
 	Added a new option under Help - About.
 		This option loads the about Screen.
 		This displays general information about klock [Name, version etc.] and some system info.
-		Also displayed is Klock and PC up time.
+		Also displays Klock and PC up time.
 
 
 

@@ -35,14 +35,17 @@ from src.projectPaths import LOGGER_PATH, CONFIG_PATH, HISTORY_PATH, LICENSE_PAT
 
 if __name__ == "__main__":
 
-    myTimer = Timer.Timer()                      #  Create a timer.
-    myTimer.Start(True)                          #  Pass True - app start noted.
-
-    myLogger = Logger.get_logger(str(LOGGER_PATH))    # Create the logger.
+    myTimer = Timer.Timer()                                     #  Create a timer.
+    myLogger = Logger.get_logger(str(LOGGER_PATH))              # Create the logger.
 
     myLogger.info("-" * 100)
 
-    myConfig  = Config.Config(CONFIG_PATH, myLogger)  # Create the config.
+    try:
+        myTimer.Start()                                         #  Timer mainly used to measure Klock up time.
+    except (TimeoutError, AttributeError, NameError) as error:
+        myLogger.debug(error)
+
+    myConfig  = Config.Config(CONFIG_PATH, myLogger)            # Create the config.
 
     myLogger.info(f"  Running {myConfig.NAME} Version {myConfig.VERSION} .::. Started at {myTimer.rightNow} ")
     myLogger.debug(f" {platform.uname()}")
@@ -63,7 +66,11 @@ if __name__ == "__main__":
     # Run the mainloop() method to start the application.
     app.mainloop()
 
-    timeStop = myTimer.Stop
+    try:
+        timeStop = myTimer.Stop
+    except (TimeoutError, AttributeError, NameError) as error:
+        myLogger.debug(error)
+        timeStop = "00:00"
 
     myLogger.info(f"  Ending {myConfig.NAME} Version {myConfig.VERSION} .::. Completed in {timeStop} ")
     myLogger.info("=" * 100)

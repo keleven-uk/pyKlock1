@@ -17,6 +17,8 @@
 #                                                                                                             #
 ###############################################################################################################
 
+from pathlib import Path
+
 import customtkinter as ctk
 
 from src.projectPaths import HISTORY_PATH, LICENSE_PATH
@@ -26,10 +28,11 @@ class showInfo(ctk.CTkToplevel):
          The text file is displayed in a text box that fill the entire window.
          The X in the top right corner is used to close the window.
     """
-    def __init__(self, master, infoType):
+    def __init__(self, master, infoType, myLogger):
         super().__init__(master)
 
         self.infoType = infoType
+        self.myLogger = myLogger
 
         ctk.set_appearance_mode("Dark")
         ctk.set_default_color_theme("dark-blue")
@@ -57,13 +60,17 @@ class showInfo(ctk.CTkToplevel):
     def _loadInfo(self):
         """  Loads the info file.  The type of info file is held in self.infoText
              If the file is not present, the initial string is set to "Info Not Found",
-             so we can ignore exceptions - can we?
         """
         match self.infoType:
             case "History":
-                self.infoText = HISTORY_PATH.read_text()
+                textFile = HISTORY_PATH
             case "License":
-                self.infoText = LICENSE_PATH.read_text()
+                textFile = LICENSE_PATH
+
+        try:
+            self.infoText = Path(textFile).read_text()
+        except(FileNotFoundError) as error:
+            self.myLogger.debug(error)
 
 
 

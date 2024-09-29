@@ -8,7 +8,7 @@ Current version of Klock is written in Python using different GUI frameworks
     Klock 1 - CustomTkinter
     Klock 2 - Flet.
 
-![](D:\My\shed\Projects\python\pyKlock1\resources\Klock.jpg)
+<img src="resources\Klock.jpg" title="Klock Display" alt="" data-align="center">
 
 A mini klock built using CuistomTKinter.
 
@@ -31,4 +31,4 @@ To install dependencies pip install -r requirements.txt
 
 For changes see history.txt
 
-Kevin Scott (C) 2024 :: pyKlock V2024.10
+Kevin Scott (C) 2024 :: pyKlock V2024.11

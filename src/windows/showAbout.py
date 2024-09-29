@@ -17,7 +17,6 @@
 #                                                                                                             #
 ###############################################################################################################
 
-import time
 import psutil
 
 import platform
@@ -71,7 +70,7 @@ class showAbout(ctk.CTkToplevel):
         self.bf.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
         self.btnExit = ctk.CTkButton(self, text="Exit", command=self.destroy)
-        self.btnExit.grid(row=3, column=0)
+        self.btnExit.grid(row=3, column=0, padx=(20,20), pady=(20,20))
 
 
 class topFrame(ctk.CTkFrame):
@@ -132,9 +131,9 @@ class bottomFrame(ctk.CTkFrame):
 
         self.grid_rowconfigure(0, weight=1)  # configure grid system
         self.grid_columnconfigure(0, weight=1)
-        self.lblBoot = ctk.CTkLabel(self, text=f"PC Up Time : 00:00:00", font=("default", 15))
+        self.lblBoot = ctk.CTkLabel(self, text="PC Up Time : 00:00:00", font=("default", 15))
         self.lblBoot.grid(row=0, column=0, padx=(0,0), sticky="w")
-        self.lblElapsed = ctk.CTkLabel(self, text=f"Klock Up Time : {myTimer.Elapsed}", font=("default", 15))
+        self.lblElapsed = ctk.CTkLabel(self, text="Klock Up Time : 00:00:00", font=("default", 15))
         self.lblElapsed.grid(row=1, column=0, padx=(0,0), sticky="w")
 
 
