@@ -29,6 +29,13 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2023.13	[30 Septemebr 2024]
+
+	Changed the help loading system - now used a customTKwindow to display.
+		Uses the pdf viewer - https://github.com/Akascape/CTkPDFViewer.
+		The source needs to be included in the src directory.
+
+
 V2024.12	[29 September 2024]
 
 	Added a new option under Help - Help.

@@ -19,15 +19,12 @@
 #                                                                                                             #
 ###############################################################################################################
 
-import os
-
 import CTkMenuBar as CTkmenu
 
 import src.windows.SelectColourWindow as cw
 import src.windows.showAbout as about
 import src.windows.showInfo as si
-
-from src.projectPaths import HELP_PATH
+import src.windows.showHelp as sh
 
 
 class myMenu(CTkmenu.CTkMenuBar):
@@ -86,7 +83,7 @@ class myMenu(CTkmenu.CTkMenuBar):
     def _showHelp(self):
         """  Loads the Help file.
         """
-        os.system(f"{HELP_PATH}\\Klock.pdf")
+        sh.showHelp(self)
 
     def _showAbout(self):
         """  Loads the license text file into a new window.
