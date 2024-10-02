@@ -27,19 +27,32 @@
 
 import sys
 import pathlib
+from platformdirs import *
 
+appname = "Klock"
+appauthor = "Keleven"
 
-PROJECT_PATH  = pathlib.Path(__file__).parent
-MAIN_PATH     = pathlib.Path(__file__).parent.parent
+USER_DATA_DIR    = pathlib.Path(user_data_dir(appname, appauthor))
+USER_LOG_DIR     = pathlib.Path(user_log_dir(appname, appauthor))
+USER_RUNTIME_DIR = pathlib.Path(user_runtime_dir(appname, appauthor))  #  if temp files are needed
+PROJECT_PATH     = pathlib.Path(__file__).parent
+MAIN_PATH        = pathlib.Path(__file__).parent.parent
+
+print(f"USER_DATA_DIR    : {USER_DATA_DIR}")
+print(f"USER_LOG_DIR     : {USER_LOG_DIR}")
+print(f"USER_RUNTIME_DIR : {USER_RUNTIME_DIR}")
+print(f"PROJECT_PATH     : {PROJECT_PATH}")
+print(f"MAIN_PATH        : {MAIN_PATH}")
 
 #  If running as an executable i.e. from using auto-py-to-exe.
 #  Some of the paths needs to be the working directory.
+#  Except the log files, these will be somewhere like C:\Users\kevin\AppData\Local\Keleven\Klock\Logs
 
 
 
 if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
-    CONFIG_PATH   = "config.toml"
-    LOGGER_PATH   = "pyKlock.log"
+    CONFIG_PATH   = USER_DATA_DIR / "config.toml"
+    LOGGER_PATH   = USER_LOG_DIR / "pyKlock.log"
     HISTORY_PATH  = "History.txt"
     LICENSE_PATH  = "LICENSE.txt"
     RESOURCE_PATH = "resources"

@@ -29,7 +29,27 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
-V2023.13	[30 Septemebr 2024]
+V2024.15	[2 October 2024]
+
+	Tried to make an installed and a stanls alone executable with auto-py-to-exe.exe and Inno setup Compiler.
+	The stand alone executable has worked for some version, but when installed on the PC there was an error.
+	The error was dur to windows not letting the loc files be created in the same directory as the .exe.
+	The solution is to store the log files in C:\Users\kevin\AppData\Local\Keleven\Klock\Logs or similar.
+	Also, store the config in a similar place : C:\Users\kevin\AppData\Local\Keleven\Klock
+	Once auto-exe-to-py has done it's stuff, copyStuff.bat needs to run.
+		This copies required files into the output/klock directory [where the .exe lives]
+	The the Inno setup script needs to be run in the output/klock directory and hey presto an installer is produced.
+
+
+V2024.14	[30 September 2024]
+
+	Added a new option under Edit - Font.
+		Allows the user to select a new font using the tk font chooser - https://tkfontchooser.readthedocs.io/en/latest/#
+		For now, only font name and size can be selected.
+		This only allows a font size to 30, amending the line 102 in tkfontchooser.pt to 102 is better.
+
+
+V2024.13	[30 Septemebr 2024]
 
 	Changed the help loading system - now used a customTKwindow to display.
 		Uses the pdf viewer - https://github.com/Akascape/CTkPDFViewer.

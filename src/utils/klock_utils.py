@@ -20,6 +20,7 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import pathlib
 
 from win32api import GetKeyState
 from win32con import VK_CAPITAL, VK_SCROLL, VK_NUMLOCK
@@ -53,13 +54,11 @@ def get_state():
 
     return state
 
-
 class LASTINPUTINFO(Structure):
     _fields_ = [
         ("cbSize", c_uint),
         ("dwTime", c_uint),
     ]
-
 
 def get_idle_duration():
     """  Returns the number of seconds the PC has been idle.
@@ -80,7 +79,6 @@ def get_idle_duration():
     else:
         return "      "
 
-
 def formatSeconds(seconds):
     """  Formats number of seconds into a human readable form i.e. hours:minutes:seconds
     """
@@ -94,7 +92,15 @@ def formatSeconds(seconds):
     else:
         return f"{seconds}s"
 
-
+def checkPath(dirPath):
+    """  Checks the directory exist, if not create it.
+    """
+    dirPath = pathlib.Path(dirPath)
+    if dirPath.exists():
+        print(f"{dirPath} exists", "info")
+    else:
+        print(f"{dirPath} doesn't exists, will create", "warning")
+        dirPath.mkdir(parents=True)
 
 
 

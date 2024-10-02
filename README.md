@@ -10,7 +10,7 @@ Current version of Klock is written in Python using different GUI frameworks
 
 <img src="resources\Klock.jpg" title="Klock Display" alt="" data-align="center">
 
-A mini klock built using CuistomTKinter.
+A klock built using Python and CuistomTKinter.
 
 Using python 3.12.6 and CustonTKinter 5.2.2.
 
@@ -31,4 +31,4 @@ To install dependencies pip install -r requirements.txt
 
 For changes see history.txt
 
-Kevin Scott (C) 2024 :: pyKlock V2024.13
+Kevin Scott (C) 2024 :: pyKlock V2024.15

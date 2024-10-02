@@ -33,6 +33,7 @@ class MyMainTimeFrame(ctk.CTkFrame):
 
         self.master   = master
         self.myConfig = myConfig
+        self.timeFont = ctk.CTkFont(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
         self._create_widgets()
 
 
@@ -40,7 +41,7 @@ class MyMainTimeFrame(ctk.CTkFrame):
         """  Create the main time display.
         """
         self.configure(fg_color=self.myConfig.BACKGROUND)
-        self.lblTime = ctk.CTkLabel(master=self, text=self._timeString(), font=("Pendule Ornamental", 100),
+        self.lblTime = ctk.CTkLabel(master=self, text=self._timeString(), font=self.timeFont,
                                     text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.lblTime.pack(expand=True)
 
@@ -62,10 +63,14 @@ class MyMainTimeFrame(ctk.CTkFrame):
 
     def update(self):
         """  Updates the main time text.
-        Method is externally called.
+             The method updates both text and font.
+             Method is externally called.
         """
         self.lblTime.configure(text=self._timeString())
-        self.lblTime.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+
+        self.timeFont.configure(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
+        self.lblTime.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND, font=self.timeFont)
+
 
 
 

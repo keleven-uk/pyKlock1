@@ -27,16 +27,19 @@ import src.config as Config
 import src.logger as Logger
 import src.pyKlock as Klock
 import src.myTimer as Timer
-
-from src.projectPaths import LOGGER_PATH, CONFIG_PATH, HISTORY_PATH, LICENSE_PATH, RESOURCE_PATH, HELP_PATH
+import src.projectPaths as pp
+import src.utils.klock_utils as utils
 
 ############################################################################################### __main__ ######
 
 
 if __name__ == "__main__":
 
+    utils.checkPath(pp.USER_DATA_DIR)                           #  Need to check these directories exist before starting logger.
+    utils.checkPath(pp.USER_LOG_DIR)
+
     myTimer = Timer.Timer()                                     #  Create a timer.
-    myLogger = Logger.get_logger(str(LOGGER_PATH))              # Create the logger.
+    myLogger = Logger.get_logger(str(pp.LOGGER_PATH))           # Create the logger.
 
     myLogger.info("-" * 100)
 
@@ -45,7 +48,7 @@ if __name__ == "__main__":
     except (TimeoutError, AttributeError, NameError) as error:
         myLogger.debug(error)
 
-    myConfig  = Config.Config(CONFIG_PATH, myLogger)            # Create the config.
+    myConfig  = Config.Config(pp.CONFIG_PATH, myLogger)            # Create the config.
 
     myLogger.info(f"  Running {myConfig.NAME} Version {myConfig.VERSION} .::. Started at {myTimer.rightNow} ")
     myLogger.debug(f" {platform.uname()}")
@@ -55,12 +58,12 @@ if __name__ == "__main__":
     if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
         myLogger.info("  Running a frozen binary - probably via pyinstaller.")
 
-    myLogger.info(f"  Config path   : {CONFIG_PATH}")
-    myLogger.info(f"  Logger path   : {LOGGER_PATH}")
-    myLogger.info(f"  History path  : {HISTORY_PATH}")
-    myLogger.info(f"  License path  : {LICENSE_PATH}")
-    myLogger.info(f"  Resource path : {RESOURCE_PATH}")
-    myLogger.info(f"  Help path     : {HELP_PATH}")
+    myLogger.info(f"  Config path   : {pp.CONFIG_PATH}")
+    myLogger.info(f"  Logger path   : {pp.LOGGER_PATH}")
+    myLogger.info(f"  History path  : {pp.HISTORY_PATH}")
+    myLogger.info(f"  License path  : {pp.LICENSE_PATH}")
+    myLogger.info(f"  Resource path : {pp.RESOURCE_PATH}")
+    myLogger.info(f"  Help path     : {pp.HELP_PATH}")
 
     # Create an instance of the App class.
     app = Klock.Klock(myLogger, myConfig, myTimer)

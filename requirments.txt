@@ -8,5 +8,6 @@ psutil==6.0.0
 PyMuPDF==1.24.10
 PyMuPDFb==1.24.10
 pywin32==306
-ruff==0.6.7
+ruff==0.6.8
+tkfontchooser==2.0.2
 toml==0.10.2

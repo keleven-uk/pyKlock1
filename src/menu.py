@@ -21,6 +21,8 @@
 
 import CTkMenuBar as CTkmenu
 
+from tkfontchooser import askfont
+
 import src.windows.SelectColourWindow as cw
 import src.windows.showAbout as about
 import src.windows.showInfo as si
@@ -65,6 +67,7 @@ class myMenu(CTkmenu.CTkMenuBar):
 
         self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnuEdit, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
+        self.dropdown2.add_option(option="Font", command=self._showFont)
         self.dropdown2.add_option(option="Colour", command=self._showColourWindow)
 
         self.dropdown3 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp, height=menuHeight,
@@ -105,6 +108,24 @@ class myMenu(CTkmenu.CTkMenuBar):
         """
         self._savePosition()
         self.master.destroy()
+
+    def _showFont(self):
+        """  Open the font chooser and get the font selected by the user.
+             The font name and size are then save to myConfig for later use.
+        """
+        font = askfont(self)
+        # font is "" if the user has cancelled
+        if font:
+            # spaces in the family name need to be escaped
+            #font['family'] = font['family'].replace(' ', '\\ ')
+            font_str = "%(family)s %(size)i %(weight)s %(slant)s" % font
+            if font["underline"]:
+                font_str += " underline"
+            if font["overstrike"]:
+                font_str += " overstrike"
+
+            self.myConfig.TIME_FONT_FAMILY = font["family"]
+            self.myConfig.TIME_FONT_SIZE   = font["size"]
 
     def _showColourWindow(self):
         """   Calls the colour picker window.

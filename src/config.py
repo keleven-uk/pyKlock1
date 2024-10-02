@@ -178,6 +178,32 @@ class Config():
         """
         return self.config["MENU"].get("visible", True)
 
+    @property
+    def TIME_FONT_FAMILY(self):
+        """  Return the type [format] of the displayed time.
+        """
+        return self.config["TIME_FONT"].get("family", "Pendule Ornamental")
+
+    @TIME_FONT_FAMILY.setter
+    def TIME_FONT_FAMILY(self, value):
+        """  Sets the type [format] of the displayed time.
+        """
+        self.config["TIME_FONT"]["family"] = value
+
+    @property
+    def TIME_FONT_SIZE(self):
+        """  Return the type [format] of the displayed time.
+        """
+        return self.config["TIME_FONT"].get("size", 100)
+
+    @TIME_FONT_SIZE.setter
+    def TIME_FONT_SIZE(self, value):
+        """  Sets the type [format] of the displayed time.
+        """
+        self.config["TIME_FONT"]["size"] = value
+
+
+
     def writeConfig(self):
         """ Write the current config file.
         """
@@ -205,7 +231,7 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.13",
+        config["INFO"] = {"myVERSION": "2024.15",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#00ff00",
@@ -220,6 +246,13 @@ class Config():
         config["TIME"] = {"type": "Fuzzy Time"}
 
         config["MENU"] = {"visible": True}
+
+        config["TIME_FONT"] = {"family"     : "Pendule Ornamental",
+                               "size"       : 100,
+                               "weight"     : "normal",
+                               "slant"      : False,
+                               "underline"  : False,
+                               "overstrike" : False}
 
 
         st_toml = toml.dumps(config)
