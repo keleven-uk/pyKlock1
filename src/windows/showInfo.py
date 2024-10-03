@@ -33,6 +33,7 @@ class showInfo(ctk.CTkToplevel):
 
         self.infoType = infoType
         self.myLogger = myLogger
+        self.InfoFont = ctk.CTkFont(family="Hack", size=12)
 
         ctk.set_appearance_mode("Dark")
         ctk.set_default_color_theme("dark-blue")
@@ -52,7 +53,7 @@ class showInfo(ctk.CTkToplevel):
         self.grid_rowconfigure(0, weight=1)  # configure grid system
         self.grid_columnconfigure(0, weight=1)
 
-        self.textbox = ctk.CTkTextbox(master=self, width=400, corner_radius=0)
+        self.textbox = ctk.CTkTextbox(master=self, width=400, corner_radius=0, font=self.InfoFont)
         self.textbox.grid(row=0, column=0, sticky="nsew")
         self.textbox.insert("0.0", self.infoText)
 

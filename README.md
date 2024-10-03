@@ -19,6 +19,8 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 The Klock displays the time [local], date, key status and the computers idle time.
  Key status is the status of Caps Lock, Scroll lock and Num lock.
 
+The format of the time display can be changes i.e in words, numbers and the famous Fuzzy Time.
+
 The foreground and background colours can be selected.
 
 The Klock is moved by dragging the displayed time.
@@ -31,4 +33,4 @@ To install dependencies pip install -r requirements.txt
 
 For changes see history.txt
 
-Kevin Scott (C) 2024 :: pyKlock V2024.15
+Kevin Scott (C) 2024 :: pyKlock V2024.16

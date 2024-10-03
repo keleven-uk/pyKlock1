@@ -38,12 +38,6 @@ USER_RUNTIME_DIR = pathlib.Path(user_runtime_dir(appname, appauthor))  #  if tem
 PROJECT_PATH     = pathlib.Path(__file__).parent
 MAIN_PATH        = pathlib.Path(__file__).parent.parent
 
-print(f"USER_DATA_DIR    : {USER_DATA_DIR}")
-print(f"USER_LOG_DIR     : {USER_LOG_DIR}")
-print(f"USER_RUNTIME_DIR : {USER_RUNTIME_DIR}")
-print(f"PROJECT_PATH     : {PROJECT_PATH}")
-print(f"MAIN_PATH        : {MAIN_PATH}")
-
 #  If running as an executable i.e. from using auto-py-to-exe.
 #  Some of the paths needs to be the working directory.
 #  Except the log files, these will be somewhere like C:\Users\kevin\AppData\Local\Keleven\Klock\Logs

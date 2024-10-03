@@ -1,10 +1,10 @@
-#   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Wednesday 02 October 2024  17:01:26
+#   Configure file for pyKlock.py 
+#   (c) Kevin Scott   Written Thursday 03 October 2024  10:42:43
 #
-#   true and false are lower case
+#   true and false are lower case 
 #
 [INFO]
-myVERSION = "2024.15"
+myVERSION = "2024.16"
 myNAME = "pyKlock"
 
 [COLOUR]
@@ -15,8 +15,8 @@ transparent = true
 [WINDOW]
 width = 300
 height = 160
-x_pos = 1231
-y_pos = -234
+x_pos = 1398
+y_pos = -280
 
 [TIME]
 type = "Fuzzy Time"
@@ -25,8 +25,8 @@ type = "Fuzzy Time"
 visible = true
 
 [TIME_FONT]
-family = "Pendule Ornamental"
-size = 100
+family = "Roboto"
+size = 18
 weight = "normal"
 slant = false
 underline = false

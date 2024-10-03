@@ -29,9 +29,18 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.16	[3 October 2024]
+
+	Added a new option under edit - Time Types.
+		This allows the time format to be chosen for a list of supplied time formats.
+		The different formats are held in src.select time.  [Used in all version of python Klock].
+		When the menu option is chosen, a new windows opens allowing the user to select the time type and size.
+		The time type and size in the config is also changed, so the main time will change in real time.
+
+
 V2024.15	[2 October 2024]
 
-	Tried to make an installed and a stanls alone executable with auto-py-to-exe.exe and Inno setup Compiler.
+	Tried to make an installed and a stand alone executable with auto-py-to-exe.exe and Inno setup Compiler.
 	The stand alone executable has worked for some version, but when installed on the PC there was an error.
 	The error was dur to windows not letting the loc files be created in the same directory as the .exe.
 	The solution is to store the log files in C:\Users\kevin\AppData\Local\Keleven\Klock\Logs or similar.

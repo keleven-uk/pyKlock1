@@ -27,6 +27,7 @@ import src.windows.SelectColourWindow as cw
 import src.windows.showAbout as about
 import src.windows.showInfo as si
 import src.windows.showHelp as sh
+import src.windows.showTimeTypes as stt
 
 
 class myMenu(CTkmenu.CTkMenuBar):
@@ -68,6 +69,7 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnuEdit, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown2.add_option(option="Font", command=self._showFont)
+        self.dropdown2.add_option(option="Time Type", command=self._showTimeType)
         self.dropdown2.add_option(option="Colour", command=self._showColourWindow)
 
         self.dropdown3 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp, height=menuHeight,
@@ -126,6 +128,11 @@ class myMenu(CTkmenu.CTkMenuBar):
 
             self.myConfig.TIME_FONT_FAMILY = font["family"]
             self.myConfig.TIME_FONT_SIZE   = font["size"]
+
+    def _showTimeType(self):
+        """   Opens a windows which allows the choice of time type display format and size..
+        """
+        stt.timeTypes(self, self.myConfig)
 
     def _showColourWindow(self):
         """   Calls the colour picker window.

@@ -21,6 +21,7 @@ import time
 
 import customtkinter as ctk
 
+import src.selectTime as st
 
 class MyMainTimeFrame(ctk.CTkFrame):
     """  A class that creates the frame for the main time display.
@@ -33,6 +34,7 @@ class MyMainTimeFrame(ctk.CTkFrame):
 
         self.master   = master
         self.myConfig = myConfig
+        self.selectTime = st.SelectTime()
         self.timeFont = ctk.CTkFont(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
         self._create_widgets()
 
@@ -58,7 +60,7 @@ class MyMainTimeFrame(ctk.CTkFrame):
     def _timeString(self):
         """  Returns the current time as a text string.
         """
-        return time.strftime("%H:%M:%S")
+        return self.selectTime.getTime(self.myConfig.TIME_TYPE)
 
 
     def update(self):

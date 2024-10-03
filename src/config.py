@@ -203,7 +203,6 @@ class Config():
         self.config["TIME_FONT"]["size"] = value
 
 
-
     def writeConfig(self):
         """ Write the current config file.
         """
@@ -231,7 +230,7 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.15",
+        config["INFO"] = {"myVERSION": "2024.16",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#00ff00",
@@ -253,6 +252,8 @@ class Config():
                                "slant"      : False,
                                "underline"  : False,
                                "overstrike" : False}
+
+        config["TIME_TYPE"] = {type : "Fuzzy Time"}
 
 
         st_toml = toml.dumps(config)
