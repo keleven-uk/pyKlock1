@@ -74,7 +74,7 @@ class Klock(ctk.CTk):
         #  Create the from for the status bar.
         myLogger.info("  Creating Status Bar")
         self.StatusBar = myStatusBar.MyStatusBarFrame(self, myConfig)
-        self.StatusBar.pack()
+        self.StatusBar.pack(expand=True)
 
     def _update(self):
         """  Update the time and status bar.

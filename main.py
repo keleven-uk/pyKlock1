@@ -34,11 +34,11 @@ import src.utils.klock_utils as utils
 
 
 if __name__ == "__main__":
-
-    utils.checkPath(pp.USER_DATA_DIR)                           #  Need to check these directories exist before starting logger.
-    utils.checkPath(pp.USER_LOG_DIR)
-
     myTimer = Timer.Timer()                                     #  Create a timer.
+
+    message1 = utils.checkPath(pp.USER_DATA_DIR)                #  Need to check these directories exist before starting logger.
+    message2 = utils.checkPath(pp.USER_LOG_DIR)
+
     myLogger = Logger.get_logger(str(pp.LOGGER_PATH))           # Create the logger.
 
     myLogger.info("-" * 100)
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     except (TimeoutError, AttributeError, NameError) as error:
         myLogger.debug(error)
 
-    myConfig  = Config.Config(pp.CONFIG_PATH, myLogger)            # Create the config.
+    myConfig  = Config.Config(pp.CONFIG_PATH, myLogger)         # Create the config.
 
     myLogger.info(f"  Running {myConfig.NAME} Version {myConfig.VERSION} .::. Started at {myTimer.rightNow} ")
     myLogger.debug(f" {platform.uname()}")
@@ -57,6 +57,8 @@ if __name__ == "__main__":
 
     if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
         myLogger.info("  Running a frozen binary - probably via pyinstaller.")
+        myLogger.info(message1)
+        myLogger.info(message1)
 
     myLogger.info(f"  Config path   : {pp.CONFIG_PATH}")
     myLogger.info(f"  Logger path   : {pp.LOGGER_PATH}")

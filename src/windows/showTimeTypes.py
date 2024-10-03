@@ -39,31 +39,39 @@ class timeTypes(ctk.CTkToplevel):
 
         self.selectTime = st.SelectTime()
         self.myConfig = myConfig
-        self.TimeFont = ctk.CTkFont(family="default", size=20)
+        self.timeFont = ctk.CTkFont(family="default", size=20)
 
         self._create_widgets()
 
     def _create_widgets(self):
         """  Create the history display display.
         """
-        timeType = self.myConfig.TIME_TYPE
-        TimeSize = ["%i" % i for i in (list(range(6, 17)) + list(range(18,102, 2)))]
+        self.timeType = self.myConfig.TIME_TYPE
+        TimeSize = ["%i" % i for i in (list(range(18,102, 2)))]
 
         lblDesc = ctk.CTkLabel(self, text="Select the format for the time display.", corner_radius=6)
         lblDesc.grid(row=0, column=0, padx=10, pady=(10, 10), sticky="ew")
         lblDesc = ctk.CTkLabel(self, text="Select the size for the time display.", corner_radius=6)
         lblDesc.grid(row=0, column=1, padx=10, pady=(10, 10), sticky="ew")
-        self.cbTimeType = ctk.CTkComboBox(self, values=self.selectTime.timeTypes, command=self.changeTimeType, variable=timeType, hover=True)
+        self.cbTimeType = ctk.CTkComboBox(self, values=self.selectTime.timeTypes, command=self._changeTimeType, variable=self.timeType, hover=True)
         self.cbTimeType.grid(row=1, column=0, padx=10, pady=(10, 10), sticky="ew")
-        self.cbTimeSIze = ctk.CTkComboBox(self, values=TimeSize, command=self.changeTimeSize, variable=TimeSize)
+        self.cbTimeSIze = ctk.CTkComboBox(self, values=TimeSize, command=self._changeTimeSize, variable=TimeSize)
         self.cbTimeSIze.grid(row=1, column=1, padx=10, pady=(10, 10), sticky="ew")
-        self.lblExample = ctk.CTkLabel(self, text=self.selectTime.getTime(timeType), font=self.TimeFont, corner_radius=6)
+        self.lblExample = ctk.CTkLabel(self, text=self.selectTime.getTime(self.timeType), font=self.timeFont, corner_radius=6)
         self.lblExample.grid(row=2, column=0, padx=10, pady=(10, 10), sticky="ew", columnspan=2)
 
         self.cbTimeType.set(self.myConfig.TIME_TYPE)
         self.cbTimeSIze.set(self.myConfig.TIME_FONT_SIZE)
 
-    def changeTimeType(self, choice):
+        self._changeTimeType(self.myConfig.TIME_TYPE)
+        self._changeTimeSize(self.myConfig.TIME_FONT_SIZE)
+
+    def _timeString(self):
+        """  Returns the current time as a text string using the current time type.
+        """
+        return self.selectTime.getTime(self.myConfig.TIME_TYPE)
+
+    def _changeTimeType(self, choice):
         """  Called when a new time type is chosen.
              The time type in the config is also changed, so the main time will change in real time.
         """
@@ -71,11 +79,18 @@ class timeTypes(ctk.CTkToplevel):
         self.lblExample.configure(text=self.selectTime.getTime(choice))
         self.cbTimeType.set(choice)
 
-    def changeTimeSize(self, choice):
+    def _changeTimeSize(self, choice):
         """  Called when a new time size is chosen.
              The time size in the config is also changed, so the main time will change in real time.
         """
-        self.TimeFont.configure(size=int(choice))
+        self.timeFont.configure(family=self.myConfig.TIME_FONT_FAMILY, size=int(choice))
         self.myConfig.TIME_FONT_SIZE = int(choice)
-        self.lblExample.configure(font=self.TimeFont)
+
+        newX = self.timeFont.measure(text=self._timeString())                   #  Get the length, in pixels, of the time text.
+        if newX > 500:
+            self.geometry(f"{newX+20}x200")                                     #  Dynamically sets the window to fit.
+        else:
+            self.geometry("500x200")                                            #  Reset back to original.
+
+        self.lblExample.configure(font=self.timeFont, text=self._timeString())
         self.cbTimeSIze.set(choice)

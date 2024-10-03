@@ -29,6 +29,12 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.17	[2 October 2024]
+
+	Amended both the main window and the time type window to expand dynamical when needed.
+	So, setting the size which produces a time text that wont fit in the window, the window expands.
+
+
 V2024.16	[3 October 2024]
 
 	Added a new option under edit - Time Types.

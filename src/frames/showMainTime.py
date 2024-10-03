@@ -17,8 +17,6 @@
 #                                                                                                             #
 ###############################################################################################################
 
-import time
-
 import customtkinter as ctk
 
 import src.selectTime as st
@@ -29,10 +27,10 @@ class MyMainTimeFrame(ctk.CTkFrame):
          mt = MyStatusBarFrame()
          mt.update() - to update the main time colours.
     """
-    def __init__(self, master, myConfig):
-        super().__init__(master)
+    def __init__(self, main, myConfig):
+        super().__init__(main)
 
-        self.master   = master
+        self.main   = main
         self.myConfig = myConfig
         self.selectTime = st.SelectTime()
         self.timeFont = ctk.CTkFont(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
@@ -43,7 +41,7 @@ class MyMainTimeFrame(ctk.CTkFrame):
         """  Create the main time display.
         """
         self.configure(fg_color=self.myConfig.BACKGROUND)
-        self.lblTime = ctk.CTkLabel(master=self, text=self._timeString(), font=self.timeFont,
+        self.lblTime = ctk.CTkLabel(self, text=self._timeString(), font=self.timeFont,
                                     text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.lblTime.pack(expand=True)
 
@@ -53,12 +51,17 @@ class MyMainTimeFrame(ctk.CTkFrame):
 
     def _move_window(self, event):
         """  Moves the window when the mouse is left clicked and moved.
+
+             When the window is dragged, the mouse moves to the top left hand corner.
+             Tried to cure, given up for now.
         """
-        self.master.geometry(f"+{event.x_root}+{event.y_root}")
+        newX = event.x_root
+        newY = event.y_root
+        self.main.geometry(f"+{newX}+{newY}")
 
 
     def _timeString(self):
-        """  Returns the current time as a text string.
+        """  Returns the current time as a text string using the current time type.
         """
         return self.selectTime.getTime(self.myConfig.TIME_TYPE)
 
@@ -71,6 +74,10 @@ class MyMainTimeFrame(ctk.CTkFrame):
         self.lblTime.configure(text=self._timeString())
 
         self.timeFont.configure(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
+
+        newX = self.timeFont.measure(text=self._timeString())                   #  Get the length, in pixels, of the time text
+        self.main.geometry(f"{newX}x{self.myConfig.WIN_HEIGHT}")                #  Dynamically sets the main window to fit.
+
         self.lblTime.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND, font=self.timeFont)
 
 

@@ -27,14 +27,14 @@
 
 import sys
 import pathlib
-from platformdirs import *
+import platformdirs as pp
 
 appname = "Klock"
 appauthor = "Keleven"
 
-USER_DATA_DIR    = pathlib.Path(user_data_dir(appname, appauthor))
-USER_LOG_DIR     = pathlib.Path(user_log_dir(appname, appauthor))
-USER_RUNTIME_DIR = pathlib.Path(user_runtime_dir(appname, appauthor))  #  if temp files are needed
+USER_DATA_DIR    = pathlib.Path(pp.user_data_dir(appname, appauthor))
+USER_LOG_DIR     = pathlib.Path(pp.user_log_dir(appname, appauthor))
+USER_RUNTIME_DIR = pathlib.Path(pp.user_runtime_dir(appname, appauthor))  #  if temp files are needed
 PROJECT_PATH     = pathlib.Path(__file__).parent
 MAIN_PATH        = pathlib.Path(__file__).parent.parent
 

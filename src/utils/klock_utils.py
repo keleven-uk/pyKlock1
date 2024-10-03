@@ -97,10 +97,10 @@ def checkPath(dirPath):
     """
     dirPath = pathlib.Path(dirPath)
     if dirPath.exists():
-        print(f"{dirPath} exists", "info")
+       return f"{dirPath} exists"
     else:
-        print(f"{dirPath} doesn't exists, will create", "warning")
-        dirPath.mkdir(parents=True)
+        dirPath.mkdir(parents=True)                             #  Will create full path if necessary.
+        return f"{dirPath} doesn't exists, will create"
 
 
 
