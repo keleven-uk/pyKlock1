@@ -22,9 +22,9 @@
 
 import pathlib
 
-from win32api import GetKeyState
-from win32con import VK_CAPITAL, VK_SCROLL, VK_NUMLOCK
-from ctypes import Structure, windll, c_uint, sizeof, byref
+import win32api
+import win32con
+import ctypes
 
 
 def get_state():
@@ -33,9 +33,9 @@ def get_state():
          A Upper case indicates the lock is on, lower case indicates the lock is off.
     """
     state  = ""
-    caps   = GetKeyState(VK_CAPITAL)
-    scroll = GetKeyState(VK_SCROLL)
-    num    = GetKeyState(VK_NUMLOCK)
+    caps   = win32api.GetKeyState(win32con.VK_CAPITAL)
+    scroll = win32api.GetKeyState(win32con.VK_SCROLL)
+    num    = win32api.GetKeyState(win32con.VK_NUMLOCK)
 
     if caps:
         state = "C"
@@ -54,10 +54,10 @@ def get_state():
 
     return state
 
-class LASTINPUTINFO(Structure):
+class LASTINPUTINFO(ctypes.Structure):
     _fields_ = [
-        ("cbSize", c_uint),
-        ("dwTime", c_uint),
+        ("cbSize", ctypes.c_uint),
+        ("dwTime", ctypes.c_uint),
     ]
 
 def get_idle_duration():
@@ -68,9 +68,9 @@ def get_idle_duration():
          http://stackoverflow.com/questions/911856/detecting-idle-time-in-python
     """
     lastInputInfo = LASTINPUTINFO()
-    lastInputInfo.cbSize = sizeof(lastInputInfo)
-    windll.user32.GetLastInputInfo(byref(lastInputInfo))
-    millis = windll.kernel32.GetTickCount() - lastInputInfo.dwTime
+    lastInputInfo.cbSize = ctypes.sizeof(lastInputInfo)
+    ctypes.windll.user32.GetLastInputInfo(ctypes.byref(lastInputInfo))
+    millis = ctypes.windll.kernel32.GetTickCount() - lastInputInfo.dwTime
     idle   = millis / 1000.0
     idle = int(idle)
 
@@ -101,6 +101,25 @@ def checkPath(dirPath):
     else:
         dirPath.mkdir(parents=True)                             #  Will create full path if necessary.
         return f"{dirPath} doesn't exists, will create"
+
+def getScreenSize():
+    """  return the screen in pixels - uses native tkinter.
+    """
+    #  make sure your python interpreter is HIGHDPIAWARE.
+    user32 = ctypes.windll.user32
+    user32.SetProcessDPIAware()
+
+    screenWidth  = win32api.GetSystemMetrics(0)
+    screenHeight = win32api.GetSystemMetrics(1)
+    # print("Width =", screenWidth)
+    # print("Height =", screenHeight)
+    #
+    # MultiScreenWidth  = win32api.GetSystemMetrics(78)
+    # MultiScreenHeight = win32api.GetSystemMetrics(79)
+    # print("Multi Width  =", MultiScreenWidth)
+    # print("Multi Height =", MultiScreenHeight)
+
+    return (screenWidth, screenHeight)
 
 
 

@@ -20,6 +20,7 @@
 import customtkinter as ctk
 
 import src.selectTime as st
+import src.utils.klock_utils as utils
 
 class MyMainTimeFrame(ctk.CTkFrame):
     """  A class that creates the frame for the main time display.
@@ -34,7 +35,12 @@ class MyMainTimeFrame(ctk.CTkFrame):
         self.myConfig = myConfig
         self.selectTime = st.SelectTime()
         self.timeFont = ctk.CTkFont(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
+        self.screenWidth, self.screenHeight = utils.getScreenSize()
+        self.newY = self.myConfig.Y_POS
         self._create_widgets()
+        self.update()
+
+
 
 
     def _create_widgets(self):
@@ -56,8 +62,8 @@ class MyMainTimeFrame(ctk.CTkFrame):
              Tried to cure, given up for now.
         """
         newX = event.x_root
-        newY = event.y_root
-        self.main.geometry(f"+{newX}+{newY}")
+        self.newY = event.y_root
+        self.main.geometry(f"+{newX}+{self.newY}")
 
 
     def _timeString(self):
@@ -70,14 +76,24 @@ class MyMainTimeFrame(ctk.CTkFrame):
         """  Updates the main time text.
              The method updates both text and font.
              Method is externally called.
-        """
-        self.lblTime.configure(text=self._timeString())
+             The length of the new time test is determined and used to resize the window so the text fits,
+             Also the window is position is the right aligned to the screen.
 
+             TODO : Maybe a choice of left alignment.
+        """
+        timeTest = self._timeString()
         self.timeFont.configure(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
 
-        newX = self.timeFont.measure(text=self._timeString())                   #  Get the length, in pixels, of the time text
-        self.main.geometry(f"{newX}x{self.myConfig.WIN_HEIGHT}")                #  Dynamically sets the main window to fit.
+        newW = self.timeFont.measure(text=timeTest)                                                         #  Get the length, in pixels, of  the time text
 
+        if self.myConfig.ALIGN_RIGHT:                                                                       #  Only change x position of window, if required.
+            newX = self.screenWidth - newW - 20                                                             #  Find the position of the window right justified to the screen
+        else:
+            newX = self.myConfig.X_POS
+
+        self.main.geometry(f"{newW}x{self.myConfig.WIN_HEIGHT}+{newX}+{self.newY}")               #  Dynamically sets the main window to fit. [Don't change the windows Y position]
+
+        self.lblTime.configure(text=timeTest)
         self.lblTime.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND, font=self.timeFont)
 
 

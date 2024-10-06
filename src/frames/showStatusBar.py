@@ -39,15 +39,19 @@ class MyStatusBarFrame(ctk.CTkFrame):
     def _create_widgets(self):
         """  Create the main time display.
         """
+        self.rowconfigure(index=0, weight=1)
+        self.columnconfigure(index=0, weight=1)
+        self.columnconfigure(index=1, weight=1)
+        self.columnconfigure(index=2, weight=1)
         self.configure(fg_color=self.myConfig.BACKGROUND)
 
-        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)       #  padx - left/right.
-        self.lblDate.grid(row=0, column=0, padx=(0,0), pady=(0,0), sticky="sw")                                                             #  pady - top/bottom.
+        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND, anchor="w")       #  padx - left/right.
+        self.lblDate.grid(row=0, column=0, padx=(0,0), pady=(0,0), sticky="news")                                                             #  pady - top/bottom.
 
         self.lblStatus = ctk.CTkLabel(master=self, text="status", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.lblStatus.grid(row=0, column=1, padx=(20,20), pady=(0,0), sticky="sew")
 
-        self.lblIdle = ctk.CTkLabel(master=self, text="idle", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+        self.lblIdle = ctk.CTkLabel(master=self, text="idle", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND, anchor="e")
         self.lblIdle.grid(row=0, column=2, padx=(0,0), pady=(0,0), sticky="se")
 
     def update(self):

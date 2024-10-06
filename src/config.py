@@ -161,6 +161,18 @@ class Config():
         self.config["WINDOW"]["y_pos"] = value
 
     @property
+    def ALIGN_RIGHT(self):
+        """  Returns the Y co-ordinate of the top right hand corner of the window.
+        """
+        return self.config["WINDOW"].get("Align_Right", True)
+
+    @ALIGN_RIGHT.setter
+    def ALIGN_RIGHT(self, value):
+        """  Sets the Y co-ordinate of the top right hand corner of the window.
+        """
+        self.config["WINDOW"]["Align_Right"] = value
+
+    @property
     def TIME_TYPE(self):
         """  Return the type [format] of the displayed time.
         """
@@ -230,17 +242,18 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.17",
+        config["INFO"] = {"myVERSION": "2024.18",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#00ff00",
                             "background" : "#000000",
                             "transparent": True}
 
-        config["WINDOW"] = {"width" :300,
-                            "height":160,
-                            "x_pos" :100,
-                            "y_pos" :100}
+        config["WINDOW"] = {"width"        :300,
+                            "height"       :160,
+                            "x_pos"        :100,
+                            "y_pos"        :100,
+                             "Align_Right" : True}
 
         config["TIME"] = {"type": "Fuzzy Time"}
 

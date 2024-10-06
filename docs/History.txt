@@ -29,6 +29,14 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.18	[6 October 2024]
+
+	Further amened below, so that when the windows is dynamically resized the keeps top the right hand side of the screen.
+	This can be switched off in the config.toml file - but default to True [I Like it].
+		When the X position is changed the gain alignment, the Y position is left unchanged.
+	Cleaned up the imports in klock_utile.py.
+
+
 V2024.17	[2 October 2024]
 
 	Amended both the main window and the time type window to expand dynamical when needed.
