@@ -77,14 +77,17 @@ class MyMainTimeFrame(ctk.CTkFrame):
              The method updates both text and font.
              Method is externally called.
              The length of the new time test is determined and used to resize the window so the text fits,
-             Also the window is position is the right aligned to the screen.
+             Also the window is positioned right aligned to the screen, if configured.
 
              TODO : Maybe a choice of left alignment.
         """
-        timeTest = self._timeString()
-        self.timeFont.configure(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
+        self.timeFont.configure(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)   #  Change font if required.
 
+        timeTest = self._timeString()
         newW = self.timeFont.measure(text=timeTest)                                                         #  Get the length, in pixels, of  the time text
+
+        if newW < self.myConfig.WIN_HEIGHT:                                                                 #  Keep a minimum window width.
+            newW = self.myConfig.WIN_HEIGHT
 
         if self.myConfig.ALIGN_RIGHT:                                                                       #  Only change x position of window, if required.
             newX = self.screenWidth - newW - 20                                                             #  Find the position of the window right justified to the screen
@@ -93,8 +96,7 @@ class MyMainTimeFrame(ctk.CTkFrame):
 
         self.main.geometry(f"{newW}x{self.myConfig.WIN_HEIGHT}+{newX}+{self.newY}")               #  Dynamically sets the main window to fit. [Don't change the windows Y position]
 
-        self.lblTime.configure(text=timeTest)
-        self.lblTime.configure(text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND, font=self.timeFont)
+        self.lblTime.configure(text=timeTest, text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND, font=self.timeFont)
 
 
 

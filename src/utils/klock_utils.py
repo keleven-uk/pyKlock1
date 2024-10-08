@@ -77,7 +77,7 @@ def get_idle_duration():
     if idle > 5:  #  Only print idles time if greater then 5 seconds.
         return f"idle : {formatSeconds(idle)}"
     else:
-        return "      "
+        return "                "
 
 def formatSeconds(seconds):
     """  Formats number of seconds into a human readable form i.e. hours:minutes:seconds

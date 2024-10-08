@@ -29,12 +29,21 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.19	[8 October 2024]
+
+	Switched off the saving of the window size, so of the window is stretched because of a long time text - it isn't saved.
+	I couldn't get the status bar to line correctly.  I wanted the date on the left side, the status in the middle and the
+	idle time at the far right.  I reverted to padding the string with spaces depending on the width of the window.
+	I know this is a bit klunky - will re-visit if I find a better way.
+	Also added config option to specify the font for the status bat - default is the "default" text.
+
+
 V2024.18	[6 October 2024]
 
-	Further amened below, so that when the windows is dynamically resized the keeps top the right hand side of the screen.
+	Further amened below, so that when the windows is dynamically resized the keeps to the right hand side of the screen.
 	This can be switched off in the config.toml file - but default to True [I Like it].
 		When the X position is changed the gain alignment, the Y position is left unchanged.
-	Cleaned up the imports in klock_utile.py.
+	Cleaned up the imports in klock_utils.py.
 
 
 V2024.17	[2 October 2024]

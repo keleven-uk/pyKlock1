@@ -153,8 +153,8 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.myLogger.debug(f" Window X pos  = {appXpos}")
         self.myLogger.debug(f" Window Y pos  = {appYpos}")
 
-        self.myConfig.WIN_WIDTH  = appWidth
-        self.myConfig.WIN_HEIGHT = appHeight
+        #self.myConfig.WIN_WIDTH  = appWidth                    #  The width may change to fit the time test, do we need to save it.
+        #self.myConfig.WIN_HEIGHT = appHeight
         self.myConfig.X_POS      = appXpos
         self.myConfig.Y_POS      = appYpos
 

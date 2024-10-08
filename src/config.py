@@ -214,6 +214,30 @@ class Config():
         """
         self.config["TIME_FONT"]["size"] = value
 
+    @property
+    def STATUS_FONT_FAMILY(self):
+        """  Return the type [format] of the displayed time.
+        """
+        return self.config["STATUS_FONT"].get("family", "default")
+
+    @STATUS_FONT_FAMILY.setter
+    def STATUS_FONT_FAMILY(self, value):
+        """  Sets the type [format] of the displayed time.
+        """
+        self.config["STATUS_FONT"]["family"] = value
+
+    @property
+    def STATUS_FONT_SIZE(self):
+        """  Return the type [format] of the displayed time.
+        """
+        return self.config["STATUS_FONT"].get("size", 12)
+
+    @STATUS_FONT_SIZE.setter
+    def STATUS_FONT_SIZE(self, value):
+        """  Sets the type [format] of the displayed time.
+        """
+        self.config["STATUS_FONT"]["size"] = value
+
 
     def writeConfig(self):
         """ Write the current config file.
@@ -242,7 +266,7 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.18",
+        config["INFO"] = {"myVERSION": "2024.19",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#00ff00",
@@ -265,6 +289,14 @@ class Config():
                                "slant"      : False,
                                "underline"  : False,
                                "overstrike" : False}
+
+        config["STATUS_FONT"] = {"family"   : "Default",
+                               "size"       : 12,
+                               "weight"     : "normal",
+                               "slant"      : False,
+                               "underline"  : False,
+                               "overstrike" : False}
+
 
         config["TIME_TYPE"] = {type : "Fuzzy Time"}
 
