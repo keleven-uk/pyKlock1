@@ -20,8 +20,8 @@
 
 import customtkinter as ctk
 
-import src.frames.showMainTime    as myMainTime
-import src.frames.showStatusBar   as myStatusBar
+import src.frames.showMainTime  as myMainTime
+import src.frames.showStatusBar as myStatusBar
 import src.menu as myMenu
 
 

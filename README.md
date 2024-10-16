@@ -31,6 +31,12 @@ The Klock should remain on top of other other windows.
 
 To install dependencies pip install -r requirements.txt
 
+To install all dependencies pip install -r requirements.txt - r requirements_dev.txt
+
+-     [needed maily for pyinstaller - auto-py-to-ese.exe]
+  
+  
+
 For changes see history.txt
 
-Kevin Scott (C) 2024 :: pyKlock V2024.18
+Kevin Scott (C) 2024 :: pyKlock V2024.20
