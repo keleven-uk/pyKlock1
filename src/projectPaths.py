@@ -46,14 +46,18 @@ MAIN_PATH        = pathlib.Path(__file__).parent.parent
 
 if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
     CONFIG_PATH   = USER_DATA_DIR / "config.toml"
+    FR_DATA_PATH  = USER_DATA_DIR / "friends.txt"
     LOGGER_PATH   = USER_LOG_DIR / "pyKlock.log"
+    VERSION_PATH  = "version.toml"
     HISTORY_PATH  = "History.txt"
     LICENSE_PATH  = "LICENSE.txt"
     RESOURCE_PATH = "resources"
     HELP_PATH     = "help"
 else:
     CONFIG_PATH   = MAIN_PATH / "config.toml"
+    FR_DATA_PATH  = MAIN_PATH / "data/friends.txt"
     LOGGER_PATH   = MAIN_PATH / "logs/pyKlock.log"
+    VERSION_PATH  = MAIN_PATH / "docs/version.toml"
     HISTORY_PATH  = MAIN_PATH / "docs/History.txt"
     LICENSE_PATH  = MAIN_PATH / "LICENSE.txt"
     RESOURCE_PATH = MAIN_PATH / "resources"

@@ -1,0 +1,8 @@
+#   Version file for pyKlock.py
+#   (c) Kevin Scott   Written Monday 22 October 2024
+#
+#   true and false are lower case
+#
+[INFO]
+newVersion = "2024.21"
+

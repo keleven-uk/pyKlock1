@@ -38,25 +38,27 @@ class Config():
             myConfig = myConfig.Config()
     """
 
-    def __init__(self, CONFIG_PATH, logger):
+    def __init__(self, CONFIG_PATH, VERSION_PATH, logger):
 
         self.FILE_NAME = CONFIG_PATH
+        self.VERS_NAME = VERSION_PATH
         self.logger    = logger
 
         try:
             with open(self.FILE_NAME, "r") as configFile:       # In context manager.
                 self.config = toml.load(configFile)             # Load the configure file, in toml.
         except FileNotFoundError:
-            self.logger.debug("Configure file not found.")
+            self.logger.error("Configure file not found.")
             self.logger.debug("Writing default configure file.")
             self._writeDefaultConfig()
             self. logger.debug("Running program with default configure settings.")
         except toml.TomlDecodeError:
-            self.logger.debug("Error reading configure file.")
+            self.logger.error("Error reading configure file.")
             self.logger.debug("Writing default configure file.")
             self._writeDefaultConfig()
             self.logger.debug("Running program with default configure settings.")
 
+        self._CheckVersion()
 
     @property
     def NAME(self):
@@ -239,10 +241,30 @@ class Config():
         self.config["STATUS_FONT"]["size"] = value
 
 
+    def _CheckVersion(self):
+        """  Checks Klocks version against a version file - if they diff, an upgrade has been performed.
+             So, amend klock's version [this save uninstalling klock to get the same result.].
+
+             Could be used to add new config options, if needed.
+        """
+        try:
+            with open(self.VERS_NAME, "r") as versionFile:       # In context manager.
+                vers = toml.load(versionFile)             # Load the configure file, in toml.
+                newVersion = vers["INFO"]["newVersion"]
+                oldVersion = self.VERSION
+                if newVersion != oldVersion:
+                    self.config["INFO"]["myVERSION"] = newVersion
+                    self.logger.info(f"  ** Klock has been upgraded from version {oldVersion} to new version {newVersion} **")
+                    self.writeConfig()
+        except FileNotFoundError:
+            self.logger.error("  Version file not found.")
+        except toml.TomlDecodeError:
+            self.logger.error("  Error reading Version file.")
+
     def writeConfig(self):
         """ Write the current config file.
         """
-        self.logger.info("writing config.")
+        self.logger.info("  Writing current config.")
         strNow  = datetime.datetime.now()
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         st_toml = toml.dumps(self.config)
@@ -261,12 +283,12 @@ class Config():
         """ Write a default configure file.
             This is hard coded  ** TO KEEP UPDATED **
         """
-        self.logger.info("writing default config.")
+        self.logger.info("  Writing default config.")
         strNow  = datetime.datetime.now()
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.20",
+        config["INFO"] = {"myVERSION": "2024.21",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#00ff00",
@@ -296,9 +318,6 @@ class Config():
                                "slant"      : False,
                                "underline"  : False,
                                "overstrike" : False}
-
-
-        config["TIME_TYPE"] = {type : "Fuzzy Time"}
 
 
         st_toml = toml.dumps(config)

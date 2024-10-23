@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "pyKlock"
-#define MyAppVersion "2024.17"
+#define MyAppVersion "2024.21"
 #define MyAppPublisher "keleven"
 #define MyAppURL "www.keleven.co.uk"
 #define MyAppExeName "pyklock.exe"
@@ -57,13 +57,14 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Files]
-Source: "Klock.exe"   ; DestDir: "{app}"           ; Flags: ignoreversion; Check: Is64BitInstallMode    ; DestName: {#MyAppExeName}
-Source: "LICENSE.txt" ; DestDir: "{app}"           ; Flags: ignoreversion
-Source: "history.txt" ; DestDir: "{app}"           ; Flags: ignoreversion
-Source: "README.md"   ; DestDir: "{app}"           ; Flags: isreadme
-Source: "_internal\*" ; DestDir: "{app}\_internal" ; Flags: recursesubdirs
-Source: "help\*"      ; DestDir: "{app}\help"      ; Flags: ignoreversion
-Source: "resources\*" ; DestDir: "{app}\resources" ; Flags: ignoreversion
+Source: "Klock.exe"    ; DestDir: "{app}"           ; Flags: ignoreversion; Check: Is64BitInstallMode    ; DestName: {#MyAppExeName}
+Source: "LICENSE.txt"  ; DestDir: "{app}"           ; Flags: ignoreversion
+Source: "history.txt"  ; DestDir: "{app}"           ; Flags: ignoreversion
+Source: "README.md"    ; DestDir: "{app}"           ; Flags: isreadme
+Source: "version.toml" ; DestDir: "{app}"           ; Flags: ignoreversion
+Source: "_internal\*"  ; DestDir: "{app}\_internal" ; Flags: recursesubdirs
+Source: "help\*"       ; DestDir: "{app}\help"      ; Flags: ignoreversion
+Source: "resources\*"  ; DestDir: "{app}\resources" ; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"                                               ; Filename: "{app}\{#MyAppExeName}"

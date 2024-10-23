@@ -29,6 +29,27 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.21	[21 October]
+
+	In friends branch [Using python 3.12.7 and CustonTKinter 5.2.2.].
+
+	Added two new windows, one to display the current friends and a second to add a new friend.
+	The display friends window is called from the main menu, there is an Add button to add a friend.
+	The friends are saved in a csv file [for the moment] in the data directory.
+	No validation is done on the data entry - will add as needed.
+
+	Need to add the edit and delete buttons to the friends window.
+	Need to test before merging into main.
+
+	Also added a sperate version file in the data directory.
+		This allows the version in an installed Klock to be updated without uninstalling first.
+		The install process doesn't upgrade the existing config file.
+
+	Note : in addition to installing the files in the requirements files, the following source
+	       directories need to be added, see Help [Credits Section] for GitHub addresses.
+	       CTkDatePicker, CTkPDFViewer & CTkXYFrame
+
+
 V2024.20	[16 October 2024]
 
 	New GIT branch friends - to build the friends accessory.

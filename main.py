@@ -48,7 +48,7 @@ if __name__ == "__main__":
     except (TimeoutError, AttributeError, NameError) as error:
         myLogger.debug(error)
 
-    myConfig  = Config.Config(pp.CONFIG_PATH, myLogger)         # Create the config.
+    myConfig  = Config.Config(pp.CONFIG_PATH, pp.VERSION_PATH, myLogger)         # Create the config.
 
     myLogger.info(f"  Running {myConfig.NAME} Version {myConfig.VERSION} .::. Started at {myTimer.rightNow} ")
     myLogger.debug(f" {platform.uname()}")
@@ -60,12 +60,13 @@ if __name__ == "__main__":
         myLogger.info(message1)
         myLogger.info(message1)
 
-    myLogger.info(f"  Config path   : {pp.CONFIG_PATH}")
-    myLogger.info(f"  Logger path   : {pp.LOGGER_PATH}")
-    myLogger.info(f"  History path  : {pp.HISTORY_PATH}")
-    myLogger.info(f"  License path  : {pp.LICENSE_PATH}")
-    myLogger.info(f"  Resource path : {pp.RESOURCE_PATH}")
-    myLogger.info(f"  Help path     : {pp.HELP_PATH}")
+    myLogger.info(f"  Config path      : {pp.CONFIG_PATH}")
+    myLogger.info(f"  Logger path      : {pp.LOGGER_PATH}")
+    myLogger.info(f"  Friend Data path : {pp.FR_DATA_PATH}")
+    myLogger.info(f"  History path     : {pp.HISTORY_PATH}")
+    myLogger.info(f"  License path     : {pp.LICENSE_PATH}")
+    myLogger.info(f"  Resource path    : {pp.RESOURCE_PATH}")
+    myLogger.info(f"  Help path        : {pp.HELP_PATH}")
 
     # Create an instance of the App class.
     app = Klock.Klock(myLogger, myConfig, myTimer)

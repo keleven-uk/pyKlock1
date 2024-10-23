@@ -135,6 +135,7 @@ $RECYCLE.BIN/
 
 # local files
 output/
+data/
 help/Klock.pdf
 help/Klock.chm
 ruff.toml

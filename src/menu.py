@@ -57,18 +57,18 @@ class myMenu(CTkmenu.CTkMenuBar):
         menuHeight = 2
         fontSize   = 12
 
-        self.menu         = CTkmenu.CTkMenuBar(self.master)
-        self.mnuFile      = self.menu.add_cascade("File")
-        self.mnuAccessory = self.menu.add_cascade("Accessories")
-        self.mnuEdit      = self.menu.add_cascade("Edit")
-        self.mnuHelp      = self.menu.add_cascade("Help")
+        self.menu           = CTkmenu.CTkMenuBar(self.master)
+        self.mnuFile        = self.menu.add_cascade("File")
+        self.mnuAccessories = self.menu.add_cascade("Accessories")
+        self.mnuEdit        = self.menu.add_cascade("Edit")
+        self.mnuHelp        = self.menu.add_cascade("Help")
 
         self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown1.add_option(option="Exit", command=self._close)
 
 
-        self.dropdown2  = CTkmenu.CustomDropdownMenu(widget=self.mnuAccessory, height=menuHeight,
+        self.dropdown2  = CTkmenu.CustomDropdownMenu(widget=self.mnuAccessories, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown2.add_option(option="Friends", command=self._showFriends)
 
@@ -178,7 +178,7 @@ class myMenu(CTkmenu.CTkMenuBar):
              Method is externally called.
         """
         self.mnuFile.configure(text_color=self.myConfig.FOREGROUND)
-        self.mnuAccessory.configure(text_color=self.myConfig.FOREGROUND)
+        self.mnuAccessories.configure(text_color=self.myConfig.FOREGROUND)
         self.mnuEdit.configure(text_color=self.myConfig.FOREGROUND)
         self.mnuHelp.configure(text_color=self.myConfig.FOREGROUND)
 

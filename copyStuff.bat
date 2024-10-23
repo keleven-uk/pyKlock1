@@ -6,8 +6,9 @@
 
 copy LICENSE.txt output\Klock\
 copy README.md output\Klock\
-copy docs\history.txt output\Klock\
 copy klock.iss output\Klock
+copy docs\history.txt output\Klock\
+copy docs\version.toml output\Klock
 
 mkdir output\klock\help
 copy help\klock.pdf output\Klock\help
@@ -15,3 +16,5 @@ copy help\klock.chm output\Klock\help
 
 mkdir output\klock\resources
 copy resources\tea.ico output\Klock\resources
+
+

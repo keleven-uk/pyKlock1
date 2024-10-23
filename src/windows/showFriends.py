@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    SelectFriends.py   Copyright (C) <2024>  <Kevin Scott>                                                   #
+#    ShowFriends.py   Copyright (C) <2024>  <Kevin Scott>                                                     #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    Colour picker used is from https://github.com/Akascape/CTkColorPicker.                                   #
@@ -20,83 +20,94 @@
 ###############################################################################################################
 
 import customtkinter as ctk
-import CTkTable as ctkTable
 
 import src.CTkXYFrame as CTkXY
 import src.windows.showAddFriend as saf
+import src.classes.friendsStore as fs
 
-import src.classes.friend as friend
+from tksheet import Sheet
 
 class FriendsWindow(ctk.CTkToplevel):
-    """  A class for choosing colours.
-         An external colour picker is launched for the user to select colours.
-
+    """  A class for adding and showing friends.
     """
+
     def __init__(self, master, myConfig):
         super().__init__(master)
         ctk.set_appearance_mode("Dark")
         ctk.set_default_color_theme("dark-blue")
 
-        self.master = master
+        self.myConfig     = myConfig
+        self.friendsStore = fs.friendsStore()
+        self.master       = master
+
         self.title("Friends")
-        self.myConfig = myConfig
-        self.geometry("800x400+400+400")
+        self.geometry("1000x400+400+400")
         self.resizable(False, False)
 
         self._create_widgets()
 
+        self.after(60000, self._update)
+
 
     def _create_widgets(self):
-        """  Create the main time display.
+        """  Create the main friend display.
         """
-        self.tf = topFrame(self, self.myConfig)
-        self.tf.pack(fill="both", expand=True)
-        self.bf = ButtonFrame(self, self.myConfig)
+        self.tf = topFrame(self, self.friendsStore)
+        self.tf.pack(padx=10, pady=10, fill="both", expand=True)
+        self.bf = ButtonFrame(self, self.friendsStore)
         self.bf.pack(padx=10, pady=10)
+
+    def _update(self):
+        """  The update will run every minute.
+             The main purpose it to update the top frame with any new friends,
+                if the FriendAddWindow window is running.
+        """
+        if self.bf.AddWindowRunning is None or not self.bf.AddWindowRunning.winfo_exists():
+            self.bf.AddWindowRunning = None
+        else:
+            self.tf.update()
+        self.after(60000, self._update)
 
 
 class topFrame(CTkXY.CTkXYFrame):
-    """  A class for the top form of the about window.
-         The display general information about Klock.
+    """  A class for the top form of the friends window.
+         The friends display.
     """
-    def __init__(self, master, myConfig):
+    def __init__(self, master, friendsStore):
         super().__init__(master)
 
+        self.friendsStore = friendsStore
         self._create_widgets()
 
     def _create_widgets(self):
 
-        value = [["No", "Title","Surname","Last Name","Mobile No","E Mail","Birth Day", "Address"],
-                ["1", "Ms","Sue","Cleret-Scott","07874 713219", "sue@seleven.co.uk", "11 October 1960", "22 Laburnam Walk, Gilberdyke, HU15 2TU"],
-                ["2", "Mr","Kevin","Scott","07742 589160", "kevin@keleven.co.uk", "2 April 1958", "22 Laburnam Walk, Gilberdyke, HU15 2TU"],
-                ["3", 1,2,3,4,5,5,88],
-                ["4", 1,2,3,4,5],
-                ["5", 1,2,3,4,5,8,12],
-                ["6", 1,2,3,4,5,8,12],
-                ["7", 1,2,3,4,5,8,12],
-                ["8", 1,2,3,4,5,8,12],
-                ["9", "Title","Surname","Last Name","Mobile No","E Mail","Birth Day", "Address"],
-                ["10", 1,2,3,4,5,8,12],
-                ["11", "Title","Surname","Last Name","Mobile No","E Mail","Birth Day", "Address"],
-                ["12", "Title","Surname","Last Name","Mobile No","E Mail","Birth Day", "Address"]]
+        self.tblFriends = Sheet(self, data=self.friendsStore.getFriends(), width=1900, height=300,
+                                align = "W", header_align = "w", row_index_align = "w",
+                                show_x_scrollbar=False, show_y_scrollbar=False)
+        self.tblFriends.pack(expand=True, fill="both")
+        self.tblFriends.change_theme("dark")
+        self.tblFriends.headers(self.friendsStore.getHeaders)
+        self._setColumnWidths()
 
-        tblFriends = ctkTable.CTkTable(self, column=8, width=100, values=value, hover=True, command=self.pressed)
-        tblFriends.pack(expand=True)
+    def _setColumnWidths(self):
+        self.tblFriends.set_all_column_widths(width=150, redraw=True)
+        self.tblFriends.column_width(column=0, width=50, redraw=True)
+        self.tblFriends.column_width(column=7, width=50, redraw=True)
 
-
-    def pressed(self, block):
-        print(block)
+    def update(self):
+        self.tblFriends.set_sheet_data(data=self.friendsStore.getFriends(), redraw=True)
+        self._setColumnWidths()
 
 
 class ButtonFrame(ctk.CTkFrame):
-    """  A class for the top form of the about window.
-         The display general information about Klock.
+    """  A class to display the buttons.
     """
-    def __init__(self, master, myConfig, **kwargs):
-        super().__init__(master, **kwargs)
+    def __init__(self, master, friendsStore):
+        super().__init__(master)
 
-        self.myConfig = myConfig
-
+        self.master           = master
+        self.friendsStore     = friendsStore
+        self.AddWindowRunning = None
         self._create_widgets()
 
     def _create_widgets(self):
@@ -114,8 +125,9 @@ class ButtonFrame(ctk.CTkFrame):
         self.btnExt.grid(row=0, column=3, padx=10, pady=10, sticky="nsew")
 
     def _add(self):
-        newFriend = saf.FriendAddWindow(self, self.myConfig)
-
+        """  Adds a friend to the friend store.
+        """
+        self.AddWindowRunning = saf.FriendAddWindow(self, self.friendsStore)
 
     def _edit(self):
         pass
