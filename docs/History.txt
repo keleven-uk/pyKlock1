@@ -29,6 +29,13 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.22	[23 October]
+
+	Merged friends branch into main branch.
+	Updated requirements.txt and requirements_dev.txt
+	Built stand alone executable and installer from main.
+
+
 V2024.21	[21 October]
 
 	In friends branch [Using python 3.12.7 and CustonTKinter 5.2.2.].
