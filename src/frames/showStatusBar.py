@@ -36,6 +36,7 @@ class MyStatusBarFrame(ctk.CTkFrame):
         self.myConfig   = myConfig
         self.statusFont = ctk.CTkFont(family=self.myConfig.STATUS_FONT_FAMILY, size=self.myConfig.STATUS_FONT_SIZE)
         self._create_widgets()
+        self.relief="sunken"
 
 
     def _create_widgets(self):
@@ -47,42 +48,40 @@ class MyStatusBarFrame(ctk.CTkFrame):
         self.columnconfigure(index=2, weight=1)
         self.configure(fg_color=self.myConfig.BACKGROUND)
 
-        self.lblDate = ctk.CTkLabel(master=self, text="date", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND,
-                                    anchor="w", font=self.statusFont)       #  padx - left/right.
-        self.lblDate.grid(row=0, column=0, padx=(0,0), pady=(0,0), sticky="w")                                                                        #  pady - top/bottom.
-
-        self.lblStatus = ctk.CTkLabel(master=self, text="status", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND,
+        self.lblStatusBar = ctk.CTkLabel(master=self, text="status Bar", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND,
                                      font=self.statusFont)
-        self.lblStatus.grid(row=0, column=1, padx=(0,20), pady=(0,0), sticky="ew")
+        self.lblStatusBar.pack(expand=True)
 
-        self.lblIdle = ctk.CTkLabel(master=self, text="idle", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND,
-                                    anchor="e", font=self.statusFont)
-        self.lblIdle.grid(row=0, column=2, padx=(0,0), pady=(0,0), sticky="e")
 
     def update(self):
         """  Update the status bar [date - status - idle time].
              Method is externally called.
-
-             I couldn't get the status bar to line correctly.
-             I wanted the date on the left side, the status in the middle and the idle time at the far right.
-             I reverted to padding the string with spaces depending on the width of the window.
-             I know this is a bit klunky - will re-visit if I find a better way.
         """
-        windowWidth = self.master.winfo_width()
+        factor = 0.125                                      #  To convert pixels to characters,
+        windowWidth = self.master.winfo_width()             #  measure works in pixels but just works in chars.
+
         dateText = time.strftime("%A %d %B %Y")
         dateLeng = self.statusFont.measure(text=dateText)
-        datePadd = int((windowWidth / 2) - dateLeng)
-        self.lblDate.configure(text=dateText.ljust(datePadd," "), text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
 
-        StatusText = utils.get_state()
-        StatusLeng = self.statusFont.measure(text=StatusText)
-        StatusPadd = int((windowWidth / 4) - StatusLeng)
-        self.lblStatus.configure(text=StatusText.center(StatusPadd), text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+        statusText = utils.get_state()
+        statusLeng = self.statusFont.measure(text=statusText)
 
-        IdleText = utils.get_idle_duration()
-        IdleLeng = self.statusFont.measure(text=IdleText)
-        IdlePadd = int((windowWidth / 4) - IdleLeng)
-        self.lblIdle.configure(text=IdleText.rjust(IdlePadd," "), text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+        idleText = utils.get_idle_duration()
+        idleLeng = self.statusFont.measure(text=idleText)
+                                                            #  Characters from now on.
+        noOfSpaces = int((windowWidth - dateLeng - statusLeng - idleLeng) * factor)
+
+        dateText   = dateText.ljust(noOfSpaces," ")
+        statusText = statusText.center(noOfSpaces, " ")
+        idleText   = idleText.rjust(noOfSpaces," ")
+
+        statusBarText = f"{dateText} {statusText} {idleText}"
+
+        if len(statusBarText) >= (self.master.winfo_width()):
+            print(f"oh no  statusBarText {len(statusBarText)}  windowWidth {windowWidth}  windt {self.master.winfo_width()}")
+
+        self.lblStatusBar.configure(text=statusBarText, text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+
 
         self.configure(fg_color=self.myConfig.BACKGROUND)
 

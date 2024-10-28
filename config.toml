@@ -1,5 +1,5 @@
 #   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Wednesday 23 October 2024  16:59:15
+#   (c) Kevin Scott   Written Monday 28 October 2024  20:03:59
 #
 #   true and false are lower case
 #
@@ -8,35 +8,43 @@ myVERSION = "2024.22"
 myNAME = "pyKlock"
 
 [COLOUR]
-foreground = "#82ccff"
+foreground = "#2ea4ff"
 background = "#000000"
 transparent = true
 
 [WINDOW]
-width = 477
+width = 300
 height = 160
-x_pos = 1608
-y_pos = -357
-Align_Right = false
+x_pos = 1410
+y_pos = -421
+Align_Right = true
 
 [TIME]
-type = "Local Time"
+type = "Fuzzy Time"
 
 [MENU]
 visible = true
 
 [TIME_FONT]
-family = "Pendule Ornamental"
-size = 100
+family = "Playwrite CU"
+size = 34
 weight = "normal"
 slant = false
 underline = false
 overstrike = false
 
 [STATUS_FONT]
-family = "default"
+family = "Default"
 size = 12
 weight = "normal"
 slant = false
 underline = false
 overstrike = false
+
+[KLOCKS]
+vfd_width = 500
+vfd_height = 260
+vfd_x_pos = 829
+vfd_y_pos = -328
+vfd_foreground = "#2ea4ff"
+vfd_background = "#000000"

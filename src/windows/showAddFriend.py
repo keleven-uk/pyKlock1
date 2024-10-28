@@ -39,7 +39,7 @@ class FriendAddWindow(ctk.CTkToplevel):
 
         self.title("Friends")
         self.geometry("800x480+400+400")
-        self.attributes('-topmost', True)
+        self.attributes("-topmost", True)
         self.resizable(False, False)
 
         self.master       = master

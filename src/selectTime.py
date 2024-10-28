@@ -41,7 +41,7 @@ class SelectTime:
     __types = ("Fuzzy Time", "Time in Words", "GMT Time", "Local Time", "UTC Time", "Swatch Time", "New Earth Time",
                "Julian Time", "Decimal Time", "True Hex Time", "Hex Time", "Oct Time", "Binary Time", "Roman Time",
                "Morse Time", "Mars Sol Date", "Coordinated Mars Time", "Flow Time", "Percent Time", "Metric Time",
-               "Unix Time")
+               "Unix Time", "getDigitTime")
 #
 #  the class is access by the following properties only.
 #  getTime can't be made a proper property, this seems to upset the dictionary of functions - they are not callable.
@@ -341,6 +341,36 @@ class SelectTime:
         return f"{__Mhour}:{__Mmins}:{__Msecs}"
 
 # ------------------------------------------------------------------------------------- getMarsSolDate------------------
+    def getDigitTime(self):
+        """   Returns the current [local] time as a list of the individual digits in list format.
+              i.e. [H,H,M,M,S,S]
+        """
+
+        __hour, __mins, __secs = self.__getNowTime()
+        __digits = []
+
+        if __hour < 10:
+            __digits.append("0",)
+            __digits.append(f"{__hour}")
+        else:
+            __digits.append(f"{int(__hour / 10)}")
+            __digits.append(f"{__hour % 10}")
+        if __mins < 10:
+            __digits.append("0")
+            __digits.append(f"{__mins}")
+        else:
+            __digits.append(f"{int(__mins / 10)}")
+            __digits.append(f"{__mins % 10}")
+        if __secs < 10:
+            __digits.append("0")
+            __digits.append(f"{__secs}")
+        else:
+            __digits.append(f"{int(__secs / 10)}")
+            __digits.append(f"{int(__secs % 10)}")
+
+        return __digits
+
+# ------------------------------------------------------------------------------------- getMarsSolDate------------------
     def getMarsSolDate(self):
         """   Returns the current [UTC] time as Mars Sol Date.
 
@@ -449,7 +479,8 @@ class SelectTime:
                "Flow Time": getFlowTime,
                "Percent Time": getPercentTime,
                "Metric Time": getMetricTime,
-               "Unix Time": getUnixTime}
+               "Unix Time": getUnixTime,
+               "Digit Time": getDigitTime}
 
 
 #

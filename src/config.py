@@ -178,68 +178,144 @@ class Config():
     def TIME_TYPE(self):
         """  Return the type [format] of the displayed time.
         """
-        return self.config["TIME"].get("type", "Fuzzy Time")
+        return self.config["TIME"].get("type", "GMT Time")
 
     @TIME_TYPE.setter
     def TIME_TYPE(self, value):
-        """  Sets the type [format] of the displayed time.
+        """  Sets if menu visible.
         """
         self.config["TIME"]["type"] = value
 
     @property
     def MENU_VISIBLE(self):
-        """  Return the type [format] of the displayed time.
+        """  Return the if menu visible.
         """
         return self.config["MENU"].get("visible", True)
 
+    #  Time Font config options.
     @property
     def TIME_FONT_FAMILY(self):
-        """  Return the type [format] of the displayed time.
+        """  Return the main time display family.
         """
         return self.config["TIME_FONT"].get("family", "Pendule Ornamental")
 
     @TIME_FONT_FAMILY.setter
     def TIME_FONT_FAMILY(self, value):
-        """  Sets the type [format] of the displayed time.
+        """  Sets the main time display family.
         """
         self.config["TIME_FONT"]["family"] = value
 
     @property
     def TIME_FONT_SIZE(self):
-        """  Return the type [format] of the displayed time.
+        """  Return the main time display font size.
         """
         return self.config["TIME_FONT"].get("size", 100)
 
     @TIME_FONT_SIZE.setter
     def TIME_FONT_SIZE(self, value):
-        """  Sets the type [format] of the displayed time.
+        """  Sets the main time display font size.
         """
         self.config["TIME_FONT"]["size"] = value
 
+    #  Status bar font config options.
     @property
     def STATUS_FONT_FAMILY(self):
-        """  Return the type [format] of the displayed time.
+        """  Return the status bar font family.
         """
         return self.config["STATUS_FONT"].get("family", "default")
 
     @STATUS_FONT_FAMILY.setter
     def STATUS_FONT_FAMILY(self, value):
-        """  Sets the type [format] of the displayed time.
+        """  Sets the status bar font family.
         """
         self.config["STATUS_FONT"]["family"] = value
 
     @property
     def STATUS_FONT_SIZE(self):
-        """  Return the type [format] of the displayed time.
+        """  Return the status bar font size.
         """
         return self.config["STATUS_FONT"].get("size", 12)
 
     @STATUS_FONT_SIZE.setter
     def STATUS_FONT_SIZE(self, value):
-        """  Sets the type [format] of the displayed time.
+        """  Sets the status bar font size.
         """
         self.config["STATUS_FONT"]["size"] = value
 
+    #  VFD Klock config options.
+    @property
+    def VFD_WIDTH(self):
+        """  Returns the vfdKlock width.
+        """
+        return self.config["KLOCKS"].get("vfd_width", "500")
+
+    @VFD_WIDTH.setter
+    def VFD_WIDTH(self, value):
+        """  Sets the vfdKlock width.
+        """
+        self.config["KLOCKS"]["vfd_width"] = value
+
+    @property
+    def VFD_HEIGHT(self):
+        """  Returns the vfdKlock height.
+        """
+        return self.config["KLOCKS"].get("vfd_height", "260")
+
+    @VFD_HEIGHT.setter
+    def VFD_HEIGHT(self, value):
+        """  Sets the vfdKlock height.
+        """
+        self.config["KLOCKS"]["vfd_height"] = value
+
+    @property
+    def VFD_X_POS(self):
+        """  Returns the vfdKlock x pos.
+        """
+        return self.config["KLOCKS"].get("vfd_x_pos", "400")
+
+    @VFD_X_POS.setter
+    def VFD_X_POS(self, value):
+        """  Sets the vfdKlock x pos.
+        """
+        self.config["KLOCKS"]["vfd_x_pos"] = value
+
+    @property
+    def VFD_Y_POS(self):
+        """  Returns the vfdKlock y pos.
+        """
+        return self.config["KLOCKS"].get("vfd_y_pos", "400")
+
+    @VFD_Y_POS.setter
+    def VFD_Y_POS(self, value):
+        """  Sets the vfdKlock y pos.
+        """
+        self.config["KLOCKS"]["vfd_y_pos"] = value
+
+    @property
+    def VFD_FOREGROUND(self):
+        """  Returns the vfdKlock foreground colour.
+        """
+        return self.config["KLOCKS"].get("vfd_foreground", "#82ccff")
+
+    @VFD_FOREGROUND.setter
+    def VFD_FOREGROUND(self, value):
+        """  Sets the vfdKlock foreground colour.
+        """
+        self.config["KLOCKS"]["vfd_foreground"] = value
+
+    @property
+    def VFD_BACKGROUND(self):
+        """  Returns the vfdKlock background colour.
+        """
+        return self.config["KLOCKS"].get("vfd_background", "#000000")
+
+    @VFD_BACKGROUND.setter
+    def VFD_BACKGROUND(self, value):
+        """  Sets the vfdKlock background colour.
+        """
+        self.config["KLOCKS"]["vfd_background"] = value
+
+    #  ------------------------------------------------------------------------------------------------------------------------
 
     def _CheckVersion(self):
         """  Checks Klocks version against a version file - if they diff, an upgrade has been performed.
@@ -255,11 +331,24 @@ class Config():
                 if newVersion != oldVersion:
                     self.config["INFO"]["myVERSION"] = newVersion
                     self.logger.info(f"  ** Klock has been upgraded from version {oldVersion} to new version {newVersion} **")
+
+                    if newVersion <= "2024.23":
+                        #  New config options to be added at 2024.23
+                        self.logger.info("  ** New options for VFD Klock added **")
+                        self.config["KLOCKS"] = {"vfd_width"      : 500,
+                                                 "vfd_height"     : 260,
+                                                 "vfd_x_pos"      : 400,
+                                                 "vfd_y_pos"      : 400,
+                                                 "vfd_foreground" : "#82ccff",
+                                                 "vfd_background" : "#000000"}
+
                     self.writeConfig()
         except FileNotFoundError:
             self.logger.error("  Version file not found.")
         except toml.TomlDecodeError:
             self.logger.error("  Error reading Version file.")
+
+    #  ------------------------------------------------------------------------------------------------------------------------
 
     def writeConfig(self):
         """ Write the current config file.
@@ -288,7 +377,7 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.22",
+        config["INFO"] = {"myVERSION": "2024.23",
                           "myNAME"   : "pyKlock"}
 
         config["COLOUR"] = {"foreground" : "#00ff00",
@@ -301,7 +390,7 @@ class Config():
                             "y_pos"        :100,
                              "Align_Right" : True}
 
-        config["TIME"] = {"type": "Fuzzy Time"}
+        config["TIME"] = {"type": "GMT Time"}
 
         config["MENU"] = {"visible": True}
 
@@ -318,6 +407,13 @@ class Config():
                                "slant"      : False,
                                "underline"  : False,
                                "overstrike" : False}
+
+        config["KLOCKS"] = {"vfd_width"      : 500,
+                            "vfd_height"     : 260,
+                            "vfd_x_pos"      : 400,
+                            "vfd_y_pos"      : 400,
+                            "vfd_foreground" : "#82ccff",
+                            "vfd_background" : "#000000"}
 
 
         st_toml = toml.dumps(config)

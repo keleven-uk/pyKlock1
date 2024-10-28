@@ -30,6 +30,8 @@ import src.windows.showFriends as sf
 import src.windows.showTimeTypes as stt
 import src.windows.SelectColourWindow as cw
 
+import src.klocks.vfdKlock as vfdKlock
+
 class myMenu(CTkmenu.CTkMenuBar):
     """  A class the creates the menu.
 
@@ -59,39 +61,50 @@ class myMenu(CTkmenu.CTkMenuBar):
 
         self.menu           = CTkmenu.CTkMenuBar(self.master)
         self.mnuFile        = self.menu.add_cascade("File")
+        self.mnuKlocks      = self.menu.add_cascade("Klocks")
         self.mnuAccessories = self.menu.add_cascade("Accessories")
         self.mnuEdit        = self.menu.add_cascade("Edit")
         self.mnuHelp        = self.menu.add_cascade("Help")
 
+        #  Exit
         self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown1.add_option(option="Exit", command=self._close)
 
-
-        self.dropdown2  = CTkmenu.CustomDropdownMenu(widget=self.mnuAccessories, height=menuHeight,
+        #Klocks
+        self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnuKlocks, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown2.add_option(option="Friends", command=self._showFriends)
+        self.dropdown2.add_option(option="vfdKlock", command=self._showKlocks)
 
-
-        self.dropdown3 = CTkmenu.CustomDropdownMenu(widget=self.mnuEdit, height=menuHeight,
+        #  Accessories
+        self.dropdown3  = CTkmenu.CustomDropdownMenu(widget=self.mnuAccessories, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown3.add_option(option="Font", command=self._showFont)
-        self.dropdown3.add_option(option="Time Type", command=self._showTimeType)
-        self.dropdown3.add_option(option="Colour", command=self._showColourWindow)
+        self.dropdown3.add_option(option="Friends", command=self._showFriends)
 
-
-        self.dropdown4 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp, height=menuHeight,
+        #  Edit
+        self.dropdown4 = CTkmenu.CustomDropdownMenu(widget=self.mnuEdit, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown4.add_option(option="Help", command=self._showHelp)
+        self.dropdown4.add_option(option="Font", command=self._showFont)
+        self.dropdown4.add_option(option="Time Type", command=self._showTimeType)
+        self.dropdown4.add_option(option="Colour", command=self._showColourWindow)
 
-        self.dropdown4.add_separator()
-        self.dropdown4.add_option(option="History", command=self._showHistory)
-        self.dropdown4.add_option(option="License", command=self._showLicence)
-        self.dropdown4.add_separator()
-        self.dropdown4.add_option(option="About", command=self._showAbout)
+        #  Help
+        self.dropdown5 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp, height=menuHeight,
+                                                    width=menuWidth, font=("default", fontSize))
+        self.dropdown5.add_option(option="Help", command=self._showHelp)
+        self.dropdown5.add_separator()
+        self.dropdown5.add_option(option="History", command=self._showHistory)
+        self.dropdown5.add_option(option="License", command=self._showLicence)
+        self.dropdown5.add_separator()
+        self.dropdown5.add_option(option="About", command=self._showAbout)
 
         self.update()
 
+
+    def _showKlocks(self):
+        self.master.overrideredirect(False)
+        self.master.state("iconic")
+        vfdKlock.vfdKlock(self.master, self.myConfig, self.myLogger)
 
     def _showFriends(self):
         """  Loads the Friends window.
@@ -181,10 +194,12 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.mnuAccessories.configure(text_color=self.myConfig.FOREGROUND)
         self.mnuEdit.configure(text_color=self.myConfig.FOREGROUND)
         self.mnuHelp.configure(text_color=self.myConfig.FOREGROUND)
+        self.mnuKlocks.configure(text_color=self.myConfig.FOREGROUND)
 
         self.dropdown1.configure(text_color=self.myConfig.FOREGROUND)
         self.dropdown2.configure(text_color=self.myConfig.FOREGROUND)
         self.dropdown3.configure(text_color=self.myConfig.FOREGROUND)
+        self.dropdown4.configure(text_color=self.myConfig.FOREGROUND)
         self.dropdown4.configure(text_color=self.myConfig.FOREGROUND)
 
         #  Only update the about window if it exists.

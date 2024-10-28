@@ -61,9 +61,9 @@ class MyMainTimeFrame(ctk.CTkFrame):
              When the window is dragged, the mouse moves to the top left hand corner.
              Tried to cure, given up for now.
         """
-        newX = event.x_root
+        self.newX = event.x_root
         self.newY = event.y_root
-        self.main.geometry(f"+{newX}+{self.newY}")
+        self.main.geometry(f"+{self.newX}+{self.newY}")
 
 
     def _timeString(self):
@@ -86,15 +86,14 @@ class MyMainTimeFrame(ctk.CTkFrame):
         timeTest = self._timeString()
         newW = self.timeFont.measure(text=timeTest)                                                         #  Get the length, in pixels, of  the time text
 
-        if newW < self.myConfig.WIN_HEIGHT:                                                                 #  Keep a minimum window width.
-            newW = self.myConfig.WIN_HEIGHT
+        if newW < self.myConfig.WIN_WIDTH:                                                                  #  Keep a minimum window width.
+            newW = self.myConfig.WIN_WIDTH
 
         if self.myConfig.ALIGN_RIGHT:                                                                       #  Only change x position of window, if required.
-            newX = self.screenWidth - newW - 20                                                             #  Find the position of the window right justified to the screen
-        else:
-            newX = self.myConfig.X_POS
+            self.newX = self.screenWidth - newW - 20                                                        #  Find the position of the window right justified to the screen
 
-        self.main.geometry(f"{newW}x{self.myConfig.WIN_HEIGHT}+{newX}+{self.newY}")               #  Dynamically sets the main window to fit. [Don't change the windows Y position]
+        self.main.geometry(f"{newW}x{self.myConfig.WIN_HEIGHT}+{self.newX}+{self.newY}")                    #  Dynamically sets the main window to fit.
+                                                                                                            #  [Don't change the windows Y position]
 
         self.lblTime.configure(text=timeTest, text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND, font=self.timeFont)
 
