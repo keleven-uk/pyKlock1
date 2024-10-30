@@ -29,6 +29,15 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2024.25	[30 October]
+
+	Combined the COLOUR and WINDOW options into a single APPLICATION option.
+		Added APPLICATION options for appearanceMode and colorTheme.
+		Amended all top level windows to use these options.
+		All APPLICATION options will be set to defaults.
+	The depreciated options keys should be deleted is found.
+
+
 V2024.24	[30 October]
 
 	Merged vfd branch into the main branch.

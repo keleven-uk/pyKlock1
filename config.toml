@@ -1,22 +1,22 @@
-#   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Tuesday 29 October 2024  15:29:22
+#   Configure file for pyKlock.py 
+#   (c) Kevin Scott   Written Wednesday 30 October 2024  16:43:26
 #
-#   true and false are lower case
+#   true and false are lower case 
 #
 [INFO]
-myVERSION = "2024.24"
+myVERSION = "2024.25"
 myNAME = "pyKlock"
 
-[COLOUR]
+[APPLICATION]
+appearanceMode = "dark"
+colorTheme = "dark-blue"
 foreground = "#2ea4ff"
 background = "#000000"
 transparent = true
-
-[WINDOW]
 width = 300
 height = 160
 x_pos = 1600
-y_pos = -421
+y_pos = -370
 Align_Right = true
 
 [TIME]

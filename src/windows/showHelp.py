@@ -26,11 +26,13 @@ from src.projectPaths import HELP_PATH
 class showHelp(ctk.CTkToplevel):
     """  A class to display Klock's help file in pdf format.
     """
-    def __init__(self, master):
+    def __init__(self, master, myConfig):
         super().__init__(master)
 
-        ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("dark-blue")
+        self.myConfig = myConfig
+
+        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
+        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.geometry("700x600")
         self.title("Klock Help")

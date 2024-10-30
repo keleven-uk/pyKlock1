@@ -33,10 +33,12 @@ class showAbout(ctk.CTkToplevel):
     """
     def __init__(self, master, myConfig, myTimer):
         super().__init__(master)
+
         self.myConfig = myConfig
         self.myTimer  = myTimer
-        ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("dark-blue")
+
+        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
+        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.geometry("500x640+200+200")            # width x height + xpos + ypos
         self.resizable(False, False)

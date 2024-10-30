@@ -114,7 +114,7 @@ class myMenu(CTkmenu.CTkMenuBar):
     def _showHelp(self):
         """  Loads the Help file.
         """
-        sh.showHelp(self)
+        sh.showHelp(self, self.myConfig)
 
     def _showAbout(self):
         """  Loads the license text file into a new window.
@@ -124,12 +124,12 @@ class myMenu(CTkmenu.CTkMenuBar):
     def _showLicence(self):
         """  Loads the license text file into a new window.
         """
-        si.showInfo(self.master, "License", self.myLogger)
+        si.showInfo(self.master, "License", self.myLogger, self.myConfig)
 
     def _showHistory(self):
         """  Loads the history text file into a new window.
         """
-        si.showInfo(self.master, "History", self.myLogger)
+        si.showInfo(self.master, "History", self.myLogger, self.myConfig)
 
     def _close(self):
         """  Called when the Exit option is chosen.  First saves the window position and colours and them closes app.

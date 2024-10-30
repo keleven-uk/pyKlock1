@@ -73,106 +73,130 @@ class Config():
         return self.config["INFO"]["myVERSION"]
 
     @property
+    def APPEARANCE_MODE(self):
+        """  Returns the application appearance mode.
+             Supported modes : Light, Dark, System.
+        """
+        value = self.config["APPLICATION"].get("appearanceMode", "Dark")
+        return value
+
+    @APPEARANCE_MODE.setter
+    def APPEARANCE_MODE(self, value):
+        """  Sets the application appearance mode.
+        """
+        self.config["APPLICATION"]["appearanceMode"] = value
+
+    @property
+    def COLOR_THEME(self):
+        """  Returns the window background colour.
+             Supported themes : green, dark-blue, blue.
+        """
+        value = self.config["APPLICATION"].get("colorTheme", "dark-blue")
+        return value
+
+    @COLOR_THEME.setter
+    def COLOR_THEME(self, value):
+        """  Sets the window background colour.
+        """
+        self.config["APPLICATION"]["colorTheme"] = value
+
+    @property
     def FOREGROUND(self):
         """  Returns the window foreground colour.
         """
-        value = self.config["COLOUR"].get("foreground", "#00ff00")
-        #print(f"getting foreground to {value}")
+        value = self.config["APPLICATION"].get("foreground", "#00ff00")
         return value
 
     @FOREGROUND.setter
     def FOREGROUND(self, value):
         """  Sets the window foreground colour.
         """
-        #print(f"setting foreground to {value}")
-        self.config["COLOUR"]["foreground"] = value
+        self.config["APPLICATION"]["foreground"] = value
 
     @property
     def BACKGROUND(self):
         """  Returns the window background colour.
         """
-        value = self.config["COLOUR"].get("background", "000000")
-        #print(f"getting background to {value}")
+        value = self.config["APPLICATION"].get("background", "000000")
         return value
 
     @BACKGROUND.setter
     def BACKGROUND(self, value):
         """  Sets the window background colour.
         """
-        #print(f"setting background to {value}")
-        self.config["COLOUR"]["background"] = value
+        self.config["APPLICATION"]["background"] = value
 
     @property
     def TRANSPARENT(self):
         """  Returns the window transparent.
         """
-        return self.config["COLOUR"].get("transparent", True)
+        return self.config["APPLICATION"].get("transparent", True)
 
     @TRANSPARENT.setter
     def TRANSPARENT(self, value):
         """  Sets the window transparent.
         """
-        self.config["COLOUR"]["transparent"] = value
+        self.config["APPLICATION"]["transparent"] = value
 
     @property
     def WIN_WIDTH(self):
         """  Returns the window width.
         """
-        return self.config["WINDOW"].get("width", "400")
+        return self.config["APPLICATION"].get("width", "400")
 
     @WIN_WIDTH.setter
     def WIN_WIDTH(self, value):
         """  Sets the window width.
         """
-        self.config["WINDOW"]["width"] = value
+        self.config["APPLICATION"]["width"] = value
 
     @property
     def WIN_HEIGHT(self):
         """  Returns the window height.
         """
-        return self.config["WINDOW"].get("height", "150")
+        return self.config["APPLICATION"].get("height", "150")
 
     @WIN_HEIGHT.setter
     def WIN_HEIGHT(self, value):
         """  Sets the window height.
         """
-        self.config["WINDOW"]["height"] = value
+        self.config["APPLICATION"]["height"] = value
 
     @property
     def X_POS(self):
         """  Returns the X co-ordinate of the top right hand corner of the window.
         """
-        return self.config["WINDOW"].get("x_pos", "0")
+        return self.config["APPLICATION"].get("x_pos", "0")
 
     @X_POS.setter
     def X_POS(self, value):
         """  Sets the X co-ordinate of the top right hand corner of the window.
         """
-        self.config["WINDOW"]["x_pos"] = value
+        self.config["APPLICATION"]["x_pos"] = value
 
     @property
     def Y_POS(self):
         """  Returns the Y co-ordinate of the top right hand corner of the window.
         """
-        return self.config["WINDOW"].get("y_pos", "0")
+        return self.config["APPLICATION"].get("y_pos", "0")
 
     @Y_POS.setter
     def Y_POS(self, value):
         """  Sets the Y co-ordinate of the top right hand corner of the window.
         """
-        self.config["WINDOW"]["y_pos"] = value
+        self.config["APPLICATION"]["y_pos"] = value
 
     @property
     def ALIGN_RIGHT(self):
         """  Returns the Y co-ordinate of the top right hand corner of the window.
         """
-        return self.config["WINDOW"].get("Align_Right", True)
+        return self.config["APPLICATION"].get("Align_Right", True)
 
     @ALIGN_RIGHT.setter
     def ALIGN_RIGHT(self, value):
         """  Sets the Y co-ordinate of the top right hand corner of the window.
         """
-        self.config["WINDOW"]["Align_Right"] = value
+        self.config["APPLICATION"]["Align_Right"] = value
 
     @property
     def TIME_TYPE(self):
@@ -332,15 +356,45 @@ class Config():
                     self.config["INFO"]["myVERSION"] = newVersion
                     self.logger.info(f"  ** Klock has been upgraded from version {oldVersion} to new version {newVersion} **")
 
-                    if newVersion <= "2024.23":
+                    if not "KLOCKS" in self.config:
                         #  New config options to be added at 2024.23
-                        self.logger.info("  ** New options for VFD Klock added **")
+                        self.logger.info("  ** New options for VFD Klock added @ 2024.23**")
                         self.config["KLOCKS"] = {"vfd_width"      : 500,
                                                  "vfd_height"     : 260,
                                                  "vfd_x_pos"      : 400,
                                                  "vfd_y_pos"      : 400,
                                                  "vfd_foreground" : "#82ccff",
                                                  "vfd_background" : "#000000"}
+
+                    if not "APPLICATION" in self.config:
+                        #  New config options to be added at 2024.25
+                        #  This is a combination of the old COLOUR and WINDOW options.
+                        self.logger.info("  ** New options for 2024.25 **")
+                        self.config["APPLICATION"] = {"appearanceMode" : "Dark",
+                                                      "colorTheme"     : "dark-blue",
+                                                      "foreground"     : "#00ff00",
+                                                      "background"     : "#000000",
+                                                      "transparent"    : True,
+                                                      "width"          : 300,
+                                                      "height"         : 160,
+                                                      "x_pos"          : 100,
+                                                      "y_pos"          : 100,
+                                                      "Align_Right"    : True}
+
+                    #  Remove depreciated option keys
+                    if "COLOUR" in self.config:
+                        self.logger.info("  ** Delete depreciated option key 2024.25 **")
+                        try:
+                            del self.config["COLOUR"]
+                        except KeyError:
+                            self.logger.debug("  Problem with config key COLOUR")
+
+                    if "WINDOW" in self.config:
+                        self.logger.info("  ** Delete depreciated option key 2024.25 **")
+                        try:
+                            del self.config["WINDOW"]
+                        except KeyError:
+                            self.logger.debug("  Problem with config key WINDOW")
 
                     self.writeConfig()
         except FileNotFoundError:
@@ -380,15 +434,16 @@ class Config():
         config["INFO"] = {"myVERSION": "2024.24",
                           "myNAME"   : "pyKlock"}
 
-        config["COLOUR"] = {"foreground" : "#00ff00",
-                            "background" : "#000000",
-                            "transparent": True}
-
-        config["WINDOW"] = {"width"        :300,
-                            "height"       :160,
-                            "x_pos"        :100,
-                            "y_pos"        :100,
-                             "Align_Right" : True}
+        config["APPLICATION"] = {"appearanceMode" : "Dark",
+                                 "colorTheme"     : "dark-blue",
+                                 "foreground"     : "#00ff00",
+                                 "background"     : "#000000",
+                                 "transparent"    : True,
+                                 "width"          : 300,
+                                 "height"         : 160,
+                                 "x_pos"          : 100,
+                                 "y_pos"          : 100,
+                                 "Align_Right"    : True}
 
         config["TIME"] = {"type": "GMT Time"}
 

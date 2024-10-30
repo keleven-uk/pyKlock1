@@ -39,8 +39,8 @@ class vfdKlock(ctk.CTkToplevel):
         menuHeight = 2
         fontSize   = 12
 
-        ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("dark-blue")
+        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
+        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         winGeometry=f"{self.myConfig.VFD_WIDTH}x{self.myConfig.VFD_HEIGHT}+{self.myConfig.VFD_X_POS}+{self.myConfig.VFD_Y_POS}"
         self.geometry(winGeometry)

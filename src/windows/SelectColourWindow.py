@@ -30,11 +30,13 @@ class ColourWindow(ctk.CTkToplevel):
     """
     def __init__(self, master, myConfig):
         super().__init__(master)
-        ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("dark-blue")
+
+        self.myConfig = myConfig
+
+        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
+        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.title("Colour Chooser")
-        self.myConfig = myConfig
         self.geometry("400x200+400+600")
         self.resizable(False, False)
 

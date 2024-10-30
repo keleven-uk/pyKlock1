@@ -28,15 +28,16 @@ class showInfo(ctk.CTkToplevel):
          The text file is displayed in a text box that fill the entire window.
          The X in the top right corner is used to close the window.
     """
-    def __init__(self, master, infoType, myLogger):
+    def __init__(self, master, infoType, myLogger, myConfig):
         super().__init__(master)
 
         self.infoType = infoType
         self.myLogger = myLogger
+        self.myConfig = myConfig
         self.InfoFont = ctk.CTkFont(family="Hack", size=12)
 
-        ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("dark-blue")
+        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
+        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.geometry("1000x800+200+200")
         self.resizable(False, False)

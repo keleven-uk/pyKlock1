@@ -39,11 +39,11 @@ class Klock(ctk.CTk):
         #  Sets the appearance of the window.
         #  Supported modes : Light, Dark, System.
         #  "System" sets the appearance mode to the appearance mode of the system.
-        ctk.set_appearance_mode("Dark")
+        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
 
         #  Sets the colour of the widgets in the window.
         #  Supported themes : green, dark-blue, blue.
-        ctk.set_default_color_theme("dark-blue")
+        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         #  Dimensions of the window
 

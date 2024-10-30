@@ -30,16 +30,18 @@ class timeTypes(ctk.CTkToplevel):
     def __init__(self, master, myConfig ):
         super().__init__(master)
 
-        ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("dark-blue")
+        self.selectTime = st.SelectTime()
+        self.myConfig = myConfig
+
+        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
+        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.geometry("500x200+200+200")
         self.resizable(False, False)
         self.title("Select Time Format")
 
-        self.selectTime = st.SelectTime()
-        self.myConfig = myConfig
         self.timeFont = ctk.CTkFont(family="default", size=20)
+        self.configure(fg_color=myConfig.BACKGROUND)
 
         self._create_widgets()
 
@@ -49,15 +51,20 @@ class timeTypes(ctk.CTkToplevel):
         self.timeType = self.myConfig.TIME_TYPE
         TimeSize = ["%i" % i for i in (list(range(18,102, 2)))]
 
-        lblDesc = ctk.CTkLabel(self, text="Select the format for the time display.", corner_radius=6)
+        lblDesc = ctk.CTkLabel(self, text="Select the format for the time display.", corner_radius=6,
+                               text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         lblDesc.grid(row=0, column=0, padx=10, pady=(10, 10), sticky="ew")
-        lblDesc = ctk.CTkLabel(self, text="Select the size for the time display.", corner_radius=6)
+        lblDesc = ctk.CTkLabel(self, text="Select the size for the time display.", corner_radius=6,
+                               text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         lblDesc.grid(row=0, column=1, padx=10, pady=(10, 10), sticky="ew")
-        self.cbTimeType = ctk.CTkComboBox(self, values=self.selectTime.timeTypes, command=self._changeTimeType, variable=self.timeType, hover=True)
+        self.cbTimeType = ctk.CTkComboBox(self, values=self.selectTime.timeTypes, command=self._changeTimeType, variable=self.timeType, hover=True,
+                                          text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.cbTimeType.grid(row=1, column=0, padx=10, pady=(10, 10), sticky="ew")
-        self.cbTimeSIze = ctk.CTkComboBox(self, values=TimeSize, command=self._changeTimeSize, variable=TimeSize)
+        self.cbTimeSIze = ctk.CTkComboBox(self, values=TimeSize, command=self._changeTimeSize, variable=TimeSize,
+                                          text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.cbTimeSIze.grid(row=1, column=1, padx=10, pady=(10, 10), sticky="ew")
-        self.lblExample = ctk.CTkLabel(self, text=self.selectTime.getTime(self.timeType), font=self.timeFont, corner_radius=6)
+        self.lblExample = ctk.CTkLabel(self, text=self.selectTime.getTime(self.timeType), font=self.timeFont, corner_radius=6,
+                                       text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.lblExample.grid(row=2, column=0, padx=10, pady=(10, 10), sticky="ew", columnspan=2)
 
         self.cbTimeType.set(self.myConfig.TIME_TYPE)

@@ -34,8 +34,8 @@ class FriendAddWindow(ctk.CTkToplevel):
     """
     def __init__(self, master, friendsStore):
         super().__init__(master)
-        ctk.set_appearance_mode("Dark")
-        ctk.set_default_color_theme("dark-blue")
+        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
+        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.title("Friends")
         self.geometry("800x480+400+400")
