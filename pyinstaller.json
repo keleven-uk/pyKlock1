@@ -15,7 +15,7 @@
   },
   {
    "optionDest": "console",
-   "value": false
+   "value": true
   },
   {
    "optionDest": "icon_file",
@@ -72,6 +72,30 @@
   {
    "optionDest": "datas",
    "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/CTkMenuBar;CTkMenuBar/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/src/CTkPDFViewer;CTkPDFViewer/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/src/CTkDatePicker;CTkDatePicker/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/src/CTkXYFrame;CTkXYFrame/"
+  },
+  {
+   "optionDest": "collect_data",
+   "value": ""
+  },
+  {
+   "optionDest": "collect_data",
+   "value": ""
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/tkVFD/Graphics;tkVFD/c/Graphics/"
   }
  ],
  "nonPyinstallerOptions": {

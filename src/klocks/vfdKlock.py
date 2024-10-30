@@ -62,7 +62,7 @@ class vfdKlock(ctk.CTkToplevel):
 
         #  Create the frame for the time display.
         myLogger.info("  Creating vfdKlock Main Time")
-        self.mainTime = vfdTime.showVFDime(self, myConfig)
+        self.mainTime = vfdTime.showVFDime(self, self.myConfig, self.myLogger)
         self.mainTime.pack(expand=True)
 
         #  Create the frame for the status bar.
