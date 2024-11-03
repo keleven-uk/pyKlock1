@@ -109,12 +109,12 @@ class myMenu(CTkmenu.CTkMenuBar):
     def _showFriends(self):
         """  Loads the Friends window.
         """
-        sf.FriendsWindow(self, self.myLogger)
+        sf.FriendsWindow(self.master, self.myConfig)
 
     def _showHelp(self):
         """  Loads the Help file.
         """
-        sh.showHelp(self, self.myConfig)
+        sh.showHelp(self.master, self.myConfig)
 
     def _showAbout(self):
         """  Loads the license text file into a new window.

@@ -356,7 +356,7 @@ class Config():
                     self.config["INFO"]["myVERSION"] = newVersion
                     self.logger.info(f"  ** Klock has been upgraded from version {oldVersion} to new version {newVersion} **")
 
-                    if not "KLOCKS" in self.config:
+                    if "KLOCKS" not in self.config:
                         #  New config options to be added at 2024.23
                         self.logger.info("  ** New options for VFD Klock added @ 2024.23**")
                         self.config["KLOCKS"] = {"vfd_width"      : 500,
@@ -366,9 +366,10 @@ class Config():
                                                  "vfd_foreground" : "#82ccff",
                                                  "vfd_background" : "#000000"}
 
-                    if not "APPLICATION" in self.config:
+                    if "APPLICATION" not in self.config:
                         #  New config options to be added at 2024.25
                         #  This is a combination of the old COLOUR and WINDOW options.
+                        #  Options set to default.
                         self.logger.info("  ** New options for 2024.25 **")
                         self.config["APPLICATION"] = {"appearanceMode" : "Dark",
                                                       "colorTheme"     : "dark-blue",

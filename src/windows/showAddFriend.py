@@ -32,22 +32,27 @@ class FriendAddWindow(ctk.CTkToplevel):
          These are then save to a friendStore - detailed else where.
 
     """
-    def __init__(self, master, friendsStore):
+    def __init__(self, master, myConfig, friendsStore, rowKey=None):
         super().__init__(master)
-        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
-
         self.title("Friends")
         self.geometry("800x480+400+400")
         self.attributes("-topmost", True)
         self.resizable(False, False)
 
-        self.master       = master
+        self.myConfig     = myConfig
         self.friendsStore = friendsStore
         self.titles       = self.friendsStore.getTitles
+        self.rowKey       = rowKey
         self.chosen       = ""
 
-        self._create_widgets()
+        ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
+        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+
+        if self.rowKey is None:                #  if rowKey is None, then in add mode - start with placeholder text in fields.
+            self._create_widgets()
+        else:
+            self._create_widgets()              #  if rowKey is not None, then in edit mode - load selected friend details into the fields.
+            self._populateFields(self.rowKey)   #  rowkey should hold the row number of the selected friend.
 
 
     def _create_widgets(self):
@@ -144,6 +149,25 @@ class FriendAddWindow(ctk.CTkToplevel):
         """
         self.chosen = choice
 
+    def _populateFields(self, rowKey):
+        """
+        """
+        friend = self.friendsStore.getFriend(rowKey)
+        self.cbxTitle.set(friend[0])
+        self.entLastName.insert(0, friend[1])
+        self.entFirstName.insert(0, friend[2])
+        self.entMobileNumber.insert(0, friend[3])
+        self.entTelNumber.insert(0, friend[4])
+        self.entEmail.insert(0, friend[5])
+        self.dpBirthday.date_entry.insert(0, friend[6])     #  Accessing date picker internals directly.
+        self.entHouseNo.insert(0, friend[7])
+        self.entAddLine1.insert(0, friend[8])
+        self.entAddLine2.insert(0, friend[9])
+        self.entCity.insert(0, friend[10])
+        self.entCounty.insert(0, friend[11])
+        self.entPostCode.insert(0, friend[12])
+        self.entCountry.insert(0, friend[13])
+
     def _add(self):
         """  The friendsStore stores the data in a list format access via a key.
              This method created the key and item and calls the friendsStore.add.
@@ -177,19 +201,17 @@ class FriendAddWindow(ctk.CTkToplevel):
 
             self.friendsStore.addFriend(key, item)
             self.btnSave.configure(state="normal")
-            self._clear()
+
+            if self.rowKey is None:                 #  If in edit more, clear fields.
+                self._clear()
+            else:
+                self._populateFields(self.rowKey)   #  If in edit more, refresh fields.
 
     def _save(self):
         """  When called the friends store will save a copy of itself.
              The location and the format of the save is determined in the store.
         """
         self.friendsStore.saveFriends()
-
-    def _edit(self):
-        pass
-
-    def _delete(self):
-        pass
 
     def _exit(self):
         """  Closes the window.

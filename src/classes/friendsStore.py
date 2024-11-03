@@ -57,11 +57,22 @@ class friendsStore():
         """
         self.store[key] = item
 
+    def deleteFriend(self, key):
+        """   Deletes a friend from the store if it exist, if not ignore.
+        """
+        if key in self.store:
+            del self.store[key]
+
     @property
     def numberOfFriends(self):
         """  Returns the number of friends in the store.
         """
         return len(self.store)
+
+    def getFriend(self, key):
+        """  Retrieves a single friend in list format.
+        """
+        return self.store[key]
 
     def getFriends(self):
         """  Retrieves friends in list format.
