@@ -43,9 +43,9 @@ class timeTypes(ctk.CTkToplevel):
         self.timeFont = ctk.CTkFont(family="default", size=20)
         self.configure(fg_color=myConfig.BACKGROUND)
 
-        self._create_widgets()
+        self._createWidgets()
 
-    def _create_widgets(self):
+    def _createWidgets(self):
         """  Create the history display display.
         """
         self.timeType = self.myConfig.TIME_TYPE

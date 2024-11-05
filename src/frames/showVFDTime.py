@@ -39,14 +39,14 @@ class showVFDime(ctk.CTkFrame):
         self.myLogger   = myLogger
         self.selectTime = st.SelectTime()
         self.configure(fg_color=self.myConfig.VFD_BACKGROUND)
-        self._create_widgets()
+        self._createWidgets()
         self.after(1000, self._update)              #  Will update the time.
         myLogger.debug("  End of showVFDime __init__")
 
-    def _create_widgets(self):
+    def _createWidgets(self):
         """  Create the main time display.
         """
-        self.myLogger.debug("  Start of showVFDime _create_widgets")
+        self.myLogger.debug("  Start of showVFDime _createWidgets")
         vfdHeight  = 200
 
         #  Oncolour expects a RGB row vector, bgcolour will take a normal TK colour code though.
@@ -79,20 +79,33 @@ class showVFDime(ctk.CTkFrame):
 
         self.myLogger.debug("  Start of showVFDime bind mouse")
         #  Using tkinter direct to bind the move window function to the left moue button press.
-        self.hour0.bind("<B1-Motion>", self._move_window)
-        self.myLogger.debug("  End of showVFDime _create_widgets")
+        self.hour0.bind("<Button-1>",        self._startMove)
+        self.hour0.bind("<ButtonRelease-1>", self._stopMove)
+        self.hour0.bind("<B1-Motion>",       self._moveWindow)
 
+        self.myLogger.debug("  End of showVFDime _createWidgets")
 
-    def _move_window(self, event):
+    #  Used to move the app.
+    #  Binds start and stop to mouse left click and move to mouse move.
+    def _startMove(self, event):
+        self.x = event.x
+        self.y = event.y
+
+    def _stopMove(self, event):
+        self.x = None
+        self.y = None
+
+    def _moveWindow(self, event):
         """  Moves the window when the mouse is left clicked and moved.
 
              When the window is dragged, the mouse moves to the top left hand corner.
              Tried to cure, given up for now.
-        """
-        newX = event.x_root
-        self.newY = event.y_root
-        self.main.geometry(f"+{newX}+{self.newY}")
 
+             The two above methods improve the cursor position, a lot better.
+        """
+        self.newX = event.x_root - self.x
+        self.newY = event.y_root - self.y
+        self.main.geometry(f"+{self.newX}+{self.newY}")
 
     def _timeString(self):
         """  Returns the current time as a text string using the Digit Time time type.

@@ -37,13 +37,11 @@ class MyMainTimeFrame(ctk.CTkFrame):
         self.timeFont = ctk.CTkFont(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
         self.screenWidth, self.screenHeight = utils.getScreenSize()
         self.newY = self.myConfig.Y_POS
-        self._create_widgets()
+        self._createWidgets()
         self.update()
 
 
-
-
-    def _create_widgets(self):
+    def _createWidgets(self):
         """  Create the main time display.
         """
         self.configure(fg_color=self.myConfig.BACKGROUND)
@@ -52,19 +50,33 @@ class MyMainTimeFrame(ctk.CTkFrame):
         self.lblTime.pack(expand=True)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.
-        self.lblTime.bind("<B1-Motion>", self._move_window)
+        self.lblTime.bind("<Button-1>",        self._startMove)
+        self.lblTime.bind("<ButtonRelease-1>", self._stopMove)
+        self.lblTime.bind("<B1-Motion>",       self._moveWindow)
 
+    #  Used to move the app.
+    #  Binds start and stop to mouse left click and move to mouse move.
+    def _startMove(self, event):
+        self.x = event.x
+        self.y = event.y
+        self.configure(cursor="circle")
 
-    def _move_window(self, event):
+    def _stopMove(self, event):
+        self.x = None
+        self.y = None
+        self.configure(cursor="arrow")
+
+    def _moveWindow(self, event):
         """  Moves the window when the mouse is left clicked and moved.
 
              When the window is dragged, the mouse moves to the top left hand corner.
              Tried to cure, given up for now.
-        """
-        self.newX = event.x_root
-        self.newY = event.y_root
-        self.main.geometry(f"+{self.newX}+{self.newY}")
 
+             The two above methods improve the cursor position, a lot better.
+        """
+        self.newX = event.x_root - self.x
+        self.newY = event.y_root - self.y
+        self.main.geometry(f"+{self.newX}+{self.newY}")
 
     def _timeString(self):
         """  Returns the current time as a text string using the current time type.

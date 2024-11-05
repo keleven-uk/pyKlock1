@@ -43,20 +43,20 @@ class FriendsWindow(ctk.CTkToplevel):
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.title("Friends")
-        self.geometry("1000x400+400+400")
+        self.geometry("1010x400+400+400")
         self.resizable(True, False)
 
-        self._create_widgets()
+        self._createWidgets()
 
         self.after(60000, self._update)
 
 
-    def _create_widgets(self):
+    def _createWidgets(self):
         """  Create the main friend display.
         """
-        self.tblFriends = Sheet(self, data=self.friendsStore.getFriends(), width=1900, height=300,
+        self.tblFriends = Sheet(self, data=self.friendsStore.getFriends(), width=1000, height=300,
                         align = "W", header_align = "w", row_index_align = "w",
-                        show_x_scrollbar=False, show_y_scrollbar=False)
+                        show_x_scrollbar=True, show_y_scrollbar=True)
         self.tblFriends.grid(row=0, column=0, padx=10, pady=10, sticky="nsew", columnspan=12)
         self.tblFriends.change_theme(self.myConfig.APPEARANCE_MODE)
         self.tblFriends.headers(self.friendsStore.getHeaders)
@@ -72,15 +72,19 @@ class FriendsWindow(ctk.CTkToplevel):
         self.btnDel = ctk.CTkButton( self, text="Delete", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, state="disabled", command=self._delete)
         self.btnDel.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
+        self.btnRefresh = ctk.CTkButton( self, text="Refresh", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
+                                    corner_radius=12, width=100, command=self._sheetUpdate)
+        self.btnRefresh.grid(row=1, column=3, padx=10, pady=10, sticky="nsew")
         self.btnExt = ctk.CTkButton( self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self._exit)
-        self.btnExt.grid(row=1, column=3, padx=10, pady=10, sticky="nsew")
+        self.btnExt.grid(row=1, column=4, padx=10, pady=10, sticky="nsew")
 
         self._setColumnWidths()
 
     def _sheetUpdate(self):
         """  Perform the actual sheet update.
         """
+        print("Updating Sheet")
         self.tblFriends.set_sheet_data(data=self.friendsStore.getFriends(), redraw=True)
         self._setColumnWidths()
 
@@ -89,7 +93,6 @@ class FriendsWindow(ctk.CTkToplevel):
              The main purpose it to update the sheet with any new friends,
                 if the FriendAddWindow window is running.
         """
-        print(f"self.AddWindowRunning :: {self.AddWindowRunning}")
         if self.AddWindowRunning is None or not self.AddWindowRunning.winfo_exists():
             self.AddWindowRunning = None
         else:
@@ -126,7 +129,6 @@ class FriendsWindow(ctk.CTkToplevel):
             self.rowKey =  f"{rowData[1]} : {rowData[2]}"
             self.AddWindowRunning = saf.FriendAddWindow(self, self.myConfig, self.friendsStore, self.rowKey)
             self.rowKey = ""
-            self._sheetUpdate()
 
         self.btnEdit.configure(state="disabled")
         self.btnDel.configure(state="disabled")
@@ -137,7 +139,7 @@ class FriendsWindow(ctk.CTkToplevel):
         if self.rowKey == "":
             CTkMessagebox(title="Error", message="No row selected", icon="cancel")
         else:
-            msg = CTkMessagebox(title="Delete Friend", message="Do you really wat to delete this friend?",
+            msg = CTkMessagebox(title="Delete Friend", message="Do you really want to delete this friend?",
                                 icon="question", option_1="Yes", option_2="No")
             if msg.get()=="Yes":
                 self.friendsStore.deleteFriend(self.rowKey)

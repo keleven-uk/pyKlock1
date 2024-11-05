@@ -1,5 +1,5 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Saturday 02 November 2024  22:21:32
+#   (c) Kevin Scott   Written Monday 04 November 2024  22:27:38
 #
 #   true and false are lower case 
 #
@@ -10,24 +10,24 @@ myNAME = "pyKlock"
 [APPLICATION]
 appearanceMode = "dark"
 colorTheme = "dark-blue"
-foreground = "#2ea4ff"
+foreground = "#7666ff"
 background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1600
-y_pos = -370
+x_pos = 1305
+y_pos = -388
 Align_Right = true
 
 [TIME]
-type = "GMT Time"
+type = "Fuzzy Time"
 
 [MENU]
 visible = true
 
 [TIME_FONT]
-family = "Pendule Ornamental"
-size = 100
+family = "Playwrite CU"
+size = 34
 weight = "normal"
 slant = false
 underline = false
@@ -44,7 +44,7 @@ overstrike = false
 [KLOCKS]
 vfd_width = 500
 vfd_height = 260
-vfd_x_pos = 529
-vfd_y_pos = 568
+vfd_x_pos = 821
+vfd_y_pos = 280
 vfd_foreground = "#82ccff"
 vfd_background = "#000000"

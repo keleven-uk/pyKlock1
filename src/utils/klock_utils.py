@@ -28,12 +28,13 @@ import ctypes
 
 
 def get_state():
-    """  Checks the current state of Caps Lock, Scroll Lock & Num Lock.
+    """  Checks the current state of Caps Lock, Insert, Scroll Lock & Num Lock.
          The results are returned as a sting.
          A Upper case indicates the lock is on, lower case indicates the lock is off.
     """
     state  = ""
     caps   = win32api.GetKeyState(win32con.VK_CAPITAL)
+    insert = win32api.GetKeyState(win32con.VK_INSERT)
     scroll = win32api.GetKeyState(win32con.VK_SCROLL)
     num    = win32api.GetKeyState(win32con.VK_NUMLOCK)
 
@@ -41,6 +42,11 @@ def get_state():
         state = "C"
     else:
         state = "c"
+
+    if insert:
+        state += "I"
+    else:
+        state += "i"
 
     if scroll:
         state += "S"

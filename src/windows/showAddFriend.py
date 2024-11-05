@@ -39,23 +39,25 @@ class FriendAddWindow(ctk.CTkToplevel):
         self.attributes("-topmost", True)
         self.resizable(False, False)
 
-        self.myConfig     = myConfig
-        self.friendsStore = friendsStore
-        self.titles       = self.friendsStore.getTitles
-        self.rowKey       = rowKey
-        self.chosen       = ""
+        self.myConfig        = myConfig
+        self.friendsStore    = friendsStore
+        self.titles          = self.friendsStore.getTitles
+        self.rowKey          = rowKey
+        self.chosen          = ""
+        self.valFirstName    = False
+        self.valLastName     = False
+        self.valMobileNumber = False
+        self.addData         = False
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
-        if self.rowKey is None:                #  if rowKey is None, then in add mode - start with placeholder text in fields.
-            self._create_widgets()
-        else:
-            self._create_widgets()              #  if rowKey is not None, then in edit mode - load selected friend details into the fields.
+        self._createWidgets()
+        if self.rowKey:                         #  if rowKey is not None, then in edit mode - load selected friend details into the fields.
             self._populateFields(self.rowKey)   #  rowkey should hold the row number of the selected friend.
 
 
-    def _create_widgets(self):
+    def _createWidgets(self):
         """  Create the main add friend frame.
         """
         self.lblTitle = ctk.CTkLabel(self, text="Title", text_color="#ffe9a6", font=("Verdana",20))
@@ -65,17 +67,20 @@ class FriendAddWindow(ctk.CTkToplevel):
 
         self.lblFirstName = ctk.CTkLabel(self, text="FirstName", text_color="#ffe9a6", font=("Verdana",20))
         self.lblFirstName.grid(row=1, column=0,padx=10, pady=10)
-        self.entFirstName = ctk.CTkEntry(self, placeholder_text="FirstName", text_color="white", fg_color="#030126", border_color="#030126")
+        self.entFirstName = ctk.CTkEntry(self, placeholder_text="FirstName", text_color="white", fg_color="#030126", border_color="#030126",
+                                         validate="focusout", validatecommand=self._validateFirstName)
         self.entFirstName.grid(row=1, column=1,padx=10, pady=10)
 
         self.lblLastName = ctk.CTkLabel(self, text="Last Name", text_color="#ffe9a6", font=("Verdana",20))
         self.lblLastName.grid(row=1, column=2,padx=10, pady=10)
-        self.entLastName = ctk.CTkEntry(self, placeholder_text="lastName", text_color="white", fg_color="#030126", border_color="#030126")
+        self.entLastName = ctk.CTkEntry(self, placeholder_text="lastName", text_color="white", fg_color="#030126", border_color="#030126",
+                                        validate="focusout", validatecommand=self._validateLastName)
         self.entLastName.grid(row=1, column=3,padx=10, pady=10)
 
         self.lblMobileNumber = ctk.CTkLabel(self, text="Mobile Number", text_color="#ffe9a6", font=("Verdana",20))
         self.lblMobileNumber.grid(row=2, column=0,padx=10, pady=10)
-        self.entMobileNumber = ctk.CTkEntry(self, placeholder_text="mobileNumber", text_color="white", fg_color="#030126", border_color="#030126")
+        self.entMobileNumber = ctk.CTkEntry(self, placeholder_text="mobileNumber", text_color="white", fg_color="#030126", border_color="#030126",
+                                            validate="focusout", validatecommand=self._validateMobileNumber)
         self.entMobileNumber.grid(row=2, column=1,padx=10, pady=10)
 
         self.lblTelNumber = ctk.CTkLabel(self, text="Tel Number", text_color="#ffe9a6", font=("Verdana",20))
@@ -134,7 +139,7 @@ class FriendAddWindow(ctk.CTkToplevel):
 
 
         self.btnAdd = ctk.CTkButton( self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, command=self._add)
+                                    corner_radius=12, width=100, command=self._add, state="disabled")
         self.btnAdd.grid(row=9, column=0, padx=10, pady=10, sticky="nsew")
         self.btnSave = ctk.CTkButton( self, text="Save", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self._save, state="disabled")
@@ -143,6 +148,45 @@ class FriendAddWindow(ctk.CTkToplevel):
                                     corner_radius=12, width=100, command=self._exit)
         self.btnExt.grid(row=9, column=3, padx=10, pady=10, sticky="nsew")
 
+
+    def _validateLastName(self):
+        if self.rowKey:
+            if self.self.entLastName.get().title().strip() != friend[1]:
+                print("LastName changed")
+                self.valLastName = True
+        else:
+            if self.entLastName.get().title().strip() != "":
+                print("LastName changed")
+                self.valLastName = True
+
+        if self.valFirstName and self.valLastName and self.valMobileNumber:
+            self.self.btnAdd.configure(state="normal")
+
+    def _validateFirstName(self):
+        if self.rowKey:
+            if self.entFirstName.get().title().strip() != friend[2]:
+                print("FirstName changed")
+                self.valFirstName = True
+        else:
+            if self.entFirstName.get().title().strip() != "":
+                print("FirstName changed")
+                self.valFirstName = True
+
+        if self.valFirstName and self.valLastName and self.valMobileNumber:
+            self.self.btnAdd.configure(state="normal")
+
+    def _validateMobileNumber(self):
+        if self.rowKey:
+            if self.entMobileNumber.get().strip() != friend[3]:
+                print("MobileNumber changed")
+                self.valMobileNumber = True
+        else:
+            if self.entMobileNumber.get().strip() != "":
+                print("MobileNumber changed")
+                self.valMobileNumber = True
+
+        if self.valFirstName and self.valLastName and self.valMobileNumber:
+            self.self.btnAdd.configure(state="normal")
 
     def setTitle(self, choice):
         """  Saves the choice of the combo box [title] for use elsewhere.
@@ -201,22 +245,42 @@ class FriendAddWindow(ctk.CTkToplevel):
 
             self.friendsStore.addFriend(key, item)
             self.btnSave.configure(state="normal")
+            self.self.btnAdd.configure(state="disabled")
+            self.valFirstName    = False
+            self.valLastName     = False
+            self.valMobileNumber = False
+            self.addData         = True     #  data had been add/edited but not saved.3.12\__setslice__
 
-            if self.rowKey is None:                 #  If in edit more, clear fields.
-                self._clear()
-            else:
+            self._clear()
+            if self.rowKey:
                 self._populateFields(self.rowKey)   #  If in edit more, refresh fields.
 
     def _save(self):
         """  When called the friends store will save a copy of itself.
              The location and the format of the save is determined in the store.
+             After save reset class flags adddata and rowKey.
         """
         self.friendsStore.saveFriends()
+        if self.addData:
+            self.addData = False
+        if self.rowKey:
+            self.rowKey = None
 
     def _exit(self):
         """  Closes the window.
+             Checks weather their is and data to be saved.
+             If there is, it asks do you really want to exit, it yes then exit.
+             If no, then drop out of the method without doing anything.
+             If no data to save [adddata will be false, then exit.]
         """
-        self.destroy()
+        if self.addData:
+            msg = CTkMessagebox(title="Un saved data", message="Do you really want exit, there is unsaved data?",
+                                icon="question", option_1="Yes", option_2="No")
+            if msg.get()=="Yes":
+                self.destroy()
+        else:
+            self.destroy()
+
 
     def _clear(self):
         """  Clears the text fields [using tk direct].
@@ -225,6 +289,7 @@ class FriendAddWindow(ctk.CTkToplevel):
         self.entFirstName.delete(0, tk.END)
         self.entLastName.delete(0, tk.END)
         self.entMobileNumber.delete(0, tk.END)
+        self.entTelNumber.delete(0, tk.END)
         self.entEmail.delete(0, tk.END)
         self.dpBirthday.date_entry.delete(0, tk.END)
         self.entHouseNo.delete(0, tk.END)

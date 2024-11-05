@@ -43,10 +43,10 @@ class ColourWindow(ctk.CTkToplevel):
         self.foreColour = ""
         self.backColour = ""
 
-        self._create_widgets()
+        self._createWidgets()
 
 
-    def _create_widgets(self):
+    def _createWidgets(self):
         """  Create the main time display.
         """
         self.configure(fg_color="black")

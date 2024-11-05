@@ -45,10 +45,10 @@ class showInfo(ctk.CTkToplevel):
         self.infoText = f"{self.infoType} Not Found"
         self._loadInfo()
 
-        self._create_widgets()
+        self._createWidgets()
 
 
-    def _create_widgets(self):
+    def _createWidgets(self):
         """  Create the history display display.
         """
         self.grid_rowconfigure(0, weight=1)  # configure grid system

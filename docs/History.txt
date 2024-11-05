@@ -26,7 +26,23 @@ Current version of Klock is written in Python using different GUI frameworks
 	Klock 1 - CustomTkinter  [this]
 	Klock 2 - Flet.
 
+	Note : pySimpleGUI is licensed software product, but free for hobbyist [but need to register]
+
 Note : I use the correct spelling of colour on my side of the code.  :-)
+
+
+V2.24.27
+
+	Testing on friends in progress, corrected a few bugs.
+	Added some basic validation, so that first name, last name and mobile number are mandatory.
+		Hopefully the add and save buttons won't be enables unless these fields are complete.
+	Added a refresh button to refresh the friends table, if needed.
+
+	Amended the window move logic by added methods for button one [Left] press and release.
+		This makes the window movement smoother and keeps the correct location of the mouse pointer.
+		The mouse pointer now changes during move :-)
+	Added the insert key to the displayed key state on the status line.
+	Cleaned up some methods names - all should be in camelCase.
 
 
 V2024.26	[3 November 2024]

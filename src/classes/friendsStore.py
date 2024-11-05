@@ -33,7 +33,7 @@ class friendsStore():
 
     def __init__(self):
         self.store     = {}         #  Create the store, an empty dictionary.
-        self.titles    = ["", "Mr", "Ms", "Mrs", "Miss", "Dr"]
+        self.titles    = ["", "Mr", "Ms", "Mrs", "Miss", "Dr", "Rev"]
         self.Headers   = ["Title", "First name", "Last name", "Mobile Number", "Telephone Number", "eMail", "Birthday",
                           "House Number", "Address Line 1","Address Line 2", "City", "County", "Post Code", "Country"]
         self.storeName = pp.FR_DATA_PATH
@@ -86,7 +86,7 @@ class friendsStore():
     def saveFriends(self):
         """  Saves the friend store to a text file in csv format.
         """
-        with open (self.storeName, "w", newline="") as csvFile:
+        with open (self.storeName, "w", newline="", encoding="utf-8") as csvFile:
             writer =csv.writer(csvFile, quoting=csv.QUOTE_ALL)
             for key in sorted(self.store):
                 writer.writerow(self.store[key])
@@ -95,7 +95,7 @@ class friendsStore():
         """  Loads the friend store from a text file in csv format.
         """
         try:
-            with open (self.storeName, "r") as csvFile:
+            with open (self.storeName, "r", encoding="utf-8") as csvFile:
                 csvFile = csv.reader(csvFile)
                 for rows in csvFile:
                     key = f"{rows[1]} : {rows[2]}"
