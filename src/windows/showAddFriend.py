@@ -21,6 +21,8 @@
 
 import tkinter as tk
 
+from re import compile
+
 import customtkinter as ctk
 from src.CTkDatePicker import CTkDatePicker
 from CTkMessagebox import CTkMessagebox
@@ -39,15 +41,15 @@ class FriendAddWindow(ctk.CTkToplevel):
         self.attributes("-topmost", True)
         self.resizable(False, False)
 
-        self.myConfig        = myConfig
-        self.friendsStore    = friendsStore
-        self.titles          = self.friendsStore.getTitles
-        self.rowKey          = rowKey
-        self.chosen          = ""
-        self.valFirstName    = False
-        self.valLastName     = False
-        self.valMobileNumber = False
-        self.addData         = False
+        self.myConfig         = myConfig
+        self.friendsStore     = friendsStore
+        self.titles           = self.friendsStore.getTitles
+        self.rowKey           = rowKey
+        self.chosen           = ""
+        self.valFirstName     = False
+        self.valLastName      = False
+        self.valMobileNumber  = False
+        self.addData          = False
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
@@ -150,67 +152,64 @@ class FriendAddWindow(ctk.CTkToplevel):
 
 
     def _validateLastName(self):
+        """  Validation the Last Name - which is mandatory.
+
+             Must not be blank.
+        """
+        lastName = self.entLastName.get().title().strip()
         if self.rowKey:
-            if self.self.entLastName.get().title().strip() != friend[1]:
-                print("LastName changed")
-                self.valLastName = True
+            if lastName != self.friend[1]:
+               self.valLastName = True
         else:
-            if self.entLastName.get().title().strip() != "":
-                print("LastName changed")
-                self.valLastName = True
+            if lastName != "":
+               self.valLastName = True
 
         if self.valFirstName and self.valLastName and self.valMobileNumber:
-            self.self.btnAdd.configure(state="normal")
+            self.btnAdd.configure(state="normal")
 
     def _validateFirstName(self):
+        """  Validation the Mobile Number - which is mandatory.
+
+             Must not be blank.
+        """
+        firstName = self.entFirstName.get().title().strip()
         if self.rowKey:
-            if self.entFirstName.get().title().strip() != friend[2]:
-                print("FirstName changed")
-                self.valFirstName = True
+            if firstName != self.friend[2]:
+               self.valFirstName = True
         else:
-            if self.entFirstName.get().title().strip() != "":
-                print("FirstName changed")
-                self.valFirstName = True
+            if firstName != "":
+               self.valFirstName = True
 
         if self.valFirstName and self.valLastName and self.valMobileNumber:
             self.self.btnAdd.configure(state="normal")
 
     def _validateMobileNumber(self):
-        if self.rowKey:
-            if self.entMobileNumber.get().strip() != friend[3]:
-                print("MobileNumber changed")
-                self.valMobileNumber = True
-        else:
-            if self.entMobileNumber.get().strip() != "":
-                print("MobileNumber changed")
-                self.valMobileNumber = True
+        """  Validation the Mobile Number - which is mandatory.
 
-        if self.valFirstName and self.valLastName and self.valMobileNumber:
-            self.self.btnAdd.configure(state="normal")
+             Must not be blank and must be numeric.
+        """
+        mobileNumber = self.entMobileNumber.get().strip()
+        if self.rowKey:
+            if mobileNumber != self.friend[3]:
+               self.valMobileNumber = True
+        else:
+            if mobileNumber != "":
+               self.valMobileNumber = True
+
+        valMobileNumbers = compile(r"[\d ]")             #  Only allows digits and spaces.
+
+        if valMobileNumbers.match(mobileNumber):             #  Only allows digits and spaces.
+            if self.valFirstName and self.valLastName and self.valMobileNumber:
+                self.btnAdd.configure(state="normal")
+        else:
+            CTkMessagebox(title="Error", message="Mobile Number not numeric", icon="warning")
+            self.valMobileNumber = False
+            self.entMobileNumber.after_idle(lambda: self.entMobileNumber.configure(validate='focusout'))    #  Reapply validation.
 
     def setTitle(self, choice):
         """  Saves the choice of the combo box [title] for use elsewhere.
         """
         self.chosen = choice
-
-    def _populateFields(self, rowKey):
-        """
-        """
-        friend = self.friendsStore.getFriend(rowKey)
-        self.cbxTitle.set(friend[0])
-        self.entLastName.insert(0, friend[1])
-        self.entFirstName.insert(0, friend[2])
-        self.entMobileNumber.insert(0, friend[3])
-        self.entTelNumber.insert(0, friend[4])
-        self.entEmail.insert(0, friend[5])
-        self.dpBirthday.date_entry.insert(0, friend[6])     #  Accessing date picker internals directly.
-        self.entHouseNo.insert(0, friend[7])
-        self.entAddLine1.insert(0, friend[8])
-        self.entAddLine2.insert(0, friend[9])
-        self.entCity.insert(0, friend[10])
-        self.entCounty.insert(0, friend[11])
-        self.entPostCode.insert(0, friend[12])
-        self.entCountry.insert(0, friend[13])
 
     def _add(self):
         """  The friendsStore stores the data in a list format access via a key.
@@ -219,11 +218,12 @@ class FriendAddWindow(ctk.CTkToplevel):
              The key = Last Name : First Name
                 item = Title, First Name, Last Name, Mobile No, Email, Birthday.
 
-             NB : no validation yet.
+             FirstName and last Name cannot be blank.
+             mobileNumber must be numeric [can contain a space].
         """
         title     = self.chosen
-        lastName  = self.entLastName.get().title().strip()
-        firstName = self.entFirstName.get().title().strip()
+        self.lastName  = self.entLastName.get().title().strip()
+        self.firstName = self.entFirstName.get().title().strip()
         mobileNo  = self.entMobileNumber.get().strip()
         telNumber = self.entTelNumber.get().strip()
         eMail     = self.entEmail.get().strip()
@@ -236,16 +236,16 @@ class FriendAddWindow(ctk.CTkToplevel):
         postCode  = self.entPostCode.get().upper().strip()
         country   = self.entCountry.get().title().strip()
 
-        if lastName == "" and firstName == "" and mobileNo == "":
+        if self.lastName == "" and self.firstName == "" and mobileNo == "":
             CTkMessagebox(title="Error", message="First, Last Name and Mobile Number are mandatory", icon="cancel")
         else:
-            key = f"{lastName} : {firstName}"
-            item = [title, lastName, firstName, mobileNo, telNumber, eMail, birthday,
+            key = f"{self.lastName} : {self.firstName}"
+            item = [title, self.lastName, self.firstName, mobileNo, telNumber, eMail, birthday,
                     houseNo, addLine1, addLine2, city, county, postCode, country]
 
             self.friendsStore.addFriend(key, item)
             self.btnSave.configure(state="normal")
-            self.self.btnAdd.configure(state="disabled")
+            self.btnAdd.configure(state="disabled")
             self.valFirstName    = False
             self.valLastName     = False
             self.valMobileNumber = False
@@ -268,22 +268,46 @@ class FriendAddWindow(ctk.CTkToplevel):
 
     def _exit(self):
         """  Closes the window.
-             Checks weather their is and data to be saved.
+             Checks whether there is any data to be saved.
              If there is, it asks do you really want to exit, it yes then exit.
              If no, then drop out of the method without doing anything.
-             If no data to save [adddata will be false, then exit.]
+             If no data to save [adddata will be false, then exit Klock.]
         """
         if self.addData:
-            msg = CTkMessagebox(title="Un saved data", message="Do you really want exit, there is unsaved data?",
+            msg = CTkMessagebox(title="Unsaved data", message="Do you really want exit, there is unsaved data?",
                                 icon="question", option_1="Yes", option_2="No")
             if msg.get()=="Yes":
                 self.destroy()
+            else:
+                self._populateFields()      #  If No, then reload the last entered friend.
         else:
             self.destroy()
 
+    def _populateFields(self, rowKey=None):
+        """  Populates the data fields with a friend.
+             If rowKey is none [not in edit more], then load the last [current] friend.
+        """
+        if rowKey == None:
+            rowKey = f"{self.lastName} : {self.firstName}"
+
+        self.friend = self.friendsStore.getFriend(rowKey)
+        self.cbxTitle.set(self.friend[0])
+        self.entLastName.insert(0, self.friend[1])
+        self.entFirstName.insert(0, self.friend[2])
+        self.entMobileNumber.insert(0, self.friend[3])
+        self.entTelNumber.insert(0, self.friend[4])
+        self.entEmail.insert(0, self.friend[5])
+        self.dpBirthday.date_entry.insert(0, self.friend[6])     #  Accessing date picker internals directly.
+        self.entHouseNo.insert(0, self.friend[7])
+        self.entAddLine1.insert(0, self.friend[8])
+        self.entAddLine2.insert(0, self.friend[9])
+        self.entCity.insert(0, self.friend[10])
+        self.entCounty.insert(0, self.friend[11])
+        self.entPostCode.insert(0, self.friend[12])
+        self.entCountry.insert(0, self.friend[13])
 
     def _clear(self):
-        """  Clears the text fields [using tk direct].
+        """  Clears the data fields [using tk direct].
         """
         self.cbxTitle.set("")
         self.entFirstName.delete(0, tk.END)

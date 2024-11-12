@@ -31,7 +31,18 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
-V2.24.27
+V2.24.28	[12 November 2024] - in friends branch.
+
+	Tested delete button okay.
+	Tested add button, now okay.
+		A friend can only be added is a First Name, Last Name and Mobile Number exits.
+		The validation works, First and Last name cannot be blank.
+		Mobile number cannot be blank and must be numeric [or space].
+	Test save button, now works okay.
+		If a friend is added but not saved, a warning is issued if the add friends window is exited.
+
+
+V2.24.27	[10 November 2024] - in friends branch.
 
 	Testing on friends in progress, corrected a few bugs.
 	Added some basic validation, so that first name, last name and mobile number are mandatory.
@@ -45,7 +56,7 @@ V2.24.27
 	Cleaned up some methods names - all should be in camelCase.
 
 
-V2024.26	[3 November 2024]
+V2024.26	[3 November 2024] - in friends branch.
 
 	Added the edit and delete functionality in the friends branch.
 		If a row in the friends table is clicked, highlighted, then that
@@ -72,7 +83,7 @@ V2024.24	[30 October 2024]
 
 	Their was a few problem with creating the executable.
 		PyMuPDF [used to display help in pdf format] failed in the executable, but worked in
-		the python script.  This was found to be a problem in the currect version [1.24.12],
+		the python script.  This was found to be a problem in the current version [1.24.12],
 		installed previous version [1.24.10] - all now okay
 
 		tkVFD [used in vfdKlock] also failed in the executable but worked in the python script.
@@ -80,9 +91,7 @@ V2024.24	[30 October 2024]
 		for it's graphic files.  I cured this by creating the desired path in the executable.
 
 
-V2024.23	[28 October 2024]
-
-	in vfd branch.
+V2024.23	[28 October 2024] - in vfd branch.
 
 	Found Vacuum Fluorescent Displays for tk when looking for other things.
 		See Help [Credits Section] for location and original author.
@@ -107,9 +116,7 @@ V2024.22	[23 October 2024]
 	Built stand alone executable and installer from main.
 
 
-V2024.21	[21 October 2024]
-
-	In friends branch [Using python 3.12.7 and CustonTKinter 5.2.2].
+V2024.21	[21 October 2024] - in friends branch [Using python 3.12.7 and CustomTKinter 5.2.2].
 
 	Added two new windows, one to display the current friends and a second to add a new friend.
 	The display friends window is called from the main menu, there is an Add button to add a friend.
@@ -128,9 +135,7 @@ V2024.21	[21 October 2024]
 	       CTkDatePicker, CTkPDFViewer & CTkXYFrame
 
 
-V2024.20	[16 October 2024]
-
-	New GIT branch friends - to build the friends accessory.
+V2024.20	[16 October 2024]  - in friends branch, to build the friends accessory.
 
 	Added two new windows - showFriends and showAddFriends.
 		One contains a scrollable frame to show all of the friends and the other allows the input of a friend.

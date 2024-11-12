@@ -84,7 +84,6 @@ class FriendsWindow(ctk.CTkToplevel):
     def _sheetUpdate(self):
         """  Perform the actual sheet update.
         """
-        print("Updating Sheet")
         self.tblFriends.set_sheet_data(data=self.friendsStore.getFriends(), redraw=True)
         self._setColumnWidths()
 
