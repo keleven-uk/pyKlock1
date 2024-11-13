@@ -30,6 +30,13 @@ Current version of Klock is written in Python using different GUI frameworks
 
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
+If no branch indicated, assume main branch.
+
+
+V2.24.30	[13 November 2024]
+
+	Merged friends branch into main.
+
 
 V2.24.29	[13 November 2024] - in friends branch.
 
