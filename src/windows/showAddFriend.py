@@ -181,7 +181,7 @@ class FriendAddWindow(ctk.CTkToplevel):
                self.valFirstName = True
 
         if self.valFirstName and self.valLastName and self.valMobileNumber:
-            self.self.btnAdd.configure(state="normal")
+            self.btnAdd.configure(state="normal")
 
     def _validateMobileNumber(self):
         """  Validation the Mobile Number - which is mandatory.
@@ -204,7 +204,7 @@ class FriendAddWindow(ctk.CTkToplevel):
         else:
             CTkMessagebox(title="Error", message="Mobile Number not numeric", icon="warning")
             self.valMobileNumber = False
-            self.entMobileNumber.after_idle(lambda: self.entMobileNumber.configure(validate='focusout'))    #  Reapply validation.
+            self.entMobileNumber.after_idle(lambda: self.entMobileNumber.configure(validate="focusout"))    #  Reapply validation.
 
     def setTitle(self, choice):
         """  Saves the choice of the combo box [title] for use elsewhere.
@@ -279,7 +279,8 @@ class FriendAddWindow(ctk.CTkToplevel):
             if msg.get()=="Yes":
                 self.destroy()
             else:
-                self._populateFields()      #  If No, then reload the last entered friend.
+                self._clear()
+                self._populateFields(self.rowKey)      #  If No, then reload the last entered friend.
         else:
             self.destroy()
 
@@ -287,8 +288,10 @@ class FriendAddWindow(ctk.CTkToplevel):
         """  Populates the data fields with a friend.
              If rowKey is none [not in edit more], then load the last [current] friend.
         """
-        if rowKey == None:
-            rowKey = f"{self.lastName} : {self.firstName}"
+        if rowKey is None:
+            rowKey = f"{self.lastName} : {self.firstName}"  #  if add mode, re-populate using existing data.
+        else:
+            self.btnAdd.configure(state="normal")      #  If in edit mode, make add button available.
 
         self.friend = self.friendsStore.getFriend(rowKey)
         self.cbxTitle.set(self.friend[0])

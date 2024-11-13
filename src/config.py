@@ -432,7 +432,7 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.28",
+        config["INFO"] = {"myVERSION": "2024.29",
                           "myNAME"   : "pyKlock"}
 
         config["APPLICATION"] = {"appearanceMode" : "Dark",

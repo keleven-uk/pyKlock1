@@ -31,6 +31,13 @@ Current version of Klock is written in Python using different GUI frameworks
 Note : I use the correct spelling of colour on my side of the code.  :-)
 
 
+V2.24.29	[13 November 2024] - in friends branch.
+
+	Tested edited button, now okay.
+		Not switching on the Add button at the right time.
+		Not re-populating the friend window correctly.
+
+
 V2.24.28	[12 November 2024] - in friends branch.
 
 	Tested delete button okay.
