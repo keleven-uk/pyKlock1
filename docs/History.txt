@@ -33,6 +33,13 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.32	[14 November 2024]
+
+	Updated Help.
+	Built stand alone executable and installer from main.
+		Still a problem with PyMuPDF - see V2024.24 below.
+
+
 V2.24.31	[14 November 2024]
 
 	Added a notes field to the add Friends window.
