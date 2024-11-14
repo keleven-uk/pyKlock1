@@ -35,20 +35,21 @@ class friendsStore():
         self.store     = {}         #  Create the store, an empty dictionary.
         self.titles    = ["", "Mr", "Ms", "Mrs", "Miss", "Dr", "Rev"]
         self.Headers   = ["Title", "First name", "Last name", "Mobile Number", "Telephone Number", "eMail", "Birthday",
-                          "House Number", "Address Line 1","Address Line 2", "City", "County", "Post Code", "Country"]
+                          "House Number", "Address Line 1","Address Line 2", "City", "County", "Post Code", "Country",
+                          "Notes"]
         self.storeName = pp.FR_DATA_PATH
 
         self.loadFriends()
 
     @property
     def getTitles(self):
-        """  Returns a list of accepted friend titles i.e. mr and mrs etc.
+        """  Returns a list of accepted friend titles i.e. Mt, Mrs etc.
         """
         return self.titles
 
     @property
     def getHeaders(self):
-        """  Returns a list of accepted friend Headers i.e. mr and mrs etc.
+        """  Returns a list of accepted friend Headers i.e. First Name, Second Name etc.
         """
         return self.Headers
 

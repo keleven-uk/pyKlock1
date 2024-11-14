@@ -37,7 +37,7 @@ class FriendAddWindow(ctk.CTkToplevel):
     def __init__(self, master, myConfig, friendsStore, rowKey=None):
         super().__init__(master)
         self.title("Friends")
-        self.geometry("800x480+400+400")
+        self.geometry("740x580+320+340")
         self.attributes("-topmost", True)
         self.resizable(False, False)
 
@@ -139,6 +139,11 @@ class FriendAddWindow(ctk.CTkToplevel):
         self.entCountry = ctk.CTkEntry(self, placeholder_text="Country", text_color="white", fg_color="#030126", border_color="#030126")
         self.entCountry.grid(row=7, column=3,padx=10, pady=10)
 
+        self.lblNotes = ctk.CTkLabel(self, text="Notes", text_color="#ffe9a6", font=("Verdana",20))
+        self.lblNotes.grid(row=8, column=0,padx=10, pady=10)
+        self.txtNotes = ctk.CTkTextbox(self, width=470, height = 100, text_color="white", fg_color="#030126", border_color="#030126",
+                                       corner_radius=10, wrap="word")
+        self.txtNotes.grid(row=8, column=1,padx=10, pady=10, columnspan=3)
 
         self.btnAdd = ctk.CTkButton( self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self._add, state="disabled")
@@ -235,13 +240,15 @@ class FriendAddWindow(ctk.CTkToplevel):
         county    = self.entCounty.get().title().strip()
         postCode  = self.entPostCode.get().upper().strip()
         country   = self.entCountry.get().title().strip()
+        notes     = self.txtNotes.get("0.0", "end").strip()                #  return note as entered, extra spaces from the end are removed.
 
+        print(len(notes))
         if self.lastName == "" and self.firstName == "" and mobileNo == "":
             CTkMessagebox(title="Error", message="First, Last Name and Mobile Number are mandatory", icon="cancel")
         else:
             key = f"{self.lastName} : {self.firstName}"
             item = [title, self.lastName, self.firstName, mobileNo, telNumber, eMail, birthday,
-                    houseNo, addLine1, addLine2, city, county, postCode, country]
+                    houseNo, addLine1, addLine2, city, county, postCode, country, notes]
 
             self.friendsStore.addFriend(key, item)
             self.btnSave.configure(state="normal")
@@ -308,6 +315,7 @@ class FriendAddWindow(ctk.CTkToplevel):
         self.entCounty.insert(0, self.friend[11])
         self.entPostCode.insert(0, self.friend[12])
         self.entCountry.insert(0, self.friend[13])
+        self.txtNotes.insert("0.0", self.friend[13])
 
     def _clear(self):
         """  Clears the data fields [using tk direct].
@@ -326,6 +334,7 @@ class FriendAddWindow(ctk.CTkToplevel):
         self.entCounty.delete(0, tk.END)
         self.entPostCode.delete(0, tk.END)
         self.entCountry.delete(0, tk.END)
+        self.txtNotes.delete("0.0", "end")
 
         self.cbxTitle.focus()
 

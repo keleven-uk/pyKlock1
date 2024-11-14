@@ -100,9 +100,10 @@ class FriendsWindow(ctk.CTkToplevel):
         self.after(60000, self._update)
 
     def _setColumnWidths(self):
-        self.tblFriends.set_all_column_widths(width=150, redraw=True)
-        self.tblFriends.column_width(column=0, width=50, redraw=True)
-        self.tblFriends.column_width(column=7, width=50, redraw=True)
+        self.tblFriends.set_all_column_widths(width=150,   redraw=True)
+        self.tblFriends.column_width(column=0,  width=50,  redraw=True)
+        self.tblFriends.column_width(column=7,  width=50,  redraw=True)
+        self.tblFriends.column_width(column=14, width=300, redraw=True)
 
     def selectRow(self, event):
         self.btnEdit.configure(state="normal")

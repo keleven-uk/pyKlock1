@@ -33,6 +33,12 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.31	[14 November 2024]
+
+	Added a notes field to the add Friends window.
+		The notes is a Free-form text field, only extra spaces from the end are removed.
+
+
 V2.24.30	[13 November 2024]
 
 	Merged friends branch into main.
@@ -109,7 +115,7 @@ V2024.23	[28 October 2024] - in vfd branch.
 
 	Found Vacuum Fluorescent Displays for tk when looking for other things.
 		See Help [Credits Section] for location and original author.
-		Added config options for vfdKlock, screen location and colour only used.
+		Added configure options for vfdKlock, screen location and colour only used.
 	This is used in the first of the alternative Klocks.
 	When this Klock is displayed, the main Klock is minimised to the task bar.
 
@@ -164,7 +170,7 @@ V2024.19	[8 October 2024]
 	I couldn't get the status bar to line correctly.  I wanted the date on the left side, the status in the middle and the
 	idle time at the far right.  I reverted to padding the string with spaces depending on the width of the window.
 	I know this is a bit klunky - will re-visit if I find a better way.
-	Also added config option to specify the font for the status bat - default is the "default" text.
+	Also added configure option to specify the font for the status bat - default is the "default" text.
 
 
 V2024.18	[6 October 2024]
@@ -187,7 +193,7 @@ V2024.16	[3 October 2024]
 		This allows the time format to be chosen for a list of supplied time formats.
 		The different formats are held in src.select time.  [Used in all version of python Klock].
 		When the menu option is chosen, a new windows opens allowing the user to select the time type and size.
-		The time type and size in the config is also changed, so the main time will change in real time.
+		The time type and size in the configure is also changed, so the main time will change in real time.
 
 
 V2024.15	[2 October 2024]
@@ -291,7 +297,7 @@ V2024.7     [25 September 2024]
 		The Segmented menu buttons have been removed, but not the file.
 	Also removed the Segmented button from the colour chooser window and implanted option is single buttons.
 
-	Passes ruff check .
+	Passes ruff check.
 	Compiles to executable using pyInstaller.
 	Using python 3.12.6 and CustonTKinter 5.2.2.
 
@@ -300,7 +306,7 @@ V2024.6     [23 Septemebr 2024]
 
 	Found an example of a dropdown menu at https://github.com/Akascape/CTkMenuBar.
 	Added the example to Klock - lives in src.menu.py.
-	Not sure if I will use it, so added a option menu visible - set to false.
+	Not sure if I will use it, so added an option for menu visible - set to false.
 
 
 V2024.5     [23 September 2024]
@@ -318,7 +324,7 @@ V2024.5     [23 September 2024]
 
 V2024.4	    [14 September 2024]
 
-	Load and saves options to a config file - config.toml.
+	Load and saves options to a configure file - config.toml.
 		Option are - App Name, App Version.
 		             App X position, App Y position - SO, the screen location is remembered and re-used.
 		             App width and height - cannot be changed at the moment.
