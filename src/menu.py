@@ -25,8 +25,9 @@ from tkfontchooser import askfont
 
 import src.windows.showInfo as si
 import src.windows.showHelp as sh
-import src.windows.showAbout as about
+import src.windows.showEvents as se
 import src.windows.showFriends as sf
+import src.windows.showAbout as about
 import src.windows.showTimeTypes as stt
 import src.windows.SelectColourWindow as cw
 
@@ -80,6 +81,7 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.dropdown3  = CTkmenu.CustomDropdownMenu(widget=self.mnuAccessories, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown3.add_option(option="Friends", command=self._showFriends)
+        self.dropdown3.add_option(option="Events",  command=self._showEvents)
 
         #  Edit
         self.dropdown4 = CTkmenu.CustomDropdownMenu(widget=self.mnuEdit, height=menuHeight,
@@ -110,6 +112,11 @@ class myMenu(CTkmenu.CTkMenuBar):
         """  Loads the Friends window.
         """
         sf.FriendsWindow(self.master, self.myConfig)
+
+    def _showEvents(self):
+        """  Loads the Events window.
+        """
+        se.EventsWindow(self.master, self.myConfig)
 
     def _showHelp(self):
         """  Loads the Help file.

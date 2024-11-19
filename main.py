@@ -68,6 +68,7 @@ if __name__ == "__main__":
     myLogger.info(f"  Resource path    : {pp.RESOURCE_PATH}")
     myLogger.info(f"  Help path        : {pp.HELP_PATH}")
     myLogger.info(f"  Friends path     : {pp.FR_DATA_PATH}")
+    myLogger.info(f"  Events path      : {pp.EV_DATA_PATH}")
 
     # Create an instance of the App class.
     app = Klock.Klock(myLogger, myConfig, myTimer)

@@ -1,25 +1,25 @@
 ###############################################################################################################
-#    friendsStore.py   Copyright (C) <2024>  <Kevin Scott>                                                    #
+#    eventsStore.py   Copyright (C) <2024>  <Kevin Scott>                                                     #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    A store class for the saving and manipulation of events.                                                 #
 #                                                                                                             #
 #    An event is a named object that consists data and a due date and/or due time.                            #
 #                                                                                                             #
-#    an friend -  a data item of each item in Headers, defined below.                                         #
+#    an event -  a data item of each item in Headers, defined below.                                          #
 #                                                                                                             #
-#    import src.classes.friendsStore as es                                                                    #
+#    import src.classes.eventsStore as es                                                                     #
 #                                                                                                             #
-#    friendsStore     = es.friendsStore()                                                                     #
+#    eventsStore     = es.eventsStore()                                                                       #
 #                                                                                                             #
-#    friendsStore.getHeaders           Retrieves the headers for display, as strings.                         #
-#    friendssStore.getCategories        Retrieves the categories for display, as strings.                     #
-#    friendsStore.addFriend(key, item)  Adds an event to the store.  Key = name, item = all data.             #
-#    friendsStore.getFriends(rowKey)     Retrieves an friend matching name.                                   #
-#    friendsStore.getFriends()          Returns all events as a sorted list.                                  #
-#    friendsStore.saveFriends()        Saves the event store to disc in CSV format.                           #
+#    eventsStore.getHeaders           Retrieves the headers for display, as strings.                          #
+#    eventsStore.getCategories        Retrieves the categories for display, as strings.                       #
+#    eventsStore.addEvent(key, item)  Adds an event to the store.  Key = name, item = all data.               #
+#    eventsStore.getEvent(rowKey)     Retrieves an event matching name.                                       #
+#    eventsStore.getEvents()          Returns all events as a sorted list.                                    #
+#    eventsStore.saveFriends()        Saves the event store to disc in CSV format.                            #
 #                                                                                                             #
-#    The class should load the CSV file on start up, if not an empty sore is created.                         #
+#    The class should load the CSF file on start up, if not an empty sore is created.                         #
 #                                                                                                             #
 ###############################################################################################################
 #                                                                                                             #
@@ -41,76 +41,75 @@ import csv
 import src.projectPaths as pp
 
 
-class friendsStore():
+class eventsStore():
     """  A class that implements a store for friends.
          The store is implemented as a dictionary - [key, item].
-         The key is a string - Last Name : First Name.
-         The item is a list  - Title, First Name, Last Name, Mobile No, Email, Birthday.
+         The key is a string - Name.
+         The item is a list  - Name, Date Due, Time, Due, Category, Notes.
     """
 
     def __init__(self):
-        self.store     = {}         #  Create the store, an empty dictionary.
-        self.titles    = ["", "Mr", "Ms", "Mrs", "Miss", "Dr", "Rev"]
-        self.Headers   = ["Title", "First name", "Last name", "Mobile Number", "Telephone Number", "eMail", "Birthday",
-                          "House Number", "Address Line 1","Address Line 2", "City", "County", "Post Code", "Country",
-                          "Notes"]
-        self.storeName = pp.FR_DATA_PATH
+        self.store      = {}         #  Create the store, an empty dictionary.
+        self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Notes"]
+        self.Categories = ["", "Birthday", "Anniversary", "Moto", "Holiday", "Appointment", "One Off Event", "Other"]
+        self.storeName  = pp.EV_DATA_PATH
 
-        self.loadFriends()
+        self.loadEvents()
 
-    @property
-    def getTitles(self):
-        """  Returns a list of accepted friend titles i.e. Mt, Mrs etc.
-        """
-        return self.titles
 
     @property
     def getHeaders(self):
-        """  Returns a list of accepted friend Headers i.e. First Name, Second Name etc.
+        """  Returns a list of accepted event Headers i.e. Name, Date Due, Time Due etc.
         """
         return self.Headers
 
-    def addFriend(self, key, item):
-        """   Stores friend data into the store.
+    @property
+    def getCategories(self):
+        """  Returns a list of accepted event Categories i.e. Birthday, Anniversary, Moto etc.
+        """
+        return self.Categories
+
+    def addEvent(self, key, item):
+        """   Stores event data into the store.
         """
         self.store[key] = item
 
-    def deleteFriend(self, key):
-        """   Deletes a friend from the store if it exist, if not ignore.
+    def deleteEvent(self, key):
+        """   Deletes a event from the store if it exist, if not ignore.
         """
         if key in self.store:
             del self.store[key]
 
     @property
-    def numberOfFriends(self):
-        """  Returns the number of friends in the store.
+    def numberOfEvents(self):
+        """  Returns the number of events in the store.
         """
         return len(self.store)
 
-    def getFriend(self, key):
-        """  Retrieves a single friend in list format.
+    def getEvent(self, key):
+        """  Retrieves a single event in list format.
         """
         return self.store[key]
 
-    def getFriends(self):
-        """  Retrieves friends in list format.
+    def getEvents(self):
+        """  Retrieves events in list format.
         """
-        lstFriends = []
+        lstEvent = []
         for key in sorted(self.store):
-            lstFriends.append(self.store[key])
+            lstEvent.append(self.store[key])
 
-        return lstFriends
+        return lstEvent
 
-    def saveFriends(self):
-        """  Saves the friend store to a text file in csv format.
+    def saveEvents(self):
+        """  Saves the event store to a text file in csv format.
         """
         with open (self.storeName, "w", newline="", encoding="utf-8") as csvFile:
             writer =csv.writer(csvFile, quoting=csv.QUOTE_ALL)
             for key in sorted(self.store):
                 writer.writerow(self.store[key])
 
-    def loadFriends(self):
-        """  Loads the friend store from a text file in csv format.
+    def loadEvents(self):
+        """  Loads the event store from a text file in csv format.
         """
         try:
             with open (self.storeName, "r", encoding="utf-8") as csvFile:
