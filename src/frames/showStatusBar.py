@@ -77,8 +77,8 @@ class MyStatusBarFrame(ctk.CTkFrame):
 
         statusBarText = f"{dateText} {statusText} {idleText}"
 
-        if len(statusBarText) >= (self.master.winfo_width()):
-            print(f"oh no  statusBarText {len(statusBarText)}  windowWidth {windowWidth}  windt {self.master.winfo_width()}")
+        # if len(statusBarText) >= (self.master.winfo_width()):
+        #     print(f"oh no  statusBarText {len(statusBarText)}  windowWidth {windowWidth}  windt {self.master.winfo_width()}")
 
         self.lblStatusBar.configure(text=statusBarText, text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
 

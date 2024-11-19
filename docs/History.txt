@@ -33,7 +33,14 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
-V2.24.32	[19 November 2024] - In Events branch.
+V2.24.34	[19 November 2024] - In Events branch.
+
+	Completed the edit and delete buttons.  Seem to work.
+	Correct a bug in events where a duplicate is created if the key is edited.
+		Will need to be added to Friends.
+
+
+V2.24.33	[19 November 2024] - In Events branch.
 
 	Started work on the events accessory, heavily modelled on the friends accessory.
 	The events should have a die date and/ot due time - Klock will notify when event is due.

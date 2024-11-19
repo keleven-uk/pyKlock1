@@ -55,27 +55,27 @@ class FriendsWindow(ctk.CTkToplevel):
         """  Create the main friend display.
         """
         self.tblFriends = Sheet(self, data=self.friendsStore.getFriends(), width=1000, height=300,
-                        align = "W", header_align = "w", row_index_align = "w",
-                        show_x_scrollbar=True, show_y_scrollbar=True)
+                                align = "W", header_align = "w", row_index_align = "w",
+                                show_x_scrollbar=True, show_y_scrollbar=True)
         self.tblFriends.grid(row=0, column=0, padx=10, pady=10, sticky="nsew", columnspan=12)
         self.tblFriends.change_theme(self.myConfig.APPEARANCE_MODE)
         self.tblFriends.headers(self.friendsStore.getHeaders)
         self.tblFriends.enable_bindings()
         self.tblFriends.extra_bindings(("row_select", "cell_select"), self.selectRow)
 
-        self.btnAdd = ctk.CTkButton( self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
+        self.btnAdd = ctk.CTkButton(self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self._add)
         self.btnAdd.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
-        self.btnEdit = ctk.CTkButton( self, text="Edit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, state="disabled", command=self._edit)
+        self.btnEdit = ctk.CTkButton(self, text="Edit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
+                                     corner_radius=12, width=100, state="disabled", command=self._edit)
         self.btnEdit.grid(row=1, column=1, padx=10, pady=10, sticky="nsew")
-        self.btnDel = ctk.CTkButton( self, text="Delete", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
+        self.btnDel = ctk.CTkButton(self, text="Delete", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, state="disabled", command=self._delete)
         self.btnDel.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
-        self.btnRefresh = ctk.CTkButton( self, text="Refresh", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, command=self._sheetUpdate)
+        self.btnRefresh = ctk.CTkButton(self, text="Refresh", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
+                                        corner_radius=12, width=100, command=self._sheetUpdate)
         self.btnRefresh.grid(row=1, column=3, padx=10, pady=10, sticky="nsew")
-        self.btnExt = ctk.CTkButton( self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
+        self.btnExt = ctk.CTkButton(self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self._exit)
         self.btnExt.grid(row=1, column=4, padx=10, pady=10, sticky="nsew")
 

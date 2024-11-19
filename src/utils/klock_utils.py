@@ -117,13 +117,6 @@ def getScreenSize():
 
     screenWidth  = win32api.GetSystemMetrics(0)
     screenHeight = win32api.GetSystemMetrics(1)
-    # print("Width =", screenWidth)
-    # print("Height =", screenHeight)
-    #
-    # MultiScreenWidth  = win32api.GetSystemMetrics(78)
-    # MultiScreenHeight = win32api.GetSystemMetrics(79)
-    # print("Multi Width  =", MultiScreenWidth)
-    # print("Multi Height =", MultiScreenHeight)
 
     return (screenWidth, screenHeight)
 

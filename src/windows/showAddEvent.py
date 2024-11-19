@@ -53,6 +53,7 @@ class EventAddWindow(ctk.CTkToplevel):
         self._createWidgets()
         if self.rowKey:                         #  if rowKey is not None, then in edit mode - load selected event details into the fields.
             self._populateFields(self.rowKey)   #  rowkey should hold the row number of the selected event.
+            self.oldKey = self.rowKey           #  Save away, just in case the key is changed.
 
 
     def _createWidgets(self):
@@ -147,6 +148,7 @@ class EventAddWindow(ctk.CTkToplevel):
             self._clear()
             if self.rowKey:
                 self._populateFields(self.rowKey)   #  If in edit more, refresh fields.
+                self.rowKey = name                  #  save the new name i.e key.
 
     def _save(self):
         """  When called the events store will save a copy of itself.
@@ -157,6 +159,8 @@ class EventAddWindow(ctk.CTkToplevel):
         if self.addData:
             self.addData = False
         if self.rowKey:
+            if self.oldKey != self.rowKey:                      #  The name has changed i.e. the key
+                self.eventsStore.deleteEvent(self.oldKey)       #  Delete the original and retain the edited.
             self.rowKey = None
 
     def _exit(self):
@@ -186,11 +190,11 @@ class EventAddWindow(ctk.CTkToplevel):
         else:
             self.btnAdd.configure(state="normal")               #  If in edit mode, make add button available.
 
-        self.event = self.eventsStore.getevent(rowKey)
-        self.cbxCategory.set(self.event[0])
-        self.Name.insert(0, self.event[1])
-        self.dpDateDue.date_entry.insert(0, self.event[2])      #  Accessing date picker internals directly.
-        self.txtNotes.insert("0.0", self.event[3])
+        self.event = self.eventsStore.getEvent(rowKey)
+        self.cbxCategory.set(self.event[2])
+        self.entName.insert(0, self.event[0])
+        self.dpDateDue.date_entry.insert(0, self.event[1])      #  Accessing date picker internals directly.
+        self.txtNotes.insert("0.0", self.event[4])
 
     def _clear(self):
         """  Clears the data fields [using tk direct].

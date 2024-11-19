@@ -242,7 +242,6 @@ class FriendAddWindow(ctk.CTkToplevel):
         country   = self.entCountry.get().title().strip()
         notes     = self.txtNotes.get("0.0", "end").strip()                #  return note as entered, extra spaces from the end are removed.
 
-        print(len(notes))
         if self.lastName == "" and self.firstName == "" and mobileNo == "":
             CTkMessagebox(title="Error", message="First, Last Name and Mobile Number are mandatory", icon="cancel")
         else:

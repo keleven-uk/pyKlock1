@@ -49,7 +49,7 @@ class eventsStore():
     """
 
     def __init__(self):
-        self.store      = {}         #  Create the store, an empty dictionary.
+        self.store = {}         #  Create the store, an empty dictionary.
         self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Notes"]
         self.Categories = ["", "Birthday", "Anniversary", "Moto", "Holiday", "Appointment", "One Off Event", "Other"]
         self.storeName  = pp.EV_DATA_PATH
@@ -88,8 +88,12 @@ class eventsStore():
 
     def getEvent(self, key):
         """  Retrieves a single event in list format.
+             If the key dosn't exist, return error massage in the Notes filed.'
         """
-        return self.store[key]
+        try:
+            return self.store[key]
+        except KeyError:
+            return ["", "", "", "", "Record not found"]
 
     def getEvents(self):
         """  Retrieves events in list format.
@@ -115,9 +119,10 @@ class eventsStore():
             with open (self.storeName, "r", encoding="utf-8") as csvFile:
                 csvFile = csv.reader(csvFile)
                 for rows in csvFile:
-                    key = f"{rows[1]} : {rows[2]}"
+                    key = f"{rows[0]}"
                     item = rows
                     self.store[key] = item
 
         except FileNotFoundError:
-            print("File not found, will use an empty store.")
+            print("Event store not found, using empty sore.")
+
