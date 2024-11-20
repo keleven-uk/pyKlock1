@@ -88,13 +88,13 @@ class eventsStore():
 
     def getEvent(self, key):
         """  Retrieves a single event in list format.
-             If the key dosn't exist, return error massage in the Notes filed.'
+             If the key doesn't exist, return error massage in the Notes filed.'
         """
         try:
             return self.store[key]
         except KeyError:
-            return ["", "", "", "", "Record not found"]
-
+            return ["", "", "", "", "Record not found"]         #  May need to extend for extra fields,
+                                                                 #  so the error message is always in the notes field.
     def getEvents(self):
         """  Retrieves events in list format.
         """

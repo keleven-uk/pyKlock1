@@ -19,11 +19,18 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import datetime
+
 import tkinter as tk
 
+from tkcalendar   import DateEntry
+from tktimepicker import SpinTimePickerModern
+from tktimepicker import constants
+
 import customtkinter as ctk
+
 from src.CTkDatePicker import CTkDatePicker
-from CTkMessagebox import CTkMessagebox
+from CTkMessagebox     import CTkMessagebox
 
 
 class EventAddWindow(ctk.CTkToplevel):
@@ -59,6 +66,26 @@ class EventAddWindow(ctk.CTkToplevel):
     def _createWidgets(self):
         """  Create the main add event frame.
         """
+
+        #  Style for the date entry widget.
+        style = tk.ttk.Style()
+        style.theme_use("clam")  # -> uncomment this line if the styling does not work
+
+        # Customize the DateEntry style
+        style.configure('my.DateEntry',
+                        fieldbackground="#030126",      # Background colour of the entry field
+                        background="grey",              # Background colour when the dropdown is open
+                        foreground="#ffe9a6",           # Text colour in the entry field
+                        arrowcolor="white",             # Colour of the dropdown arrow
+                        bordercolor="#030126",          # Border colour of the entry field
+                        darkcolor="#ffe9a6",            # Colour for dark areas (e.g., arrow borders)
+                        lightcolor="#030126",           # Colour for light areas (e.g., arrow background)
+                        insertcolor="#030126",          # Colour of the text cursor
+                        selectbackground="#030126",     # Background colour of selected text
+                        selectforeground="#ffe9a6",     # Text colour of selected text
+                        borderwidth=2)
+
+
         self.lblName = ctk.CTkLabel(self, text="Name", text_color="#ffe9a6", font=("Verdana",20))
         self.lblName.grid(row=0, column=0,padx=10, pady=10)
         self.entName = ctk.CTkEntry(self, placeholder_text="Event Name", text_color="white", fg_color="#030126", border_color="#030126",
@@ -72,11 +99,19 @@ class EventAddWindow(ctk.CTkToplevel):
 
         self.lblDateDue = ctk.CTkLabel(self, text="Date Due", text_color="#ffe9a6", font=("Verdana",20))
         self.lblDateDue.grid(row=3, column=0,padx=10, pady=10)
-        self.dpDateDue = CTkDatePicker(self)
+        self.dpDateDue = DateEntry(self, style="my.DateEntry")
         self.dpDateDue.grid(row=3, column=1,padx=10, pady=10)
 
-        self.dpDateDue.set_date_format("%d/%m/%Y")
-        self.dpDateDue.set_allow_manual_input(True)  # Enable
+        self.lblTimeDue = ctk.CTkLabel(self, text="Time Due", text_color="#ffe9a6", font=("Verdana",20))
+        self.lblTimeDue.grid(row=3, column=2,padx=10, pady=10)
+        self.tpTimeDue = SpinTimePickerModern(self)
+        self.tpTimeDue.grid(row=3, column=3,padx=10, pady=10)
+        self.tpTimeDue.addAll(constants.HOURS24)  # adds hours clock, minutes and period
+        self.tpTimeDue.configureAll(bg="#404040", height=1, fg="#ffffff", font=("Times", 16), hoverbg="#404040",
+                                    hovercolor="#d73333", clickedbg="#2e2d2d", clickedcolor="#d73333")
+        self.tpTimeDue.configure_separator(bg="#404040", fg="#ffffff")
+        self.tpTimeDue.set24Hrs(0)      #  set the hour to 0
+        self.tpTimeDue.setMins(0)       #  set the minutes to 0
 
 
         self.lblNotes = ctk.CTkLabel(self, text="Notes", text_color="#ffe9a6", font=("Verdana",20))
@@ -130,14 +165,20 @@ class EventAddWindow(ctk.CTkToplevel):
         """
         Category  = self.chosen
         name      = self.entName.get().title().strip()
-        dateDue   = self.dpDateDue.get_date().strip()
-        notes     = self.txtNotes.get("0.0", "end").strip()                #  return note as entered, extra spaces from the end are removed.
+        dateDue   = self.dpDateDue.get_date()                #  datetime.date
+        timeDue   = self.tpTimeDue.time()
+        notes     = self.txtNotes.get("0.0", "end").strip()  #  return note as entered, extra spaces from the end are removed.
+
+        strDateDue = dateDue.strftime("%d/%m/%Y")
+        strTimeDue = f"{timeDue[0]:02}:{timeDue[1]:02}"
 
         if name == "":
             CTkMessagebox(title="Error", message="Name is mandatory", icon="cancel")
         else:
             key = f"{name}"
-            item = [name, dateDue, "00:00", Category, notes]
+            item = [name, strDateDue, strTimeDue, Category, notes]
+
+            print(f"item = {item}")
 
             self.eventsStore.addEvent(key, item)
             self.btnSave.configure(state="normal")
@@ -191,9 +232,16 @@ class EventAddWindow(ctk.CTkToplevel):
             self.btnAdd.configure(state="normal")               #  If in edit mode, make add button available.
 
         self.event = self.eventsStore.getEvent(rowKey)
-        self.cbxCategory.set(self.event[2])
+
+        strDateDue = datetime.datetime.strptime(self.event[1], "%d/%m/%Y")
+        intHrsDue  = int(self.event[2][0:2])
+        intMinsDue = int(self.event[2][3:5])
+
+        self.cbxCategory.set(self.event[3])
         self.entName.insert(0, self.event[0])
-        self.dpDateDue.date_entry.insert(0, self.event[1])      #  Accessing date picker internals directly.
+        self.dpDateDue.set_date(strDateDue)
+        self.tpTimeDue.set24Hrs(intHrsDue)
+        self.tpTimeDue.setMins(intMinsDue)
         self.txtNotes.insert("0.0", self.event[4])
 
     def _clear(self):
@@ -201,7 +249,9 @@ class EventAddWindow(ctk.CTkToplevel):
         """
         self.cbxCategory.set("")
         self.entName.delete(0, tk.END)
-        self.dpDateDue.date_entry.delete(0, tk.END)
+        self.dpDateDue.set_date(datetime.datetime.now())
+        self.tpTimeDue.set24Hrs(0)      #  set the hour to 0
+        self.tpTimeDue.setMins(0)       #  set the minutes to 0
         self.txtNotes.delete("0.0", "end")
 
         self.entName.focus()

@@ -33,6 +33,16 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.35	[20 November 2024] - In Events branch.
+
+	Changed the date picker to use Tkcalendr, it's a bit quicker then CTkDatePicker.
+		Source directory will be removed when fitted into friends.
+	Added time Picker tkTimePicker, as a analogue entry [not a clock].
+	Both add to requirements.txt
+
+	Both pickers work with add, edit and delete.
+
+
 V2.24.34	[19 November 2024] - In Events branch.
 
 	Completed the edit and delete buttons.  Seem to work.

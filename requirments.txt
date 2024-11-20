@@ -1,3 +1,4 @@
+babel==2.16.0
 CTkColorPicker==0.9.0
 CTkMenuBar==0.8
 CTkMessagebox==2.7
@@ -7,10 +8,12 @@ packaging==24.1
 pillow==11.0.0
 platformdirs==4.3.6
 psutil==6.1.0
-PyMuPDF==1.24.10
+PyMuPDF==1.24.12
 pywin32==308
-ruff==0.7.1
+ruff==0.7.4
+tkcalendar==1.6.1
 tkfontchooser==2.0.2
 tksheet==7.2.19
+tkTimePicker==2.0.2
 tkVFD==1.1.0
 toml==0.10.2
