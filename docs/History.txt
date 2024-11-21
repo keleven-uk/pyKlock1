@@ -33,6 +33,15 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.36	[21 November 2024] - In Events branch.
+
+	Added a new option - recurring.
+		If an event is a recurring event, birthday, then the event will re-populate.
+		Recurring work with add, edit and delete.
+	The due target date and time should be saved as a python datetime type.
+		Started work on this.
+
+
 V2.24.35	[20 November 2024] - In Events branch.
 
 	Changed the date picker to use Tkcalendr, it's a bit quicker then CTkDatePicker.

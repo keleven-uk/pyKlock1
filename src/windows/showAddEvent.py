@@ -21,16 +21,13 @@
 
 import datetime
 
-import tkinter as tk
-
-from tkcalendar   import DateEntry
-from tktimepicker import SpinTimePickerModern
-from tktimepicker import constants
-
+import tkinter       as tk
 import customtkinter as ctk
 
-from src.CTkDatePicker import CTkDatePicker
-from CTkMessagebox     import CTkMessagebox
+from tkcalendar    import DateEntry
+from tktimepicker  import SpinTimePickerModern
+from tktimepicker  import constants
+from CTkMessagebox import CTkMessagebox
 
 
 class EventAddWindow(ctk.CTkToplevel):
@@ -42,7 +39,7 @@ class EventAddWindow(ctk.CTkToplevel):
     def __init__(self, master, myConfig, eventsStore, rowKey=None):
         super().__init__(master)
         self.title("Events")
-        self.geometry("700x300+320+340")
+        self.geometry("700x320+320+340")
         self.attributes("-topmost", True)
         self.resizable(False, False)
 
@@ -72,7 +69,7 @@ class EventAddWindow(ctk.CTkToplevel):
         style.theme_use("clam")  # -> uncomment this line if the styling does not work
 
         # Customize the DateEntry style
-        style.configure('my.DateEntry',
+        style.configure("my.DateEntry",
                         fieldbackground="#030126",      # Background colour of the entry field
                         background="grey",              # Background colour when the dropdown is open
                         foreground="#ffe9a6",           # Text colour in the entry field
@@ -83,7 +80,8 @@ class EventAddWindow(ctk.CTkToplevel):
                         insertcolor="#030126",          # Colour of the text cursor
                         selectbackground="#030126",     # Background colour of selected text
                         selectforeground="#ffe9a6",     # Text colour of selected text
-                        borderwidth=2)
+                        borderwidth=2,
+                        date_patternstr="%d/%m/%Y")
 
 
         self.lblName = ctk.CTkLabel(self, text="Name", text_color="#ffe9a6", font=("Verdana",20))
@@ -93,19 +91,19 @@ class EventAddWindow(ctk.CTkToplevel):
         self.entName.grid(row=0, column=1,padx=10, pady=10)
 
         self.lblCategory = ctk.CTkLabel(self, text="Category", text_color="#ffe9a6", font=("Verdana",20))
-        self.lblCategory.grid(row=0, column=2,padx=10, pady=10)
+        self.lblCategory.grid(row=0, column=2, padx=10, pady=10)
         self.cbxCategory = ctk.CTkComboBox(self, values=self.Categories, text_color="white", fg_color="#030126", border_color="#030126", command=self.setCategory)
-        self.cbxCategory.grid(row=0, column=3,padx=10, pady=10)
+        self.cbxCategory.grid(row=0, column=3, padx=10, pady=10)
 
         self.lblDateDue = ctk.CTkLabel(self, text="Date Due", text_color="#ffe9a6", font=("Verdana",20))
-        self.lblDateDue.grid(row=3, column=0,padx=10, pady=10)
+        self.lblDateDue.grid(row=3, column=0, padx=10, pady=10)
         self.dpDateDue = DateEntry(self, style="my.DateEntry")
-        self.dpDateDue.grid(row=3, column=1,padx=10, pady=10)
+        self.dpDateDue.grid(row=3, column=1, padx=10, pady=10)
 
         self.lblTimeDue = ctk.CTkLabel(self, text="Time Due", text_color="#ffe9a6", font=("Verdana",20))
-        self.lblTimeDue.grid(row=3, column=2,padx=10, pady=10)
+        self.lblTimeDue.grid(row=3, column=2, padx=10, pady=10)
         self.tpTimeDue = SpinTimePickerModern(self)
-        self.tpTimeDue.grid(row=3, column=3,padx=10, pady=10)
+        self.tpTimeDue.grid(row=3, column=3, padx=10, pady=10)
         self.tpTimeDue.addAll(constants.HOURS24)  # adds hours clock, minutes and period
         self.tpTimeDue.configureAll(bg="#404040", height=1, fg="#ffffff", font=("Times", 16), hoverbg="#404040",
                                     hovercolor="#d73333", clickedbg="#2e2d2d", clickedcolor="#d73333")
@@ -113,6 +111,10 @@ class EventAddWindow(ctk.CTkToplevel):
         self.tpTimeDue.set24Hrs(0)      #  set the hour to 0
         self.tpTimeDue.setMins(0)       #  set the minutes to 0
 
+        self.lblRecurring = ctk.CTkLabel(self, text="Recurring", text_color="#ffe9a6", font=("Verdana",20))
+        self.lblRecurring.grid(row=4, column=0, padx=10, pady=10)
+        self.chkRecurring = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color="#030126")
+        self.chkRecurring.grid(row=4, column=1, padx=10, pady=10)
 
         self.lblNotes = ctk.CTkLabel(self, text="Notes", text_color="#ffe9a6", font=("Verdana",20))
         self.lblNotes.grid(row=8, column=0,padx=10, pady=10)
@@ -139,7 +141,7 @@ class EventAddWindow(ctk.CTkToplevel):
         """
         name = self.entName.get().title().strip()
         if self.rowKey:                 #  In edit mode
-            if name != self.event[1]:
+            if name != self.event[0]:
                self.valName = True
         else:                           #  In add mode.
             if name != "":
@@ -163,20 +165,28 @@ class EventAddWindow(ctk.CTkToplevel):
              FirstName and last Name cannot be blank.
              mobileNumber must be numeric [can contain a space].
         """
-        Category  = self.chosen
-        name      = self.entName.get().title().strip()
+
+        if self.rowKey:                                     #  If in edit more, use the existing Category.
+            Category = self.event[3]
+        else:                                               #  If in add mode, use the new Category.
+            Category = self.chosen
+        self.name = self.entName.get().title().strip()       #  Needs to be self. because used in _populateFields()
         dateDue   = self.dpDateDue.get_date()                #  datetime.date
         timeDue   = self.tpTimeDue.time()
+        recurring = self.chkRecurring.get()                  #  returns 1 for True and 0 for False.
         notes     = self.txtNotes.get("0.0", "end").strip()  #  return note as entered, extra spaces from the end are removed.
 
-        strDateDue = dateDue.strftime("%d/%m/%Y")
-        strTimeDue = f"{timeDue[0]:02}:{timeDue[1]:02}"
+        strDateDue   = dateDue.strftime("%d/%m/%Y")
+        strTimeDue   = f"{timeDue[0]:02}:{timeDue[1]:02}"
+        strRecurring = "True" if recurring == 1 else "False"
 
-        if name == "":
+        dateTimeDue = self.getDateTimeDue(dateDue, strTimeDue)
+
+        if self.name == "":
             CTkMessagebox(title="Error", message="Name is mandatory", icon="cancel")
         else:
-            key = f"{name}"
-            item = [name, strDateDue, strTimeDue, Category, notes]
+            key = f"{self.name}"
+            item = [self.name, strDateDue, strTimeDue, Category, strRecurring, notes, dateTimeDue]
 
             print(f"item = {item}")
 
@@ -190,6 +200,24 @@ class EventAddWindow(ctk.CTkToplevel):
             if self.rowKey:
                 self._populateFields(self.rowKey)   #  If in edit more, refresh fields.
                 self.rowKey = name                  #  save the new name i.e key.
+
+    def getDateTimeDue(self, dateDue, strTimeDue):
+        """  Return the datetime that the event will be due.
+             If the year is previous, like a birthday, then the next occurrence will be returned.
+        """
+        now      = datetime.datetime.now()
+        curYear  = now.year
+        curMonth = now.month
+        curday   = now.day
+        year     = dateDue.year
+        month    = dateDue.month
+        day      = dateDue.day
+
+        dateTimeStr = f"{dateDue.day}/{dateDue.month}/{dateDue.year} {strTimeDue}"
+        date_format = r"%d/%m/%Y %H:%M"
+        dateTimeDue = datetime.datetime.strptime(dateTimeStr, date_format)
+
+        return dateTimeDue
 
     def _save(self):
         """  When called the events store will save a copy of itself.
@@ -233,16 +261,21 @@ class EventAddWindow(ctk.CTkToplevel):
 
         self.event = self.eventsStore.getEvent(rowKey)
 
-        strDateDue = datetime.datetime.strptime(self.event[1], "%d/%m/%Y")
+        dtmDateDue = datetime.datetime.strptime(self.event[1], "%d/%m/%Y")  #  string to datetime
         intHrsDue  = int(self.event[2][0:2])
         intMinsDue = int(self.event[2][3:5])
 
         self.cbxCategory.set(self.event[3])
         self.entName.insert(0, self.event[0])
-        self.dpDateDue.set_date(strDateDue)
+        self.dpDateDue.set_date(dtmDateDue)
         self.tpTimeDue.set24Hrs(intHrsDue)
         self.tpTimeDue.setMins(intMinsDue)
-        self.txtNotes.insert("0.0", self.event[4])
+        self.txtNotes.insert("0.0", self.event[5])
+
+        if self.event[4] == "True":
+            self.chkRecurring.select()
+        else:
+            self.chkRecurring.deselect()
 
     def _clear(self):
         """  Clears the data fields [using tk direct].
@@ -252,6 +285,7 @@ class EventAddWindow(ctk.CTkToplevel):
         self.dpDateDue.set_date(datetime.datetime.now())
         self.tpTimeDue.set24Hrs(0)      #  set the hour to 0
         self.tpTimeDue.setMins(0)       #  set the minutes to 0
+        self.chkRecurring.deselect()
         self.txtNotes.delete("0.0", "end")
 
         self.entName.focus()

@@ -43,7 +43,7 @@ class EventsWindow(ctk.CTkToplevel):
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.title("Events")
-        self.geometry("960x400+400+400")
+        self.geometry("960x420+400+400")
         self.resizable(True, False)
 
         self._createWidgets()
@@ -100,8 +100,9 @@ class EventsWindow(ctk.CTkToplevel):
         self.after(60000, self._update)
 
     def _setColumnWidths(self):
-        self.tblEvents.set_all_column_widths(width=150,   redraw=True)
-        self.tblEvents.column_width(column=4, width=300, redraw=True)
+        self.tblEvents.set_all_column_widths(width=80,  redraw=True)
+        self.tblEvents.column_width(column=0, width=150, redraw=True)
+        self.tblEvents.column_width(column=5, width=400, redraw=True)
 
     def selectRow(self, event):
         if self.eventsStore.numberOfEvents != 0:

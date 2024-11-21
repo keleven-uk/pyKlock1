@@ -50,7 +50,7 @@ class eventsStore():
 
     def __init__(self):
         self.store = {}         #  Create the store, an empty dictionary.
-        self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Notes"]
+        self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", ""]
         self.Categories = ["", "Birthday", "Anniversary", "Moto", "Holiday", "Appointment", "One Off Event", "Other"]
         self.storeName  = pp.EV_DATA_PATH
 
@@ -93,7 +93,7 @@ class eventsStore():
         try:
             return self.store[key]
         except KeyError:
-            return ["", "", "", "", "Record not found"]         #  May need to extend for extra fields,
+            return ["", "", "", "", "", "Record not found", ""] #  May need to extend for extra fields,
                                                                  #  so the error message is always in the notes field.
     def getEvents(self):
         """  Retrieves events in list format.
