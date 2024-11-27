@@ -41,13 +41,14 @@ class myMenu(CTkmenu.CTkMenuBar):
 
     """
 
-    def __init__(self, master, myConfig, myLogger, myTimer):
+    def __init__(self, master, myConfig, myLogger, myTimer, eventsStore):
         super().__init__(master)
 
-        self.master   = master
-        self.myConfig = myConfig
-        self.myLogger = myLogger
-        self.myTimer  = myTimer
+        self.master        = master
+        self.myConfig      = myConfig
+        self.myLogger      = myLogger
+        self.myTimer       = myTimer
+        self.eventsStore   = eventsStore
         self.aboutTopLevel = None
 
         self._create_menu()
@@ -116,7 +117,7 @@ class myMenu(CTkmenu.CTkMenuBar):
     def _showEvents(self):
         """  Loads the Events window.
         """
-        se.EventsWindow(self.master, self.myConfig)
+        se.EventsWindow(self.master, self.myConfig, self.eventsStore)
 
     def _showHelp(self):
         """  Loads the Help file.

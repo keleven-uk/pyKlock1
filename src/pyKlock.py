@@ -29,12 +29,14 @@ class Klock(ctk.CTk):
     """  The main Klock class, when called will create the Klock main window.
          The class should be called from the main script.
     """
-    def __init__(self, myLogger, myConfig, myTimer):
+    def __init__(self, myLogger, myConfig, myTimer, eventsStore):
 
         #  Call the constructor method of the parent class.
         super().__init__()
 
-        self.myConfig = myConfig
+        self.myConfig    = myConfig
+        self.eventsStore = eventsStore      #  This needs to be declared here and passed down the tree.
+                                            #  So the checks whether any of the events are due can be done all the time.
 
         #  Sets the appearance of the window.
         #  Supported modes : Light, Dark, System.
@@ -62,14 +64,15 @@ class Klock(ctk.CTk):
 
         #  Create the main menu.
         myLogger.info("  Creating Menu")
-        self.menu = myMenu.myMenu(self, myConfig, myLogger, myTimer)
+        self.menu = myMenu.myMenu(self, myConfig, myLogger, myTimer, eventsStore)
 
         #  Create the frame for the main time text.
         myLogger.info("  Creating Main Time")
         self.mainTime = myMainTime.MyMainTimeFrame(self, myConfig)
         self.mainTime.pack(expand=True)
 
-        self.after(1000, self._update)              #  Will update the time and status bar.
+        self.after(1000, self._update)              #  Update the time and status bar.
+        self.after(1000, self._minuteUpdate)        #  Update the events every minute.
 
         #  Create the frame for the status bar.
         myLogger.info("  Creating Status Bar")
@@ -83,7 +86,16 @@ class Klock(ctk.CTk):
         self.menu.update()
         self.mainTime.update()
         self.StatusBar.update()
+
         self.after(1000, self._update)
+
+    def _minuteUpdate(self):
+        """  Update the events every minute.
+             This checks whether any of the events are due.
+        """
+        self.eventsStore.updateEvents()
+
+        self.after(60000, self._minuteUpdate)
 
 
 

@@ -81,7 +81,8 @@ class EventAddWindow(ctk.CTkToplevel):
                         selectbackground="#030126",     # Background colour of selected text
                         selectforeground="#ffe9a6",     # Text colour of selected text
                         borderwidth=2,
-                        date_patternstr="%d/%m/%Y")
+                        locale="en_GB",
+                        date_patternstr="%dd/%MM/%Y")
 
 
         self.lblName = ctk.CTkLabel(self, text="Name", text_color="#ffe9a6", font=("Verdana",20))
@@ -180,13 +181,14 @@ class EventAddWindow(ctk.CTkToplevel):
         strTimeDue   = f"{timeDue[0]:02}:{timeDue[1]:02}"
         strRecurring = "True" if recurring == 1 else "False"
 
-        dateTimeDue = self.getDateTimeDue(dateDue, strTimeDue)
-
+        #
+        #  self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", "Left"]
+        #
         if self.name == "":
             CTkMessagebox(title="Error", message="Name is mandatory", icon="cancel")
         else:
             key = f"{self.name}"
-            item = [self.name, strDateDue, strTimeDue, Category, strRecurring, notes, dateTimeDue]
+            item = [self.name, strDateDue, strTimeDue, Category, strRecurring, notes, ""]
 
             print(f"item = {item}")
 
@@ -201,23 +203,6 @@ class EventAddWindow(ctk.CTkToplevel):
                 self._populateFields(self.rowKey)   #  If in edit more, refresh fields.
                 self.rowKey = name                  #  save the new name i.e key.
 
-    def getDateTimeDue(self, dateDue, strTimeDue):
-        """  Return the datetime that the event will be due.
-             If the year is previous, like a birthday, then the next occurrence will be returned.
-        """
-        now      = datetime.datetime.now()
-        curYear  = now.year
-        curMonth = now.month
-        curday   = now.day
-        year     = dateDue.year
-        month    = dateDue.month
-        day      = dateDue.day
-
-        dateTimeStr = f"{dateDue.day}/{dateDue.month}/{dateDue.year} {strTimeDue}"
-        date_format = r"%d/%m/%Y %H:%M"
-        dateTimeDue = datetime.datetime.strptime(dateTimeStr, date_format)
-
-        return dateTimeDue
 
     def _save(self):
         """  When called the events store will save a copy of itself.
@@ -255,7 +240,7 @@ class EventAddWindow(ctk.CTkToplevel):
              If rowKey is none [not in edit more], then load the last [current] event.
         """
         if rowKey is None:
-            rowKey = f"{self.Name}"                             #  if add mode, re-populate using existing data.
+            rowKey = f"{self.name}"                             #  if add mode, re-populate using existing data.
         else:
             self.btnAdd.configure(state="normal")               #  If in edit mode, make add button available.
 

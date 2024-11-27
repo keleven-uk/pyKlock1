@@ -36,6 +36,7 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import datetime
 import csv
 
 import src.projectPaths as pp
@@ -50,7 +51,7 @@ class eventsStore():
 
     def __init__(self):
         self.store = {}         #  Create the store, an empty dictionary.
-        self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", ""]
+        self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", "Left"]
         self.Categories = ["", "Birthday", "Anniversary", "Moto", "Holiday", "Appointment", "One Off Event", "Other"]
         self.storeName  = pp.EV_DATA_PATH
 
@@ -104,6 +105,58 @@ class eventsStore():
 
         return lstEvent
 
+    def updateEvents(self):
+        """  For each event in the store, calculate the time between the due date and now.
+             The time interval, in seconds, is stored to the end of the event data,
+             to be investigated later.
+        """
+        now = datetime.datetime.now()
+
+        for key in self.store:
+            dateDue = self.store[key][1]
+            dateDue = self._checkYear(dateDue, now)
+            timeDue = self.store[key][2]
+            dtDue   = datetime.datetime.strptime(f"{dateDue} {timeDue}", "%d/%m/%Y %M:%H")  #  Now a dateTime
+            dtLeft  = (dtDue - now).total_seconds()               #  Convert timedelta to seconds.
+
+            if dtLeft < 61:                                       #  If dtLeft is less the a minute, flag event has due.
+                self._eventDue(key)
+
+            self.store[key][6] = self._formatSeconds(dtLeft)      #  Time left in seconds.
+
+    def _checkYear(self, dateDue, now):
+        """  Rule 1 : If the year if before the current year [i.e. original birthday year] use current year.
+             Rule 2 : If the month is before the current month [i.e. original birthday month] add 1 to year.
+             Rule 3 : If the day is before the current day [i.e. original birthday day] add 1 to year.
+
+             for example - if now if 27/11/2024 and date due is 02/04/1958.
+                           Should return 02/04/2025.
+
+             Both dateDue input and output are in string format.
+             now is input in datetime format.
+        """
+        curDay   = now.day
+        curMonth = now.month
+        curYear  = now.year
+        dueDay   = int(dateDue[0:2])
+        dueMonth = int(dateDue[3:5])
+        dueYear  = int(dateDue[6:])
+
+        if dueYear < curYear:
+            dueYear = curYear
+        if dueMonth < curMonth:
+            dueYear = curYear + 1
+        if dueDay < curDay:
+            dueYear = curYear + 1
+
+        return f"{dueDay}/{dueMonth}/{dueYear}"
+
+    def _eventDue(self, key):
+        """  Called when an event is found to be due
+        """
+        eventDue = self.store[key]
+        print(f" Event due {eventDue}")
+
     def saveEvents(self):
         """  Saves the event store to a text file in csv format.
         """
@@ -125,4 +178,26 @@ class eventsStore():
 
         except FileNotFoundError:
             print("Event store not found, using empty sore.")
+
+
+    def _formatSeconds(self, seconds):
+        """  Formats number of seconds into a human readable form i.e. hours:minutes:seconds
+
+            Based form klock_utils.py, to make the class self accessing.
+        """
+        (days, remainder)  = divmod(seconds, 86400)
+        (hours, remainder) = divmod(remainder, 3600)
+        (minutes, seconds) = divmod(remainder, 60)
+
+        if days:
+            return f"{days:.0f}d {hours:.0f}h:{minutes:.0f}m"
+        elif hours:
+            return f"{hours:.0f}h {minutes:.0f}m"
+        else:
+            return f"{minutes:.0f}m"
+
+
+
+
+
 

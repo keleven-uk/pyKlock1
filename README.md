@@ -7,7 +7,7 @@ Current version of Klock is written in Python using different GUI frameworks
     Klock 0 - pygubu & pySimpleGUI - finally settled on pySimpleGUI.  Most complete.
     Klock 1 - CustomTkinter - this one
     Klock 2 - Flet.
-    
+
     Note : pySimpleGUI is licensed software product, but free for hobbyist [but need to register]
 
 <img src="resources\Klock.jpg" title="Klock Display" alt="" data-align="center">
@@ -41,4 +41,4 @@ To install all dependencies pip install -r requirements.txt - r requirements_dev
 
 For changes see history.txt
 
-Kevin Scott (C) 2024 :: pyKlock V2024.31
+Kevin Scott (C) 2024 :: pyKlock V2024.37

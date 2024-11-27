@@ -31,11 +31,11 @@ class EventsWindow(ctk.CTkToplevel):
     """  A class for adding and showing events.
     """
 
-    def __init__(self, master, myConfig):
+    def __init__(self, master, myConfig, eventsStore):
         super().__init__(master)
 
         self.myConfig         = myConfig
-        self.eventsStore      = es.eventsStore()
+        self.eventsStore      = eventsStore
         self.master           = master
         self.AddWindowRunning = None
 
@@ -43,11 +43,11 @@ class EventsWindow(ctk.CTkToplevel):
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.title("Events")
-        self.geometry("960x420+400+400")
+        self.geometry("900x400+400+400")
         self.resizable(True, False)
 
         self._createWidgets()
-
+        self._setColumnWidths()
         self.after(60000, self._update)
 
 
@@ -65,37 +65,26 @@ class EventsWindow(ctk.CTkToplevel):
 
         self.btnAdd = ctk.CTkButton(self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self._add)
-        self.btnAdd.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
+        self.btnAdd.grid(row=1, column=1, padx=10, pady=10, sticky="nsew")
         self.btnEdit = ctk.CTkButton(self, text="Edit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                      corner_radius=12, width=100, state="disabled", command=self._edit)
-        self.btnEdit.grid(row=1, column=1, padx=10, pady=10, sticky="nsew")
+        self.btnEdit.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
         self.btnDel = ctk.CTkButton(self, text="Delete", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, state="disabled", command=self._delete)
-        self.btnDel.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
+        self.btnDel.grid(row=1, column=3, padx=10, pady=10, sticky="nsew")
         self.btnRefresh = ctk.CTkButton(self, text="Refresh", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                        corner_radius=12, width=100, command=self._sheetUpdate)
-        self.btnRefresh.grid(row=1, column=3, padx=10, pady=10, sticky="nsew")
+                                        corner_radius=12, width=100, command=self._update)
+        self.btnRefresh.grid(row=1, column=4, padx=10, pady=10, sticky="nsew")
         self.btnExt = ctk.CTkButton(self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self._exit)
-        self.btnExt.grid(row=1, column=4, padx=10, pady=10, sticky="nsew")
+        self.btnExt.grid(row=1, column=5, padx=10, pady=10, sticky="nsew")
 
-        self._setColumnWidths()
-
-    def _sheetUpdate(self):
-        """  Perform the actual sheet update.
-        """
-        self.tblEvents.set_sheet_data(data=self.eventsStore.getEvents(), redraw=True)
-        self._setColumnWidths()
 
     def _update(self):
         """  The update will run every minute.
-             The main purpose it to update the sheet with any new events,
-                if the eventAddWindow window is running.
         """
-        if self.AddWindowRunning is None or not self.AddWindowRunning.winfo_exists():
-            self.AddWindowRunning = None
-        else:
-            self._sheetUpdate()
+        self.tblEvents.set_sheet_data(data=self.eventsStore.getEvents(), redraw=True)
+        self._setColumnWidths()
 
         self.after(60000, self._update)
 
@@ -117,7 +106,6 @@ class EventsWindow(ctk.CTkToplevel):
         """  Adds a event to the event store.
         """
         self.AddWindowRunning = sae.EventAddWindow(self, self.myConfig, self.eventsStore)
-        self._sheetUpdate()
 
     def _edit(self):
         """  Edits a event data, displays the updated data.

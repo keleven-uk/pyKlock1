@@ -33,6 +33,16 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.37	[27 November 2024] - In Events branch.
+
+	The event store update now calculates the target date/time for each event.
+	This is stored at the end of the event data and displayed in the table.
+	If this is less then 1 minutes the event will be flagged [not yet implemented].
+	Most of this work is done in the event store class.
+	Since this update has to be run periodically, even when the event windows are not being display,
+	the event store is now declared in the top pyKlock window and passed down to the event windows.
+
+
 V2.24.36	[21 November 2024] - In Events branch.
 
 	Added a new option - recurring.
