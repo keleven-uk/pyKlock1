@@ -40,53 +40,72 @@ import datetime
 import csv
 
 import src.projectPaths as pp
+import src.windows.showNotification as toast
 
 
 class eventsStore():
     """  A class that implements a store for friends.
          The store is implemented as a dictionary - [key, item].
          The key is a string - Name.
-         The item is a list  - Name, Date Due, Time, Due, Category, Notes.
+         The item is a list  - Name, Date Due, Time, Due, Category, Notes, Time Left, Stage 1, stage 2, stage 3.
     """
 
-    def __init__(self):
-        self.store = {}         #  Create the store, an empty dictionary.
-        self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", "Left"]
-        self.Categories = ["", "Birthday", "Anniversary", "Moto", "Holiday", "Appointment", "One Off Event", "Other"]
+# ------------------------------------------------------------------------------------- __init__ ----------------------
+    def __init__(self, master):
+        self.master     = master     #  Need to pass in a tk window, so the notifications work.
+        self.store      = {}         #  Create the store, an empty dictionary.
+        self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", "Left", "Stage 1", "Stage 2", "Stage 3"]
+        self.Categories = ["", "Birthday", "Wedding Anniversary", "Anniversary", "Moto", "Holiday", "Appointment", "One Off Event", "Other"]
         self.storeName  = pp.EV_DATA_PATH
 
         self.loadEvents()
 
+        self.stage1 = 5  * 86400    #   5 days in seconds, is really soon
+        self.stage2 = 10 * 86400    #  10 days in seconds, Will very soon be here
+        self.stage3 = 30 * 86400    #  30 days in seconds, will soon be here
 
+        self.stage1Colour = "red"
+        self.stage2Colour = "yellow"
+        self.stage3Colour = "green"
+        self.nowColour    = "blue"
+
+# ------------------------------------------------------------------------------------- getHeaders --------------------
     @property
     def getHeaders(self):
         """  Returns a list of accepted event Headers i.e. Name, Date Due, Time Due etc.
         """
         return self.Headers
 
+# ------------------------------------------------------------------------------------- getCategories -----------------
     @property
     def getCategories(self):
         """  Returns a list of accepted event Categories i.e. Birthday, Anniversary, Moto etc.
         """
         return self.Categories
 
+# ------------------------------------------------------------------------------------- addEvent ----------------------
     def addEvent(self, key, item):
         """   Stores event data into the store.
         """
         self.store[key] = item
 
+# ------------------------------------------------------------------------------------- deleteEvent -------------------
     def deleteEvent(self, key):
         """   Deletes a event from the store if it exist, if not ignore.
+              If deleted, save the events store.
         """
         if key in self.store:
             del self.store[key]
+            self.saveEvents()
 
+# ------------------------------------------------------------------------------------- numberOfEvents ----------------
     @property
     def numberOfEvents(self):
         """  Returns the number of events in the store.
         """
         return len(self.store)
 
+# ------------------------------------------------------------------------------------- getEvent ----------------------
     def getEvent(self, key):
         """  Retrieves a single event in list format.
              If the key doesn't exist, return error massage in the Notes filed.'
@@ -94,8 +113,10 @@ class eventsStore():
         try:
             return self.store[key]
         except KeyError:
-            return ["", "", "", "", "", "Record not found", ""] #  May need to extend for extra fields,
-                                                                 #  so the error message is always in the notes field.
+            return ["", "", "", "", "", "Record not found", "", "", "", ""] #  May need to extend for extra fields,
+                                                                             #  so the error message is always in the notes field.
+
+# ------------------------------------------------------------------------------------- getEvents ---------------------
     def getEvents(self):
         """  Retrieves events in list format.
         """
@@ -105,6 +126,7 @@ class eventsStore():
 
         return lstEvent
 
+# ------------------------------------------------------------------------------------- updateEvents ------------------
     def updateEvents(self):
         """  For each event in the store, calculate the time between the due date and now.
              The time interval, in seconds, is stored to the end of the event data,
@@ -116,14 +138,12 @@ class eventsStore():
             dateDue = self.store[key][1]
             dateDue = self._checkYear(dateDue, now)
             timeDue = self.store[key][2]
-            dtDue   = datetime.datetime.strptime(f"{dateDue} {timeDue}", "%d/%m/%Y %M:%H")  #  Now a dateTime
+            dtDue   = datetime.datetime.strptime(f"{dateDue} {timeDue}", "%d/%m/%Y %H:%M")  #  Now a dateTime
             dtLeft  = (dtDue - now).total_seconds()               #  Convert timedelta to seconds.
 
-            if dtLeft < 61:                                       #  If dtLeft is less the a minute, flag event has due.
-                self._eventDue(key)
+            self._checkEvent(key, dtLeft)
 
-            self.store[key][6] = self._formatSeconds(dtLeft)      #  Time left in seconds.
-
+# ------------------------------------------------------------------------------------- _checkYear --------------------
     def _checkYear(self, dateDue, now):
         """  Rule 1 : If the year if before the current year [i.e. original birthday year] use current year.
              Rule 2 : If the month is before the current month [i.e. original birthday month] add 1 to year.
@@ -151,12 +171,80 @@ class eventsStore():
 
         return f"{dueDay}/{dueMonth}/{dueYear}"
 
-    def _eventDue(self, key):
-        """  Called when an event is found to be due
-        """
-        eventDue = self.store[key]
-        print(f" Event due {eventDue}")
+# ------------------------------------------------------------------------------------- _checkEvent -------------------
+    def _checkEvent(self, key, secondsLeft):
+        """  For each event, calculate the time left in seconds.
+             Store that on the event, formatted into days, minutes and seconds for display.
+             If the time left falls into the stages the process event.
 
+                Stage 3 becomes active after 30 days.
+                Stage 2 becomes active after 10 days.
+                stage 1 becomes active after 1 day.
+                Now becomes active with 1 minute to go - mainly intended for event with a time.
+        """
+        self.store[key][6] = self._formatSeconds(secondsLeft)      #  Time left in seconds.
+
+        match secondsLeft:
+            case secondsLeft if secondsLeft <= 0:
+                self.store[key][6] = "Event Due"
+            case secondsLeft if secondsLeft <= 60:
+                self._eventDue(key, "Now")
+            case secondsLeft if (secondsLeft <= self.stage3 and self.store[key][9] == "False"):
+                self._eventDue(key, "Stage 3")
+            case secondsLeft if (secondsLeft <= self.stage2 and self.store[key][8] == "False"):
+                self._eventDue(key, "Stage 2")
+            case secondsLeft if (secondsLeft <= self.stage1 and self.store[key][7] == "False"):
+                self._eventDue(key, "Stage 1")
+
+# ------------------------------------------------------------------------------------- _eventDue ---------------------
+    def _eventDue(self, key, stage):
+        """  Called when an event is found to be due.
+             An appropriate notification is displayed for the event.
+
+             If the notification is Acknowledged, then cancel that stage.
+             If the notification is muted, the notification with be re-displayed.  [Maybe not the next minute]
+        """
+        event     = self.store[key]
+        eventDue  = event[6]
+        eventName = event[0]
+
+        match stage:
+            case "Stage 3":
+                message = f" {eventName} in {eventDue}"
+                print(message)
+                eventNot = toast.notification(self.master, message, self.stage3Colour)
+                response = eventNot.get()
+                if response == "Acknowledge":
+                    self.store[key][9] = "True"
+                    self.saveEvents()
+
+            case "Stage 2":
+                message = f" {eventName} in {eventDue}"
+                print(message)
+                eventNot = toast.notification(self.master, message, self.stage2Colour)
+                response = eventNot.get()
+                if response == "Acknowledge":
+                    self.store[key][8] = "True"
+                    self.saveEvents()
+
+            case "Stage 1":
+                message = f" {eventName} in {eventDue}"
+                print(message)
+                eventNot = toast.notification(self.master, message, self.stage1Colour)
+                response = eventNot.get()
+                if response == "Acknowledge":
+                    self.store[key][7] = "True"
+                    self.saveEvents()
+
+            case "Now":
+                message = f" {eventName} Now"
+                print(message)
+                eventNot = toast.notification(self.master, message, self.nowColour)
+                response = eventNot.get()
+                if response == "Acknowledge":
+                    deleteEvent(key)
+
+# ------------------------------------------------------------------------------------- saveEvents --------------------
     def saveEvents(self):
         """  Saves the event store to a text file in csv format.
         """
@@ -165,6 +253,7 @@ class eventsStore():
             for key in sorted(self.store):
                 writer.writerow(self.store[key])
 
+# ------------------------------------------------------------------------------------- loadEvents --------------------
     def loadEvents(self):
         """  Loads the event store from a text file in csv format.
         """
@@ -179,11 +268,11 @@ class eventsStore():
         except FileNotFoundError:
             print("Event store not found, using empty sore.")
 
-
+# ------------------------------------------------------------------------------------- _formatSeconds ----------------
     def _formatSeconds(self, seconds):
         """  Formats number of seconds into a human readable form i.e. hours:minutes:seconds
 
-            Based form klock_utils.py, to make the class self accessing.
+            Based from klock_utils.py, to make the class self accessing.
         """
         (days, remainder)  = divmod(seconds, 86400)
         (hours, remainder) = divmod(remainder, 3600)

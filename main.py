@@ -30,7 +30,6 @@ import src.myTimer as Timer
 import src.projectPaths as pp
 import src.utils.klock_utils as utils
 
-import src.classes.eventsStore as es
 ############################################################################################### __main__ ######
 
 
@@ -50,7 +49,6 @@ if __name__ == "__main__":
         myLogger.debug(error)
 
     myConfig    = Config.Config(pp.CONFIG_PATH, pp.VERSION_PATH, myLogger)         # Create the config.
-    eventsStore = es.eventsStore()                                                 # Create the events store.
 
     myLogger.info(f"  Running {myConfig.NAME} Version {myConfig.VERSION} .::. Started at {myTimer.rightNow} ")
     myLogger.debug(f" {platform.uname()}")
@@ -73,7 +71,7 @@ if __name__ == "__main__":
     myLogger.info(f"  Events path      : {pp.EV_DATA_PATH}")
 
     # Create an instance of the App class.
-    app = Klock.Klock(myLogger, myConfig, myTimer, eventsStore)
+    app = Klock.Klock(myLogger, myConfig, myTimer)
     # Run the mainloop() method to start the application.
     app.mainloop()
 

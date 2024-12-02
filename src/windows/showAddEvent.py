@@ -147,7 +147,7 @@ class EventAddWindow(ctk.CTkToplevel):
         else:                           #  In add mode.
             if name != "":
                self.valName = True
-
+        print(f"rowkey = {self.rowKey}  :: valName = {self.valName}")
         if self.valName:
             self.btnAdd.configure(state="normal")
 
@@ -182,13 +182,13 @@ class EventAddWindow(ctk.CTkToplevel):
         strRecurring = "True" if recurring == 1 else "False"
 
         #
-        #  self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", "Left"]
+        #  The item is a list  - Name, Date Due, Time, Due, Category, Notes, Time Left, Stage 1, stage 2, stage 3.
         #
         if self.name == "":
             CTkMessagebox(title="Error", message="Name is mandatory", icon="cancel")
         else:
             key = f"{self.name}"
-            item = [self.name, strDateDue, strTimeDue, Category, strRecurring, notes, ""]
+            item = [self.name, strDateDue, strTimeDue, Category, strRecurring, notes, "", "False", "False", "False"]
 
             print(f"item = {item}")
 
@@ -201,7 +201,7 @@ class EventAddWindow(ctk.CTkToplevel):
             self._clear()
             if self.rowKey:
                 self._populateFields(self.rowKey)   #  If in edit more, refresh fields.
-                self.rowKey = name                  #  save the new name i.e key.
+                self.rowKey = self.name                  #  save the new name i.e key.
 
 
     def _save(self):

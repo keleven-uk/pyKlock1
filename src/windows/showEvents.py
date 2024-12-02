@@ -22,7 +22,6 @@
 import customtkinter as ctk
 
 import src.windows.showAddEvent as sae
-import src.classes.eventsStore as es
 
 from CTkMessagebox import CTkMessagebox
 from tksheet import Sheet
@@ -43,7 +42,7 @@ class EventsWindow(ctk.CTkToplevel):
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.title("Events")
-        self.geometry("900x400+400+400")
+        self.geometry("1320x400+400+400")
         self.resizable(True, False)
 
         self._createWidgets()
@@ -54,7 +53,7 @@ class EventsWindow(ctk.CTkToplevel):
     def _createWidgets(self):
         """  Create the main event display.
         """
-        self.tblEvents = Sheet(self, data=self.eventsStore.getEvents(), width=1000, height=300,
+        self.tblEvents = Sheet(self, data=self.eventsStore.getEvents(), width=1300, height=300,
                                align = "W", header_align = "w", row_index_align = "w",
                                show_x_scrollbar=True, show_y_scrollbar=True)
         self.tblEvents.grid(row=0, column=0, padx=10, pady=10, sticky="nsew", columnspan=12)
@@ -92,6 +91,7 @@ class EventsWindow(ctk.CTkToplevel):
         self.tblEvents.set_all_column_widths(width=80,  redraw=True)
         self.tblEvents.column_width(column=0, width=150, redraw=True)
         self.tblEvents.column_width(column=5, width=400, redraw=True)
+        self.tblEvents.column_width(column=6, width=100, redraw=True)
 
     def selectRow(self, event):
         if self.eventsStore.numberOfEvents != 0:
@@ -121,7 +121,7 @@ class EventsWindow(ctk.CTkToplevel):
 
         self.btnEdit.configure(state="disabled")
         self.btnDel.configure(state="disabled")
-        self._sheetUpdate()
+        self._update()
 
     def _delete(self):
         """  Deletes a event from the store, displays the updated data.
@@ -133,9 +133,8 @@ class EventsWindow(ctk.CTkToplevel):
                                 icon="question", option_1="Yes", option_2="No")
             if msg.get()=="Yes":
                 self.eventsStore.deleteEvent(self.rowKey)
-                self.eventsStore.saveEvents()
                 self.rowKey = ""
-                self._sheetUpdate()
+                self._update()
 
         self.btnEdit.configure(state="disabled")
         self.btnDel.configure(state="disabled")
@@ -143,5 +142,6 @@ class EventsWindow(ctk.CTkToplevel):
     def _exit(self):
         """  Closes the window.
         """
+        self.eventsStore.saveEvents()
         self.destroy()
 

@@ -22,6 +22,7 @@ import customtkinter as ctk
 
 import src.frames.showMainTime  as myMainTime
 import src.frames.showStatusBar as myStatusBar
+import src.classes.eventsStore as es
 import src.menu as myMenu
 
 
@@ -29,14 +30,14 @@ class Klock(ctk.CTk):
     """  The main Klock class, when called will create the Klock main window.
          The class should be called from the main script.
     """
-    def __init__(self, myLogger, myConfig, myTimer, eventsStore):
+    def __init__(self, myLogger, myConfig, myTimer):
 
         #  Call the constructor method of the parent class.
         super().__init__()
 
         self.myConfig    = myConfig
-        self.eventsStore = eventsStore      #  This needs to be declared here and passed down the tree.
-                                            #  So the checks whether any of the events are due can be done all the time.
+        self.eventsStore = es.eventsStore(self) #  This needs to be declared here and passed down the tree.
+                                                #  So the checks whether any of the events are due can be done all the time.
 
         #  Sets the appearance of the window.
         #  Supported modes : Light, Dark, System.
@@ -64,7 +65,7 @@ class Klock(ctk.CTk):
 
         #  Create the main menu.
         myLogger.info("  Creating Menu")
-        self.menu = myMenu.myMenu(self, myConfig, myLogger, myTimer, eventsStore)
+        self.menu = myMenu.myMenu(self, myConfig, myLogger, myTimer, self.eventsStore)
 
         #  Create the frame for the main time text.
         myLogger.info("  Creating Main Time")
