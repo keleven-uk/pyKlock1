@@ -109,13 +109,13 @@ class notification(ctk.CTkToplevel):
         """  Returns a acknowledge string when the Acknowledge button is pressed.
         """
         self._fadeOut()
-        self.event  =  f"Acknowledge"
+        self.event  =  "Acknowledge"
 
     def _mute(self):
         """  Returns a mute string when the Mute button is pressed.
         """
         self._fadeOut()
-        self.event  =  f"mute"
+        self.event  =  "mute"
 
     def get(self):
         """  Return the appropriate return string when requested.

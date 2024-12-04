@@ -136,15 +136,16 @@ class eventsStore():
 
         for key in self.store:
             dateDue = self.store[key][1]
-            dateDue = self._checkYear(dateDue, now)
+            dateDue = self.checkYear(dateDue, now)
             timeDue = self.store[key][2]
             dtDue   = datetime.datetime.strptime(f"{dateDue} {timeDue}", "%d/%m/%Y %H:%M")  #  Now a dateTime
-            dtLeft  = (dtDue - now).total_seconds()               #  Convert timedelta to seconds.
+            dtLeft  = int((dtDue - now).total_seconds())                                    #  Convert timedelta to seconds.
 
             self._checkEvent(key, dtLeft)
+        print()
 
 # ------------------------------------------------------------------------------------- _checkYear --------------------
-    def _checkYear(self, dateDue, now):
+    def checkYear(self, dateDue, now):
         """  Rule 1 : If the year if before the current year [i.e. original birthday year] use current year.
              Rule 2 : If the month is before the current month [i.e. original birthday month] add 1 to year.
              Rule 3 : If the day is before the current day [i.e. original birthday day] add 1 to year.
@@ -154,6 +155,8 @@ class eventsStore():
 
              Both dateDue input and output are in string format.
              now is input in datetime format.
+
+              Made the method callable, is a means of degerming the actual due date.
         """
         curDay   = now.day
         curMonth = now.month
@@ -182,6 +185,8 @@ class eventsStore():
                 stage 1 becomes active after 1 day.
                 Now becomes active with 1 minute to go - mainly intended for event with a time.
         """
+        now = datetime.datetime.now()
+        print(f"check event {now} : key {key} :: secondsLeft {secondsLeft}")
         self.store[key][6] = self._formatSeconds(secondsLeft)      #  Time left in seconds.
 
         match secondsLeft:
@@ -208,6 +213,7 @@ class eventsStore():
         eventDue  = event[6]
         eventName = event[0]
 
+        print(f"event Due {key} {stage}")
         match stage:
             case "Stage 3":
                 message = f" {eventName} in {eventDue}"
@@ -241,8 +247,8 @@ class eventsStore():
                 print(message)
                 eventNot = toast.notification(self.master, message, self.nowColour)
                 response = eventNot.get()
-                if response == "Acknowledge":
-                    deleteEvent(key)
+                # if response == "Acknowledge":
+                #     self.deleteEvent(key)
 
 # ------------------------------------------------------------------------------------- saveEvents --------------------
     def saveEvents(self):

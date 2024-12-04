@@ -33,6 +33,14 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.39	[4 December 2024] - In Events branch.
+
+	Modified the initial saved event, so that the stages reflect the actual days left before due.
+		This was to ensure events are notified at the correct time.
+
+	Needs more testing, but perhaps by being used in real world events.
+
+
 V2.24.38	[2 December 2024] - In Events branch.
 
 	Added a new notification window, used to display due events.
@@ -40,7 +48,7 @@ V2.24.38	[2 December 2024] - In Events branch.
 		If more then one, then the are stacked up the left hand side of the screen.
 			Maybe need to keep track of empty slots and re-use them.
 	Different colour notifications are displayed depending on the stage of the event.
-		Currently there are 3 stages, 30, 20 and days before the event.
+		Currently there are 3 stages, 30, 10 and 5 days before the event.
 		These are displayed in green, yellow and red respectively.
 		Events that are due now are displayed in blue within a minute of being due.
 

@@ -73,7 +73,7 @@ class Klock(ctk.CTk):
         self.mainTime.pack(expand=True)
 
         self.after(1000, self._update)              #  Update the time and status bar.
-        self.after(1000, self._minuteUpdate)        #  Update the events every minute.
+        self.after(1000, self._eventUpdate)         #  Update the events every minute.
 
         #  Create the frame for the status bar.
         myLogger.info("  Creating Status Bar")
@@ -90,13 +90,13 @@ class Klock(ctk.CTk):
 
         self.after(1000, self._update)
 
-    def _minuteUpdate(self):
+    def _eventUpdate(self):
         """  Update the events every minute.
              This checks whether any of the events are due.
         """
         self.eventsStore.updateEvents()
 
-        self.after(60000, self._minuteUpdate)
+        self.after(60000, self._eventUpdate)
 
 
 

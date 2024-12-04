@@ -147,7 +147,6 @@ class EventAddWindow(ctk.CTkToplevel):
         else:                           #  In add mode.
             if name != "":
                self.valName = True
-        print(f"rowkey = {self.rowKey}  :: valName = {self.valName}")
         if self.valName:
             self.btnAdd.configure(state="normal")
 
@@ -189,8 +188,7 @@ class EventAddWindow(ctk.CTkToplevel):
         else:
             key = f"{self.name}"
             item = [self.name, strDateDue, strTimeDue, Category, strRecurring, notes, "", "False", "False", "False"]
-
-            print(f"item = {item}")
+            item = self._setItemStages(item, strDateDue)
 
             self.eventsStore.addEvent(key, item)
             self.btnSave.configure(state="normal")
@@ -203,6 +201,30 @@ class EventAddWindow(ctk.CTkToplevel):
                 self._populateFields(self.rowKey)   #  If in edit more, refresh fields.
                 self.rowKey = self.name                  #  save the new name i.e key.
 
+
+    def _setItemStages(self, item, dateDue):
+        """  Sets the stages relevant to the number of days left of the event.
+        """
+        dtNow      = datetime.datetime.now()
+        strDateDue = self.eventsStore.checkYear(dateDue, dtNow)                 #  A means of degerming the actual due date.
+        dtDateDue  = datetime.datetime.strptime(f"{strDateDue}", "%d/%m/%Y")
+        days       = (dtDateDue - dtNow).days
+
+        match days:
+            case days if days < 5:          #  if the event has less then 5 days, then ignore stages [set all to true].
+                item[7] = True
+                item[8] = True
+                item[9] = True
+            case days if 5 < days < 11:     #  if the event has less then 10 days, then ignore stages 3 & 2
+                item[7] = True
+                item[8] = True
+                item[9] = False
+            case days if 10 < days <30:     #  if the event has less then 30 days, then ignore stage 1
+                item[7] = True
+                item[8] = False
+                item[9] = False
+
+        return item
 
     def _save(self):
         """  When called the events store will save a copy of itself.
