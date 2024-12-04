@@ -22,8 +22,11 @@ Klock displays the time [local], date, key status and the computers idle time.
 Key status is the status of Caps Lock, Insert, Scroll lock and Num lock.
 The format of the time display can be changes i.e GMT, UTC, in words, numbers and the famous Fuzzy Time.
 
-Klock will store a number of friends [contacts] that are display in a table.
+Klock will store a number of friends [contacts] that are displayed in a table.
 Each friend can be edited and deleted.
+
+Klock will store a number of events that are displayed in a table.
+These events have a date due attached to them, Klock will give notifications when up and coming.
 
 The foreground and background colours can be selected.
 
@@ -41,4 +44,4 @@ To install all dependencies pip install -r requirements.txt - r requirements_dev
 
 For changes see history.txt
 
-Kevin Scott (C) 2024 :: pyKlock V2024.39
+Kevin Scott (C) 2024 :: pyKlock V2024.40

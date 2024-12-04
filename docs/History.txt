@@ -33,6 +33,11 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.40	[4 December 2024]
+
+	Merged events branch back into main for further testing, enhancements and update of help.
+
+
 V2.24.39	[4 December 2024] - In Events branch.
 
 	Modified the initial saved event, so that the stages reflect the actual days left before due.
