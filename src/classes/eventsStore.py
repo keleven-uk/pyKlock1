@@ -142,7 +142,6 @@ class eventsStore():
             dtLeft  = int((dtDue - now).total_seconds())                                    #  Convert timedelta to seconds.
 
             self._checkEvent(key, dtLeft)
-        print()
 
 # ------------------------------------------------------------------------------------- _checkYear --------------------
     def checkYear(self, dateDue, now):
@@ -186,7 +185,7 @@ class eventsStore():
                 Now becomes active with 1 minute to go - mainly intended for event with a time.
         """
         now = datetime.datetime.now()
-        print(f"check event {now} : key {key} :: secondsLeft {secondsLeft}")
+        #print(f"check event {now} : key {key} :: secondsLeft {secondsLeft}")
         self.store[key][6] = self._formatSeconds(secondsLeft)      #  Time left in seconds.
 
         match secondsLeft:

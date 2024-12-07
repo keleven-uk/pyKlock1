@@ -19,12 +19,14 @@
 #                                                                                                             #
 ###############################################################################################################
 
+import datetime
+
 import tkinter as tk
 
 from re import compile
 
 import customtkinter as ctk
-from src.CTkDatePicker import CTkDatePicker
+from tkcalendar    import DateEntry
 from CTkMessagebox import CTkMessagebox
 
 
@@ -57,11 +59,32 @@ class FriendAddWindow(ctk.CTkToplevel):
         self._createWidgets()
         if self.rowKey:                         #  if rowKey is not None, then in edit mode - load selected friend details into the fields.
             self._populateFields(self.rowKey)   #  rowkey should hold the row number of the selected friend.
+            self.oldKey = self.rowKey           #  Save away, just in case the key is changed.
 
 
     def _createWidgets(self):
         """  Create the main add friend frame.
         """
+        #  Style for the date entry widget.
+        style = tk.ttk.Style()
+        style.theme_use("clam")  # -> uncomment this line if the styling does not work
+
+        # Customize the DateEntry style
+        style.configure("my.DateEntry",
+                        fieldbackground="#030126",      # Background colour of the entry field
+                        background="grey",              # Background colour when the dropdown is open
+                        foreground="#ffe9a6",           # Text colour in the entry field
+                        arrowcolor="white",             # Colour of the dropdown arrow
+                        bordercolor="#030126",          # Border colour of the entry field
+                        darkcolor="#ffe9a6",            # Colour for dark areas (e.g., arrow borders)
+                        lightcolor="#030126",           # Colour for light areas (e.g., arrow background)
+                        insertcolor="#030126",          # Colour of the text cursor
+                        selectbackground="#030126",     # Background colour of selected text
+                        selectforeground="#ffe9a6",     # Text colour of selected text
+                        borderwidth=2,
+                        locale="en_GB",
+                        date_patternstr="%dd/%MM/%Y")
+
         self.lblTitle = ctk.CTkLabel(self, text="Title", text_color="#ffe9a6", font=("Verdana",20))
         self.lblTitle.grid(row=0, column=0,padx=10, pady=10)
         self.cbxTitle = ctk.CTkComboBox(self, values=self.titles, text_color="white", fg_color="#030126", border_color="#030126", command=self.setTitle)
@@ -97,12 +120,8 @@ class FriendAddWindow(ctk.CTkToplevel):
 
         self.lblBirthday = ctk.CTkLabel(self, text="Birthday", text_color="#ffe9a6", font=("Verdana",20))
         self.lblBirthday.grid(row=3, column=2,padx=10, pady=10)
-        self.dpBirthday = CTkDatePicker(self)
+        self.dpBirthday = DateEntry(self, style="my.DateEntry", width=20)
         self.dpBirthday.grid(row=3, column=3,padx=10, pady=10)
-
-        self.dpBirthday.set_date_format("%d/%m/%Y")
-        self.dpBirthday.set_allow_manual_input(True)  # Enable
-
 
         self.lblHouseNo = ctk.CTkLabel(self, text="House No / Name", text_color="#ffe9a6", font=("Verdana",20))
         self.lblHouseNo.grid(row=4, column=0,padx=10, pady=10)
@@ -201,7 +220,7 @@ class FriendAddWindow(ctk.CTkToplevel):
             if mobileNumber != "":
                self.valMobileNumber = True
 
-        valMobileNumbers = compile(r"[\d ]")             #  Only allows digits and spaces.
+        valMobileNumbers = compile(r"[\d ]")                 #  Only allows digits and spaces.
 
         if valMobileNumbers.match(mobileNumber):             #  Only allows digits and spaces.
             if self.valFirstName and self.valLastName and self.valMobileNumber:
@@ -227,12 +246,14 @@ class FriendAddWindow(ctk.CTkToplevel):
              mobileNumber must be numeric [can contain a space].
         """
         title     = self.chosen
+        dateDue   = self.dpBirthday.get_date()
+
         self.lastName  = self.entLastName.get().title().strip()
         self.firstName = self.entFirstName.get().title().strip()
         mobileNo  = self.entMobileNumber.get().strip()
         telNumber = self.entTelNumber.get().strip()
         eMail     = self.entEmail.get().strip()
-        birthday  = self.dpBirthday.get_date().strip()
+        birthday  = dateDue.strftime("%d/%m/%Y")
         houseNo   = self.entHouseNo.get().title().strip()
         addLine1  = self.entAddLine1.get().title().strip()
         addLine2  = self.entAddLine2.get().title().strip()
@@ -270,6 +291,8 @@ class FriendAddWindow(ctk.CTkToplevel):
         if self.addData:
             self.addData = False
         if self.rowKey:
+            if self.oldKey != self.rowKey:                      #  The name has changed i.e. the key
+                self.eventsStore.deleteEvent(self.oldKey)       #  Delete the original and retain the edited.
             self.rowKey = None
 
     def _exit(self):
@@ -306,7 +329,10 @@ class FriendAddWindow(ctk.CTkToplevel):
         self.entMobileNumber.insert(0, self.friend[3])
         self.entTelNumber.insert(0, self.friend[4])
         self.entEmail.insert(0, self.friend[5])
-        self.dpBirthday.date_entry.insert(0, self.friend[6])     #  Accessing date picker internals directly.
+        if self.friend[6]:                                                                    #  Protect against a blank date.
+            self.dpBirthday.set_date(datetime.datetime.strptime(self.friend[6], "%d/%m/%Y"))  #  String to datetime)
+        else:
+            self.dpBirthday.delete(0, "end")
         self.entHouseNo.insert(0, self.friend[7])
         self.entAddLine1.insert(0, self.friend[8])
         self.entAddLine2.insert(0, self.friend[9])
@@ -325,7 +351,7 @@ class FriendAddWindow(ctk.CTkToplevel):
         self.entMobileNumber.delete(0, tk.END)
         self.entTelNumber.delete(0, tk.END)
         self.entEmail.delete(0, tk.END)
-        self.dpBirthday.date_entry.delete(0, tk.END)
+        self.dpBirthday.set_date(datetime.date.today())       # todays date
         self.entHouseNo.delete(0, tk.END)
         self.entAddLine1.delete(0, tk.END)
         self.entAddLine2.delete(0, tk.END)

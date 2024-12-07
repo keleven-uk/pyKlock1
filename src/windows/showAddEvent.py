@@ -98,7 +98,7 @@ class EventAddWindow(ctk.CTkToplevel):
 
         self.lblDateDue = ctk.CTkLabel(self, text="Date Due", text_color="#ffe9a6", font=("Verdana",20))
         self.lblDateDue.grid(row=3, column=0, padx=10, pady=10)
-        self.dpDateDue = DateEntry(self, style="my.DateEntry")
+        self.dpDateDue = DateEntry(self, style="my.DateEntry", width=20)
         self.dpDateDue.grid(row=3, column=1, padx=10, pady=10)
 
         self.lblTimeDue = ctk.CTkLabel(self, text="Time Due", text_color="#ffe9a6", font=("Verdana",20))

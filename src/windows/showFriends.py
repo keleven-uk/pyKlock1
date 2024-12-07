@@ -47,6 +47,7 @@ class FriendsWindow(ctk.CTkToplevel):
         self.resizable(True, False)
 
         self._createWidgets()
+        self._setColumnWidths()
 
         self.after(60000, self._update)
 
@@ -79,7 +80,6 @@ class FriendsWindow(ctk.CTkToplevel):
                                     corner_radius=12, width=100, command=self._exit)
         self.btnExt.grid(row=1, column=4, padx=10, pady=10, sticky="nsew")
 
-        self._setColumnWidths()
 
     def _sheetUpdate(self):
         """  Perform the actual sheet update.
@@ -153,5 +153,6 @@ class FriendsWindow(ctk.CTkToplevel):
     def _exit(self):
         """  Closes the window.
         """
+        self.friendsStore.saveFriends()
         self.destroy()
 

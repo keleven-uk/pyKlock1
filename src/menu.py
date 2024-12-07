@@ -57,16 +57,16 @@ class myMenu(CTkmenu.CTkMenuBar):
     def _create_menu(self):
         """  Creates the menu widgets.
         """
-        menuWidth  = 24
+        menuWidth  = 20
         menuHeight = 2
         fontSize   = 12
 
-        self.menu           = CTkmenu.CTkMenuBar(self.master)
-        self.mnuFile        = self.menu.add_cascade("File")
-        self.mnuKlocks      = self.menu.add_cascade("Klocks")
-        self.mnuAccessories = self.menu.add_cascade("Accessories")
-        self.mnuEdit        = self.menu.add_cascade("Edit")
-        self.mnuHelp        = self.menu.add_cascade("Help")
+        self.menu      = CTkmenu.CTkMenuBar(self.master)
+        self.mnuFile   = self.menu.add_cascade("File")
+        self.mnuKlocks = self.menu.add_cascade("Klocks")
+        self.mnuThings = self.menu.add_cascade("Things")
+        self.mnuEdit   = self.menu.add_cascade("Edit")
+        self.mnuHelp   = self.menu.add_cascade("Help")
 
         #  Exit
         self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile, height=menuHeight,
@@ -79,7 +79,7 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.dropdown2.add_option(option="vfdKlock", command=self._showKlocks)
 
         #  Accessories
-        self.dropdown3  = CTkmenu.CustomDropdownMenu(widget=self.mnuAccessories, height=menuHeight,
+        self.dropdown3  = CTkmenu.CustomDropdownMenu(widget=self.mnuThings, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown3.add_option(option="Friends", command=self._showFriends)
         self.dropdown3.add_option(option="Events",  command=self._showEvents)
@@ -199,7 +199,7 @@ class myMenu(CTkmenu.CTkMenuBar):
              Method is externally called.
         """
         self.mnuFile.configure(text_color=self.myConfig.FOREGROUND)
-        self.mnuAccessories.configure(text_color=self.myConfig.FOREGROUND)
+        self.mnuThings.configure(text_color=self.myConfig.FOREGROUND)
         self.mnuEdit.configure(text_color=self.myConfig.FOREGROUND)
         self.mnuHelp.configure(text_color=self.myConfig.FOREGROUND)
         self.mnuKlocks.configure(text_color=self.myConfig.FOREGROUND)

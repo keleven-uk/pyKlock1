@@ -33,6 +33,13 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.41	[7 December 2024]
+
+	Changed the menu name of Accessories to Things.
+	Changed the date picker in Add Friends to use Tkcalendar, this mirrors the change in Add Events.
+		CTkDatePicker source directory removed.
+
+
 V2.24.40	[4 December 2024]
 
 	Merged events branch back into main for further testing, enhancements and update of help.
@@ -43,7 +50,7 @@ V2.24.39	[4 December 2024] - In Events branch.
 	Modified the initial saved event, so that the stages reflect the actual days left before due.
 		This was to ensure events are notified at the correct time.
 
-	Needs more testing, but perhaps by being used in real world events.
+	Needs more testing, but perhaps by being used with some real world events.
 
 
 V2.24.38	[2 December 2024] - In Events branch.
@@ -81,7 +88,7 @@ V2.24.36	[21 November 2024] - In Events branch.
 
 V2.24.35	[20 November 2024] - In Events branch.
 
-	Changed the date picker to use Tkcalendr, it's a bit quicker then CTkDatePicker.
+	Changed the date picker to use Tkcalendar, it's a bit quicker then CTkDatePicker.
 		Source directory will be removed when fitted into friends.
 	Added time Picker tkTimePicker, as a analogue entry [not a clock].
 	Both add to requirements.txt
