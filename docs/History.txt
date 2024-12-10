@@ -33,6 +33,15 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.42	[10 December 2024] - in textKlock branch.
+
+	Started working on a new sub Klock - textKlock.
+	The clock in a matrix of lettes/words and the current time is displayed by highlighted text.
+	The basic window containing the text created.
+	The main menu amended to include the new Klock.
+	Added new config option of textKlock [screen position, window size and text colours].
+
+
 V2.24.41	[7 December 2024]
 
 	Changed the menu name of Accessories to Things.

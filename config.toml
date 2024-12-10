@@ -1,10 +1,10 @@
 #   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Saturday 07 December 2024  20:42:56
+#   (c) Kevin Scott   Written Monday 09 December 2024  23:00:10
 #
 #   true and false are lower case
 #
 [INFO]
-myVERSION = "2024.41"
+myVERSION = "2024.37"
 myNAME = "pyKlock"
 
 [APPLICATION]
@@ -15,11 +15,11 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1408
-y_pos = -353
+x_pos = 1381
+y_pos = -336
 Align_Right = true
 
-[TIME]
+[TIME]git STATUS_FONT
 type = "Fuzzy Time"
 
 [MENU]
@@ -42,9 +42,16 @@ underline = false
 overstrike = false
 
 [KLOCKS]
-vfd_width = 500
+vfd_width = 300
 vfd_height = 260
 vfd_x_pos = 821
 vfd_y_pos = 280
 vfd_foreground = "#82ccff"
 vfd_background = "#000000"
+text_width = 360
+text_height = 320
+text_x_pos = -398
+text_y_pos = -387
+text_onColour = "#82ccff"
+text_ofColour = "grey"
+text_background = "#000000"

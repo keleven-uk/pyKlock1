@@ -33,7 +33,6 @@ class showVFDime(ctk.CTkFrame):
     def __init__(self, main, myConfig, myLogger):
         super().__init__(main)
 
-        myLogger.debug("  Start of showVFDime __init__")
         self.main       = main
         self.myConfig   = myConfig
         self.myLogger   = myLogger
@@ -41,12 +40,10 @@ class showVFDime(ctk.CTkFrame):
         self.configure(fg_color=self.myConfig.VFD_BACKGROUND)
         self._createWidgets()
         self.after(1000, self._update)              #  Will update the time.
-        myLogger.debug("  End of showVFDime __init__")
 
     def _createWidgets(self):
         """  Create the main time display.
         """
-        self.myLogger.debug("  Start of showVFDime _createWidgets")
         vfdHeight  = 200
 
         #  Oncolour expects a RGB row vector, bgcolour will take a normal TK colour code though.
@@ -54,7 +51,6 @@ class showVFDime(ctk.CTkFrame):
                     int(self.myConfig.VFD_FOREGROUND[5:7], 16)]
         bgColour = self.myConfig.VFD_BACKGROUND
 
-        self.myLogger.debug("  Start of showVFDime create hour segments")
         self.hour0 = tkVFD.seg7(self, height=vfdHeight, use_CC=False, on_color=onColour, bg=bgColour)
         self.hour0.grid(row=0, column=0, padx=(0,0), pady=(0,0))
         self.hour0.char("8", DP=None, CC=0)
@@ -62,7 +58,6 @@ class showVFDime(ctk.CTkFrame):
         self.hour1.grid(row=0, column=1, padx=(0,0), pady=(0,0))
         self.hour1.char("8", DP=None, CC=0)
 
-        self.myLogger.debug("  Start of showVFDime create mins segments")
         self.mins0 = tkVFD.seg7(self, height=vfdHeight, use_CC=False, on_color=onColour, bg=bgColour)
         self.mins0.grid(row=0, column=2, padx=(0,0), pady=(0,0))
         self.mins0.char("8", DP=None, CC=0)
@@ -77,13 +72,10 @@ class showVFDime(ctk.CTkFrame):
         # self.secs1.grid(row=0, column=5, padx=(0,0), pady=(0,0))
         # self.secs1.char("8", DP=None, CC=0)
 
-        self.myLogger.debug("  Start of showVFDime bind mouse")
         #  Using tkinter direct to bind the move window function to the left moue button press.
         self.hour0.bind("<Button-1>",        self._startMove)
         self.hour0.bind("<ButtonRelease-1>", self._stopMove)
         self.hour0.bind("<B1-Motion>",       self._moveWindow)
-
-        self.myLogger.debug("  End of showVFDime _createWidgets")
 
     #  Used to move the app.
     #  Binds start and stop to mouse left click and move to mouse move.

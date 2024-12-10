@@ -32,6 +32,7 @@ import src.windows.showTimeTypes as stt
 import src.windows.SelectColourWindow as cw
 
 import src.klocks.vfdKlock as vfdKlock
+import src.klocks.textKlock as textKlock
 
 class myMenu(CTkmenu.CTkMenuBar):
     """  A class the creates the menu.
@@ -76,7 +77,8 @@ class myMenu(CTkmenu.CTkMenuBar):
         #Klocks
         self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnuKlocks, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown2.add_option(option="vfdKlock", command=self._showKlocks)
+        self.dropdown2.add_option(option="vfdKlock",  command=self._showVFDKlock)
+        self.dropdown2.add_option(option="textKlock", command=self._showTextKlock)
 
         #  Accessories
         self.dropdown3  = CTkmenu.CustomDropdownMenu(widget=self.mnuThings, height=menuHeight,
@@ -104,7 +106,12 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.update()
 
 
-    def _showKlocks(self):
+    def _showTextKlock(self):
+        self.master.overrideredirect(False)
+        self.master.state("iconic")
+        textKlock.textKlock(self.master, self.myConfig, self.myLogger)
+
+    def _showVFDKlock(self):
         self.master.overrideredirect(False)
         self.master.state("iconic")
         vfdKlock.vfdKlock(self.master, self.myConfig, self.myLogger)

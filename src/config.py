@@ -339,6 +339,92 @@ class Config():
         """
         self.config["KLOCKS"]["vfd_background"] = value
 
+    #  Text Klock config options.
+    @property
+    def TEXT_WIDTH(self):
+        """  Returns the textKlock width.
+        """
+        return self.config["KLOCKS"].get("text_width", "500")
+
+    @TEXT_WIDTH.setter
+    def TEXT_WIDTH(self, value):
+        """  Sets the textKlock width.
+        """
+        self.config["KLOCKS"]["text_width"] = value
+
+    @property
+    def TEXT_HEIGHT(self):
+        """  Returns the textKlock height.
+        """
+        return self.config["KLOCKS"].get("text_height", "260")
+
+    @TEXT_HEIGHT.setter
+    def TEXT_HEIGHT(self, value):
+        """  Sets the textKlock height.
+        """
+        self.config["KLOCKS"]["text_height"] = value
+
+    @property
+    def TEXT_X_POS(self):
+        """  Returns the textKlock x pos.
+        """
+        return self.config["KLOCKS"].get("text_x_pos", "400")
+
+    @TEXT_X_POS.setter
+    def TEXT_X_POS(self, value):
+        """  Sets the textKlock x pos.
+        """
+        self.config["KLOCKS"]["text_x_pos"] = value
+
+    @property
+    def TEXT_Y_POS(self):
+        """  Returns the textKlock y pos.
+        """
+        return self.config["KLOCKS"].get("text_y_pos", "400")
+
+    @TEXT_Y_POS.setter
+    def TEXT_Y_POS(self, value):
+        """  Sets the textKlock y pos.
+        """
+        self.config["KLOCKS"]["text_y_pos"] = value
+
+    @property
+    def TEXT_ON_COLOUR(self):
+        """  Returns the textdKlock on colour.
+        """
+        return self.config["KLOCKS"].get("text_foreground", "#82ccff")
+
+    @TEXT_ON_COLOUR.setter
+    def TEXT_ON_COLOUR(self, value):
+        """  Sets the textKlock on colour.
+        """
+        self.config["KLOCKS"]["text_foreground"] = value
+
+    @property
+    def TEXT_OFF_COLOUR(self):
+        """  Returns the textdKlock off colour.
+        """
+        return self.config["KLOCKS"].get("text_foreground", "grey")
+
+    @TEXT_OFF_COLOUR.setter
+    def TEXT_OFF_COLOUR(self, value):
+        """  Sets the textKlock off colour.
+        """
+        self.config["KLOCKS"]["text_foreground"] = value
+
+    @property
+    def TEXT_BACKGROUND(self):
+        """  Returns the textKlock background colour.
+        """
+        return self.config["KLOCKS"].get("text_background", "#000000")
+
+    @TEXT_BACKGROUND.setter
+    def TEXT_BACKGROUND(self, value):
+        """  Sets the textKlock background colour.
+        """
+        self.config["KLOCKS"]["text_background"] = value
+
+
     #  ------------------------------------------------------------------------------------------------------------------------
 
     def _CheckVersion(self):
@@ -365,6 +451,17 @@ class Config():
                                                  "vfd_y_pos"      : 400,
                                                  "vfd_foreground" : "#82ccff",
                                                  "vfd_background" : "#000000"}
+
+                    if "KLOCKS" not in self.config:
+                        #  New config options to be added at 2024.42 - text klock
+                        self.logger.info("  ** New options for TEXT Klock added @ 2024.42**")
+                        self.config["KLOCKS"] = {"text_width"      : 500,
+                                                 "text_height"     : 260,
+                                                 "text_x_pos"      : 821,
+                                                 "text_y_pos"      : 280,
+                                                 "text_onColour"   : "#82ccff",
+                                                 "text_ofColour"   : "grey",
+                                                 "text_background" : "#000000"}
 
                     if "APPLICATION" not in self.config:
                         #  New config options to be added at 2024.25
@@ -464,12 +561,19 @@ class Config():
                                "underline"  : False,
                                "overstrike" : False}
 
-        config["KLOCKS"] = {"vfd_width"      : 500,
-                            "vfd_height"     : 260,
-                            "vfd_x_pos"      : 400,
-                            "vfd_y_pos"      : 400,
-                            "vfd_foreground" : "#82ccff",
-                            "vfd_background" : "#000000"}
+        config["KLOCKS"] = {"vfd_width"       : 500,
+                            "vfd_height"      : 260,
+                            "vfd_x_pos"       : 400,
+                            "vfd_y_pos"       : 400,
+                            "vfd_foreground"  : "#82ccff",
+                            "vfd_background"  : "#000000",
+                            "text_width"      : 500,
+                            "text_height"     : 260,
+                            "text_x_pos"      : 821,
+                            "text_y_pos"      : 280,
+                            "text_onColour"   : "#82ccff",
+                            "text_ofColour"   : "grey",
+                            "text_background" : "#000000"}
 
 
         st_toml = toml.dumps(config)

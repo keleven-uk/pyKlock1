@@ -184,7 +184,7 @@ class eventsStore():
                 stage 1 becomes active after 1 day.
                 Now becomes active with 1 minute to go - mainly intended for event with a time.
         """
-        now = datetime.datetime.now()
+        #now = datetime.datetime.now()
         #print(f"check event {now} : key {key} :: secondsLeft {secondsLeft}")
         self.store[key][6] = self._formatSeconds(secondsLeft)      #  Time left in seconds.
 
