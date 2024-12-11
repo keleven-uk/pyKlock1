@@ -66,10 +66,10 @@ class notification(ctk.CTkToplevel):
         self.attributes("-alpha", 0)
         self.attributes("-topmost", True)
 
-        self._createWidgets()
-        self._fadeIn()
+        self.__createWidgets()
+        self.__fadeIn()
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the main event display.
         """
         self.lblMessage = ctk.CTkLabel(self, text=self.message, text_color="black", fg_color="transparent")
@@ -81,7 +81,7 @@ class notification(ctk.CTkToplevel):
                                      hover=False, corner_radius=12, width=100, command=self._mute)
         self.btnMute.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
 
-    def _fadeIn(self):
+    def __fadeIn(self):
         """  Fades in the windows, but slowly increasing the alpha attribute of the background colour.
 
             See https://stackoverflow.com/questions/22491488/how-to-create-a-fade-out-effect-in-tkinter-my-code-crashes
@@ -90,9 +90,9 @@ class notification(ctk.CTkToplevel):
         alpha = min(alpha + .01, self.maxAlpha)
         self.attributes("-alpha", alpha)
         if alpha < self.maxAlpha:
-            self.after(self.fadeSpeed, self._fadeIn)
+            self.after(self.fadeSpeed, self.__fadeIn)
 
-    def _fadeOut(self):
+    def __fadeOut(self):
         """  Fades out the windows, but slowly decreasing the alpha attribute of the background colour.
 
             See https://stackoverflow.com/questions/22491488/how-to-create-a-fade-out-effect-in-tkinter-my-code-crashes
@@ -101,20 +101,20 @@ class notification(ctk.CTkToplevel):
         if alpha > 0:
             alpha -= .01
             self.attributes("-alpha", alpha)
-            self.after(self.fadeSpeed, self._fadeOut)
+            self.after(self.fadeSpeed, self.__fadeOut)
         else:
             self.destroy()
 
-    def _Acknowledge(self):
+    def __Acknowledge(self):
         """  Returns a acknowledge string when the Acknowledge button is pressed.
         """
-        self._fadeOut()
+        self.__fadeOut()
         self.event  =  "Acknowledge"
 
-    def _mute(self):
+    def __mute(self):
         """  Returns a mute string when the Mute button is pressed.
         """
-        self._fadeOut()
+        self.__fadeOut()
         self.event  =  "mute"
 
     def get(self):

@@ -35,11 +35,11 @@ class MyStatusBarFrame(ctk.CTkFrame):
         self.master     = master
         self.myConfig   = myConfig
         self.statusFont = ctk.CTkFont(family=self.myConfig.STATUS_FONT_FAMILY, size=self.myConfig.STATUS_FONT_SIZE)
-        self._createWidgets()
+        self.__createWidgets()
         self.relief="sunken"
 
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the main time display.
         """
         self.rowconfigure(index=0, weight=1)

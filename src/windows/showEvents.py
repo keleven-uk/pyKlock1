@@ -45,12 +45,12 @@ class EventsWindow(ctk.CTkToplevel):
         self.geometry("1320x400+400+400")
         self.resizable(True, False)
 
-        self._createWidgets()
-        self._setColumnWidths()
-        self.after(60000, self._update)
+        self.__createWidgets()
+        self.__setColumnWidths()
+        self.after(60000, self.__update)
 
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the main event display.
         """
         self.tblEvents = Sheet(self, data=self.eventsStore.getEvents(), width=1300, height=300,
@@ -63,31 +63,31 @@ class EventsWindow(ctk.CTkToplevel):
         self.tblEvents.extra_bindings(("row_select", "cell_select"), self.selectRow)
 
         self.btnAdd = ctk.CTkButton(self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, command=self._add)
+                                    corner_radius=12, width=100, command=self.__add)
         self.btnAdd.grid(row=1, column=1, padx=10, pady=10, sticky="nsew")
         self.btnEdit = ctk.CTkButton(self, text="Edit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                     corner_radius=12, width=100, state="disabled", command=self._edit)
+                                     corner_radius=12, width=100, state="disabled", command=self.__edit)
         self.btnEdit.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
         self.btnDel = ctk.CTkButton(self, text="Delete", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, state="disabled", command=self._delete)
+                                    corner_radius=12, width=100, state="disabled", command=self.__delete)
         self.btnDel.grid(row=1, column=3, padx=10, pady=10, sticky="nsew")
         self.btnRefresh = ctk.CTkButton(self, text="Refresh", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                        corner_radius=12, width=100, command=self._update)
+                                        corner_radius=12, width=100, command=self.__update)
         self.btnRefresh.grid(row=1, column=4, padx=10, pady=10, sticky="nsew")
         self.btnExt = ctk.CTkButton(self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, command=self._exit)
+                                    corner_radius=12, width=100, command=self.__exit)
         self.btnExt.grid(row=1, column=5, padx=10, pady=10, sticky="nsew")
 
 
-    def _update(self):
+    def __update(self):
         """  The update will run every minute.
         """
         self.tblEvents.set_sheet_data(data=self.eventsStore.getEvents(), redraw=True)
-        self._setColumnWidths()
+        self.__setColumnWidths()
 
-        self.after(60000, self._update)
+        self.after(60000, self.__update)
 
-    def _setColumnWidths(self):
+    def __setColumnWidths(self):
         self.tblEvents.set_all_column_widths(width=80,  redraw=True)
         self.tblEvents.column_width(column=0, width=150, redraw=True)
         self.tblEvents.column_width(column=5, width=400, redraw=True)
@@ -102,12 +102,12 @@ class EventsWindow(ctk.CTkToplevel):
             rowData     = self.tblEvents.get_row_data(rowSelected[0])
             self.rowKey =  f"{rowData[0]}"
 
-    def _add(self):
+    def __add(self):
         """  Adds a event to the event store.
         """
         self.AddWindowRunning = sae.EventAddWindow(self, self.myConfig, self.eventsStore)
 
-    def _edit(self):
+    def __edit(self):
         """  Edits a event data, displays the updated data.
         """
         if self.rowKey == "":
@@ -121,9 +121,9 @@ class EventsWindow(ctk.CTkToplevel):
 
         self.btnEdit.configure(state="disabled")
         self.btnDel.configure(state="disabled")
-        self._update()
+        self.__update()
 
-    def _delete(self):
+    def __delete(self):
         """  Deletes a event from the store, displays the updated data.
         """
         if self.rowKey == "":
@@ -134,12 +134,12 @@ class EventsWindow(ctk.CTkToplevel):
             if msg.get()=="Yes":
                 self.eventsStore.deleteEvent(self.rowKey)
                 self.rowKey = ""
-                self._update()
+                self.__update()
 
         self.btnEdit.configure(state="disabled")
         self.btnDel.configure(state="disabled")
 
-    def _exit(self):
+    def __exit(self):
         """  Closes the window.
         """
         self.eventsStore.saveEvents()

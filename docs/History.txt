@@ -33,6 +33,16 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.43	[11 December 2024] - in textKlock branch.
+
+	TextClock seems to be working, after some tweaking.
+
+	Amended to main update method of klock only update the main menu and time in main screen is running.
+	Apparently, to make a python method private you prefix it with two underscores [__].
+	I had only been using one, so took the opportunity of the branch to change all the ones to twos.
+	Also, it appears the file showmenuButtons is no longer used - removed.
+
+
 V2.24.42	[10 December 2024] - in textKlock branch.
 
 	Started working on a new sub Klock - textKlock.

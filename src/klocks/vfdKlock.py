@@ -58,7 +58,7 @@ class vfdKlock(ctk.CTkToplevel):
         #  Exit
         self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown1.add_option(option="Exit", command=self._close)
+        self.dropdown1.add__option(option="Exit", command=self.__close)
 
         #  Create the frame for the time display.
         myLogger.info("  Creating vfdKlock Main Time")
@@ -70,9 +70,9 @@ class vfdKlock(ctk.CTkToplevel):
         self.StatusBar = myStatusBar.MyStatusBarFrame(self, self.myConfig)
         self.StatusBar.pack(expand=True)
 
-        self.after(1000, self._update)              #  Will update the status bar.
+        self.after(1000, self.__update)              #  Will update the status bar.
 
-    def _close(self):
+    def __close(self):
         """  Called when the Exit option is chosen.  First saves the window position then closes app.
         """
         self.master.update_idletasks()              #  To make sure the app location had been updated.
@@ -86,13 +86,13 @@ class vfdKlock(ctk.CTkToplevel):
         self.master.overrideredirect(True)
         self.destroy()
 
-    def _update(self):
+    def __update(self):
         """  Updates the status bar.
         """
         self.mnuFile.configure(text_color=self.myConfig.VFD_FOREGROUND)
         self.dropdown1.configure(text_color=self.myConfig.VFD_FOREGROUND)
         self.StatusBar.update()
-        self.after(30000, self._update)
+        self.after(30000, self.__update)
 
 
 

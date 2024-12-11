@@ -54,13 +54,13 @@ class EventAddWindow(ctk.CTkToplevel):
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
-        self._createWidgets()
+        self.__createWidgets()
         if self.rowKey:                         #  if rowKey is not None, then in edit mode - load selected event details into the fields.
-            self._populateFields(self.rowKey)   #  rowkey should hold the row number of the selected event.
+            self.__populateFields(self.rowKey)   #  rowkey should hold the row number of the selected event.
             self.oldKey = self.rowKey           #  Save away, just in case the key is changed.
 
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the main add event frame.
         """
 
@@ -125,17 +125,17 @@ class EventAddWindow(ctk.CTkToplevel):
 
 
         self.btnAdd = ctk.CTkButton( self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, command=self._add, state="disabled")
+                                    corner_radius=12, width=100, command=self.__add, state="disabled")
         self.btnAdd.grid(row=9, column=0, padx=10, pady=10, sticky="nsew")
         self.btnSave = ctk.CTkButton( self, text="Save", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, command=self._save, state="disabled")
+                                    corner_radius=12, width=100, command=self.__save, state="disabled")
         self.btnSave.grid(row=9, column=1, padx=10, pady=10, sticky="nsew")
         self.btnExt = ctk.CTkButton( self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, command=self._exit)
+                                    corner_radius=12, width=100, command=self.__exit)
         self.btnExt.grid(row=9, column=3, padx=10, pady=10, sticky="nsew")
 
 
-    def _validateName(self):
+    def __validateName(self):
         """  Validation the Name - which is mandatory.
 
              Must not be blank.
@@ -155,7 +155,7 @@ class EventAddWindow(ctk.CTkToplevel):
         """
         self.chosen = choice
 
-    def _add(self):
+    def __add(self):
         """  The eventsStore stores the data in a list format access via a key.
              This method created the key and item and calls the eventsStore.add.
 
@@ -196,13 +196,13 @@ class EventAddWindow(ctk.CTkToplevel):
             self.valName = False
             self.addData = True     #  data had been add/edited but not saved.
 
-            self._clear()
+            self.__clear()
             if self.rowKey:
-                self._populateFields(self.rowKey)   #  If in edit more, refresh fields.
+                self.__populateFields(self.rowKey)   #  If in edit more, refresh fields.
                 self.rowKey = self.name                  #  save the new name i.e key.
 
 
-    def _setItemStages(self, item, dateDue):
+    def __setItemStages(self, item, dateDue):
         """  Sets the stages relevant to the number of days left of the event.
         """
         dtNow      = datetime.datetime.now()
@@ -226,7 +226,7 @@ class EventAddWindow(ctk.CTkToplevel):
 
         return item
 
-    def _save(self):
+    def __save(self):
         """  When called the events store will save a copy of itself.
              The location and the format of the save is determined in the store.
              After save reset class flags adddata and rowKey.
@@ -239,7 +239,7 @@ class EventAddWindow(ctk.CTkToplevel):
                 self.eventsStore.deleteEvent(self.oldKey)       #  Delete the original and retain the edited.
             self.rowKey = None
 
-    def _exit(self):
+    def __exit(self):
         """  Closes the window.
              Checks whether there is any data to be saved.
              If there is, it asks do you really want to exit, it yes then exit.
@@ -252,12 +252,12 @@ class EventAddWindow(ctk.CTkToplevel):
             if msg.get()=="Yes":
                 self.destroy()
             else:
-                self._clear()
-                self._populateFields(self.rowKey)      #  If No, then reload the last entered event.
+                self.__clear()
+                self.__populateFields(self.rowKey)      #  If No, then reload the last entered event.
         else:
             self.destroy()
 
-    def _populateFields(self, rowKey=None):
+    def __populateFields(self, rowKey=None):
         """  Populates the data fields with a event.
              If rowKey is none [not in edit more], then load the last [current] event.
         """
@@ -284,7 +284,7 @@ class EventAddWindow(ctk.CTkToplevel):
         else:
             self.chkRecurring.deselect()
 
-    def _clear(self):
+    def __clear(self):
         """  Clears the data fields [using tk direct].
         """
         self.cbxCategory.set("")

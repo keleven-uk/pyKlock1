@@ -37,24 +37,24 @@ class showTextime(ctk.CTkFrame):
         self.myLogger   = myLogger
         self.selectTime = st.SelectTime()
         self.configure(fg_color=self.myConfig.BACKGROUND)
-        self.onClouur  = self.myConfig.TEXT_ON_COLOUR
-        self.offColour = self.myConfig.TEXT_OFF_COLOUR
-        self.fgColour  = self.myConfig.BACKGROUND
+        self.onColour   = self.myConfig.TEXT_ON_COLOUR
+        self.offColour  = self.myConfig.TEXT_OFF_COLOUR
+        self.fgColour   = self.myConfig.BACKGROUND
 
         self.textFont = ctk.CTkFont(family="Hack", size=26)
 
-        self._createWidgets()
+        self.__createWidgets()
 
-        self.after(1000, self._update)              #  Will update the time.
+        self.after(1000, self.__update)              #  Will update the time.
 
 
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the main time display.
         """
         self.frmRow1 = ctk.CTkFrame(self)
         self.frmRow1.grid(row=0, column=0, sticky="nsw")
-        self.firstRow = ["IT", "IS", "E", "TEN", "HALF", "QUARTER", "X"]
+        self.firstRow = ["IT", "EE", "IS", "K", "A", "TEN", "HALF", "QUARTER", "I", "X"]
         self.firstDic = {}
         for item in self.firstRow:
             self.firstDic[item] = ctk.CTkLabel(self.frmRow1, text=item, text_color=self.offColour,
@@ -63,7 +63,7 @@ class showTextime(ctk.CTkFrame):
 
         self.frmRow2 = ctk.CTkFrame(self)
         self.frmRow2.grid(row=1, column=0, sticky="nsw")
-        self.secondRow = ["TWENTY", "FIVE", "ABOUT", "TO", "FEW"]
+        self.secondRow = ["TWENTY", "K", "FIVE", "J", "ABOUT", "P", "TO", "S", "FEW"]
         self.secondDic = {}
         for item in self.secondRow:
             self.secondDic[item] = ctk.CTkLabel(self.frmRow2, text=item, text_color=self.offColour,
@@ -72,7 +72,7 @@ class showTextime(ctk.CTkFrame):
 
         self.frmRow3 = ctk.CTkFrame(self)
         self.frmRow3.grid(row=2, column=0, sticky="nsw")
-        thirdRow = ["PAST", "ONE", "TWO", "THREE", "v", "FOUR"]
+        thirdRow = ["PAST", "K","ONE", "L", "TWO", "O", "THREE", "C", "FOUR", "K"]
         self.thirdDic = {}
         for item in thirdRow:
             self.thirdDic[item] = ctk.CTkLabel(self.frmRow3, text=item, text_color=self.offColour,
@@ -81,7 +81,7 @@ class showTextime(ctk.CTkFrame):
 
         self.frmRow4 = ctk.CTkFrame(self)
         self.frmRow4.grid(row=3, column=0, sticky="nsw")
-        fourthRow = ["FIVE", "SIX", "SEVEN", "EIGHT", "TEN"]
+        fourthRow = ["FIVE", "D", "SIX", "U", "SEVEN", "R", "EIGHT", "M", "TEN"]
         self.fourthDic = {}
         for item in fourthRow:
             self.fourthDic[item] = ctk.CTkLabel(self.frmRow4, text=item, text_color=self.offColour,
@@ -90,7 +90,7 @@ class showTextime(ctk.CTkFrame):
 
         self.frmRow5 = ctk.CTkFrame(self)
         self.frmRow5.grid(row=4, column=0, sticky="nsw")
-        fifthRow = ["NINE", "ELEVEN", "TWELVE", "AS", "HW"]
+        fifthRow = ["NINE", "K", "ELEVEN", "U", "TWELVE", "TAS", "HOW"]
         self.fifthDic = {}
         for item in fifthRow:
             self.fifthDic[item] = ctk.CTkLabel(self.frmRow5, text=item, text_color=self.offColour,
@@ -99,7 +99,7 @@ class showTextime(ctk.CTkFrame):
 
         self.frmRow6 = ctk.CTkFrame(self)
         self.frmRow6.grid(row=5, column=0, sticky="nsw")
-        sixthRow = ["IN", "XI", "THE", "ON", "AFTER", "NOON", "JC"]
+        sixthRow = ["IN", "XIN", "THE", "L", "ON", "I", "AFTERNOON", "T", "JC"]
         self.sixthDic = {}
         for item in sixthRow:
             self.sixthDic[item] = ctk.CTkLabel(self.frmRow6, text=item, text_color=self.offColour,
@@ -108,7 +108,7 @@ class showTextime(ctk.CTkFrame):
 
         self.frmRow7 = ctk.CTkFrame(self)
         self.frmRow7.grid(row=6, column=0, sticky="nsw")
-        seventhRow = ["GSIPB", "MORNING", "ZFUP", "BF", "TH"]
+        seventhRow = ["GSIPB", "O", "MORNING", "Q","ZFUP", "G", "BF", "OTH"]
         self.seventhDic = {}
         for item in seventhRow:
             self.seventhDic[item] = ctk.CTkLabel(self.frmRow7, text=item, text_color=self.offColour,
@@ -117,24 +117,23 @@ class showTextime(ctk.CTkFrame):
 
         self.frmRow8 = ctk.CTkFrame(self)
         self.frmRow8.grid(row=7, column=0, sticky="nsw")
-        eigthRow = ["EVENING", "MOVE", "Z", "MIDNIGHT"]
-        self.eigththDic = {}
-        for item in eigthRow:
-            self.eigththDic[item] = ctk.CTkLabel(self.frmRow8, text=item, text_color=self.offColour,
+        eighthRow = ["EVENING", "N", "MOVE", "A", "XZX", "MIDNIGHT"]
+        self.eighthDic = {}
+        for item in eighthRow:
+            self.eighthDic[item] = ctk.CTkLabel(self.frmRow8, text=item, text_color=self.offColour,
                                                  fg_color=self.fgColour, font=self.textFont)
-            self.eigththDic[item].pack(side=ctk.LEFT)
+            self.eighthDic[item].pack(side=ctk.LEFT)
 
         #  Bind the top right X to close.
-        self.firstDic["X"].bind("<Button-1>",        self._close)
-        self.firstDic["X"].configure(text_color="red")
+        self.firstDic["X"].bind("<Button-1>",        self.__close)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.
-        self.eigththDic["MOVE"].bind("<Button-1>",        self._startMove)
-        self.eigththDic["MOVE"].bind("<ButtonRelease-1>", self._stopMove)
-        self.eigththDic["MOVE"].bind("<B1-Motion>",       self._moveWindow)
-        self.eigththDic["MOVE"].configure(text_color="silver")
+        self.eighthDic["MOVE"].bind("<Button-1>",        self.__startMove)
+        self.eighthDic["MOVE"].bind("<ButtonRelease-1>", self.__stopMove)
+        self.eighthDic["MOVE"].bind("<B1-Motion>",       self.__moveWindow)
+        self.eighthDic["MOVE"].configure(text_color="silver")
 
-    def _close(self, event):
+    def __close(self, event):
         self.master.update_idletasks()              #  To make sure the app location had been updated.
 
         self.myConfig.TEXT_X_POS = self.winfo_rootx()
@@ -148,17 +147,17 @@ class showTextime(ctk.CTkFrame):
 
     #  Used to move the app.
     #  Binds start and stop to mouse left click and move to mouse move.
-    def _startMove(self, event):
+    def __startMove(self, event):
         self.x = event.x
         self.y = event.y
         self.configure(cursor="circle")
 
-    def _stopMove(self, event):
+    def __stopMove(self, event):
         self.x = None
         self.y = None
         self.configure(cursor="arrow")
 
-    def _moveWindow(self, event):
+    def __moveWindow(self, event):
         """  Moves the window when the mouse is left clicked and moved.
 
              When the window is dragged, the mouse moves to the top left hand corner.
@@ -170,17 +169,127 @@ class showTextime(ctk.CTkFrame):
         self.newY = event.y_root - self.y
         self.main.geometry(f"+{self.newX}+{self.newY}")
 
-    def _timeString(self):
-        """  Returns the current time as a text string using the Digit Time time type.
+    def __setHours(self, hours, minutes):
+        """  Switches on the appropriate text to display the hour.
         """
-        return self.selectTime.getTime("Digit Time")
+        self.firstDic["IT"].configure(text_color=self.onColour)
+        self.firstDic["IS"].configure(text_color=self.onColour)
+        self.sixthDic["IN"].configure(text_color=self.onColour)
+        self.sixthDic["THE"].configure(text_color=self.onColour)
 
-    def _update(self):
+        if hours <= 12:
+            self.seventhDic["MORNING"].configure(text_color=self.onColour)
+        elif hours < 18:
+            self.sixthDic["AFTERNOON"].configure(text_color=self.onColour)
+        else:
+            self.eighthDic["EVENING"].configure(text_color=self.onColour)
+
+        if hours > 12:              #  Use 12 hour clock.
+            hours -= 12
+
+        if minutes in [58, 59]:     #  Increment hours if time is close to the hour.
+            hours += 1
+
+        match hours:
+            case 0:
+                self.eighthDic["MIDNIGHT"].configure(text_color=self.onColour)
+            case 1:
+                self.thirdDic["ONE"].configure(text_color=self.onColour)
+            case 2:
+                self.thirdDic["TWO"].configure(text_color=self.onColour)
+            case 3:
+                self.thirdDic["THREE"].configure(text_color=self.onColour)
+            case 4:
+                self.thirdDic["FOUR"].configure(text_color=self.onColour)
+            case 5:
+                self.fourthDic["FIVE"].configure(text_color=self.onColour)
+            case 6:
+                self.fourthDic["SIX"].configure(text_color=self.onColour)
+            case 7:
+                self.fourthDic["SEVEN"].configure(text_color=self.onColour)
+            case 8:
+                self.fourthDic["EIGHT"].configure(text_color=self.onColour)
+            case 9:
+                self.fifthDic["NINE"].configure(text_color=self.onColour)
+            case 10:
+                self.fourthDic["TEN"].configure(text_color=self.onColour)
+            case 11:
+                self.fifthDic["ELEVEN"].configure(text_color=self.onColour)
+            case 12:
+                self.sixthDic["NOON"].configure(text_color=self.onColour)
+
+    def __setMinutes(self, minutes):
+        """  Switches on the appropriate text to display the minutes.
+        """
+        if minutes > 30:
+            minutes = 60 - minutes
+            self.secondDic["TO"].configure(text_color=self.onColour)
+        else:
+            self.thirdDic["PAST"].configure(text_color=self.onColour)
+
+        match minutes:
+            case minutes if (0 <= minutes <= 2):
+                self.secondDic["TO"].configure(text_color=self.offColour)
+                self.thirdDic["PAST"].configure(text_color=self.offColour)
+            case minutes if (2 < minutes <= 7):
+                self.secondDic["FIVE"].configure(text_color=self.onColour)
+            case minutes if (7 < minutes <= 12):
+                self.firstDic["TEN"].configure(text_color=self.onColour)
+            case minutes if (13 < minutes <= 17):
+                self.firstDic["A"].configure(text_color=self.onColour)
+                self.firstDic["QUARTER"].configure(text_color=self.onColour)
+            case minutes if (17 < minutes <= 22):
+                self.secondDic["TWENTY"].configure(text_color=self.onColour)
+            case minutes if (22 < minutes <= 27):
+                self.secondDic["TWENTY"].configure(text_color=self.onColour)
+                self.secondDic["FIVE"].configure(text_color=self.onColour)
+            case minutes if (27 < minutes <= 30):
+                self.secondDic["TO"].configure(text_color=self.offColour)
+                self.thirdDic["PAST"].configure(text_color=self.offColour)
+                self.firstDic["HALF"].configure(text_color=self.onColour)
+
+    def __clear(self):
+        """  Switches off all texts.
+        """
+        for item in self.firstDic:
+            self.firstDic[item].configure(text_color=self.offColour)
+
+        for item in self.secondDic:
+            self.secondDic[item].configure(text_color=self.offColour)
+
+        for item in self.thirdDic:
+            self.thirdDic[item].configure(text_color=self.offColour)
+
+        for item in self.fourthDic:
+            self.fourthDic[item].configure(text_color=self.offColour)
+
+        for item in self.fifthDic:
+            self.fifthDic[item].configure(text_color=self.offColour)
+
+        for item in self.sixthDic:
+            self.sixthDic[item].configure(text_color=self.offColour)
+
+        for item in self.seventhDic:
+            self.seventhDic[item].configure(text_color=self.offColour)
+
+        for item in self.eighthDic:
+            self.eighthDic[item].configure(text_color=self.offColour)
+
+        self.eighthDic["MOVE"].configure(text_color="silver")           #  Switch on the X in the top right corner [exit button]
+        self.firstDic["X"].configure(text_color="red")                  #  Switch on the MOVE text [move button]
+
+    def __update(self):
         """  Updates the main time text.
         """
-        timeText = self._timeString()
+        self.__clear()
+        timeText = self.selectTime.getTime("Local Time")
+        hours    = int(timeText[0:2])
+        minutes  = int(timeText[3:5])
 
-        # self.after(1000, self._update)
+        self.__setHours(hours, minutes)
+        self.__setMinutes(minutes)
+
+        self.after(60000, self.__update)                                #  Update every minute.
 
 
 

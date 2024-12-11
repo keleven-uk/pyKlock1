@@ -43,39 +43,39 @@ class ColourWindow(ctk.CTkToplevel):
         self.foreColour = ""
         self.backColour = ""
 
-        self._createWidgets()
+        self.__createWidgets()
 
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the main time display.
         """
         self.configure(fg_color="black")
         self.lblTitle = ctk.CTkLabel(master=self, text="Click on required button to set the colour.", fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
         self.lblTitle.grid(row=0, column=0, padx=(20, 20), pady=(20, 20), columnspan=3)
 
-        self.btnForeColour = ctk.CTkButton(self, text="Foreground Colour", command=self._askForeColour, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        self.btnForeColour = ctk.CTkButton(self, text="Foreground Colour", command=self.__askForeColour, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
         self.btnForeColour.grid(row=1, column=0, padx=(0, 0), pady=(20, 20))
 
-        self.btnBackColour = ctk.CTkButton(self, text="Background Colour", command=self._askBackColour, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        self.btnBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askBackColour, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
         self.btnBackColour.grid(row=1, column=1, padx=(0, 0), pady=(20, 20))
 
-        self.btnApply = ctk.CTkButton(self, text="Apply", command=self._applyInfo, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        self.btnApply = ctk.CTkButton(self, text="Apply", command=self.__applyInfo, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
         self.btnApply.grid(row=2, column=0, padx=(0, 0), pady=(20, 20))
 
-        self.btnReset = ctk.CTkButton(self, text="Reset", command=self._resetInfo, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        self.btnReset = ctk.CTkButton(self, text="Reset", command=self.__resetInfo, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
         self.btnReset.grid(row=2, column=1, padx=(0, 0), pady=(20, 20))
 
-        self.btnCancel = ctk.CTkButton(self, text="Cancel", command=self._cancel, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        self.btnCancel = ctk.CTkButton(self, text="Cancel", command=self.__cancel, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
         self.btnCancel.grid(row=2, column=2, padx=(0, 0), pady=(20, 20))
 
 
-    def _cancel(self):
+    def __cancel(self):
         """  Closes the window.
         """
         self.destroy()
 
 
-    def _resetInfo(self):
+    def __resetInfo(self):
         """  Rested the foreground colour to green and the background colour to black.
         """
         self.foreColour = "#00ff00"
@@ -94,7 +94,7 @@ class ColourWindow(ctk.CTkToplevel):
         self.btnCancel.configure(fg_color=self.backColour)
 
 
-    def _applyInfo(self):
+    def __applyInfo(self):
         """  Apply the selected colours by amended to config file.
         """
         if self.foreColour:
@@ -103,7 +103,7 @@ class ColourWindow(ctk.CTkToplevel):
             self.myConfig.BACKGROUND = self.backColour
 
 
-    def _askForeColour(self):
+    def __askForeColour(self):
         """  Ask the user to select a new foreground colour.
         """
         pickColor = ctk_cp.AskColor() # open the colour picker
@@ -111,7 +111,7 @@ class ColourWindow(ctk.CTkToplevel):
         self.btnForeColour.configure(text_color=self.foreColour)
         self.btnBackColour.configure(text_color=self.foreColour)
 
-    def _askBackColour(self):
+    def __askBackColour(self):
         """  Ask the user to select a new background colour.
         """
         pickColor = ctk_cp.AskColor() # open the colour picker

@@ -41,7 +41,7 @@ class SelectTime:
     __types = ("Fuzzy Time", "Time in Words", "GMT Time", "Local Time", "UTC Time", "Swatch Time", "New Earth Time",
                "Julian Time", "Decimal Time", "True Hex Time", "Hex Time", "Oct Time", "Binary Time", "Roman Time",
                "Morse Time", "Mars Sol Date", "Coordinated Mars Time", "Flow Time", "Percent Time", "Metric Time",
-               "Unix Time", "getDigitTime")
+               "Unix Time", "Digit Time")
 #
 #  the class is access by the following properties only.
 #  getTime can't be made a proper property, this seems to upset the dictionary of functions - they are not callable.

@@ -38,10 +38,10 @@ class showVFDime(ctk.CTkFrame):
         self.myLogger   = myLogger
         self.selectTime = st.SelectTime()
         self.configure(fg_color=self.myConfig.VFD_BACKGROUND)
-        self._createWidgets()
-        self.after(1000, self._update)              #  Will update the time.
+        self.__createWidgets()
+        self.after(1000, self.__update)              #  Will update the time.
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the main time display.
         """
         vfdHeight  = 200
@@ -73,21 +73,21 @@ class showVFDime(ctk.CTkFrame):
         # self.secs1.char("8", DP=None, CC=0)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.
-        self.hour0.bind("<Button-1>",        self._startMove)
-        self.hour0.bind("<ButtonRelease-1>", self._stopMove)
-        self.hour0.bind("<B1-Motion>",       self._moveWindow)
+        self.hour0.bind("<Button-1>",        self.__startMove)
+        self.hour0.bind("<ButtonRelease-1>", self.__stopMove)
+        self.hour0.bind("<B1-Motion>",       self.__moveWindow)
 
     #  Used to move the app.
     #  Binds start and stop to mouse left click and move to mouse move.
-    def _startMove(self, event):
+    def __startMove(self, event):
         self.x = event.x
         self.y = event.y
 
-    def _stopMove(self, event):
+    def __stopMove(self, event):
         self.x = None
         self.y = None
 
-    def _moveWindow(self, event):
+    def __moveWindow(self, event):
         """  Moves the window when the mouse is left clicked and moved.
 
              When the window is dragged, the mouse moves to the top left hand corner.
@@ -99,22 +99,22 @@ class showVFDime(ctk.CTkFrame):
         self.newY = event.y_root - self.y
         self.main.geometry(f"+{self.newX}+{self.newY}")
 
-    def _timeString(self):
+    def __timeString(self):
         """  Returns the current time as a text string using the Digit Time time type.
         """
         return self.selectTime.getTime("Digit Time")
 
-    def _update(self):
+    def __update(self):
         """  Updates the main time text.
         """
-        timeText = self._timeString()
+        timeText = self.__timeString()
         self.hour0.char(timeText[0], DP=None, CC=0)
         self.hour1.char(timeText[1], DP=None, CC=1)
         self.mins0.char(timeText[2], DP=None, CC=0)
         self.mins1.char(timeText[3], DP=None, CC=0)
         # self.secs0.char(timeTest[4], DP=None, CC=0)
         # self.secs1.char(timeTest[5], DP=None, CC=1)
-        self.after(1000, self._update)
+        self.after(1000, self.__update)
 
 
 

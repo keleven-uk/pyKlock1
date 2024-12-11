@@ -52,10 +52,10 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.eventsStore   = eventsStore
         self.aboutTopLevel = None
 
-        self._create_menu()
+        self.__createMenu()
 
 
-    def _create_menu(self):
+    def __createMenu(self):
         """  Creates the menu widgets.
         """
         menuWidth  = 20
@@ -72,87 +72,87 @@ class myMenu(CTkmenu.CTkMenuBar):
         #  Exit
         self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown1.add_option(option="Exit", command=self._close)
+        self.dropdown1.add_option(option="Exit", command=self.__close)
 
         #Klocks
         self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnuKlocks, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown2.add_option(option="vfdKlock",  command=self._showVFDKlock)
-        self.dropdown2.add_option(option="textKlock", command=self._showTextKlock)
+        self.dropdown2.add_option(option="vfdKlock",  command=self.__showVFDKlock)
+        self.dropdown2.add_option(option="textKlock", command=self.__showTextKlock)
 
         #  Accessories
         self.dropdown3  = CTkmenu.CustomDropdownMenu(widget=self.mnuThings, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown3.add_option(option="Friends", command=self._showFriends)
-        self.dropdown3.add_option(option="Events",  command=self._showEvents)
+        self.dropdown3.add_option(option="Friends", command=self.__showFriends)
+        self.dropdown3.add_option(option="Events",  command=self.__showEvents)
 
         #  Edit
         self.dropdown4 = CTkmenu.CustomDropdownMenu(widget=self.mnuEdit, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown4.add_option(option="Font", command=self._showFont)
-        self.dropdown4.add_option(option="Time Type", command=self._showTimeType)
-        self.dropdown4.add_option(option="Colour", command=self._showColourWindow)
+        self.dropdown4.add_option(option="Font", command=self.__showFont)
+        self.dropdown4.add_option(option="Time Type", command=self.__showTimeType)
+        self.dropdown4.add_option(option="Colour", command=self.__showColourWindow)
 
         #  Help
         self.dropdown5 = CTkmenu.CustomDropdownMenu(widget=self.mnuHelp, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown5.add_option(option="Help", command=self._showHelp)
+        self.dropdown5.add_option(option="Help", command=self.__showHelp)
         self.dropdown5.add_separator()
-        self.dropdown5.add_option(option="History", command=self._showHistory)
-        self.dropdown5.add_option(option="License", command=self._showLicence)
+        self.dropdown5.add_option(option="History", command=self.__showHistory)
+        self.dropdown5.add_option(option="License", command=self.__showLicence)
         self.dropdown5.add_separator()
-        self.dropdown5.add_option(option="About", command=self._showAbout)
+        self.dropdown5.add_option(option="About", command=self.__showAbout)
 
         self.update()
 
 
-    def _showTextKlock(self):
+    def __showTextKlock(self):
         self.master.overrideredirect(False)
         self.master.state("iconic")
         textKlock.textKlock(self.master, self.myConfig, self.myLogger)
 
-    def _showVFDKlock(self):
+    def __showVFDKlock(self):
         self.master.overrideredirect(False)
         self.master.state("iconic")
         vfdKlock.vfdKlock(self.master, self.myConfig, self.myLogger)
 
-    def _showFriends(self):
+    def __showFriends(self):
         """  Loads the Friends window.
         """
         sf.FriendsWindow(self.master, self.myConfig)
 
-    def _showEvents(self):
+    def __showEvents(self):
         """  Loads the Events window.
         """
         se.EventsWindow(self.master, self.myConfig, self.eventsStore)
 
-    def _showHelp(self):
+    def __showHelp(self):
         """  Loads the Help file.
         """
         sh.showHelp(self.master, self.myConfig)
 
-    def _showAbout(self):
+    def __showAbout(self):
         """  Loads the license text file into a new window.
         """
         self.aboutTopLevel = about.showAbout(self.master, self.myConfig, self.myTimer)
 
-    def _showLicence(self):
+    def __showLicence(self):
         """  Loads the license text file into a new window.
         """
         si.showInfo(self.master, "License", self.myLogger, self.myConfig)
 
-    def _showHistory(self):
+    def __showHistory(self):
         """  Loads the history text file into a new window.
         """
         si.showInfo(self.master, "History", self.myLogger, self.myConfig)
 
-    def _close(self):
+    def __close(self):
         """  Called when the Exit option is chosen.  First saves the window position and colours and them closes app.
         """
-        self._savePosition()
+        self.__savePosition()
         self.master.destroy()
 
-    def _showFont(self):
+    def __showFont(self):
         """  Open the font chooser and get the font selected by the user.
              The font name and size are then save to myConfig for later use.
         """
@@ -170,17 +170,17 @@ class myMenu(CTkmenu.CTkMenuBar):
             self.myConfig.TIME_FONT_FAMILY = font["family"]
             self.myConfig.TIME_FONT_SIZE   = font["size"]
 
-    def _showTimeType(self):
+    def __showTimeType(self):
         """   Opens a windows which allows the choice of time type display format and size..
         """
         stt.timeTypes(self, self.myConfig)
 
-    def _showColourWindow(self):
+    def __showColourWindow(self):
         """   Calls the colour picker window.
         """
         cw.ColourWindow(self.master, self.myConfig)
 
-    def _savePosition(self):
+    def __savePosition(self):
         """   Saves the relevant information to the config file.
         """
         self.master.update_idletasks()              #  To make sure the app location had been updated.

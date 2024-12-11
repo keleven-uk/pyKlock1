@@ -43,38 +43,38 @@ class Timer():
 
     """
     def __init__(self):
-        self._start_time = None
+        self.__start__time = None
 
     def Start(self):
         """  Start a new timer.
 
              app - True indicates time the executable time of an App.
         """
-        if self._start_time is not None:
+        if self.__start__time is not None:
             raise TimerError("Timer is running. Use .stop to stop it")
 
-        self._start_time = time.perf_counter()
+        self.__start_time = time.perf_counter()
 
     @property
     def Elapsed(self):
         """  Return the elapsed time since start, but does not stop the timer.
         """
-        if self._start_time is None:
+        if self.__start__time is None:
             raise TimerError("Timer is not running. Use .start to start it")
 
-        _elapsed_time = time.perf_counter() - self._start_time
-        return self.formatSeconds(_elapsed_time)
+        __elapsed_time = time.perf_counter() - self._start_time
+        return self.formatSeconds(__elapsed_time)
 
     @property
     def Stop(self):
         """  Stop the timer, and report the elapsed time.
         """
-        if self._start_time is None:
+        if self.__start_time is None:
             raise TimerError("Timer is not running. Use .start to start it")
 
-        _elapsed_time = time.perf_counter() - self._start_time
-        self._start_time = None
-        return self.formatSeconds(_elapsed_time)
+        __elapsed_time = time.perf_counter() - self._start_time
+        self.__start_time = None
+        return self.formatSeconds(__elapsed_time)
 
     @property
     def rightNow(self):

@@ -43,7 +43,7 @@ class showAbout(ctk.CTkToplevel):
         self.geometry("500x640+200+200")            # width x height + xpos + ypos
         self.resizable(False, False)
 
-        self._createWidgets()
+        self.__createWidgets()
 
 
     def update(self):
@@ -58,7 +58,7 @@ class showAbout(ctk.CTkToplevel):
         self.bf.lblBoot.configure(text=f"Klock Up Time : {self.myTimer.Elapsed}")
 
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the about widgets [frames].
         """
         self.grid_rowconfigure(0, weight=1)  # configure grid system

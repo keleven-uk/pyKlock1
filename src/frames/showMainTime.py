@@ -37,36 +37,36 @@ class MyMainTimeFrame(ctk.CTkFrame):
         self.timeFont = ctk.CTkFont(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)
         self.screenWidth, self.screenHeight = utils.getScreenSize()
         self.newY = self.myConfig.Y_POS
-        self._createWidgets()
+        self.__createWidgets()
         self.update()
 
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the main time display.
         """
         self.configure(fg_color=self.myConfig.BACKGROUND)
-        self.lblTime = ctk.CTkLabel(self, text=self._timeString(), font=self.timeFont,
+        self.lblTime = ctk.CTkLabel(self, text=self.__timeString(), font=self.timeFont,
                                     text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.lblTime.pack(expand=True)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.
-        self.lblTime.bind("<Button-1>",        self._startMove)
-        self.lblTime.bind("<ButtonRelease-1>", self._stopMove)
-        self.lblTime.bind("<B1-Motion>",       self._moveWindow)
+        self.lblTime.bind("<Button-1>",        self.__startMove)
+        self.lblTime.bind("<ButtonRelease-1>", self.__stopMove)
+        self.lblTime.bind("<B1-Motion>",       self.__moveWindow)
 
     #  Used to move the app.
     #  Binds start and stop to mouse left click and move to mouse move.
-    def _startMove(self, event):
+    def __startMove(self, event):
         self.x = event.x
         self.y = event.y
         self.configure(cursor="circle")
 
-    def _stopMove(self, event):
+    def __stopMove(self, event):
         self.x = None
         self.y = None
         self.configure(cursor="arrow")
 
-    def _moveWindow(self, event):
+    def __moveWindow(self, event):
         """  Moves the window when the mouse is left clicked and moved.
 
              When the window is dragged, the mouse moves to the top left hand corner.
@@ -78,7 +78,7 @@ class MyMainTimeFrame(ctk.CTkFrame):
         self.newY = event.y_root - self.y
         self.main.geometry(f"+{self.newX}+{self.newY}")
 
-    def _timeString(self):
+    def __timeString(self):
         """  Returns the current time as a text string using the current time type.
         """
         return self.selectTime.getTime(self.myConfig.TIME_TYPE)
@@ -95,7 +95,7 @@ class MyMainTimeFrame(ctk.CTkFrame):
         """
         self.timeFont.configure(family=self.myConfig.TIME_FONT_FAMILY, size=self.myConfig.TIME_FONT_SIZE)   #  Change font if required.
 
-        timeTest = self._timeString()
+        timeTest = self.__timeString()
         newW = self.timeFont.measure(text=timeTest)                                                         #  Get the length, in pixels, of  the time text
 
         if newW < self.myConfig.WIN_WIDTH:                                                                  #  Keep a minimum window width.

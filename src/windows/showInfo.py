@@ -43,12 +43,12 @@ class showInfo(ctk.CTkToplevel):
         self.resizable(False, False)
 
         self.infoText = f"{self.infoType} Not Found"
-        self._loadInfo()
+        self.__loadInfo()
 
-        self._createWidgets()
+        self.__createWidgets()
 
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the history display display.
         """
         self.grid_rowconfigure(0, weight=1)  # configure grid system
@@ -59,7 +59,7 @@ class showInfo(ctk.CTkToplevel):
         self.textbox.insert("0.0", self.infoText)
 
 
-    def _loadInfo(self):
+    def __loadInfo(self):
         """  Loads the info file.  The type of info file is held in self.infoText
              If the file is not present, the initial string is set to "Info Not Found",
         """

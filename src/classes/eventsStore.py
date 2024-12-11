@@ -141,7 +141,7 @@ class eventsStore():
             dtDue   = datetime.datetime.strptime(f"{dateDue} {timeDue}", "%d/%m/%Y %H:%M")  #  Now a dateTime
             dtLeft  = int((dtDue - now).total_seconds())                                    #  Convert timedelta to seconds.
 
-            self._checkEvent(key, dtLeft)
+            self.__checkEvent(key, dtLeft)
 
 # ------------------------------------------------------------------------------------- _checkYear --------------------
     def checkYear(self, dateDue, now):
@@ -174,7 +174,7 @@ class eventsStore():
         return f"{dueDay}/{dueMonth}/{dueYear}"
 
 # ------------------------------------------------------------------------------------- _checkEvent -------------------
-    def _checkEvent(self, key, secondsLeft):
+    def __checkEvent(self, key, secondsLeft):
         """  For each event, calculate the time left in seconds.
              Store that on the event, formatted into days, minutes and seconds for display.
              If the time left falls into the stages the process event.
@@ -186,22 +186,22 @@ class eventsStore():
         """
         #now = datetime.datetime.now()
         #print(f"check event {now} : key {key} :: secondsLeft {secondsLeft}")
-        self.store[key][6] = self._formatSeconds(secondsLeft)      #  Time left in seconds.
+        self.store[key][6] = self.__formatSeconds(secondsLeft)      #  Time left in seconds.
 
         match secondsLeft:
             case secondsLeft if secondsLeft <= 0:
                 self.store[key][6] = "Event Due"
             case secondsLeft if secondsLeft <= 60:
-                self._eventDue(key, "Now")
+                self.__eventDue(key, "Now")
             case secondsLeft if (secondsLeft <= self.stage3 and self.store[key][9] == "False"):
-                self._eventDue(key, "Stage 3")
+                self.__eventDue(key, "Stage 3")
             case secondsLeft if (secondsLeft <= self.stage2 and self.store[key][8] == "False"):
-                self._eventDue(key, "Stage 2")
+                self.__eventDue(key, "Stage 2")
             case secondsLeft if (secondsLeft <= self.stage1 and self.store[key][7] == "False"):
-                self._eventDue(key, "Stage 1")
+                self.__eventDue(key, "Stage 1")
 
 # ------------------------------------------------------------------------------------- _eventDue ---------------------
-    def _eventDue(self, key, stage):
+    def __eventDue(self, key, stage):
         """  Called when an event is found to be due.
              An appropriate notification is displayed for the event.
 
@@ -274,7 +274,7 @@ class eventsStore():
             print("Event store not found, using empty sore.")
 
 # ------------------------------------------------------------------------------------- _formatSeconds ----------------
-    def _formatSeconds(self, seconds):
+    def __formatSeconds(self, seconds):
         """  Formats number of seconds into a human readable form i.e. hours:minutes:seconds
 
             Based from klock_utils.py, to make the class self accessing.

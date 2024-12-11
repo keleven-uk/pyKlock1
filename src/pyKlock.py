@@ -72,31 +72,32 @@ class Klock(ctk.CTk):
         self.mainTime = myMainTime.MyMainTimeFrame(self, myConfig)
         self.mainTime.pack(expand=True)
 
-        self.after(1000, self._update)              #  Update the time and status bar.
-        self.after(1000, self._eventUpdate)         #  Update the events every minute.
+        self.after(1000, self.__update)              #  Update the time and status bar.
+        self.after(1000, self.__eventUpdate)         #  Update the events every minute.
 
         #  Create the frame for the status bar.
         myLogger.info("  Creating Status Bar")
         self.StatusBar = myStatusBar.MyStatusBarFrame(self, myConfig)
         self.StatusBar.pack(expand=True)
 
-    def _update(self):
+    def __update(self):
         """  Update the time and status bar.
         """
-        self.configure(fg_color=self.myConfig.BACKGROUND)
-        self.menu.update()
-        self.mainTime.update()
-        self.StatusBar.update()
+        if self.state() == "normal":                               #  Only update if Klock is visible.
+            self.configure(fg_color=self.myConfig.BACKGROUND)
+            self.menu.update()
+            self.mainTime.update()
+        self.StatusBar.update()                                 #  Status bar used by all windows.
 
-        self.after(1000, self._update)
+        self.after(1000, self.__update)
 
-    def _eventUpdate(self):
+    def __eventUpdate(self):
         """  Update the events every minute.
              This checks whether any of the events are due.
         """
         self.eventsStore.updateEvents()
 
-        self.after(60000, self._eventUpdate)
+        self.after(60000, self.__eventUpdate)
 
 
 

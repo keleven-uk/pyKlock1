@@ -50,15 +50,15 @@ class Config():
         except FileNotFoundError:
             self.logger.error("Configure file not found.")
             self.logger.debug("Writing default configure file.")
-            self._writeDefaultConfig()
+            self.__writeDefaultConfig()
             self. logger.debug("Running program with default configure settings.")
         except toml.TomlDecodeError:
             self.logger.error("Error reading configure file.")
             self.logger.debug("Writing default configure file.")
-            self._writeDefaultConfig()
+            self.__writeDefaultConfig()
             self.logger.debug("Running program with default configure settings.")
 
-        self._CheckVersion()
+        self.__CheckVersion()
 
     @property
     def NAME(self):
@@ -344,7 +344,7 @@ class Config():
     def TEXT_WIDTH(self):
         """  Returns the textKlock width.
         """
-        return self.config["KLOCKS"].get("text_width", "500")
+        return self.config["KLOCKS"].get("text_width", "460")
 
     @TEXT_WIDTH.setter
     def TEXT_WIDTH(self, value):
@@ -392,25 +392,25 @@ class Config():
     def TEXT_ON_COLOUR(self):
         """  Returns the textdKlock on colour.
         """
-        return self.config["KLOCKS"].get("text_foreground", "#82ccff")
+        return self.config["KLOCKS"].get("text_onColour", "springGreen2")
 
     @TEXT_ON_COLOUR.setter
     def TEXT_ON_COLOUR(self, value):
         """  Sets the textKlock on colour.
         """
-        self.config["KLOCKS"]["text_foreground"] = value
+        self.config["KLOCKS"]["text_onColour"] = value
 
     @property
     def TEXT_OFF_COLOUR(self):
         """  Returns the textdKlock off colour.
         """
-        return self.config["KLOCKS"].get("text_foreground", "grey")
+        return self.config["KLOCKS"].get("text_offColour", "slate grey")
 
     @TEXT_OFF_COLOUR.setter
     def TEXT_OFF_COLOUR(self, value):
         """  Sets the textKlock off colour.
         """
-        self.config["KLOCKS"]["text_foreground"] = value
+        self.config["KLOCKS"]["text_offColour"] = value
 
     @property
     def TEXT_BACKGROUND(self):
@@ -427,7 +427,7 @@ class Config():
 
     #  ------------------------------------------------------------------------------------------------------------------------
 
-    def _CheckVersion(self):
+    def __CheckVersion(self):
         """  Checks Klocks version against a version file - if they diff, an upgrade has been performed.
              So, amend klock's version [this save uninstalling klock to get the same result.].
 
@@ -520,7 +520,7 @@ class Config():
             configFile.writelines(st_toml)
 
 
-    def _writeDefaultConfig(self):
+    def __writeDefaultConfig(self):
         """ Write a default configure file.
             This is hard coded  ** TO KEEP UPDATED **
         """
@@ -561,7 +561,7 @@ class Config():
                                "underline"  : False,
                                "overstrike" : False}
 
-        config["KLOCKS"] = {"vfd_width"       : 500,
+        config["KLOCKS"] = {"vfd_width"       : 460,
                             "vfd_height"      : 260,
                             "vfd_x_pos"       : 400,
                             "vfd_y_pos"       : 400,
@@ -571,8 +571,8 @@ class Config():
                             "text_height"     : 260,
                             "text_x_pos"      : 821,
                             "text_y_pos"      : 280,
-                            "text_onColour"   : "#82ccff",
-                            "text_ofColour"   : "grey",
+                            "text_onColour"   : "springGreen2",
+                            "text_ofColour"   : "slate grey",
                             "text_background" : "#000000"}
 
 
