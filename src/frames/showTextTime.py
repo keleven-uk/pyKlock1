@@ -99,7 +99,7 @@ class showTextime(ctk.CTkFrame):
 
         self.frmRow6 = ctk.CTkFrame(self)
         self.frmRow6.grid(row=5, column=0, sticky="nsw")
-        sixthRow = ["IN", "XIN", "THE", "L", "ON", "I", "AFTERNOON", "T", "JC"]
+        sixthRow = ["IN", "XIN", "THE", "L", "ON", "I", "AFTER", "NOON", "T", "JC"]
         self.sixthDic = {}
         for item in sixthRow:
             self.sixthDic[item] = ctk.CTkLabel(self.frmRow6, text=item, text_color=self.offColour,
@@ -172,51 +172,103 @@ class showTextime(ctk.CTkFrame):
     def __setHours(self, hours, minutes):
         """  Switches on the appropriate text to display the hour.
         """
+        #print(f"__setHours : hours = {hours}  minutes = {minutes}")
         self.firstDic["IT"].configure(text_color=self.onColour)
         self.firstDic["IS"].configure(text_color=self.onColour)
         self.sixthDic["IN"].configure(text_color=self.onColour)
         self.sixthDic["THE"].configure(text_color=self.onColour)
 
-        if hours <= 12:
-            self.seventhDic["MORNING"].configure(text_color=self.onColour)
-        elif hours < 18:
-            self.sixthDic["AFTERNOON"].configure(text_color=self.onColour)
-        else:
-            self.eighthDic["EVENING"].configure(text_color=self.onColour)
-
-        if hours > 12:              #  Use 12 hour clock.
-            hours -= 12
-
-        if minutes in [58, 59]:     #  Increment hours if time is close to the hour.
+        if minutes > 30:     #  Increment hours if time is close to the hour.
             hours += 1
 
         match hours:
-            case 0:
-                self.eighthDic["MIDNIGHT"].configure(text_color=self.onColour)
+            case 0 | 24:
+                if minutes in [58, 59, 0, 1]:
+                    self.eighthDic["MIDNIGHT"].configure(text_color=self.onColour)
+                    self.sixthDic["IN"].configure(text_color=self.offColour)
+                    self.sixthDic["THE"].configure(text_color=self.offColour)
+                else:
+                    self.fifthDic["TWELVE"].configure(text_color=self.onColour)
+                    self.eighthDic["EVENING"].configure(text_color=self.onColour)
             case 1:
                 self.thirdDic["ONE"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 2:
                 self.thirdDic["TWO"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 3:
                 self.thirdDic["THREE"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 4:
                 self.thirdDic["FOUR"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 5:
                 self.fourthDic["FIVE"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 6:
                 self.fourthDic["SIX"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 7:
                 self.fourthDic["SEVEN"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 8:
                 self.fourthDic["EIGHT"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 9:
                 self.fifthDic["NINE"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 10:
                 self.fourthDic["TEN"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 11:
                 self.fifthDic["ELEVEN"].configure(text_color=self.onColour)
+                self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 12:
+                if minutes in [58, 59, 0, 1]:
+                    self.sixthDic["NOON"].configure(text_color=self.onColour)
+                    self.sixthDic["IN"].configure(text_color=self.offColour)
+                    self.sixthDic["THE"].configure(text_color=self.offColour)
+                else:
+                    self.fifthDic["TWELVE"].configure(text_color=self.onColour)
+                    self.seventhDic["MORNING"].configure(text_color=self.onColour)
+            case 13:
+                self.thirdDic["ONE"].configure(text_color=self.onColour)
+                self.sixthDic["AFTER"].configure(text_color=self.onColour)
                 self.sixthDic["NOON"].configure(text_color=self.onColour)
+            case 14:
+                self.thirdDic["TWO"].configure(text_color=self.onColour)
+                self.sixthDic["AFTER"].configure(text_color=self.onColour)
+                self.sixthDic["NOON"].configure(text_color=self.onColour)
+            case 15:
+                self.thirdDic["THREE"].configure(text_color=self.onColour)
+                self.sixthDic["AFTER"].configure(text_color=self.onColour)
+                self.sixthDic["NOON"].configure(text_color=self.onColour)
+            case 16:
+                self.thirdDic["FOUR"].configure(text_color=self.onColour)
+                self.sixthDic["AFTER"].configure(text_color=self.onColour)
+                self.sixthDic["NOON"].configure(text_color=self.onColour)
+            case 17:
+                self.fourthDic["FIVE"].configure(text_color=self.onColour)
+                self.sixthDic["AFTER"].configure(text_color=self.onColour)
+                self.sixthDic["NOON"].configure(text_color=self.onColour)
+            case 18:
+                self.fourthDic["SIX"].configure(text_color=self.onColour)
+                self.eighthDic["EVENING"].configure(text_color=self.onColour)
+            case 19:
+                self.fourthDic["SEVEN"].configure(text_color=self.onColour)
+                self.eighthDic["EVENING"].configure(text_color=self.onColour)
+            case 20:
+                self.fourthDic["EIGHT"].configure(text_color=self.onColour)
+                self.eighthDic["EVENING"].configure(text_color=self.onColour)
+            case 21:
+                self.fifthDic["NINE"].configure(text_color=self.onColour)
+                self.eighthDic["EVENING"].configure(text_color=self.onColour)
+            case 22:
+                self.fourthDic["TEN"].configure(text_color=self.onColour)
+                self.eighthDic["EVENING"].configure(text_color=self.onColour)
+            case 23:
+                self.fifthDic["ELEVEN"].configure(text_color=self.onColour)
+                self.eighthDic["EVENING"].configure(text_color=self.onColour)
 
     def __setMinutes(self, minutes):
         """  Switches on the appropriate text to display the minutes.
@@ -226,7 +278,7 @@ class showTextime(ctk.CTkFrame):
             self.secondDic["TO"].configure(text_color=self.onColour)
         else:
             self.thirdDic["PAST"].configure(text_color=self.onColour)
-
+        #print(f"__setMinutes : minutes = {minutes}")
         match minutes:
             case minutes if (0 <= minutes <= 2):
                 self.secondDic["TO"].configure(text_color=self.offColour)
@@ -245,7 +297,7 @@ class showTextime(ctk.CTkFrame):
                 self.secondDic["FIVE"].configure(text_color=self.onColour)
             case minutes if (27 < minutes <= 30):
                 self.secondDic["TO"].configure(text_color=self.offColour)
-                self.thirdDic["PAST"].configure(text_color=self.offColour)
+                self.thirdDic["PAST"].configure(text_color=self.onColour)
                 self.firstDic["HALF"].configure(text_color=self.onColour)
 
     def __clear(self):
@@ -283,8 +335,11 @@ class showTextime(ctk.CTkFrame):
         """
         self.__clear()
         timeText = self.selectTime.getTime("Local Time")
+        #timeText = "11:55"
         hours    = int(timeText[0:2])
         minutes  = int(timeText[3:5])
+
+        #print(f"timeText = {timeText}  hours= {hours}  minutes = {minutes}")
 
         self.__setHours(hours, minutes)
         self.__setMinutes(minutes)

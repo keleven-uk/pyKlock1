@@ -33,7 +33,13 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
-V2.24.43	[11 December 2024] - in textKlock branch.
+V2.24.44	[11 December 2024] - in textKlock branch.
+
+	TextClock looking better, after more tweaking.
+		Now seems to handle noon and midnight.
+
+
+V2.24.43	[10 December 2024] - in textKlock branch.
 
 	TextClock seems to be working, after some tweaking.
 

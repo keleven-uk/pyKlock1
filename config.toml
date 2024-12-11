@@ -1,7 +1,7 @@
-#   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Wednesday 11 December 2024  10:26:30
+#   Configure file for pyKlock.py 
+#   (c) Kevin Scott   Written Wednesday 11 December 2024  15:59:16
 #
-#   true and false are lower case
+#   true and false are lower case 
 #
 [INFO]
 myVERSION = "2024.37"
@@ -15,7 +15,7 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1331
+x_pos = 1381
 y_pos = -231
 Align_Right = true
 
@@ -50,7 +50,7 @@ vfd_foreground = "#82ccff"
 vfd_background = "#000000"
 text_width = 460
 text_height = 260
-text_x_pos = 756
+text_x_pos = 984
 text_y_pos = -355
 text_onColour = "springGreen2"
 text_offColour = "slate grey"
