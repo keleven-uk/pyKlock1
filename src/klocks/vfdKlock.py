@@ -20,8 +20,6 @@
 
 import customtkinter as ctk
 
-import CTkMenuBar as CTkmenu
-
 import src.frames.showStatusBar as myStatusBar
 import src.frames.showVFDTime  as vfdTime
 
@@ -34,10 +32,6 @@ class vfdKlock(ctk.CTkToplevel):
         self.master   = master
         self.myConfig = myConfig
         self.myLogger = myLogger
-
-        menuWidth  = 24
-        menuHeight = 2
-        fontSize   = 12
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
@@ -52,17 +46,9 @@ class vfdKlock(ctk.CTkToplevel):
 
         self.configure(fg_color=self.myConfig.VFD_BACKGROUND)
 
-        self.menu    = CTkmenu.CTkMenuBar(self)
-        self.mnuFile = self.menu.add_cascade("File")
-
-        #  Exit
-        self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile, height=menuHeight,
-                                                    width=menuWidth, font=("default", fontSize))
-        self.dropdown1.add__option(option="Exit", command=self.__close)
-
         #  Create the frame for the time display.
         myLogger.info("  Creating vfdKlock Main Time")
-        self.mainTime = vfdTime.showVFDime(self, self.myConfig, self.myLogger)
+        self.mainTime = vfdTime.showVFDime(self, self.master, self.myConfig, self.myLogger)
         self.mainTime.pack(expand=True)
 
         #  Create the frame for the status bar.
@@ -72,25 +58,9 @@ class vfdKlock(ctk.CTkToplevel):
 
         self.after(1000, self.__update)              #  Will update the status bar.
 
-    def __close(self):
-        """  Called when the Exit option is chosen.  First saves the window position then closes app.
-        """
-        self.master.update_idletasks()              #  To make sure the app location had been updated.
-
-        self.myConfig.VFD_X_POS = self.winfo_rootx()
-        self.myConfig.VFD_Y_POS = self.winfo_rooty()
-
-        self.myConfig.writeConfig()
-
-        self.master.state("normal")
-        self.master.overrideredirect(True)
-        self.destroy()
-
     def __update(self):
         """  Updates the status bar.
         """
-        self.mnuFile.configure(text_color=self.myConfig.VFD_FOREGROUND)
-        self.dropdown1.configure(text_color=self.myConfig.VFD_FOREGROUND)
         self.StatusBar.update()
         self.after(30000, self.__update)
 

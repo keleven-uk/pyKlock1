@@ -125,7 +125,7 @@ class showTextime(ctk.CTkFrame):
             self.eighthDic[item].pack(side=ctk.LEFT)
 
         #  Bind the top right X to close.
-        self.firstDic["X"].bind("<Button-1>",        self.__close)
+        self.firstDic["X"].bind("<Button-1>", self.__close)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.
         self.eighthDic["MOVE"].bind("<Button-1>",        self.__startMove)

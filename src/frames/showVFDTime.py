@@ -30,10 +30,11 @@ class showVFDime(ctk.CTkFrame):
          vfd = showVFDime()
          cfd.update() - to update the time and status bar.
     """
-    def __init__(self, main, myConfig, myLogger):
+    def __init__(self, main, master, myConfig, myLogger):
         super().__init__(main)
 
         self.main       = main
+        self.master     = master
         self.myConfig   = myConfig
         self.myLogger   = myLogger
         self.selectTime = st.SelectTime()
@@ -64,6 +65,11 @@ class showVFDime(ctk.CTkFrame):
         self.mins1 = tkVFD.seg7(self, height=vfdHeight, use_CC=False, on_color=onColour, bg=bgColour)
         self.mins1.grid(row=0, column=3, padx=(0,0), pady=(0,0))
         self.mins1.char("8", DP=None, CC=0)
+
+        self.lblExit = ctk.CTkLabel(self, text="X", text_color="red", fg_color=self.myConfig.VFD_BACKGROUND,
+                                    anchor="ne")
+        self.lblExit.grid(row=0, column=4, padx=(0,0), pady=(0,0), sticky="ne")
+
         #
         # self.secs0 = tkVFD.seg7(self, height=vfdHeight, use_CC=True, on_color=onColour, bg=bgColour)
         # self.secs0.grid(row=0, column=4, padx=(0,0), pady=(0,0))
@@ -72,20 +78,37 @@ class showVFDime(ctk.CTkFrame):
         # self.secs1.grid(row=0, column=5, padx=(0,0), pady=(0,0))
         # self.secs1.char("8", DP=None, CC=0)
 
+        #  Bind the top right X to close.
+        self.lblExit.bind("<Button-1>", self.__close)
+
         #  Using tkinter direct to bind the move window function to the left moue button press.
         self.hour0.bind("<Button-1>",        self.__startMove)
         self.hour0.bind("<ButtonRelease-1>", self.__stopMove)
         self.hour0.bind("<B1-Motion>",       self.__moveWindow)
+
+    def __close(self, event):
+        self.master.update_idletasks()              #  To make sure the app location had been updated.
+
+        self.myConfig.VFD_X_POS = self.winfo_rootx()
+        self.myConfig.VFD_Y_POS = self.winfo_rooty()
+
+        self.myConfig.writeConfig()
+
+        self.master.state("normal")
+        self.master.overrideredirect(True)
+        self.main.destroy()
 
     #  Used to move the app.
     #  Binds start and stop to mouse left click and move to mouse move.
     def __startMove(self, event):
         self.x = event.x
         self.y = event.y
+        self.configure(cursor="circle")
 
     def __stopMove(self, event):
         self.x = None
         self.y = None
+        self.configure(cursor="arrow")
 
     def __moveWindow(self, event):
         """  Moves the window when the mouse is left clicked and moved.

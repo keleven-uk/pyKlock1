@@ -33,6 +33,13 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.45	[11 December 2024] - in textKlock branch.
+
+	When textKlock was built, it was built without a menu.
+	The window is closed by clicking on a red X in the top left hand corner.
+	This feature has been incorporated into VFDKlock.
+
+
 V2.24.44	[11 December 2024] - in textKlock branch.
 
 	TextClock looking better, after more tweaking.
