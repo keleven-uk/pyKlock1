@@ -37,8 +37,8 @@ class showTextime(ctk.CTkFrame):
         self.myLogger   = myLogger
         self.selectTime = st.SelectTime()
         self.configure(fg_color=self.myConfig.BACKGROUND)
-        self.onColour   = self.myConfig.TEXT_ON_COLOUR
-        self.offColour  = self.myConfig.TEXT_OFF_COLOUR
+        self.onColour   = self.myConfig.TEXTKLOCK_ON_COLOUR
+        self.offColour  = self.myConfig.TEXTKLOCK_OFF_COLOUR
         self.fgColour   = self.myConfig.BACKGROUND
 
         self.textFont = ctk.CTkFont(family="Hack", size=26)
@@ -136,8 +136,8 @@ class showTextime(ctk.CTkFrame):
     def __close(self, event):
         self.master.update_idletasks()              #  To make sure the app location had been updated.
 
-        self.myConfig.TEXT_X_POS = self.winfo_rootx()
-        self.myConfig.TEXT_Y_POS = self.winfo_rooty()
+        self.myConfig.TEXTKLOCK_X_POS = self.winfo_rootx()
+        self.myConfig.TEXTKLOCK_Y_POS = self.winfo_rooty()
 
         self.myConfig.writeConfig()
 

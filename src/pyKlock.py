@@ -23,6 +23,7 @@ import customtkinter as ctk
 import src.frames.showMainTime  as myMainTime
 import src.frames.showStatusBar as myStatusBar
 import src.classes.eventsStore as es
+import src.classes.sounds as snds
 import src.menu as myMenu
 
 
@@ -36,6 +37,9 @@ class Klock(ctk.CTk):
         super().__init__()
 
         self.myConfig    = myConfig
+        self.myLogger    = myLogger
+        self.myTimer     = myTimer
+        self.sounds      = snds.Sounds(self.myConfig)
         self.eventsStore = es.eventsStore(self) #  This needs to be declared here and passed down the tree.
                                                 #  So the checks whether any of the events are due can be done all the time.
 
@@ -50,8 +54,8 @@ class Klock(ctk.CTk):
 
         #  Dimensions of the window
 
-        myLogger.debug(f" Window Width  = {myConfig.WIN_WIDTH}")
-        myLogger.debug(f" Window Height = {myConfig.WIN_HEIGHT}")
+        self.myLogger.debug(f" Window Width  = {myConfig.WIN_WIDTH}")
+        self.myLogger.debug(f" Window Height = {myConfig.WIN_HEIGHT}")
 
         self.title("Klock")
         self.geometry(f"{myConfig.WIN_WIDTH}x{myConfig.WIN_HEIGHT}+{myConfig.X_POS}+{myConfig.Y_POS}")
@@ -65,11 +69,11 @@ class Klock(ctk.CTk):
 
         #  Create the main menu.
         myLogger.info("  Creating Menu")
-        self.menu = myMenu.myMenu(self, myConfig, myLogger, myTimer, self.eventsStore)
+        self.menu = myMenu.myMenu(self, self.myConfig, self.myLogger, self.myTimer, self.eventsStore)
 
         #  Create the frame for the main time text.
         myLogger.info("  Creating Main Time")
-        self.mainTime = myMainTime.MyMainTimeFrame(self, myConfig)
+        self.mainTime = myMainTime.MyMainTimeFrame(self, self.myConfig)
         self.mainTime.pack(expand=True)
 
         self.after(1000, self.__update)              #  Update the time and status bar.
@@ -77,7 +81,7 @@ class Klock(ctk.CTk):
 
         #  Create the frame for the status bar.
         myLogger.info("  Creating Status Bar")
-        self.StatusBar = myStatusBar.MyStatusBarFrame(self, myConfig)
+        self.StatusBar = myStatusBar.MyStatusBarFrame(self, self.myConfig)
         self.StatusBar.pack(expand=True)
 
     def __update(self):
@@ -87,7 +91,10 @@ class Klock(ctk.CTk):
             self.configure(fg_color=self.myConfig.BACKGROUND)
             self.menu.update()
             self.mainTime.update()
-        self.StatusBar.update()                                 #  Status bar used by all windows.
+            self.StatusBar.update()                                #  Status bar.
+
+        if self.myConfig.SOUNDS:
+            self.sounds.playSounds()
 
         self.after(1000, self.__update)
 

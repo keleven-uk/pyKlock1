@@ -1,5 +1,5 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Wednesday 11 December 2024  20:26:28
+#   (c) Kevin Scott   Written Monday 16 December 2024  14:06:30
 #
 #   true and false are lower case 
 #
@@ -15,7 +15,7 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1303
+x_pos = 1372
 y_pos = -231
 Align_Right = true
 
@@ -48,10 +48,17 @@ vfd_x_pos = 400
 vfd_y_pos = 400
 vfd_foreground = "#82ccff"
 vfd_background = "#000000"
-text_width = 460
-text_height = 260
-text_x_pos = 1413
-text_y_pos = -340
-text_onColour = "springGreen2"
-text_offColour = "slate grey"
-text_background = "#000000"
+textKlock_width = 460
+textKlock_height = 260
+textKlock_x_pos = 568
+textKlock_y_pos = -373
+textKlock_onColour = "springGreen2"
+textKlock_offColour = "slate grey"
+textKlock_background = "#000000"
+
+[SOUNDS]
+sounds = true
+hour_chimes = true
+quarter_chimes = true
+hour_pips = true
+sound_volume = 25

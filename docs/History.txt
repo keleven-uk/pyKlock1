@@ -33,6 +33,22 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.47	[16 December 2024]
+
+	Added sound to Klock.
+	Klock can play Westminster type chimes on the quarter, half and on the hour.
+	Klock can also play "the pips" on the hour.
+		I first used playsound, but the volume could not be adjusted.
+		Currently using audioplayer, this allows the volume to be adjusted.
+		But the non blocking does not work, so a slight pause in Klock can be noticed.
+	Sound can enabled in the config file, as well as the sound volume.
+
+
+V2.24.46	[11 December 2024]
+
+	Merged textKlock branch back to main.
+
+
 V2.24.45	[11 December 2024] - in textKlock branch.
 
 	When textKlock was built, it was built without a menu.

@@ -28,6 +28,10 @@ Each friend can be edited and deleted.
 Klock will store a number of events that are displayed in a table.
 These events have a date due attached to them, Klock will give notifications when up and coming.
 
+Added sound to Klock.
+	Klock can play Westminster type chimes on the quarter, half and on the hour.
+	Klock can also play "the pips" on the hour.
+
 The foreground and background colours can be selected.
 
 Klock is moved by dragging the displayed time.
@@ -44,4 +48,4 @@ To install all dependencies pip install -r requirements.txt - r requirements_dev
 
 For changes see history.txt
 
-Kevin Scott (C) 2024 :: pyKlock V2024.41
+Kevin Scott (C) 2024 :: pyKlock V2024.47

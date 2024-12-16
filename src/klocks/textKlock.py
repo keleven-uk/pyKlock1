@@ -36,15 +36,15 @@ class textKlock(ctk.CTkToplevel):
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
-        winGeometry=f"{self.myConfig.TEXT_WIDTH}x{self.myConfig.TEXT_HEIGHT}+{self.myConfig.TEXT_X_POS}+{self.myConfig.TEXT_Y_POS}"
+        winGeometry=f"{self.myConfig.TEXTKLOCK_WIDTH}x{self.myConfig.TEXTKLOCK_HEIGHT}+{self.myConfig.TEXTKLOCK_X_POS}+{self.myConfig.TEXTKLOCK_Y_POS}"
         self.geometry(winGeometry)
 
         # Using tkinter direct to remove the default title bar. transparency and always on top.
         self.overrideredirect(True)
-        self.wm_attributes("-transparentcolor", myConfig.TEXT_BACKGROUND)
+        self.wm_attributes("-transparentcolor", myConfig.TEXTKLOCK_BACKGROUND)
         self.attributes("-topmost", True)
 
-        self.configure(fg_color=self.myConfig.TEXT_BACKGROUND)
+        self.configure(fg_color=self.myConfig.TEXTKLOCK_BACKGROUND)
 
         #  Create the frame for the time display.
         self.mainTime = textTime.showTextime(self, self.master, self.myConfig, self.myLogger)

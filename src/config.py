@@ -341,88 +341,148 @@ class Config():
 
     #  Text Klock config options.
     @property
-    def TEXT_WIDTH(self):
+    def TEXTKLOCK_WIDTH(self):
         """  Returns the textKlock width.
         """
-        return self.config["KLOCKS"].get("text_width", "460")
+        return self.config["KLOCKS"].get("textKlock_width", "460")
 
-    @TEXT_WIDTH.setter
-    def TEXT_WIDTH(self, value):
+    @TEXTKLOCK_WIDTH.setter
+    def TEXTKLOCK_WIDTH(self, value):
         """  Sets the textKlock width.
         """
-        self.config["KLOCKS"]["text_width"] = value
+        self.config["KLOCKS"]["textKlock_width"] = value
 
     @property
-    def TEXT_HEIGHT(self):
+    def TEXTKLOCK_HEIGHT(self):
         """  Returns the textKlock height.
         """
-        return self.config["KLOCKS"].get("text_height", "260")
+        return self.config["KLOCKS"].get("textKlock_height", "260")
 
-    @TEXT_HEIGHT.setter
-    def TEXT_HEIGHT(self, value):
+    @TEXTKLOCK_HEIGHT.setter
+    def TEXTKLOCK_HEIGHT(self, value):
         """  Sets the textKlock height.
         """
-        self.config["KLOCKS"]["text_height"] = value
+        self.config["KLOCKS"]["textKlock_height"] = value
 
     @property
-    def TEXT_X_POS(self):
+    def TEXTKLOCK_X_POS(self):
         """  Returns the textKlock x pos.
         """
-        return self.config["KLOCKS"].get("text_x_pos", "400")
+        return self.config["KLOCKS"].get("textKlock_x_pos", "400")
 
-    @TEXT_X_POS.setter
-    def TEXT_X_POS(self, value):
+    @TEXTKLOCK_X_POS.setter
+    def TEXTKLOCK_X_POS(self, value):
         """  Sets the textKlock x pos.
         """
-        self.config["KLOCKS"]["text_x_pos"] = value
+        self.config["KLOCKS"]["textKlock_x_pos"] = value
 
     @property
-    def TEXT_Y_POS(self):
+    def TEXTKLOCK_Y_POS(self):
         """  Returns the textKlock y pos.
         """
-        return self.config["KLOCKS"].get("text_y_pos", "400")
+        return self.config["KLOCKS"].get("textKlock_y_pos", "400")
 
-    @TEXT_Y_POS.setter
-    def TEXT_Y_POS(self, value):
+    @TEXTKLOCK_Y_POS.setter
+    def TEXTKLOCK_Y_POS(self, value):
         """  Sets the textKlock y pos.
         """
-        self.config["KLOCKS"]["text_y_pos"] = value
+        self.config["KLOCKS"]["textKlock_y_pos"] = value
 
     @property
-    def TEXT_ON_COLOUR(self):
+    def TEXTKLOCK_ON_COLOUR(self):
         """  Returns the textdKlock on colour.
         """
-        return self.config["KLOCKS"].get("text_onColour", "springGreen2")
+        return self.config["KLOCKS"].get("textKlock_onColour", "springGreen2")
 
-    @TEXT_ON_COLOUR.setter
-    def TEXT_ON_COLOUR(self, value):
+    @TEXTKLOCK_ON_COLOUR.setter
+    def TEXTKLOCK_ON_COLOUR(self, value):
         """  Sets the textKlock on colour.
         """
-        self.config["KLOCKS"]["text_onColour"] = value
+        self.config["KLOCKS"]["textKlock_onColour"] = value
 
     @property
-    def TEXT_OFF_COLOUR(self):
+    def TEXTKLOCK_OFF_COLOUR(self):
         """  Returns the textdKlock off colour.
         """
-        return self.config["KLOCKS"].get("text_offColour", "slate grey")
+        return self.config["KLOCKS"].get("textKlock_offColour", "slate grey")
 
-    @TEXT_OFF_COLOUR.setter
-    def TEXT_OFF_COLOUR(self, value):
+    @TEXTKLOCK_OFF_COLOUR.setter
+    def TEXTKLOCK_OFF_COLOUR(self, value):
         """  Sets the textKlock off colour.
         """
-        self.config["KLOCKS"]["text_offColour"] = value
+        self.config["KLOCKS"]["textKlock_offColour"] = value
 
     @property
-    def TEXT_BACKGROUND(self):
+    def TEXTKLOCK_BACKGROUND(self):
         """  Returns the textKlock background colour.
         """
-        return self.config["KLOCKS"].get("text_background", "#000000")
+        return self.config["KLOCKS"].get("textKlock_background", "#000000")
 
-    @TEXT_BACKGROUND.setter
-    def TEXT_BACKGROUND(self, value):
+    @TEXTKLOCK_BACKGROUND.setter
+    def TEXTKLOCK_BACKGROUND(self, value):
         """  Sets the textKlock background colour.
         """
-        self.config["KLOCKS"]["text_background"] = value
+        self.config["KLOCKS"]["textKlock_background"] = value
+
+    @property
+    def SOUNDS(self):
+        """  Returns if sounds are enabled.
+        """
+        return self.config["SOUNDS"].get("sounds", True)
+
+    @SOUNDS.setter
+    def SOUNDS(self, value):
+        """  Sets if sounds are enabled.
+        """
+        self.config["SOUNDS"]["sounds"] = value
+
+    @property
+    def SOUNDS_HOUR_CHIMES(self):
+        """  Returns if hour chimes are enabled.
+        """
+        return self.config["SOUNDS"].get("hour_chimes", True)
+
+    @SOUNDS_HOUR_CHIMES.setter
+    def SOUNDS_HOUR_CHIMES(self, value):
+        """  Sets if hour chimes are enabled.
+        """
+        self.config["SOUNDS"]["hour_chimes"] = value
+
+    @property
+    def SOUNDS_QUARTER_CHIMES(self):
+        """  Returns if quarter chimes are enabled.
+        """
+        return self.config["SOUNDS"].get("quarter_chimes", True)
+
+    @SOUNDS_QUARTER_CHIMES.setter
+    def SOUNDS_QUARTER_CHIMES(self, value):
+        """  Sets if quarter chimes are enabled.
+        """
+        self.config["SOUNDS"]["quarter_chimes"] = value
+
+    @property
+    def SOUNDS_HOUR_PIPS(self):
+        """  Returns if hour pips are enabled.
+        """
+        return self.config["SOUNDS"].get("hour_pips", True)
+
+    @SOUNDS_HOUR_PIPS.setter
+    def SOUNDS_HOUR_PIPS(self, value):
+        """  Sets if hour pips are enabled.
+        """
+        self.config["SOUNDS"]["hour_pips"] = value
+
+    @property
+    def SOUND_VOLUME(self):
+        """  Returns if sound volume.
+        """
+        return self.config["SOUNDS"].get("sound_volume", True)
+
+    @SOUND_VOLUME.setter
+    def SOUND_VOLUME(self, value):
+        """  Sets sound volume.
+        """
+        self.config["SOUNDS"]["sound_volume"] = value
 
 
     #  ------------------------------------------------------------------------------------------------------------------------
@@ -442,8 +502,27 @@ class Config():
                     self.config["INFO"]["myVERSION"] = newVersion
                     self.logger.info(f"  ** Klock has been upgraded from version {oldVersion} to new version {newVersion} **")
 
-                    if "KLOCKS" not in self.config:
-                        #  New config options to be added at 2024.23
+                    if "SOUNDS" not in self.config:
+                        #  New config options to be added at 2024.47 - Sounds
+                        self.logger.info("  ** New options for Sounds added @ 2024.47**")
+                        self.config["SOUNDS"] = {"hour_chimes"   : True,
+                                                 "quarter_chimes": True,
+                                                 "hour_pips"     : True,
+                                                 "sound_volume"  : 25}
+
+                    if self.config["KLOCKS"].get("textKlock_width" ) is None:
+                        #  New config options to be added at 2024.42 - text klock
+                        self.logger.info("  ** New options for TEXT Klock added @ 2024.42**")
+                        self.config["KLOCKS"] = {"textKlock_width"      : 500,
+                                                 "textKlock_height"     : 260,
+                                                 "textKlock_x_pos"      : 821,
+                                                 "textKlock_y_pos"      : 280,
+                                                 "textKlock_onColour"   : "springGreen2",
+                                                 "text_ofColour"        : "grey",
+                                                 "textKlock_background" : "#000000"}
+
+                    if self.config["KLOCKS"].get("vfd_width" ) is None:
+                        #  New config options to be added at 2024.23 - VFD Klock
                         self.logger.info("  ** New options for VFD Klock added @ 2024.23**")
                         self.config["KLOCKS"] = {"vfd_width"      : 500,
                                                  "vfd_height"     : 260,
@@ -451,17 +530,6 @@ class Config():
                                                  "vfd_y_pos"      : 400,
                                                  "vfd_foreground" : "#82ccff",
                                                  "vfd_background" : "#000000"}
-
-                    if "KLOCKS" not in self.config:
-                        #  New config options to be added at 2024.42 - text klock
-                        self.logger.info("  ** New options for TEXT Klock added @ 2024.42**")
-                        self.config["KLOCKS"] = {"text_width"      : 500,
-                                                 "text_height"     : 260,
-                                                 "text_x_pos"      : 821,
-                                                 "text_y_pos"      : 280,
-                                                 "text_onColour"   : "#82ccff",
-                                                 "text_ofColour"   : "grey",
-                                                 "text_background" : "#000000"}
 
                     if "APPLICATION" not in self.config:
                         #  New config options to be added at 2024.25
@@ -529,7 +597,7 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["INFO"] = {"myVERSION": "2024.41",
+        config["INFO"] = {"myVERSION": "2024.47",
                           "myNAME"   : "pyKlock"}
 
         config["APPLICATION"] = {"appearanceMode" : "Dark",
@@ -567,13 +635,18 @@ class Config():
                             "vfd_y_pos"       : 400,
                             "vfd_foreground"  : "#82ccff",
                             "vfd_background"  : "#000000",
-                            "text_width"      : 500,
-                            "text_height"     : 260,
-                            "text_x_pos"      : 821,
-                            "text_y_pos"      : 280,
-                            "text_onColour"   : "springGreen2",
+                            "textKlock_width"      : 500,
+                            "textKlock_height"     : 260,
+                            "textKlock_x_pos"      : 821,
+                            "textKlock_y_pos"      : 280,
+                            "textKlock_onColour"   : "springGreen2",
                             "text_ofColour"   : "slate grey",
-                            "text_background" : "#000000"}
+                            "textKlock_background" : "#000000"}
+
+        config["SOUNDS"] = {"hour_chimes"   : True,
+                            "quarter_chimes": True,
+                            "hour_pips"     : True,
+                            "sound_volume"  : 25}
 
 
         st_toml = toml.dumps(config)
