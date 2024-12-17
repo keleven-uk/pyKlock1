@@ -17,4 +17,9 @@ copy help\klock.chm output\Klock\help
 mkdir output\klock\resources
 copy resources\tea.ico output\Klock\resources
 
+mkdir output\klock\resources\Sounds
+xcopy resources\Sounds output\Klock\resources\Sounds
+
+
+
 

@@ -43,6 +43,8 @@ class Klock(ctk.CTk):
         self.eventsStore = es.eventsStore(self) #  This needs to be declared here and passed down the tree.
                                                 #  So the checks whether any of the events are due can be done all the time.
 
+        self.myTimer.Start                      #  Start the timer - used to determined Klock running time.
+
         #  Sets the appearance of the window.
         #  Supported modes : Light, Dark, System.
         #  "System" sets the appearance mode to the appearance mode of the system.

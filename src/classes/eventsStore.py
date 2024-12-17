@@ -54,7 +54,7 @@ class eventsStore():
     def __init__(self, master):
         self.master     = master     #  Need to pass in a tk window, so the notifications work.
         self.store      = {}         #  Create the store, an empty dictionary.
-        self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", "Left", "Stage 1", "Stage 2", "Stage 3"]
+        self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", "Left"]
         self.Categories = ["", "Birthday", "Wedding Anniversary", "Anniversary", "Moto", "Holiday", "Appointment", "One Off Event", "Other"]
         self.storeName  = pp.EV_DATA_PATH
 
@@ -113,7 +113,7 @@ class eventsStore():
         try:
             return self.store[key]
         except KeyError:
-            return ["", "", "", "", "", "Record not found", "", "", "", ""] #  May need to extend for extra fields,
+            return ["", "", "", "", "", "Record not found", ""]             #  May need to extend for extra fields,
                                                                              #  so the error message is always in the notes field.
 
 # ------------------------------------------------------------------------------------- getEvents ---------------------
@@ -122,7 +122,7 @@ class eventsStore():
         """
         lstEvent = []
         for key in sorted(self.store):
-            lstEvent.append(self.store[key])
+            lstEvent.append(self.store[key][0:7])                           #  Don't return stage flags.'
 
         return lstEvent
 

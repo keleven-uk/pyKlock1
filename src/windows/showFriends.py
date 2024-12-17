@@ -52,7 +52,7 @@ class FriendsWindow(ctk.CTkToplevel):
         self.after(60000, self.__update)
 
 
-    def _createWidgets(self):
+    def __createWidgets(self):
         """  Create the main friend display.
         """
         self.tblFriends = Sheet(self, data=self.friendsStore.getFriends(), width=1000, height=300,
@@ -74,9 +74,9 @@ class FriendsWindow(ctk.CTkToplevel):
                                     corner_radius=12, width=100, state="disabled", command=self.__delete)
         self.btnDel.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
         self.btnRefresh = ctk.CTkButton(self, text="Refresh", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                        corner_radius=12, width=100, command=self._sheetUpdate)
+                                        corner_radius=12, width=100, command=self.__sheetUpdate)
         self.btnRefresh.grid(row=1, column=3, padx=10, pady=10, sticky="nsew")
-        self.btnExt = ctk.CTkButton(self, text="Exit", fg__color="blue", hover_color="gray", font=("Montserrat", 16),
+        self.btnExt = ctk.CTkButton(self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self.__exit)
         self.btnExt.grid(row=1, column=4, padx=10, pady=10, sticky="nsew")
 

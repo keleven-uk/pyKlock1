@@ -1,4 +1,8 @@
-pyKlock.
+Klock - a clock with a k.
+
+A multifunction timing thingy, where some [but not necessary all] of the things are useful.
+
+Klock serves as a vehicle by which I learn and tinker with programming.
 
 Previous versions of Klock have existed in VB.net, Lazarus [Free Pascal] and Free Basic - and may again.
 
@@ -14,7 +18,7 @@ Current version of Klock is written in Python using different GUI frameworks
 
 A klock built using Python and CuistomTKinter.
 
-Using python 3.12.7 and CustonTKinter 5.2.2.
+Using python 3.12.8 and CustonTKinter 5.2.2.
 
 Note : I use the correct spelling of colour on my side of the code.  :-)
 

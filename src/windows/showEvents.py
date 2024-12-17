@@ -42,7 +42,7 @@ class EventsWindow(ctk.CTkToplevel):
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
         self.title("Events")
-        self.geometry("1320x400+400+400")
+        self.geometry("1040x400+400+400")
         self.resizable(True, False)
 
         self.__createWidgets()

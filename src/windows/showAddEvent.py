@@ -88,7 +88,7 @@ class EventAddWindow(ctk.CTkToplevel):
         self.lblName = ctk.CTkLabel(self, text="Name", text_color="#ffe9a6", font=("Verdana",20))
         self.lblName.grid(row=0, column=0,padx=10, pady=10)
         self.entName = ctk.CTkEntry(self, placeholder_text="Event Name", text_color="white", fg_color="#030126", border_color="#030126",
-                                         validate="focusout", validatecommand=self._validateName)
+                                         validate="focusout", validatecommand=self.__validateName)
         self.entName.grid(row=0, column=1,padx=10, pady=10)
 
         self.lblCategory = ctk.CTkLabel(self, text="Category", text_color="#ffe9a6", font=("Verdana",20))

@@ -87,7 +87,6 @@ class Sounds():
         if self.myConfig.SOUNDS_HOUR_CHIMES:
             if minutes == 0:
                 sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\{self.strHour[hours]}.mp3"
-                print(f"SOUNDS_HOUR_CHIMES sndPath = {sndPath}")
 
         if self.myConfig.SOUNDS_QUARTER_CHIMES:
             if minutes in [15, 30, 45]:
@@ -98,16 +97,13 @@ class Sounds():
                         sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\halfchime.mp3"
                     case 45:
                         sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\threequarterchime.mp3"
-                print(f"SOUNDS_QUARTER_CHIMES sndPath {minutes} = {sndPath}")
 
         if self.myConfig.SOUNDS_HOUR_PIPS and not self.myConfig.SOUNDS_HOUR_CHIMES:  #  If both enabled, just play hour chimes.
             if minutes == 0:
                 sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\thepips.mp3"
-                print(f"SOUNDS_HOUR_PIPS sndPath = {sndPath}")
 
         if sndPath:
             # Playback stops when the object is destroyed (GC'ed), so save a reference to the object for non-blocking playback.
-            print("Play sound")
             try:
                 player = AudioPlayer(sndPath)
                 player.volume = self.myConfig.SOUND_VOLUME

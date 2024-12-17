@@ -26,10 +26,6 @@
    "value": "Klock"
   },
   {
-   "optionDest": "upx_dir",
-   "value": "D:/My/upx-4.2.4-win64"
-  },
-  {
    "optionDest": "clean_build",
    "value": false
   },
@@ -79,10 +75,6 @@
   },
   {
    "optionDest": "datas",
-   "value": "D:/My/shed/Projects/python/pyKlock1/src/CTkDatePicker;CTkDatePicker/"
-  },
-  {
-   "optionDest": "datas",
    "value": "D:/My/shed/Projects/python/pyKlock1/src/CTkXYFrame;CTkXYFrame/"
   },
   {
@@ -96,6 +88,18 @@
   {
    "optionDest": "datas",
    "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/tkVFD/Graphics;tkVFD/c/Graphics/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/audioplayer;audioplayer/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/tkcalendar;tkcalendar/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/babel;babel/"
   }
  ],
  "nonPyinstallerOptions": {

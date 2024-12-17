@@ -43,14 +43,14 @@ class Timer():
 
     """
     def __init__(self):
-        self.__start__time = None
+        self.__start_time = None
 
     def Start(self):
         """  Start a new timer.
 
              app - True indicates time the executable time of an App.
         """
-        if self.__start__time is not None:
+        if self.__start_time is not None:
             raise TimerError("Timer is running. Use .stop to stop it")
 
         self.__start_time = time.perf_counter()
@@ -59,10 +59,10 @@ class Timer():
     def Elapsed(self):
         """  Return the elapsed time since start, but does not stop the timer.
         """
-        if self.__start__time is None:
+        if self.__start_time is None:
             raise TimerError("Timer is not running. Use .start to start it")
 
-        __elapsed_time = time.perf_counter() - self._start_time
+        __elapsed_time = time.perf_counter() - self.__start_time
         return self.formatSeconds(__elapsed_time)
 
     @property
@@ -72,7 +72,7 @@ class Timer():
         if self.__start_time is None:
             raise TimerError("Timer is not running. Use .start to start it")
 
-        __elapsed_time = time.perf_counter() - self._start_time
+        __elapsed_time = time.perf_counter() - self.__start_time
         self.__start_time = None
         return self.formatSeconds(__elapsed_time)
 
@@ -92,8 +92,8 @@ class Timer():
         hours, minutes   = divmod(minutes, 60)
 
         if hours:
-            return f"{hours}h:{minutes}m:{seconds:0.2f}s"
+            return f"{hours}h:{minutes}m:{seconds:0.0f}s"
         elif minutes:
-            return f"{minutes}m:{seconds:0.2f}s"
+            return f"{minutes}m:{seconds:0.0f}s"
         else:
-            return f"{seconds:0.2f}s"
+            return f"{seconds:0.0f}s"

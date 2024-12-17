@@ -33,6 +33,25 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.48	[17 December 2024]
+
+	Updated requirements.txt - tksheet and ruff.  Added audioplayer.
+	Updated requirements_dev.txt - auto-py-to-exe, setuptools.  Added the tk stuff.
+
+	Tidied up code and corrected a few bugs.
+		eventStore returns the event without the sage flags for display.
+		Corrected text time showing "in the morning" after 12 O'clock.
+		For some reason the timer wasn't being started - corrected.
+		A few instances where the move from "_" to "__" hadn't been done.
+
+	Made changes to satisfy pyinstaller.
+		It needed to copy a few more directories.
+		I needed to install tzdata, although Babel seems to have its own.  Only on the executable though.
+
+	Made changes to satisfy Inno setup script.
+		Still a problem with PyMuPDF - see V2024.24 below.  Still a problem with 1.25.1, okay with 1.24.10.
+
+
 V2.24.47	[16 December 2024]
 
 	Added sound to Klock.

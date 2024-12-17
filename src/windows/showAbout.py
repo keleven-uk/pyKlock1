@@ -68,7 +68,7 @@ class showAbout(ctk.CTkToplevel):
         self.tf.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
         self.mf = middleFrame(self)
         self.mf.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
-        self.bf = bottomFrame(self, self.myTimer)
+        self.bf = bottomFrame(self)
         self.bf.grid(row=2, column=0, padx=10, pady=10, sticky="nsew")
 
         self.btnExit = ctk.CTkButton(self, text="Exit", command=self.destroy)
@@ -128,7 +128,7 @@ class bottomFrame(ctk.CTkFrame):
          The display Klock and PC up time.
          The PC elapsed time is updated in the update method of the showAbout class.
     """
-    def __init__(self, master, myTimer, **kwargs):
+    def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
 
         self.grid_rowconfigure(0, weight=1)  # configure grid system
