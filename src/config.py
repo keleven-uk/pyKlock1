@@ -61,6 +61,12 @@ class Config():
         self.__CheckVersion()
 
     @property
+    def SETTINGS_HEADERS(self):
+        """  Returns the setting headers.
+        """
+        return self.config["SETTINGS"].get("headers")
+
+    @property
     def NAME(self):
         """  Returns the application name.
         """
@@ -80,6 +86,14 @@ class Config():
         value = self.config["APPLICATION"].get("appearanceMode", "Dark")
         return value
 
+    @property
+    def APPEARANCE_MODE_TYPES(self):
+        """  Returns the application appearance mode types.
+             Supported modes : Light, Dark, System.
+        """
+        value = self.config["APPLICATION"].get("appearanceModeTypes", [ "Light", "Dark", "System",])
+        return value
+
     @APPEARANCE_MODE.setter
     def APPEARANCE_MODE(self, value):
         """  Sets the application appearance mode.
@@ -92,6 +106,14 @@ class Config():
              Supported themes : green, dark-blue, blue.
         """
         value = self.config["APPLICATION"].get("colorTheme", "dark-blue")
+        return value
+
+    @property
+    def COLOR_THEME_TYPES(self):
+        """  Returns the window background colour types.
+             Supported themes : green, dark-blue, blue.
+        """
+        value = self.config["APPLICATION"].get("colorThemeTypes", [ "green", "dark-blue", "blue",])
         return value
 
     @COLOR_THEME.setter
@@ -502,6 +524,12 @@ class Config():
                     self.config["INFO"]["myVERSION"] = newVersion
                     self.logger.info(f"  ** Klock has been upgraded from version {oldVersion} to new version {newVersion} **")
 
+                    if self.config["APPLICATION"].get("appearanceModeTypes" ) is None:
+                        #  New config options to be added at 2024.49 - modes for settings
+                        self.logger.info("  ** New options for TEXT Klock added @ 2024.42**")
+                        self.config["APPLICATION"] = {"appearanceModeTypes" : ["Light", "Dark", "System"],
+                                                      "colorThemeTypes"     : ["green", "dark-blue", "blue"]}
+
                     if "SOUNDS" not in self.config:
                         #  New config options to be added at 2024.47 - Sounds
                         self.logger.info("  ** New options for Sounds added @ 2024.47**")
@@ -520,16 +548,6 @@ class Config():
                                                  "textKlock_onColour"   : "springGreen2",
                                                  "text_ofColour"        : "grey",
                                                  "textKlock_background" : "#000000"}
-
-                    if self.config["KLOCKS"].get("vfd_width" ) is None:
-                        #  New config options to be added at 2024.23 - VFD Klock
-                        self.logger.info("  ** New options for VFD Klock added @ 2024.23**")
-                        self.config["KLOCKS"] = {"vfd_width"      : 500,
-                                                 "vfd_height"     : 260,
-                                                 "vfd_x_pos"      : 400,
-                                                 "vfd_y_pos"      : 400,
-                                                 "vfd_foreground" : "#82ccff",
-                                                 "vfd_background" : "#000000"}
 
                     if "APPLICATION" not in self.config:
                         #  New config options to be added at 2024.25
@@ -561,6 +579,16 @@ class Config():
                             del self.config["WINDOW"]
                         except KeyError:
                             self.logger.debug("  Problem with config key WINDOW")
+
+                    if self.config["KLOCKS"].get("vfd_width" ) is None:
+                        #  New config options to be added at 2024.23 - VFD Klock
+                        self.logger.info("  ** New options for VFD Klock added @ 2024.23**")
+                        self.config["KLOCKS"] = {"vfd_width"      : 500,
+                                                 "vfd_height"     : 260,
+                                                 "vfd_x_pos"      : 400,
+                                                 "vfd_y_pos"      : 400,
+                                                 "vfd_foreground" : "#82ccff",
+                                                 "vfd_background" : "#000000"}
 
                     self.writeConfig()
         except FileNotFoundError:

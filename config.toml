@@ -1,33 +1,38 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Tuesday 17 December 2024  12:17:38
+#   (c) Kevin Scott   Written Thursday 19 December 2024  22:21:34
 #
 #   true and false are lower case 
 #
+[SETTINGS]
+headers = [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",]
+
 [INFO]
-myVERSION = "2024.47"
+myVERSION = "2024.48"
 myNAME = "pyKlock"
 
 [APPLICATION]
 appearanceMode = "Dark"
+appearanceModeTypes = [ "Light", "Dark", "System",]
 colorTheme = "dark-blue"
+colorThemeTypes = [ "green", "dark-blue", "blue",]
 foreground = "#00ff00"
 background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1290
-y_pos = -231
+x_pos = 1558
+y_pos = -405
 Align_Right = true
 
 [TIME]
-type = "Time in Words"
+type = "Fuzzy Time"
 
 [MENU]
 visible = true
 
 [TIME_FONT]
-family = "Playwrite CU ExtraLight"
-size = 24
+family = "Playwrite CU"
+size = 22
 weight = "normal"
 slant = false
 underline = false
@@ -50,7 +55,7 @@ vfd_foreground = "#82ccff"
 vfd_background = "#000000"
 textKlock_width = 460
 textKlock_height = 260
-textKlock_x_pos = 511
+textKlock_x_pos = 701
 textKlock_y_pos = -365
 textKlock_onColour = "springGreen2"
 textKlock_offColour = "slate grey"

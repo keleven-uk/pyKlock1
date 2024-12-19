@@ -189,7 +189,10 @@ class showTextime(ctk.CTkFrame):
                     self.sixthDic["THE"].configure(text_color=self.offColour)
                 else:
                     self.fifthDic["TWELVE"].configure(text_color=self.onColour)
-                    self.eighthDic["EVENING"].configure(text_color=self.onColour)
+                    if minutes > 30:
+                        self.eighthDic["EVENING"].configure(text_color=self.onColour)
+                    else:
+                        self.seventhDic["MORNING"].configure(text_color=self.onColour)
             case 1:
                 self.thirdDic["ONE"].configure(text_color=self.onColour)
                 self.seventhDic["MORNING"].configure(text_color=self.onColour)

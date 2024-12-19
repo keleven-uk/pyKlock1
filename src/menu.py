@@ -27,6 +27,7 @@ import src.windows.showInfo as si
 import src.windows.showHelp as sh
 import src.windows.showEvents as se
 import src.windows.showFriends as sf
+import src.windows.showSettings as ss
 import src.windows.showAbout as about
 import src.windows.showTimeTypes as stt
 import src.windows.SelectColourWindow as cw
@@ -72,6 +73,8 @@ class myMenu(CTkmenu.CTkMenuBar):
         #  Exit
         self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
+        self.dropdown1.add_option(option="Settings", command=self.__showSettings)
+        self.dropdown1.add_separator()
         self.dropdown1.add_option(option="Exit", command=self.__close)
 
         #Klocks
@@ -80,7 +83,7 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.dropdown2.add_option(option="vfdKlock",  command=self.__showVFDKlock)
         self.dropdown2.add_option(option="textKlock", command=self.__showTextKlock)
 
-        #  Accessories
+        #  Things
         self.dropdown3  = CTkmenu.CustomDropdownMenu(widget=self.mnuThings, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown3.add_option(option="Friends", command=self.__showFriends)
@@ -105,6 +108,9 @@ class myMenu(CTkmenu.CTkMenuBar):
 
         self.update()
 
+
+    def __showSettings(self):
+        ss.showHelp(self.master, self.myConfig)
 
     def __showTextKlock(self):
         self.master.overrideredirect(False)

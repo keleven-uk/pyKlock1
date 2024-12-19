@@ -33,6 +33,53 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.49	[19 December 2024]
+
+	Started work on a settings window.
+	This all set in a tab view in a separate window.
+		tabs complete for Application, Time, Menu, Fonts and Sounds.
+		Still need tab for the extra Klocks and all the saving and validation stuff.
+
+
+----------------------------------------------------------------------------------------------
+File                                                       blank        comment           code
+----------------------------------------------------------------------------------------------
+pyKlock1\src\config.py                                       109            191            363
+pyKlock1\src\frames\showTextTime.py                           53             45            259
+pyKlock1\src\selectTime.py                                   136            158            258
+pyKlock1\src\windows\showAddFriend.py                         56             61            249
+pyKlock1\src\windows\showAddEvent.py                          49             60            191
+pyKlock1\src\classes\eventsStore.py                           46            111            140
+pyKlock1\src\menu.py                                          41             63            121
+pyKlock1\src\windows\showFriends.py                           27             38             93
+pyKlock1\src\windows\showEvents.py                            25             34             88
+pyKlock1\src\utils\timeCodes.py                                5             19             78
+pyKlock1\src\windows\showAbout.py                             34             35             77
+pyKlock1\src\frames\showVFDTime.py                            32             47             67
+pyKlock1\src\utils\klock_utils.py                             25             37             65
+pyKlock1\src\windows\showNotification.py                      23             44             63
+pyKlock1\src\windows\SelectColourWindow.py                    25             35             60
+pyKlock1\src\classes\sounds.py                                19             43             53
+pyKlock1\src\windows\showTimeTypes.py                         18             32             53
+pyKlock1\config.toml                                           7              5             52
+pyKlock1\src\pyKlock.py                                       40             38             48
+pyKlock1\src\classes\friendsStore.py                          17             60             47
+pyKlock1\src\frames\showMainTime.py                           28             42             46
+pyKlock1\main.py                                              16             24             45
+pyKlock1\src\frames\showStatusBar.py                          32             30             36
+pyKlock1\src\myTimer.py                                       19             44             36
+pyKlock1\src\windows\showInfo.py                              18             27             33
+pyKlock1\src\projectPaths.py                                   9             28             30
+pyKlock1\src\klocks\vfdKlock.py                               28             25             27
+pyKlock1\src\klocks\textKlock.py                              28             25             25
+pyKlock1\src\logger.py                                        11             27             18
+pyKlock1\copyStuff.bat                                         9              0             16
+pyKlock1\src\windows\showHelp.py                               8             20             13
+pyKlock1\docs\version.toml                                     2             19              2
+----------------------------------------------------------------------------------------------
+SUM:                                                        1056           1500           3079
+----------------------------------------------------------------------------------------------
+
 V2.24.48	[17 December 2024]
 
 	Updated requirements.txt - tksheet and ruff.  Added audioplayer.
@@ -45,7 +92,7 @@ V2.24.48	[17 December 2024]
 		A few instances where the move from "_" to "__" hadn't been done.
 
 	Made changes to satisfy pyinstaller.
-		It needed to copy a few more directories.
+		I needed to copy a few more directories.
 		I needed to install tzdata, although Babel seems to have its own.  Only on the executable though.
 
 	Made changes to satisfy Inno setup script.

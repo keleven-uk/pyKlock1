@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "pyKlock"
-#define MyAppVersion "2024.32"
+#define MyAppVersion "2024.48"
 #define MyAppPublisher "keleven"
 #define MyAppURL "www.keleven.co.uk"
 #define MyAppExeName "pyklock.exe"
@@ -61,10 +61,9 @@ Source: "Klock.exe"    ; DestDir: "{app}"           ; Flags: ignoreversion; Chec
 Source: "LICENSE.txt"  ; DestDir: "{app}"           ; Flags: ignoreversion
 Source: "history.txt"  ; DestDir: "{app}"           ; Flags: ignoreversion
 Source: "README.md"    ; DestDir: "{app}"           ; Flags: isreadme
-Source: "version.toml" ; DestDir: "{app}"           ; Flags: ignoreversion
 Source: "_internal\*"  ; DestDir: "{app}\_internal" ; Flags: recursesubdirs
 Source: "help\*"       ; DestDir: "{app}\help"      ; Flags: ignoreversion
-Source: "resources\*"  ; DestDir: "{app}\resources" ; Flags: ignoreversion
+Source: "resources\*"  ; DestDir: "{app}\resources" ; Flags: recursesubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"                                               ; Filename: "{app}\{#MyAppExeName}"
