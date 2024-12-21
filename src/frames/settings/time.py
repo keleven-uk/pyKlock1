@@ -52,5 +52,5 @@ class MyTimeFrame(ctk.CTkFrame):
         self.cbxTimeType.grid(row=1, column=2, padx=10, pady=10)
         self.cbxTimeType.set(self.myConfig.TIME_TYPE)
 
-    def __setTimeType(self):
+    def __setTimeType(self, choice):
         self.master.btnSave.configure(state="normal")

@@ -33,6 +33,11 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.50	[21 December 2024]
+
+	Completed the layout of the setting window.
+
+
 V2.24.49	[19 December 2024]
 
 	Started work on a settings window.
@@ -77,7 +82,7 @@ pyKlock1\copyStuff.bat                                         9              0 
 pyKlock1\src\windows\showHelp.py                               8             20             13
 pyKlock1\docs\version.toml                                     2             19              2
 ----------------------------------------------------------------------------------------------
-SUM:                                                        1056           1500           3079
+SUM:                                                        995           1467           2752
 ----------------------------------------------------------------------------------------------
 
 V2.24.48	[17 December 2024]
@@ -135,13 +140,13 @@ V2.24.43	[10 December 2024] - in textKlock branch.
 	Amended to main update method of klock only update the main menu and time in main screen is running.
 	Apparently, to make a python method private you prefix it with two underscores [__].
 	I had only been using one, so took the opportunity of the branch to change all the ones to twos.
-	Also, it appears the file showmenuButtons is no longer used - removed.
+	Also, it appears the file showMenuButtons is no longer used - removed.
 
 
 V2.24.42	[10 December 2024] - in textKlock branch.
 
 	Started working on a new sub Klock - textKlock.
-	The clock in a matrix of lettes/words and the current time is displayed by highlighted text.
+	The clock in a matrix of letters/words and the current time is displayed by highlighted text.
 	The basic window containing the text created.
 	The main menu amended to include the new Klock.
 	Added new config option of textKlock [screen position, window size and text colours].
@@ -220,7 +225,7 @@ V2.24.34	[19 November 2024] - In Events branch.
 V2.24.33	[19 November 2024] - In Events branch.
 
 	Started work on the events accessory, heavily modelled on the friends accessory.
-	The events should have a die date and/ot due time - Klock will notify when event is due.
+	The events should have a die date and/or due time - Klock will notify when event is due.
 	Refactored the showFriends and showAddFriends to have similar event roles.
 	The Add button seems to work.
 
@@ -399,7 +404,7 @@ V2024.15	[2 October 2024]
 
 	Tried to make an installed and a stand alone executable with auto-py-to-exe.exe and Inno setup Compiler.
 	The stand alone executable has worked for some version, but when installed on the PC there was an error.
-	The error was dur to windows not letting the loc files be created in the same directory as the .exe.
+	The error was due to windows not letting the loc files be created in the same directory as the .exe.
 	The solution is to store the log files in C:\Users\kevin\AppData\Local\Keleven\Klock\Logs or similar.
 	Also, store the config in a similar place : C:\Users\kevin\AppData\Local\Keleven\Klock
 	Once auto-exe-to-py has done it's stuff, copyStuff.bat needs to run.

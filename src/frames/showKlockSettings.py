@@ -23,6 +23,7 @@ import src.frames.settings.application as frmApplication
 import src.frames.settings.time as frmTime
 import src.frames.settings.menu as frmMenu
 import src.frames.settings.font as frmFont
+import src.frames.settings.klocks as frmKlocks
 import src.frames.settings.sounds as frmSound
 
 class MySettings(ctk.CTkFrame):
@@ -51,7 +52,7 @@ class MySettings(ctk.CTkFrame):
         self.lblVersion.grid(row=0, column=1)
 
 
-        self.tvSettings =  ctk.CTkTabview(self, width=700, height=500, fg_color=self.myConfig.BACKGROUND)
+        self.tvSettings =  ctk.CTkTabview(self, width=700, height=420, fg_color=self.myConfig.BACKGROUND)
         self.tvSettings.grid(row=1, column=0, columnspan=2)
 
         for header in self.myConfig.SETTINGS_HEADERS:
@@ -70,6 +71,9 @@ class MySettings(ctk.CTkFrame):
                 case "FONT":
                     frmMn = frmFont.MyFontFrame(self, self.frmSettings["FONT"], self.myConfig)
                     frmMn.grid(row=1, column=0)
+                case "KLOCKS":
+                    frmKl = frmKlocks.MyKlocksFrame(self, self.frmSettings["KLOCKS"], self.myConfig)
+                    frmKl.grid(row=1, column=0)
                 case "SOUNDS":
                     frmMn = frmSound.MySoundFrame(self, self.frmSettings["SOUNDS"], self.myConfig)
                     frmMn.grid(row=1, column=0)

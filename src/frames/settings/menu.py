@@ -43,8 +43,8 @@ class MyMenuFrame(ctk.CTkFrame):
         self.lblMenuVisable = ctk.CTkLabel(self, text="Menu Visable", text_color=self.foreColour,
                                               fg_color=self.myConfig.BACKGROUND)
         self.lblMenuVisable.grid(row=1, column=0, padx=10, pady=10)
-        self.chkMenuVisable = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color="#030126",
-                                              command=self.__setMenuVisable)
+        self.chkMenuVisable = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color=self.foreColour,
+                                              hover_color="gray", command=self.__setMenuVisable)
         self.chkMenuVisable.grid(row=1, column=1, padx=10, pady=10)
         if self.myConfig.MENU_VISIBLE:
             self.chkMenuVisable.select()

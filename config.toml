@@ -1,5 +1,5 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Thursday 19 December 2024  22:21:34
+#   (c) Kevin Scott   Written Saturday 21 December 2024  13:54:09
 #
 #   true and false are lower case 
 #
@@ -20,7 +20,7 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1558
+x_pos = 1588
 y_pos = -405
 Align_Right = true
 

@@ -62,8 +62,8 @@ class MyApplicationFrame(ctk.CTkFrame):
         self.lblTransparent = ctk.CTkLabel(self, text="Background Transparent", text_color=self.foreColour,
                                               fg_color=self.myConfig.BACKGROUND)
         self.lblTransparent.grid(row=2, column=0, padx=10, pady=10)
-        self.chkTransparent = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color="#030126",
-                                              command=self.__setTransparent)
+        self.chkTransparent = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color=self.foreColour,
+                                              hover_color="gray", command=self.__setTransparent)
         self.chkTransparent.grid(row=2, column=1, padx=10, pady=10)
         if self.myConfig.TRANSPARENT:
             self.chkTransparent.select()
@@ -73,8 +73,8 @@ class MyApplicationFrame(ctk.CTkFrame):
         self.lblAlighnRight = ctk.CTkLabel(self, text="Right Align Klock", text_color=self.foreColour,
                                               fg_color=self.myConfig.BACKGROUND)
         self.lblAlighnRight.grid(row=2, column=2, padx=10, pady=10)
-        self.chkAlighnRight = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color="#030126",
-                                              command=self.__setAlighnRight)
+        self.chkAlighnRight = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color=self.foreColour,
+                                              hover_color="gray", command=self.__setAlighnRight)
         self.chkAlighnRight.grid(row=2, column=3, padx=10, pady=10)
         if self.myConfig.ALIGN_RIGHT:
             self.chkAlighnRight.select()
@@ -105,7 +105,6 @@ class MyApplicationFrame(ctk.CTkFrame):
         pass
 
     def __setTransparent(self):
-        print("__setTransparent")
         self.master.btnSave.configure(state="normal")
 
     def __setAlighnRight(self):

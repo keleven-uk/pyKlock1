@@ -44,26 +44,26 @@ class MySoundFrame(ctk.CTkFrame):
         self.lblSound = ctk.CTkLabel(self, text="Sound Enabled", text_color=self.foreColour,
                                               fg_color=self.myConfig.BACKGROUND)
         self.lblSound.grid(row=1, column=0, padx=10, pady=10)
-        self.chkSound = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color="#030126",
-                                              command=self.__setSound)
+        self.chkSound = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color=self.foreColour,
+                                              hover_color="gray", command=self.__setSound)
         self.chkSound.grid(row=1, column=1, padx=10, pady=10)
         self.lblHrChimes = ctk.CTkLabel(self, text="Hour Chimes", text_color=self.foreColour,
                                               fg_color=self.myConfig.BACKGROUND)
         self.lblHrChimes.grid(row=2, column=0, padx=10, pady=10)
-        self.chkHrChimes = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color="#030126",
-                                              command=self.__hourChimes)
+        self.chkHrChimes = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color=self.foreColour,
+                                              hover_color="gray", command=self.__hourChimes)
         self.chkHrChimes.grid(row=2, column=1, padx=10, pady=10)
         self.lblQtrChimes = ctk.CTkLabel(self, text="Quarter Hour Chimes", text_color=self.foreColour,
                                               fg_color=self.myConfig.BACKGROUND)
         self.lblQtrChimes.grid(row=2, column=2, padx=10, pady=10)
-        self.chkQtrChimes = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color="#030126",
-                                              command=self.__qtrHourChimes)
+        self.chkQtrChimes = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color=self.foreColour,
+                                              hover_color="gray", command=self.__qtrHourChimes)
         self.chkQtrChimes.grid(row=2, column=3, padx=10, pady=10)
         self.lblPips = ctk.CTkLabel(self, text="The Pips on the Hour", text_color=self.foreColour,
                                               fg_color=self.myConfig.BACKGROUND)
         self.lblPips.grid(row=3, column=0, padx=10, pady=10)
-        self.chkPips = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color="#030126",
-                                              command=self.__pips)
+        self.chkPips = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color=self.foreColour,
+                                              hover_color="gray", command=self.__pips)
         self.chkPips.grid(row=3, column=1, padx=10, pady=10)
         self.lblVolume = ctk.CTkLabel(self, text="Sound Volume", text_color=self.foreColour,
                                               fg_color=self.myConfig.BACKGROUND)

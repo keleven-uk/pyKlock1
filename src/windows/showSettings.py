@@ -32,7 +32,7 @@ class showHelp(ctk.CTkToplevel):
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
         ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
 
-        self.geometry("700x600")
+        self.geometry("700x500")
         self.title("Klock Settings")
 
         #  Create the frame for the main time text.
