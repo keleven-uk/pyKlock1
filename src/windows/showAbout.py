@@ -38,7 +38,7 @@ class showAbout(ctk.CTkToplevel):
         self.myTimer  = myTimer
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+        ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
         self.geometry("500x640+200+200")            # width x height + xpos + ypos
         self.resizable(False, False)

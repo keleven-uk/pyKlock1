@@ -70,7 +70,7 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.mnuEdit   = self.menu.add_cascade("Edit")
         self.mnuHelp   = self.menu.add_cascade("Help")
 
-        #  Exit
+        #  File
         self.dropdown1 = CTkmenu.CustomDropdownMenu(widget=self.mnuFile, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown1.add_option(option="Settings", command=self.__showSettings)
@@ -110,7 +110,7 @@ class myMenu(CTkmenu.CTkMenuBar):
 
 
     def __showSettings(self):
-        ss.showHelp(self.master, self.myConfig)
+        ss.showSettings(self.master, self.myConfig, self.myLogger)
 
     def __showTextKlock(self):
         self.master.overrideredirect(False)

@@ -39,7 +39,7 @@ class EventsWindow(ctk.CTkToplevel):
         self.AddWindowRunning = None
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+        ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
         self.title("Events")
         self.geometry("1040x400+400+400")

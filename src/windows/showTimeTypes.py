@@ -34,7 +34,7 @@ class timeTypes(ctk.CTkToplevel):
         self.myConfig = myConfig
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+        ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
         self.geometry("500x200+200+200")
         self.resizable(False, False)

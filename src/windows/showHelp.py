@@ -32,7 +32,7 @@ class showHelp(ctk.CTkToplevel):
         self.myConfig = myConfig
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+        ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
         self.geometry("700x600")
         self.title("Klock Help")

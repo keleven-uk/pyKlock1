@@ -54,7 +54,7 @@ class FriendAddWindow(ctk.CTkToplevel):
         self.addData          = False
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+        ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
         self.__createWidgets()
         if self.rowKey:                         #  if rowKey is not None, then in edit mode - load selected friend details into the fields.

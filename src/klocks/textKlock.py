@@ -34,7 +34,7 @@ class textKlock(ctk.CTkToplevel):
         self.myLogger = myLogger
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+        ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
         winGeometry=f"{self.myConfig.TEXTKLOCK_WIDTH}x{self.myConfig.TEXTKLOCK_HEIGHT}+{self.myConfig.TEXTKLOCK_X_POS}+{self.myConfig.TEXTKLOCK_Y_POS}"
         self.geometry(winGeometry)

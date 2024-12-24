@@ -106,7 +106,7 @@ class Sounds():
             # Playback stops when the object is destroyed (GC'ed), so save a reference to the object for non-blocking playback.
             try:
                 player = AudioPlayer(sndPath)
-                player.volume = self.myConfig.SOUND_VOLUME
+                player.volume = self.myConfig.SOUNDS_VOLUME
                 player.play(block=True)
             except Exception as e:
                 print(f"Error {e}")

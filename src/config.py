@@ -21,7 +21,7 @@
 ###############################################################################################################
 
 import datetime
-
+import pickle
 import toml
 
 
@@ -32,7 +32,7 @@ class Config():
 
          If config.toml is not found, a default configure file is generated.
 
-         The get read the directory and if the key is not found a default is returned.
+         The .get reads the directory and if the key is not found a default is returned.
 
          usage:
             myConfig = myConfig.Config()
@@ -60,17 +60,69 @@ class Config():
 
         self.__CheckVersion()
 
+    def __eq__(self, other):
+        """  Implements object equality.
+             Both need to be of type Config.
+
+             a = myConfig.Config()
+             b = myConfig.Config()
+             a == b  will give True if equal otherwise Fault.
+        """
+        if not isinstance(other, Config):
+            # don't attempt to compare against unrelated types
+            return NotImplemented
+
+        #  If pickle does not work, will need to implement a better way
+        return pickle.dumps(self) == pickle.dumps(other)
+
+    def copy(self, other):
+        """  Copy an other instance of config to self.
+             Only Copies properties that can be changed in the settings window.
+             Both need to be of type Config.
+
+             Might be a better was of doing this.
+
+             a.copy(other)
+        """
+        if not isinstance(other, Config):
+            # don't attempt to copy unrelated types
+            return NotImplemented
+
+        self.APPEARANCE_MODE       = other.APPEARANCE_MODE
+        self.COLOUR_THEME          = other.COLOUR_THEME
+        self.FOREGROUND            = other.FOREGROUND
+        self.BACKGROUND            = other.BACKGROUND
+        self.TRANSPARENT           = other.TRANSPARENT
+        self.ALIGN_RIGHT           = other.ALIGN_RIGHT
+        self.TIME_TYPE             = other.TIME_TYPE
+        self.TIME_CAPITALISE       = other.TIME_CAPITALISE
+        self.MENU_VISIBLE          = other.MENU_VISIBLE
+        self.TIME_FONT_FAMILY      = other.TIME_FONT_FAMILY
+        self.TIME_FONT_SIZE        = other.TIME_FONT_SIZE
+        self.STATUS_FONT_FAMILY    = other.STATUS_FONT_FAMILY
+        self.STATUS_FONT_SIZE      = other.STATUS_FONT_SIZE
+        self.VFD_FOREGROUND        = other.VFD_FOREGROUND
+        self.VFD_BACKGROUND        = other.VFD_BACKGROUND
+        self.TEXTKLOCK_ON_COLOUR   = other.TEXTKLOCK_ON_COLOUR
+        self.TEXTKLOCK_OFF_COLOUR  = other.TEXTKLOCK_OFF_COLOUR
+        self.TEXTKLOCK_BACKGROUND  = other.TEXTKLOCK_BACKGROUND
+        self.SOUNDS                = other.SOUNDS
+        self.SOUNDS_HOUR_CHIMES    = other.SOUNDS_HOUR_CHIMES
+        self.SOUNDS_QUARTER_CHIMES = other.SOUNDS_QUARTER_CHIMES
+        self.SOUNDS_HOUR_PIPS      = other.SOUNDS_HOUR_PIPS
+        self.SOUNDS_VOLUME         = other.SOUNDS_VOLUME
+
     @property
     def SETTINGS_HEADERS(self):
         """  Returns the setting headers.
         """
-        return self.config["SETTINGS"].get("headers")
+        return self.config["SETTINGS"].get("headers", [])
 
     @property
     def NAME(self):
         """  Returns the application name.
         """
-        return self.config["INFO"].get("myNAME", "pyDigitalKlock")
+        return self.config["INFO"].get("myNAME", "pyKlock")
 
     @property
     def VERSION(self):
@@ -86,14 +138,6 @@ class Config():
         value = self.config["APPLICATION"].get("appearanceMode", "Dark")
         return value
 
-    @property
-    def APPEARANCE_MODE_TYPES(self):
-        """  Returns the application appearance mode types.
-             Supported modes : Light, Dark, System.
-        """
-        value = self.config["APPLICATION"].get("appearanceModeTypes", [ "Light", "Dark", "System",])
-        return value
-
     @APPEARANCE_MODE.setter
     def APPEARANCE_MODE(self, value):
         """  Sets the application appearance mode.
@@ -101,26 +145,34 @@ class Config():
         self.config["APPLICATION"]["appearanceMode"] = value
 
     @property
-    def COLOR_THEME(self):
+    def APPEARANCE_MODE_TYPES(self):
+        """  Returns the application appearance mode types.
+             Supported modes : Light, Dark, System.
+        """
+        value = self.config["SETTINGS"].get("appearanceModeTypes", [ "Light", "Dark", "System",])
+        return value
+
+    @property
+    def COLOUR_THEME(self):
         """  Returns the window background colour.
              Supported themes : green, dark-blue, blue.
         """
         value = self.config["APPLICATION"].get("colorTheme", "dark-blue")
         return value
 
-    @property
-    def COLOR_THEME_TYPES(self):
-        """  Returns the window background colour types.
-             Supported themes : green, dark-blue, blue.
-        """
-        value = self.config["APPLICATION"].get("colorThemeTypes", [ "green", "dark-blue", "blue",])
-        return value
-
-    @COLOR_THEME.setter
-    def COLOR_THEME(self, value):
+    @COLOUR_THEME.setter
+    def COLOUR_THEME(self, value):
         """  Sets the window background colour.
         """
         self.config["APPLICATION"]["colorTheme"] = value
+
+    @property
+    def COLOUR_THEME_TYPES(self):
+        """  Returns the window background colour types.
+             Supported themes : green, dark-blue, blue.
+        """
+        value = self.config["SETTINGS"].get("colorThemeTypes", [ "green", "dark-blue", "blue",])
+        return value
 
     @property
     def FOREGROUND(self):
@@ -224,19 +276,37 @@ class Config():
     def TIME_TYPE(self):
         """  Return the type [format] of the displayed time.
         """
-        return self.config["TIME"].get("type", "GMT Time")
+        return self.config["TIME"].get("type", "Fuzzy Time")
 
     @TIME_TYPE.setter
     def TIME_TYPE(self, value):
-        """  Sets if menu visible.
+        """  Sets the type [format] of the displayed time.
         """
         self.config["TIME"]["type"] = value
+
+    @property
+    def TIME_CAPITALISE(self):
+        """  Return if the main time should be in title case.
+        """
+        return self.config["TIME"].get("capitalise", True)
+
+    @TIME_CAPITALISE.setter
+    def TIME_CAPITALISE(self, value):
+        """  Sets if the main time should be in title case.
+        """
+        self.config["TIME"]["capitalise"] = value
 
     @property
     def MENU_VISIBLE(self):
         """  Return the if menu visible.
         """
         return self.config["MENU"].get("visible", True)
+
+    @MENU_VISIBLE.setter
+    def MENU_VISIBLE(self, value):
+        """  Return the if menu visible.
+        """
+        self.config["MENU"]["visible"] = value
 
     #  Time Font config options.
     @property
@@ -495,13 +565,13 @@ class Config():
         self.config["SOUNDS"]["hour_pips"] = value
 
     @property
-    def SOUND_VOLUME(self):
+    def SOUNDS_VOLUME(self):
         """  Returns if sound volume.
         """
         return self.config["SOUNDS"].get("sound_volume", True)
 
-    @SOUND_VOLUME.setter
-    def SOUND_VOLUME(self, value):
+    @SOUNDS_VOLUME.setter
+    def SOUNDS_VOLUME(self, value):
         """  Sets sound volume.
         """
         self.config["SOUNDS"]["sound_volume"] = value
@@ -524,14 +594,20 @@ class Config():
                     self.config["INFO"]["myVERSION"] = newVersion
                     self.logger.info(f"  ** Klock has been upgraded from version {oldVersion} to new version {newVersion} **")
 
-                    if self.config["APPLICATION"].get("appearanceModeTypes" ) is None:
+                    if self.config["TIME"].get("capitalise" ) is None:
+                        #  New config options to be added at 2024.51 - text klock
+                        self.logger.info("  ** New options for Time added @ 2024.47**")
+                        self.config["TIME"] = {"capitalise" : True}
+
+                    if "SETTINGS" not in self.config:
                         #  New config options to be added at 2024.49 - modes for settings
-                        self.logger.info("  ** New options for TEXT Klock added @ 2024.42**")
-                        self.config["APPLICATION"] = {"appearanceModeTypes" : ["Light", "Dark", "System"],
-                                                      "colorThemeTypes"     : ["green", "dark-blue", "blue"]}
+                        self.logger.info("  ** New options for Settings added @ 2024.49**")
+                        self.config["SETTINGS"] = {"headers"             : [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",],
+                                                   "appearanceModeTypes" : ["Light", "Dark", "System"],
+                                                   "colorThemeTypes"     : ["green", "dark-blue", "blue"]}
 
                     if "SOUNDS" not in self.config:
-                        #  New config options to be added at 2024.47 - Sounds
+                        #  New config options to be added at 2024.51 - Sounds
                         self.logger.info("  ** New options for Sounds added @ 2024.47**")
                         self.config["SOUNDS"] = {"hour_chimes"   : True,
                                                  "quarter_chimes": True,
@@ -625,6 +701,11 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
+        config["SETTINGS"] = {"headers"             : [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",],
+                              "appearanceModeTypes" : [ "Light", "Dark", "System",],
+                              "colorThemeTypes"     : [ "green", "dark-blue", "blue",]
+                              }
+
         config["INFO"] = {"myVERSION": "2024.47",
                           "myNAME"   : "pyKlock"}
 
@@ -639,7 +720,8 @@ class Config():
                                  "y_pos"          : 100,
                                  "Align_Right"    : True}
 
-        config["TIME"] = {"type": "GMT Time"}
+        config["TIME"] = {"type"       : "GMT Time",
+                          "capitalise" : True}
 
         config["MENU"] = {"visible": True}
 

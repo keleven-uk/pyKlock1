@@ -80,8 +80,13 @@ class MyMainTimeFrame(ctk.CTkFrame):
 
     def __timeString(self):
         """  Returns the current time as a text string using the current time type.
+
+             If required, will return the time string capitalised.
         """
-        return self.selectTime.getTime(self.myConfig.TIME_TYPE)
+        if self.myConfig.TIME_CAPITALISE:
+            return self.selectTime.getTime(self.myConfig.TIME_TYPE).capitalize()
+        else:
+            return self.selectTime.getTime(self.myConfig.TIME_TYPE)
 
 
     def update(self):

@@ -128,7 +128,7 @@ class SelectTime:
             else:
                 __fuzzyTime = f" {__sRtn} {tc.hours[__hour]} {__ampm}"
 
-        return __fuzzyTime
+        return __fuzzyTime.strip()
 
 # ------------------------------------------------------------------------------------- getWordsTime -------------------
     def getWordsTime(self):
@@ -166,7 +166,7 @@ class SelectTime:
         else:
             __minsStr = f" thirty minutes past {tc.hours[__hour]} {__ampm}"
 
-        return __minsStr
+        return __minsStr.strip()
 
 # ------------------------------------------------------------------------------------- getSwatchTime ------------------
     def getSwatchTime(self):

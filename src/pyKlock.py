@@ -50,7 +50,7 @@ class Klock(ctk.CTk):
 
         #  Sets the colour of the widgets in the window.
         #  Supported themes : green, dark-blue, blue.
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+        ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
         #  Dimensions of the window
 

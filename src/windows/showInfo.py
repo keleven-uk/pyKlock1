@@ -37,7 +37,7 @@ class showInfo(ctk.CTkToplevel):
         self.InfoFont = ctk.CTkFont(family="Hack", size=12)
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+        ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
         self.geometry("1000x800+200+200")
         self.resizable(False, False)

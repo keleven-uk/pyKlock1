@@ -21,13 +21,15 @@ import customtkinter as ctk
 
 class MyMenuFrame(ctk.CTkFrame):
     """  A class that creates a frame that holds the user settings for the Application.
+
+        Note : this frame uses a copy of the Config file i.e. not myConfig.
     """
-    def __init__(self, master, main, myConfig):
+    def __init__(self, master, main, Config):
         super().__init__(main)
 
         self.master     = master
         self.main       = main
-        self.myConfig   = myConfig
+        self.Config     = Config
         self.foreColour = "white"
 
         self.__createWidgets()
@@ -36,22 +38,30 @@ class MyMenuFrame(ctk.CTkFrame):
     def __createWidgets(self):
         """  Create the main frame.
         """
-        self.configure(fg_color=self.myConfig.BACKGROUND)
+        self.configure(fg_color=self.Config.BACKGROUND)
         self.lblTitle = ctk.CTkLabel(self, text="Menu Settings", text_color=self.foreColour,
-                                         fg_color=self.myConfig.BACKGROUND)
+                                         fg_color=self.Config.BACKGROUND)
         self.lblTitle.grid(row=0, column=3)
         self.lblMenuVisable = ctk.CTkLabel(self, text="Menu Visable", text_color=self.foreColour,
-                                              fg_color=self.myConfig.BACKGROUND)
+                                              fg_color=self.Config.BACKGROUND)
         self.lblMenuVisable.grid(row=1, column=0, padx=10, pady=10)
-        self.chkMenuVisable = ctk.CTkCheckBox(self, text="", fg_color=self.myConfig.BACKGROUND, border_color=self.foreColour,
+        self.chkMenuVisable = ctk.CTkCheckBox(self, text="", fg_color=self.Config.BACKGROUND, border_color=self.foreColour,
                                               hover_color="gray", command=self.__setMenuVisable)
         self.chkMenuVisable.grid(row=1, column=1, padx=10, pady=10)
-        if self.myConfig.MENU_VISIBLE:
+        if self.Config.MENU_VISIBLE:
             self.chkMenuVisable.select()
         else:
             self.chkMenuVisable.deselect()
+        self.lblLabel = ctk.CTkLabel(self, text=" Setting not yet implemented", text_color=self.foreColour,
+                                         fg_color=self.Config.BACKGROUND)
+        self.lblLabel.grid(row=1, column=3)
 
 
     def __setMenuVisable(self):
+        """  Set if the menu's are visible.
+             This feature is not yet implemented and may be removed.
+        """
         self.master.btnSave.configure(state="normal")
+        clicked = self.chkMenuVisable.get()
+        self.Config.MENU_VISIBLE = True if clicked == 1 else False
 

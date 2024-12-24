@@ -1,38 +1,39 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Saturday 21 December 2024  13:54:09
+#   (c) Kevin Scott   Written Tuesday 24 December 2024  11:39:04
 #
 #   true and false are lower case 
 #
-[SETTINGS]
-headers = [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",]
-
 [INFO]
 myVERSION = "2024.48"
 myNAME = "pyKlock"
 
-[APPLICATION]
-appearanceMode = "Dark"
+[SETTINGS]
+headers = [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",]
 appearanceModeTypes = [ "Light", "Dark", "System",]
-colorTheme = "dark-blue"
 colorThemeTypes = [ "green", "dark-blue", "blue",]
+
+[APPLICATION]
+appearanceMode = "System"
+colorTheme = "dark-blue"
 foreground = "#00ff00"
 background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1588
-y_pos = -405
+x_pos = 361
+y_pos = -430
 Align_Right = true
 
 [TIME]
-type = "Fuzzy Time"
+type = "Time in Words"
+capitalise = true
 
 [MENU]
 visible = true
 
 [TIME_FONT]
-family = "Playwrite CU"
-size = 22
+family = "Toy Train"
+size = 50
 weight = "normal"
 slant = false
 underline = false
@@ -47,23 +48,24 @@ underline = false
 overstrike = false
 
 [KLOCKS]
-vfd_width = 500
+vfd_width = 460
 vfd_height = 260
-vfd_x_pos = 428
-vfd_y_pos = -614
-vfd_foreground = "#82ccff"
+vfd_x_pos = 400
+vfd_y_pos = 400
+vfd_foreground = "#34ff6c"
 vfd_background = "#000000"
-textKlock_width = 460
+textKlock_width = 500
 textKlock_height = 260
-textKlock_x_pos = 701
-textKlock_y_pos = -365
-textKlock_onColour = "springGreen2"
-textKlock_offColour = "slate grey"
+textKlock_x_pos = 557
+textKlock_y_pos = -398
+textKlock_onColour = "#ff313b"
+text_ofColour = "slate grey"
 textKlock_background = "#000000"
+textKlock_offColour = "#fff234"
 
 [SOUNDS]
-sounds = true
-hour_chimes = false
-quarter_chimes = false
+hour_chimes = true
+quarter_chimes = true
 hour_pips = true
-sound_volume = 25
+sound_volume = 14.0
+sounds = true

@@ -19,6 +19,10 @@
 
 import customtkinter as ctk
 
+from CTkMessagebox import CTkMessagebox
+
+import src.config as Config
+import src.projectPaths as pp
 import src.frames.settings.application as frmApplication
 import src.frames.settings.time as frmTime
 import src.frames.settings.menu as frmMenu
@@ -29,13 +33,15 @@ import src.frames.settings.sounds as frmSound
 class MySettings(ctk.CTkFrame):
     """  A class that creates the frame for the settings.
     """
-    def __init__(self, main, myConfig):
+    def __init__(self, main, myConfig, myLogger):
         super().__init__(main)
 
         self.main        = main
         self.myConfig    = myConfig
+        self.myLogger    = myLogger
         self.frmSettings = {}
         self.foreColour  = "white"
+        self.copyConfig  = Config.Config(pp.CONFIG_PATH, pp.VERSION_PATH, self.myLogger)         # Create the copy config.
 
         self.__createWidgets()
 
@@ -60,22 +66,22 @@ class MySettings(ctk.CTkFrame):
 
             match header:
                 case "APPLICATION":
-                    frmApp = frmApplication.MyApplicationFrame(self, self.frmSettings["APPLICATION"], self.myConfig)
+                    frmApp = frmApplication.MyApplicationFrame(self, self.frmSettings["APPLICATION"], self.copyConfig)
                     frmApp.grid(row=1, column=0)
                 case "TIME":
-                    frmTm = frmTime.MyTimeFrame(self, self.frmSettings["TIME"], self.myConfig)
+                    frmTm = frmTime.MyTimeFrame(self, self.frmSettings["TIME"], self.copyConfig)
                     frmTm.grid(row=1, column=0)
                 case "MENU":
-                    frmMn = frmMenu.MyMenuFrame(self, self.frmSettings["MENU"], self.myConfig)
+                    frmMn = frmMenu.MyMenuFrame(self, self.frmSettings["MENU"], self.copyConfig)
                     frmMn.grid(row=1, column=0)
                 case "FONT":
-                    frmMn = frmFont.MyFontFrame(self, self.frmSettings["FONT"], self.myConfig)
+                    frmMn = frmFont.MyFontFrame(self, self.frmSettings["FONT"], self.copyConfig)
                     frmMn.grid(row=1, column=0)
                 case "KLOCKS":
-                    frmKl = frmKlocks.MyKlocksFrame(self, self.frmSettings["KLOCKS"], self.myConfig)
+                    frmKl = frmKlocks.MyKlocksFrame(self, self.frmSettings["KLOCKS"], self.copyConfig)
                     frmKl.grid(row=1, column=0)
                 case "SOUNDS":
-                    frmMn = frmSound.MySoundFrame(self, self.frmSettings["SOUNDS"], self.myConfig)
+                    frmMn = frmSound.MySoundFrame(self, self.frmSettings["SOUNDS"], self.copyConfig)
                     frmMn.grid(row=1, column=0)
 
         self.btnExit = ctk.CTkButton(self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
@@ -87,11 +93,30 @@ class MySettings(ctk.CTkFrame):
 
     def __exit(self):
         """  Closes the window.
+             Will display a warning if any settings have been changed and not saved.
         """
+        try:
+            if self.myConfig != self.copyConfig:
+                msg = CTkMessagebox(title="Unsaved data", message="Do you really want exit, there is unsaved data?",
+                                    icon="question", option_1="Yes", option_2="No")
+                if msg.get()=="No":
+                    return
+        except NotImplemented as error:
+            self.myLogger.error(f"  Problems with comparing configs for equality :: {error}")
+
+        self.myLogger.debug("  Exited setting window although there was unsaved data.")
         self.main.destroy()
 
     def __Save(self):
-        pass
+        """  Save amended config file.
+             We first copy the amended configs [copyConfig] back to the main config [myConfig].
+                This ensure the amendments will be used by the rest of Klock.
+        """
+        self.myConfig.copy(self.copyConfig)
+        self.myConfig.writeConfig()
+        self.btnSave.configure(state="disabled")
+
+
 
 
 

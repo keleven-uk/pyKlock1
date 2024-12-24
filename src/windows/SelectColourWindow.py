@@ -34,7 +34,7 @@ class ColourWindow(ctk.CTkToplevel):
         self.myConfig = myConfig
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
-        ctk.set_default_color_theme(self.myConfig.COLOR_THEME)
+        ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
         self.title("Colour Chooser")
         self.geometry("400x200+400+600")
