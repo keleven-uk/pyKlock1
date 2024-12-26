@@ -29,7 +29,7 @@ import sys
 import pathlib
 import platformdirs as pp
 
-appname = "Klock"
+appname = "pyKlock"
 appauthor = "Keleven"
 
 USER_DATA_DIR    = pathlib.Path(pp.user_data_dir(appname, appauthor))
@@ -40,7 +40,7 @@ MAIN_PATH        = pathlib.Path(__file__).parent.parent
 
 #  If running as an executable i.e. from using auto-py-to-exe.
 #  Some of the paths needs to be the working directory.
-#  Except the log files, these will be somewhere like C:\Users\kevin\AppData\Local\Keleven\Klock\Logs
+#  Except the log files, these will be somewhere like C:\Users\kevin\AppData\Local\Keleven\pyKlock\Logs
 
 
 

@@ -21,13 +21,13 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 
 ;  all source files here
-SourceDir=D:\My\shed\Projects\python\pyKlock1\output\Klock
+SourceDir=D:\My\shed\Projects\python\pyKlock1\output\pyKlock
 
 DefaultDirName={pf}\keleven\{#MyAppName}
 DefaultGroupName={#MyAppName}
 LicenseFile=LICENSE.txt
 InfoAfterFile=README.md
-OutputDir=D:\My\shed\Projects\python\pyKlock1\output\Klock
+OutputDir=D:\My\shed\Projects\python\pyKlock1\output\pyKlock
 OutputBaseFilename={#MyAppName}_{#MyAppVersion}
 SetupIconFile=resources\tea.ico
 Compression=lzma
@@ -36,11 +36,11 @@ DisableStartupPrompt=False
 UsePreviousAppDir=False
 SetupLogging=True
 
-; "ArchitecturesInstallIn64BitMode=x64" requests that the install be done in "64-bit mode" 
-; on x64, meaning it should use the native 64-bit Program Files directory and the 64-bit 
+; "ArchitecturesInstallIn64BitMode=x64" requests that the install be done in "64-bit mode"
+; on x64, meaning it should use the native 64-bit Program Files directory and the 64-bit
 ; view of the registry. On all other architectures it will install in "32-bit mode".
 ArchitecturesInstallIn64BitMode=x64
-; Note: We don't set ProcessorsAllowed because we want this installation to run on 
+; Note: We don't set ProcessorsAllowed because we want this installation to run on
 ; all architectures (including Itanium,since it's capable of running 32-bit code too)
 
 [Messages]
@@ -57,7 +57,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Files]
-Source: "Klock.exe"    ; DestDir: "{app}"           ; Flags: ignoreversion; Check: Is64BitInstallMode    ; DestName: {#MyAppExeName}
+Source: "pyKlock.exe"    ; DestDir: "{app}"           ; Flags: ignoreversion; Check: Is64BitInstallMode    ; DestName: {#MyAppExeName}
 Source: "LICENSE.txt"  ; DestDir: "{app}"           ; Flags: ignoreversion
 Source: "history.txt"  ; DestDir: "{app}"           ; Flags: ignoreversion
 Source: "README.md"    ; DestDir: "{app}"           ; Flags: isreadme

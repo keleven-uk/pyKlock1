@@ -21,7 +21,7 @@ import customtkinter as ctk
 
 import CTkColorPicker as ctk_cp
 
-class MyKlocksFrame(ctk.CTkFrame):
+class MypyKlocksFrame(ctk.CTkFrame):
     """  A class that creates a frame that holds the user settings for the Application.
 
          Note : this frame uses a copy of the Config file i.e. not myConfig.
@@ -41,11 +41,11 @@ class MyKlocksFrame(ctk.CTkFrame):
         """  Create the main frame.
         """
         self.configure(fg_color=self.Config.BACKGROUND)
-        self.lblTitle = ctk.CTkLabel(self, text="Extra Klocks Settings", text_color=self.foreColour,
+        self.lblTitle = ctk.CTkLabel(self, text="Extra pyKlocks Settings", text_color=self.foreColour,
                                          fg_color=self.Config.BACKGROUND)
         self.lblTitle.grid(row=0, column=2)
 
-        self.lblVFD = ctk.CTkLabel(self, text="VFD Klocks Settings", text_color=self.foreColour,
+        self.lblVFD = ctk.CTkLabel(self, text="VFD pyKlocks Settings", text_color=self.foreColour,
                                          fg_color=self.Config.BACKGROUND)
         self.lblVFD.grid(row=2, column=2)
         self.lblVFDForeColour = ctk.CTkLabel(self, text="Foreground Colour", text_color=self.foreColour,
@@ -64,7 +64,7 @@ class MyKlocksFrame(ctk.CTkFrame):
                                            text_color=self.foreColour, font=("Montserrat", 16))
         self.btnVFDBackColour.grid(row=3, column=3, padx=10, pady=10)
 
-        self.lblText = ctk.CTkLabel(self, text="Text Klocks Settings", text_color=self.foreColour,
+        self.lblText = ctk.CTkLabel(self, text="Text pyKlocks Settings", text_color=self.foreColour,
                                          fg_color=self.Config.BACKGROUND)
         self.lblText.grid(row=5, column=2)
         self.lblTextOnColour = ctk.CTkLabel(self, text="On Colour", text_color=self.foreColour,
@@ -94,7 +94,7 @@ class MyKlocksFrame(ctk.CTkFrame):
 
 
     def __askVFDForeColour(self):
-        """  Sets the forecolour of the VFD Klock - i.e. the text colour.
+        """  Sets the forecolour of the VFD pyKlock - i.e. the text colour.
         """
         self.master.btnSave.configure(state="normal")
         pickColor = ctk_cp.AskColor()                                                   # open the colour picker
@@ -102,7 +102,7 @@ class MyKlocksFrame(ctk.CTkFrame):
         self.btnVFDForeColour.configure(text_color=self.Config.VFD_FOREGROUND)
 
     def __askVFDBackColour(self):
-        """"  Sets the background of the VFD Klock.
+        """"  Sets the background of the VFD pyKlock.
         """
         self.master.btnSave.configure(state="normal")
         pickColor = ctk_cp.AskColor()                                                   # open the colour picker

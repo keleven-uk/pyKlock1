@@ -23,7 +23,7 @@
   },
   {
    "optionDest": "name",
-   "value": "Klock"
+   "value": "pyKlock"
   },
   {
    "optionDest": "clean_build",

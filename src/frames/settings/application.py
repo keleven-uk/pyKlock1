@@ -68,7 +68,7 @@ class MyApplicationFrame(ctk.CTkFrame):
                                               hover_color="gray", command=self.__setTransparent)
         self.chkTransparent.grid(row=2, column=1, padx=10, pady=10)
 
-        self.lblAlighnRight = ctk.CTkLabel(self, text="Right Align Klock", text_color=self.foreColour,
+        self.lblAlighnRight = ctk.CTkLabel(self, text="Right Align pyKlock", text_color=self.foreColour,
                                               fg_color=self.Config.BACKGROUND)
         self.lblAlighnRight.grid(row=2, column=2, padx=10, pady=10)
         self.chkAlighnRight = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color=self.foreColour,
@@ -120,32 +120,32 @@ class MyApplicationFrame(ctk.CTkFrame):
         self.Config.COLOUR_THEME = choice
 
     def __setTransparent(self):
-        """  Set if Klock has a Transparent background.
+        """  Set if pyKlock has a Transparent background.
         """
         self.master.btnSave.configure(state="normal")
         clicked = self.chkTransparent.get()
         self.Config.TRANSPARENT = True if clicked == 1 else False
 
     def __setAlighnRight(self):
-        """  Set if Klock has is aligned with the right side of the monitor.
+        """  Set if pyKlock has is aligned with the right side of the monitor.
         """
         self.master.btnSave.configure(state="normal")
         clicked = self.chkAlighnRight.get()
         self.Config.ALIGN_RIGHT = True if clicked == 1 else False
 
     def __askForeColour(self):
-        """  Sets the forecolour of Klock - i.e. the text colour.
+        """  Sets the forecolour of pyKlock - i.e. the text colour.
         """
         self.master.btnSave.configure(state="normal")
         pickColor = ctk_cp.AskColor()                                                   # open the colour picker
         self.Config.FOREGROUND = pickColor.get()                                        # get the colour string
         self.btnForeColour.configure(text_color=self.Config.VFD_FOREGROUND)
 
-    def __askBackColour(sefl):
-        """  Sets the forecolour of Klock - i.e. the text colour.
+    def __askBackColour(self):
+        """  Sets the back colour of pyKlock - i.e. the text colour.
         """
         self.master.btnSave.configure(state="normal")
         pickColor = ctk_cp.AskColor()                                                   # open the colour picker
-        self.Config.BACKGROUND.VFD_FOREGROUND = pickColor.get()                         # get the colour string
+        self.Config.VFD_FOREGROUND = pickColor.get()                         # get the colour string
         self.btnBackColour.configure(text_color=self.Config.VFD_FOREGROUND)
 

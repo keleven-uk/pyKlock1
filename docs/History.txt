@@ -18,13 +18,13 @@
 #                                                                                                             #
 ###############################################################################################################
 
-Previous versions of Klock have existed in VB.net, Lazarus [Free Pascal] and Free Basic - and may again.
+Previous versions of pyKlock have existed in VB.net, Lazarus [Free Pascal] and Free Basic - and may again.
 
-Current version of Klock is written in Python using different GUI frameworks
+Current version of pyKlock is written in Python using different GUI frameworks
 
-	Klock 0 - pygubu & pySimpleGUI - finally settled on pySimpleGUI.  Most complete.
-	Klock 1 - CustomTkinter  [this]
-	Klock 2 - Flet.
+	pyKlock 0 - pygubu & pySimpleGUI - finally settled on pySimpleGUI.  Most complete.
+	pyKlock 1 - CustomTkinter  [this]
+	pyKlock 2 - Flet.
 
 	Note : pySimpleGUI is licensed software product, but free for hobbyist [but need to register]
 
@@ -33,8 +33,13 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
-V2.24.52	[25 December 2024]
-	Added a second set of hour chimes - Cuckoo Klock.
+V2.24.53	[26 December 2024]
+	I had used the two terms Klock and pyKlock through out the codebase.
+	So, I cleaned it all up and now only use the term pyKlock.
+
+
+V2.24.52	[26 December 2024]
+	Added a second set of hour chimes - Cuckoo pyKlock.
 		These can be selected from the Sounds settings page.
 
 
@@ -56,7 +61,7 @@ V2.24.49	[19 December 2024]
 	Started work on a settings window.
 	This all set in a tab view in a separate window.
 		tabs complete for Application, Time, Menu, Fonts and Sounds.
-		Still need tab for the extra Klocks and all the saving and validation stuff.
+		Still need tab for the extra pyKlocks and all the saving and validation stuff.
 
 
 ----------------------------------------------------------------------------------------------
@@ -88,8 +93,8 @@ pyKlock1\src\frames\showStatusBar.py                          32             30 
 pyKlock1\src\myTimer.py                                       19             44             36
 pyKlock1\src\windows\showInfo.py                              18             27             33
 pyKlock1\src\projectPaths.py                                   9             28             30
-pyKlock1\src\klocks\vfdKlock.py                               28             25             27
-pyKlock1\src\klocks\textKlock.py                              28             25             25
+pyKlock1\src\klocks\vfdpyKlock.py                               28             25             27
+pyKlock1\src\klocks\textpyKlock.py                              28             25             25
 pyKlock1\src\logger.py                                        11             27             18
 pyKlock1\copyStuff.bat                                         9              0             16
 pyKlock1\src\windows\showHelp.py                               8             20             13
@@ -119,34 +124,34 @@ V2.24.48	[17 December 2024]
 
 V2.24.47	[16 December 2024]
 
-	Added sound to Klock.
-	Klock can play Westminster type chimes on the quarter, half and on the hour.
-	Klock can also play "the pips" on the hour.
+	Added sound to pyKlock.
+	pyKlock can play Westminster type chimes on the quarter, half and on the hour.
+	pyKlock can also play "the pips" on the hour.
 		I first used playsound, but the volume could not be adjusted.
 		Currently using audioplayer, this allows the volume to be adjusted.
-		But the non blocking does not work, so a slight pause in Klock can be noticed.
+		But the non blocking does not work, so a slight pause in pyKlock can be noticed.
 	Sound can enabled in the config file, as well as the sound volume.
 
 
 V2.24.46	[11 December 2024]
 
-	Merged textKlock branch back to main.
+	Merged textpyKlock branch back to main.
 
 
-V2.24.45	[11 December 2024] - in textKlock branch.
+V2.24.45	[11 December 2024] - in textpyKlock branch.
 
-	When textKlock was built, it was built without a menu.
+	When textpyKlock was built, it was built without a menu.
 	The window is closed by clicking on a red X in the top left hand corner.
-	This feature has been incorporated into VFDKlock.
+	This feature has been incorporated into VFDpyKlock.
 
 
-V2.24.44	[11 December 2024] - in textKlock branch.
+V2.24.44	[11 December 2024] - in textpyKlock branch.
 
 	TextClock looking better, after more tweaking.
 		Now seems to handle noon and midnight.
 
 
-V2.24.43	[10 December 2024] - in textKlock branch.
+V2.24.43	[10 December 2024] - in textpyKlock branch.
 
 	TextClock seems to be working, after some tweaking.
 
@@ -156,13 +161,13 @@ V2.24.43	[10 December 2024] - in textKlock branch.
 	Also, it appears the file showMenuButtons is no longer used - removed.
 
 
-V2.24.42	[10 December 2024] - in textKlock branch.
+V2.24.42	[10 December 2024] - in textpyKlock branch.
 
-	Started working on a new sub Klock - textKlock.
+	Started working on a new sub pyKlock - textpyKlock.
 	The clock in a matrix of letters/words and the current time is displayed by highlighted text.
 	The basic window containing the text created.
-	The main menu amended to include the new Klock.
-	Added new config option of textKlock [screen position, window size and text colours].
+	The main menu amended to include the new pyKlock.
+	Added new config option of textpyKlock [screen position, window size and text colours].
 
 
 V2.24.41	[7 December 2024]
@@ -238,7 +243,7 @@ V2.24.34	[19 November 2024] - In Events branch.
 V2.24.33	[19 November 2024] - In Events branch.
 
 	Started work on the events accessory, heavily modelled on the friends accessory.
-	The events should have a die date and/or due time - Klock will notify when event is due.
+	The events should have a die date and/or due time - pyKlock will notify when event is due.
 	Refactored the showFriends and showAddFriends to have similar event roles.
 	The Add button seems to work.
 
@@ -323,7 +328,7 @@ V2024.24	[30 October 2024]
 		the python script.  This was found to be a problem in the current version [1.24.12],
 		installed previous version [1.24.10] - all now okay
 
-		tkVFD [used in vfdKlock] also failed in the executable but worked in the python script.
+		tkVFD [used in vfdpyKlock] also failed in the executable but worked in the python script.
 		This was found to be tkVFD using a different path in the executable then the script
 		for it's graphic files.  I cured this by creating the desired path in the executable.
 
@@ -332,9 +337,9 @@ V2024.23	[28 October 2024] - In vfd branch.
 
 	Found Vacuum Fluorescent Displays for tk when looking for other things.
 		See Help [Credits Section] for location and original author.
-		Added configure options for vfdKlock, screen location and colour only used.
-	This is used in the first of the alternative Klocks.
-	When this Klock is displayed, the main Klock is minimised to the task bar.
+		Added configure options for vfdpyKlock, screen location and colour only used.
+	This is used in the first of the alternative pyKlocks.
+	When this pyKlock is displayed, the main pyKlock is minimised to the task bar.
 
 	Changed the status bar [again] to try and fix the layout problems.
 	The status bar is now one long label and not three as before.
@@ -343,7 +348,7 @@ V2024.23	[28 October 2024] - In vfd branch.
 	Corrected a bug in the screen position locator of the main window.
 
 	Added a new time type - getDigitTime - returns current time as a list [H,H,M,M,S,S]
-		Used in vfdKlock
+		Used in vfdpyKlock
 
 
 V2024.22	[23 October 2024]
@@ -364,7 +369,7 @@ V2024.21	[21 October 2024] - In friends branch [Using python 3.12.7 and CustomTK
 	Need to test before merging into main.
 
 	Also added a sperate version file in the data directory.
-		This allows the version in an installed Klock to be updated without uninstalling first.
+		This allows the version in an installed pyKlock to be updated without uninstalling first.
 		The install process doesn't upgrade the existing config file.
 
 	Note : in addition to installing the files in the requirements files, the following source
@@ -408,7 +413,7 @@ V2024.16	[3 October 2024]
 
 	Added a new option under edit - Time Types.
 		This allows the time format to be chosen for a list of supplied time formats.
-		The different formats are held in src.select time.  [Used in all version of python Klock].
+		The different formats are held in src.select time.  [Used in all version of python pyKlock].
 		When the menu option is chosen, a new windows opens allowing the user to select the time type and size.
 		The time type and size in the configure is also changed, so the main time will change in real time.
 
@@ -418,8 +423,8 @@ V2024.15	[2 October 2024]
 	Tried to make an installed and a stand alone executable with auto-py-to-exe.exe and Inno setup Compiler.
 	The stand alone executable has worked for some version, but when installed on the PC there was an error.
 	The error was due to windows not letting the loc files be created in the same directory as the .exe.
-	The solution is to store the log files in C:\Users\kevin\AppData\Local\Keleven\Klock\Logs or similar.
-	Also, store the config in a similar place : C:\Users\kevin\AppData\Local\Keleven\Klock
+	The solution is to store the log files in C:\Users\kevin\AppData\Local\Keleven\pyKlock\Logs or similar.
+	Also, store the config in a similar place : C:\Users\kevin\AppData\Local\Keleven\pyKlock
 	Once auto-exe-to-py has done it's stuff, copyStuff.bat needs to run.
 		This copies required files into the output/klock directory [where the .exe lives]
 	The the Inno setup script needs to be run in the output/klock directory and hey presto an installer is produced.
@@ -443,7 +448,7 @@ V2024.13	[30 Septemebr 2024]
 V2024.12	[29 September 2024]
 
 	Added a new option under Help - Help.
-		This option loads Klock's help in pdf format.
+		This option loads pyKlock's help in pdf format.
 		The pdf file is loaded by whatever your system loads pdf files.
 		The help file is generated using HelpNDoc - .pdf & .chm files are generated.
 
@@ -486,7 +491,7 @@ SUM:                                                        477            684  
 	Added a new option under Help - About.
 		This option loads the about Screen.
 		This displays general information about klock [Name, version etc.] and some system info.
-		Also displays Klock and PC up time.
+		Also displays pyKlock and PC up time.
 
 
 
@@ -495,7 +500,7 @@ V2024.9     [25 September 2024]
 	Added a new option under Help - License.
 		This option loads the license text file into a text box for display.
 	Added a screen shot of klock to the read.me file.
-	Klock does not run un 3.13.rc2 yes - pywin32 not compatible.
+	pyKlock does not run un 3.13.rc2 yes - pywin32 not compatible.
 
 
 V2024.8     [24 September 2024]
@@ -522,7 +527,7 @@ V2024.7     [25 September 2024]
 V2024.6     [23 Septemebr 2024]
 
 	Found an example of a dropdown menu at https://github.com/Akascape/CTkMenuBar.
-	Added the example to Klock - lives in src.menu.py.
+	Added the example to pyKlock - lives in src.menu.py.
 	Not sure if I will use it, so added an option for menu visible - set to false.
 
 
@@ -577,7 +582,7 @@ V2024.2     [12 September 2024]
 
 V2024.1		[9 September 2024]
 
-	Basic implementation of Klock.
+	Basic implementation of pyKlock.
 	The app is created in python [3.12.6] using the Customtkinter [5.2.2] GUI framework.
 	The app displays the current time in the format HH:MM:SS.
 	The app consists of the following -

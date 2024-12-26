@@ -27,8 +27,8 @@ import src.classes.sounds as snds
 import src.menu as myMenu
 
 
-class Klock(ctk.CTk):
-    """  The main Klock class, when called will create the Klock main window.
+class pyKlock(ctk.CTk):
+    """  The main pyKlock class, when called will create the pyKlock main window.
          The class should be called from the main script.
     """
     def __init__(self, myLogger, myConfig, myTimer):
@@ -38,7 +38,7 @@ class Klock(ctk.CTk):
 
         self.myConfig    = myConfig
         self.myLogger    = myLogger
-        self.myTimer     = myTimer              #  Also starts the timer - used to determined Klock running time.
+        self.myTimer     = myTimer              #  Also starts the timer - used to determined pyKlock running time.
         self.sounds      = snds.Sounds(self.myConfig)
         self.eventsStore = es.eventsStore(self) #  This needs to be declared here and passed down the tree.
                                                 #  So the checks whether any of the events are due can be done all the time.
@@ -57,7 +57,7 @@ class Klock(ctk.CTk):
         self.myLogger.debug(f" Window Width  = {myConfig.WIN_WIDTH}")
         self.myLogger.debug(f" Window Height = {myConfig.WIN_HEIGHT}")
 
-        self.title("Klock")
+        self.title("pyKlock")
         self.geometry(f"{myConfig.WIN_WIDTH}x{myConfig.WIN_HEIGHT}+{myConfig.X_POS}+{myConfig.Y_POS}")
         self.resizable(False, False)
         self.configure(fg_color=myConfig.BACKGROUND)
@@ -87,7 +87,7 @@ class Klock(ctk.CTk):
     def __update(self):
         """  Update the time and status bar.
         """
-        if self.state() == "normal":                               #  Only update if Klock is visible.
+        if self.state() == "normal":                               #  Only update if pyKlock is visible.
             self.configure(fg_color=self.myConfig.BACKGROUND)
             self.menu.update()
             self.mainTime.update()

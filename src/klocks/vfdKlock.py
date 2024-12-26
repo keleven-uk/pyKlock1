@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    vfdKlock   Copyright (C) <2024>  <Kevin Scott>                                                           #
+#    vfdpyKlock   Copyright (C) <2024>  <Kevin Scott>                                                           #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -47,12 +47,12 @@ class vfdKlock(ctk.CTkToplevel):
         self.configure(fg_color=self.myConfig.VFD_BACKGROUND)
 
         #  Create the frame for the time display.
-        myLogger.info("  Creating vfdKlock Main Time")
+        myLogger.info("  Creating vfdpyKlock Main Time")
         self.mainTime = vfdTime.showVFDime(self, self.master, self.myConfig, self.myLogger)
         self.mainTime.pack(expand=True)
 
         #  Create the frame for the status bar.
-        myLogger.info("  Creating vfdKlock Status Bar")
+        myLogger.info("  Creating vfdpyKlock Status Bar")
         self.StatusBar = myStatusBar.MyStatusBarFrame(self, self.myConfig)
         self.StatusBar.pack(expand=True)
 

@@ -1,7 +1,7 @@
 ###############################################################################################################
 #    pyKlock1   Copyright (C) <2024>  <Kevin Scott>                                                           #
 #                                                                                                             #
-#    The Klock displays the time [local], date, key status  and the computers idle time.                      #
+#    The pyKlock displays the time [local], date, key status  and the computers idle time.                      #
 #       Key status is the status of Caps Lock, Scroll lock and Num lock.                                      #
 #                                                                                                             #
 #    For changes see history.txt                                                                              #
@@ -25,7 +25,7 @@ import platform
 
 import src.config as Config
 import src.logger as Logger
-import src.pyKlock as Klock
+import src.pyKlock as pyKlock
 import src.myTimer as Timer
 import src.projectPaths as pp
 import src.utils.klock_utils as utils
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     myLogger.info("-" * 100)
 
     try:
-        myTimer.Start()                                         #  Timer mainly used to measure Klock up time.
+        myTimer.Start()                                         #  Timer mainly used to measure pyKlock up time.
     except (TimeoutError, AttributeError, NameError) as error:
         myLogger.debug(error)
 
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     myLogger.info(f"  Events path      : {pp.EV_DATA_PATH}")
 
     # Create an instance of the App class.
-    app = Klock.Klock(myLogger, myConfig, myTimer)
+    app = pyKlock.pyKlock(myLogger, myConfig, myTimer)
     # Run the mainloop() method to start the application.
     app.mainloop()
 

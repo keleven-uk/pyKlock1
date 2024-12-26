@@ -244,7 +244,7 @@ class EventAddWindow(ctk.CTkToplevel):
              Checks whether there is any data to be saved.
              If there is, it asks do you really want to exit, it yes then exit.
              If no, then drop out of the method without doing anything.
-             If no data to save [adddata will be false, then exit Klock.]
+             If no data to save [adddata will be false, then exit pyKlock.]
         """
         if self.addData:
             msg = CTkMessagebox(title="Unsaved data", message="Do you really want exit, there is unsaved data?",

@@ -65,7 +65,7 @@ class myMenu(CTkmenu.CTkMenuBar):
 
         self.menu      = CTkmenu.CTkMenuBar(self.master)
         self.mnuFile   = self.menu.add_cascade("File")
-        self.mnuKlocks = self.menu.add_cascade("Klocks")
+        self.mnupyKlocks = self.menu.add_cascade("Klocks")
         self.mnuThings = self.menu.add_cascade("Things")
         self.mnuEdit   = self.menu.add_cascade("Edit")
         self.mnuHelp   = self.menu.add_cascade("Help")
@@ -77,8 +77,8 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.dropdown1.add_separator()
         self.dropdown1.add_option(option="Exit", command=self.__close)
 
-        #Klocks
-        self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnuKlocks, height=menuHeight,
+        #pyKlocks
+        self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnupyKlocks, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown2.add_option(option="vfdKlock",  command=self.__showVFDKlock)
         self.dropdown2.add_option(option="textKlock", command=self.__showTextKlock)
@@ -215,7 +215,7 @@ class myMenu(CTkmenu.CTkMenuBar):
         self.mnuThings.configure(text_color=self.myConfig.FOREGROUND)
         self.mnuEdit.configure(text_color=self.myConfig.FOREGROUND)
         self.mnuHelp.configure(text_color=self.myConfig.FOREGROUND)
-        self.mnuKlocks.configure(text_color=self.myConfig.FOREGROUND)
+        self.mnupyKlocks.configure(text_color=self.myConfig.FOREGROUND)
 
         self.dropdown1.configure(text_color=self.myConfig.FOREGROUND)
         self.dropdown2.configure(text_color=self.myConfig.FOREGROUND)

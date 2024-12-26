@@ -1,10 +1,10 @@
-#   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Tuesday 24 December 2024  21:46:03
+#   Configure file for pyKlock.py 
+#   (c) Kevin Scott   Written Thursday 26 December 2024  20:06:53
 #
-#   true and false are lower case
+#   true and false are lower case 
 #
 [INFO]
-myVERSION = "2024.48"
+myVERSION = "2024.52"
 myNAME = "pyKlock"
 
 [SETTINGS]
@@ -20,7 +20,7 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 893
+x_pos = 862
 y_pos = -247
 Align_Right = true
 
@@ -48,18 +48,18 @@ underline = false
 overstrike = false
 
 [KLOCKS]
-vfd_width = 460
+vfd_width = 500
 vfd_height = 260
-vfd_x_pos = 400
-vfd_y_pos = 400
+vfd_x_pos = 416
+vfd_y_pos = 416
 vfd_foreground = "#34ff6c"
 vfd_background = "#000000"
 textKlock_width = 500
 textKlock_height = 260
-textKlock_x_pos = 557
+textKlock_x_pos = 673
 textKlock_y_pos = -398
-textKlock_onColour = "#ff313b"
-text_ofColour = "slate grey"
+textKlock_on_Colour = "#ff313b"
+textKlock_off_Colour = "slate grey"
 textKlock_background = "#000000"
 textKlock_offColour = "#fff234"
 

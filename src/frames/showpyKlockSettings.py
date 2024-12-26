@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showKlockSettings   Copyright (C) <2024>  <Kevin Scott>                                                  #
+#    showpyKlockSettings   Copyright (C) <2024>  <Kevin Scott>                                                  #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -27,7 +27,7 @@ import src.frames.settings.application as frmApplication
 import src.frames.settings.time as frmTime
 import src.frames.settings.menu as frmMenu
 import src.frames.settings.font as frmFont
-import src.frames.settings.klocks as frmKlocks
+import src.frames.settings.klocks as frmpyKlocks
 import src.frames.settings.sounds as frmSound
 
 class MySettings(ctk.CTkFrame):
@@ -78,7 +78,7 @@ class MySettings(ctk.CTkFrame):
                     frmMn = frmFont.MyFontFrame(self, self.frmSettings["FONT"], self.copyConfig)
                     frmMn.grid(row=1, column=0)
                 case "KLOCKS":
-                    frmKl = frmKlocks.MyKlocksFrame(self, self.frmSettings["KLOCKS"], self.copyConfig)
+                    frmKl = frmpyKlocks.MypyKlocksFrame(self, self.frmSettings["KLOCKS"], self.copyConfig)
                     frmKl.grid(row=1, column=0)
                 case "SOUNDS":
                     frmMn = frmSound.MySoundFrame(self, self.frmSettings["SOUNDS"], self.copyConfig)
@@ -110,7 +110,7 @@ class MySettings(ctk.CTkFrame):
     def __Save(self):
         """  Save amended config file.
              We first copy the amended configs [copyConfig] back to the main config [myConfig].
-                This ensure the amendments will be used by the rest of Klock.
+                This ensure the amendments will be used by the rest of pyKlock.
         """
         self.myConfig.copy(self.copyConfig)
         self.myConfig.writeConfig()

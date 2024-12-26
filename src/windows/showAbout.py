@@ -29,7 +29,7 @@ import customtkinter as ctk
 from src.projectPaths import RESOURCE_PATH
 
 class showAbout(ctk.CTkToplevel):
-    """  A class to display general information about Klock.
+    """  A class to display general information about pyKlock.
     """
     def __init__(self, master, myConfig, myTimer):
         super().__init__(master)
@@ -48,14 +48,14 @@ class showAbout(ctk.CTkToplevel):
 
     def update(self):
         """  Will only be called if the window is visible.
-             Updated the Klock up time and PC up time labels in real time.
+             Updated the pyKlock up time and PC up time labels in real time.
         """
         bootTime = psutil.boot_time()
         CurrTime = dt.datetime.now().timestamp()
         elapTime = self.myTimer.formatSeconds(CurrTime-bootTime)
 
         self.bf.lblElapsed.configure(text=f"PC Up Time : {elapTime}")
-        self.bf.lblBoot.configure(text=f"Klock Up Time : {self.myTimer.Elapsed}")
+        self.bf.lblBoot.configure(text=f"pyKlock Up Time : {self.myTimer.Elapsed}")
 
 
     def __createWidgets(self):
@@ -77,7 +77,7 @@ class showAbout(ctk.CTkToplevel):
 
 class topFrame(ctk.CTkFrame):
     """  A class for the top form of the about window.
-         The display general information about Klock.
+         The display general information about pyKlock.
     """
     def __init__(self, master, myConfig, **kwargs):
         super().__init__(master, **kwargs)
@@ -95,7 +95,7 @@ class topFrame(ctk.CTkFrame):
         lblEmail.grid(row=2, column=1, padx=20)
         lblCopy = ctk.CTkLabel(self, text="(c) Kevin Scott 2024", font=("default", 20), justify=("center"))
         lblCopy.grid(row=3, column=1, padx=20)
-        lblVersion = ctk.CTkLabel(self, text=f"Klock Version : {myConfig.VERSION}", font=("default", 20), justify=("center"))
+        lblVersion = ctk.CTkLabel(self, text=f"pyKlock Version : {myConfig.VERSION}", font=("default", 20), justify=("center"))
         lblVersion.grid(row=4, column=1, padx=20)
 
 class middleFrame(ctk.CTkFrame):
@@ -125,7 +125,7 @@ class middleFrame(ctk.CTkFrame):
 
 class bottomFrame(ctk.CTkFrame):
     """  A class for the bottom form of the about window.
-         The display Klock and PC up time.
+         The display pyKlock and PC up time.
          The PC elapsed time is updated in the update method of the showAbout class.
     """
     def __init__(self, master, **kwargs):
@@ -135,7 +135,7 @@ class bottomFrame(ctk.CTkFrame):
         self.grid_columnconfigure(0, weight=1)
         self.lblBoot = ctk.CTkLabel(self, text="PC Up Time : 00:00:00", font=("default", 15))
         self.lblBoot.grid(row=0, column=0, padx=(0,0), sticky="w")
-        self.lblElapsed = ctk.CTkLabel(self, text="Klock Up Time : 00:00:00", font=("default", 15))
+        self.lblElapsed = ctk.CTkLabel(self, text="pyKlock Up Time : 00:00:00", font=("default", 15))
         self.lblElapsed.grid(row=1, column=0, padx=(0,0), sticky="w")
 
 

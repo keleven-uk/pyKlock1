@@ -1,7 +1,7 @@
 ###############################################################################################################
 #    pyKlock1_utils   Copyright (C) <2024>  <Kevin Scott>                                                     #
 #                                                                                                             #
-#    Contains utility functions for Klock.                                                                    #
+#    Contains utility functions for pyKlock.                                                                    #
 #                                                                                                             #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #

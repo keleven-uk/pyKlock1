@@ -358,80 +358,80 @@ class Config():
         """
         self.config["STATUS_FONT"]["size"] = value
 
-    #  VFD Klock config options.
+    #  VFD pyKlock config options.
     @property
     def VFD_WIDTH(self):
-        """  Returns the vfdKlock width.
+        """  Returns the vfdpyKlock width.
         """
         return self.config["KLOCKS"].get("vfd_width", "500")
 
     @VFD_WIDTH.setter
     def VFD_WIDTH(self, value):
-        """  Sets the vfdKlock width.
+        """  Sets the vfdpyKlock width.
         """
         self.config["KLOCKS"]["vfd_width"] = value
 
     @property
     def VFD_HEIGHT(self):
-        """  Returns the vfdKlock height.
+        """  Returns the vfdpyKlock height.
         """
         return self.config["KLOCKS"].get("vfd_height", "260")
 
     @VFD_HEIGHT.setter
     def VFD_HEIGHT(self, value):
-        """  Sets the vfdKlock height.
+        """  Sets the vfdpyKlock height.
         """
         self.config["KLOCKS"]["vfd_height"] = value
 
     @property
     def VFD_X_POS(self):
-        """  Returns the vfdKlock x pos.
+        """  Returns the vfdpyKlock x pos.
         """
         return self.config["KLOCKS"].get("vfd_x_pos", "400")
 
     @VFD_X_POS.setter
     def VFD_X_POS(self, value):
-        """  Sets the vfdKlock x pos.
+        """  Sets the vfdpyKlock x pos.
         """
         self.config["KLOCKS"]["vfd_x_pos"] = value
 
     @property
     def VFD_Y_POS(self):
-        """  Returns the vfdKlock y pos.
+        """  Returns the vfdpyKlock y pos.
         """
         return self.config["KLOCKS"].get("vfd_y_pos", "400")
 
     @VFD_Y_POS.setter
     def VFD_Y_POS(self, value):
-        """  Sets the vfdKlock y pos.
+        """  Sets the vfdpyKlock y pos.
         """
         self.config["KLOCKS"]["vfd_y_pos"] = value
 
     @property
     def VFD_FOREGROUND(self):
-        """  Returns the vfdKlock foreground colour.
+        """  Returns the vfdpyKlock foreground colour.
         """
         return self.config["KLOCKS"].get("vfd_foreground", "#82ccff")
 
     @VFD_FOREGROUND.setter
     def VFD_FOREGROUND(self, value):
-        """  Sets the vfdKlock foreground colour.
+        """  Sets the vfdpyKlock foreground colour.
         """
         self.config["KLOCKS"]["vfd_foreground"] = value
 
     @property
     def VFD_BACKGROUND(self):
-        """  Returns the vfdKlock background colour.
+        """  Returns the vfdpyKlock background colour.
         """
         return self.config["KLOCKS"].get("vfd_background", "#000000")
 
     @VFD_BACKGROUND.setter
     def VFD_BACKGROUND(self, value):
-        """  Sets the vfdKlock background colour.
+        """  Sets the vfdpyKlock background colour.
         """
         self.config["KLOCKS"]["vfd_background"] = value
 
-    #  Text Klock config options.
+    #  Text pyKlock config options.
     @property
     def TEXTKLOCK_WIDTH(self):
         """  Returns the textKlock width.
@@ -482,27 +482,27 @@ class Config():
 
     @property
     def TEXTKLOCK_ON_COLOUR(self):
-        """  Returns the textdKlock on colour.
+        """  Returns the textdpyKlock on colour.
         """
-        return self.config["KLOCKS"].get("textKlock_onColour", "springGreen2")
+        return self.config["KLOCKS"].get("textKlock_on_Colour", "springGreen2")
 
     @TEXTKLOCK_ON_COLOUR.setter
     def TEXTKLOCK_ON_COLOUR(self, value):
         """  Sets the textKlock on colour.
         """
-        self.config["KLOCKS"]["textKlock_onColour"] = value
+        self.config["KLOCKS"]["textKlock_on_Colour"] = value
 
     @property
     def TEXTKLOCK_OFF_COLOUR(self):
-        """  Returns the textdKlock off colour.
+        """  Returns the textdpyKlock off colour.
         """
-        return self.config["KLOCKS"].get("textKlock_offColour", "slate grey")
+        return self.config["KLOCKS"].get("textKlock_off_Colour", "slate grey")
 
     @TEXTKLOCK_OFF_COLOUR.setter
     def TEXTKLOCK_OFF_COLOUR(self, value):
         """  Sets the textKlock off colour.
         """
-        self.config["KLOCKS"]["textKlock_offColour"] = value
+        self.config["KLOCKS"]["textKlock_off_Colour"] = value
 
     @property
     def TEXTKLOCK_BACKGROUND(self):
@@ -604,7 +604,7 @@ class Config():
     #  ------------------------------------------------------------------------------------------------------------------------
 
     def __CheckVersion(self):
-        """  Checks Klocks version against a version file - if they diff, an upgrade has been performed.
+        """  Checks pyKlocks version against a version file - if they diff, an upgrade has been performed.
              So, amend klock's version [this save uninstalling klock to get the same result.].
 
              Could be used to add new config options, if needed.
@@ -616,7 +616,7 @@ class Config():
                 oldVersion = self.VERSION
                 if newVersion != oldVersion:
                     self.config["INFO"]["myVERSION"] = newVersion
-                    self.logger.info(f"  ** Klock has been upgraded from version {oldVersion} to new version {newVersion} **")
+                    self.logger.info(f"  ** pyKlock has been upgraded from version {oldVersion} to new version {newVersion} **")
 
                     if self.config["TIME"].get("capitalise" ) is None:
                         #  New config options to be added at 2024.51 - text klock
@@ -643,13 +643,13 @@ class Config():
 
                     if self.config["KLOCKS"].get("textKlock_width" ) is None:
                         #  New config options to be added at 2024.42 - text klock
-                        self.logger.info("  ** New options for TEXT Klock added @ 2024.42**")
+                        self.logger.info("  ** New options for TEXT pyKlock added @ 2024.42**")
                         self.config["KLOCKS"] = {"textKlock_width"      : 500,
                                                  "textKlock_height"     : 260,
                                                  "textKlock_x_pos"      : 821,
                                                  "textKlock_y_pos"      : 280,
-                                                 "textKlock_onColour"   : "springGreen2",
-                                                 "text_ofColour"        : "grey",
+                                                 "textKlock_on_Colour"  : "springGreen2",
+                                                 "textKlock_ofF_Colour" : "grey",
                                                  "textKlock_background" : "#000000"}
 
                     if "APPLICATION" not in self.config:
@@ -684,8 +684,8 @@ class Config():
                             self.logger.debug("  Problem with config key WINDOW")
 
                     if self.config["KLOCKS"].get("vfd_width" ) is None:
-                        #  New config options to be added at 2024.23 - VFD Klock
-                        self.logger.info("  ** New options for VFD Klock added @ 2024.23**")
+                        #  New config options to be added at 2024.23 - VFD pyKlock
+                        self.logger.info("  ** New options for VFD pyKlock added @ 2024.23**")
                         self.config["KLOCKS"] = {"vfd_width"      : 500,
                                                  "vfd_height"     : 260,
                                                  "vfd_x_pos"      : 400,
@@ -766,18 +766,18 @@ class Config():
                                "underline"  : False,
                                "overstrike" : False}
 
-        config["KLOCKS"] = {"vfd_width"            : 460,
-                            "vfd_height"           : 260,
-                            "vfd_x_pos"            : 400,
-                            "vfd_y_pos"            : 400,
-                            "vfd_foreground"       : "#82ccff",
-                            "vfd_background"       : "#000000",
-                            "textKlock_width"      : 500,
-                            "textKlock_height"     : 260,
-                            "textKlock_x_pos"      : 821,
-                            "textKlock_y_pos"      : 280,
-                            "textKlock_onColour"   : "springGreen2",
-                            "text_ofColour"        : "slate grey",
+        config["KLOCKS"] = {"vfd_width"              : 460,
+                            "vfd_height"             : 260,
+                            "vfd_x_pos"              : 400,
+                            "vfd_y_pos"              : 400,
+                            "vfd_foreground"         : "#82ccff",
+                            "vfd_background"         : "#000000",
+                            "textKlock_width"        : 500,
+                            "textKlock_height"       : 260,
+                            "textKlock_x_pos"        : 821,
+                            "textKlock_y_pos"        : 280,
+                            "textKlock_on_Colour"    : "springGreen2",
+                            "textKlock_off_Colour"   : "slate grey",
                             "textKlock_background" : "#000000"}
 
         config["SOUNDS"] = {"sounds"        : True,
