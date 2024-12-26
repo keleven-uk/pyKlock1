@@ -33,12 +33,17 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.52	[25 December 2024]
+	Added a second set of hour chimes - Cuckoo Klock.
+		These can be selected from the Sounds settings page.
+
+
 V2.24.51	[24 December 2024]
 
 	Completed the logic of the settings window.
 		All settings tabs make changes to a copy of config and this copied to
 		the live config if required.
-	Also, correct a spelling mistake, COLOR_THEME - COLOUR_THEME
+	Also, corrected a spelling mistake, COLOR_THEME - COLOUR_THEME
 
 
 V2.24.50	[21 December 2024]

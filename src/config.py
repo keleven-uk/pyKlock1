@@ -529,6 +529,18 @@ class Config():
         self.config["SOUNDS"]["sounds"] = value
 
     @property
+    def SOUNDS_WESTMINSTER(self):
+        """  Returns if sounds are enabled.
+        """
+        return self.config["SOUNDS"].get("westminster", True)
+
+    @SOUNDS_WESTMINSTER.setter
+    def SOUNDS_WESTMINSTER(self, value):
+        """  Sets if sounds are enabled.
+        """
+        self.config["SOUNDS"]["westminster"] = value
+
+    @property
     def SOUNDS_HOUR_CHIMES(self):
         """  Returns if hour chimes are enabled.
         """
@@ -563,6 +575,18 @@ class Config():
         """  Sets if hour pips are enabled.
         """
         self.config["SOUNDS"]["hour_pips"] = value
+
+    @property
+    def SOUNDS_CUCKOO(self):
+        """  Returns if sounds are enabled.
+        """
+        return self.config["SOUNDS"].get("cuckoo", True)
+
+    @SOUNDS_CUCKOO.setter
+    def SOUNDS_CUCKOO(self, value):
+        """  Sets if sounds are enabled.
+        """
+        self.config["SOUNDS"]["cuckoo"] = value
 
     @property
     def SOUNDS_VOLUME(self):
@@ -609,9 +633,12 @@ class Config():
                     if "SOUNDS" not in self.config:
                         #  New config options to be added at 2024.51 - Sounds
                         self.logger.info("  ** New options for Sounds added @ 2024.47**")
-                        self.config["SOUNDS"] = {"hour_chimes"   : True,
+                        self.config["SOUNDS"] = {"sounds"        : True,
+                                                 "westminster"   : True,
+                                                 "hour_chimes"   : True,
                                                  "quarter_chimes": True,
                                                  "hour_pips"     : True,
+                                                 "cuckoo"        : False,
                                                  "sound_volume"  : 25}
 
                     if self.config["KLOCKS"].get("textKlock_width" ) is None:
@@ -739,23 +766,26 @@ class Config():
                                "underline"  : False,
                                "overstrike" : False}
 
-        config["KLOCKS"] = {"vfd_width"       : 460,
-                            "vfd_height"      : 260,
-                            "vfd_x_pos"       : 400,
-                            "vfd_y_pos"       : 400,
-                            "vfd_foreground"  : "#82ccff",
-                            "vfd_background"  : "#000000",
+        config["KLOCKS"] = {"vfd_width"            : 460,
+                            "vfd_height"           : 260,
+                            "vfd_x_pos"            : 400,
+                            "vfd_y_pos"            : 400,
+                            "vfd_foreground"       : "#82ccff",
+                            "vfd_background"       : "#000000",
                             "textKlock_width"      : 500,
                             "textKlock_height"     : 260,
                             "textKlock_x_pos"      : 821,
                             "textKlock_y_pos"      : 280,
                             "textKlock_onColour"   : "springGreen2",
-                            "text_ofColour"   : "slate grey",
+                            "text_ofColour"        : "slate grey",
                             "textKlock_background" : "#000000"}
 
-        config["SOUNDS"] = {"hour_chimes"   : True,
+        config["SOUNDS"] = {"sounds"        : True,
+                            "westminster"   : True,
+                            "hour_chimes"   : True,
                             "quarter_chimes": True,
                             "hour_pips"     : True,
+                            "cuckoo"        : False,
                             "sound_volume"  : 25}
 
 

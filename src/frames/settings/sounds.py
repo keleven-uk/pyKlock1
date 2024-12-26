@@ -67,14 +67,32 @@ class MySoundFrame(ctk.CTkFrame):
         self.chkPips = ctk.CTkCheckBox(self, text="", fg_color=self.Config.BACKGROUND, border_color=self.foreColour,
                                               hover_color="gray", command=self.__pips)
         self.chkPips.grid(row=3, column=1, padx=10, pady=10)
+
+        self.lblWestminster = ctk.CTkLabel(self, text="Westminster type chimes", text_color=self.foreColour,
+                                              fg_color=self.Config.BACKGROUND)
+        self.lblWestminster.grid(row=4, column=0, padx=10, pady=10)
+        self.chkWestminster = ctk.CTkCheckBox(self, text="", fg_color=self.Config.BACKGROUND, border_color=self.foreColour,
+                                              hover_color="gray", command=self.__westminsterChimes)
+        self.chkWestminster.grid(row=4, column=1, padx=10, pady=10)
+        self.lblCuckoo = ctk.CTkLabel(self, text="Cuckoo type chimes", text_color=self.foreColour,
+                                              fg_color=self.Config.BACKGROUND)
+        self.lblCuckoo.grid(row=4, column=2, padx=10, pady=10)
+        self.chkCuckoo = ctk.CTkCheckBox(self, text="", fg_color=self.Config.BACKGROUND, border_color=self.foreColour,
+                                              hover_color="gray", command=self.__cuckooChimes)
+        self.chkCuckoo.grid(row=4, column=3, padx=10, pady=10)
+
+        self.lblWarning = ctk.CTkLabel(self, text="Only One type.", text_color=self.foreColour,
+                                              fg_color=self.Config.BACKGROUND)
+        self.lblWarning.grid(row=4, column=4, padx=10, pady=10)
+
         self.lblVolume = ctk.CTkLabel(self, text="Sound Volume", text_color=self.foreColour,
                                               fg_color=self.Config.BACKGROUND)
-        self.lblVolume.grid(row=4, column=0, padx=10, pady=10)
+        self.lblVolume.grid(row=5, column=0, padx=10, pady=10)
         self.sldVolume= ctk.CTkSlider(self, from_=0, to=50, command=self.__soundVolume)
-        self.sldVolume.grid(row=4, column=1, padx=10, pady=10, columnspan=2)
+        self.sldVolume.grid(row=5, column=1, padx=10, pady=10, columnspan=2)
         self.lblCurVol = ctk.CTkLabel(self, text=f"Current Volume {self.Config.SOUNDS_VOLUME}", text_color=self.foreColour,
                                               fg_color=self.Config.BACKGROUND)
-        self.lblCurVol.grid(row=4, column=3, padx=10, pady=10)
+        self.lblCurVol.grid(row=5, column=3, padx=10, pady=10)
 
     def __setSound(self):
         """  Called when sound is Enabled/disabled.
@@ -111,6 +129,40 @@ class MySoundFrame(ctk.CTkFrame):
         self.master.btnSave.configure(state="normal")
         clicked = self.chkPips.get()
         self.Config.SOUNDS_HOUR_PIPS = True if clicked == 1 else False
+
+    def __westminsterChimes(self):
+        """  Called when Westminster type chimes is Enabled/disabled.
+
+             Can only be either Westminster or Cuckoo chimes.
+        """
+        self.master.btnSave.configure(state="normal")
+        clicked = self.chkWestminster.get()
+
+        if clicked:
+            self.Config.SOUNDS_WESTMINSTER = True
+            self.lblCuckoo.configure(state="disabled")
+            self.chkCuckoo.configure(state="disabled")
+        else:
+            self.Config.SOUNDS_WESTMINSTER = False
+            self.lblCuckoo.configure(state="normal")
+            self.chkCuckoo.configure(state="normal")
+
+    def __cuckooChimes(self):
+        """  Called when Cuckoo type chimes is Enabled/disabled.
+
+             Can only be either Westminster or Cuckoo chimes.
+        """
+        self.master.btnSave.configure(state="normal")
+        clicked = self.chkCuckoo.get()
+
+        if clicked:
+            self.Config.SOUNDS_CUCKOO = True
+            self.lblWestminster.configure(state="disabled")
+            self.chkWestminster.configure(state="disabled")
+        else:
+            self.Config.SOUNDS_WESTMINSTER = False
+            self.lblWestminster.configure(state="normal")
+            self.chkWestminster.configure(state="normal")
 
     def __soundVolume(self, choice):
         """  Called when the sound volume is changed..
@@ -155,6 +207,20 @@ class MySoundFrame(ctk.CTkFrame):
         else:
             self.chkPips.deselect()
 
+        if self.Config.SOUNDS_WESTMINSTER:
+            self.chkWestminster.select()
+            self.lblCuckoo.configure(state="disabled")
+            self.chkCuckoo.configure(state="disabled")
+        else:
+            self.chkWestminster.deselect()
+            self.lblCuckoo.configure(state="normal")
+            self.chkCuckoo.configure(state="normal")
+
+        if self.Config.SOUNDS_CUCKOO:
+            self.chkCuckoo.select()
+        else:
+            self.chkCuckoo.deselect()
+
     def __switchOffSounds(self):
         """  Tries to switch off all sound settings.
 
@@ -167,6 +233,10 @@ class MySoundFrame(ctk.CTkFrame):
         self.chkQtrChimes.configure(state="disabled")
         self.lblPips.configure(state="disabled")
         self.chkPips.configure(state="disabled")
+        self.lblWestminster.configure(state="disabled")
+        self.chkWestminster.configure(state="disabled")
+        self.lblCuckoo.configure(state="disabled")
+        self.chkCuckoo.configure(state="disabled")
         self.lblVolume.configure(state="disabled")
         self.sldVolume.configure(state="disabled")
 

@@ -34,6 +34,7 @@ These events have a date due attached to them, Klock will give notifications whe
 
 Added sound to Klock.
 	Klock can play Westminster type chimes on the quarter, half and on the hour.
+	Klock can also imitate a Cuckoo Klock.
 	Klock can also play "the pips" on the hour.
 
 The foreground and background colours can be selected.
@@ -52,4 +53,4 @@ To install all dependencies pip install -r requirements.txt - r requirements_dev
 
 For changes see history.txt
 
-Kevin Scott (C) 2024 :: pyKlock V2024.47
+Kevin Scott (C) 2024 :: pyKlock V2024.52
