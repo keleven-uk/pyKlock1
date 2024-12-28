@@ -1,5 +1,5 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Thursday 26 December 2024  20:06:53
+#   (c) Kevin Scott   Written Saturday 28 December 2024  14:11:01
 #
 #   true and false are lower case 
 #
@@ -20,7 +20,7 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 862
+x_pos = 894
 y_pos = -247
 Align_Right = true
 
@@ -67,7 +67,7 @@ textKlock_offColour = "#fff234"
 sounds = true
 westminster = false
 hour_chimes = false
-quarter_chimes = false
+quarter_chimes = true
 hour_pips = false
 cuckoo = true
 sound_volume = 14.0

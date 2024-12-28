@@ -34,6 +34,8 @@
 
 from audioplayer import AudioPlayer
 
+from CTkMessagebox import CTkMessagebox
+
 import src.selectTime as st
 import src.projectPaths as pp
 
@@ -48,8 +50,7 @@ class Sounds():
     """
 
     def __init__(self, myConfig):
-        self.myConfig = myConfig
-
+        self.myConfig   = myConfig
         self.selectTime = st.SelectTime()
 
         self.strHour = {
@@ -116,5 +117,52 @@ class Sounds():
             except Exception as e:
                 print(f"Error {e}")
 
+    def playPips(self):
+        """  Enable the pip to be played to test the volume.
+        """
+        try:
+            player = AudioPlayer(f"{pp.RESOURCE_PATH}\\Sounds\\thepips.mp3")
+            player.volume = self.myConfig.SOUNDS_VOLUME
+            player.play(block=True)
+        except Exception as e:
+            print(f"Error {e}")
+
+    def checkHourChimes(self, master):
+        """  There should be one and only one hour chime selected.
+             This should not happen, bur check anyways.
+        """
+        clash = 0
+        if self.myConfig.SOUNDS_WESTMINSTER:
+            clash += 1
+
+        if self.myConfig.SOUNDS_CUCKOO:
+            clash += 1
+
+        if self.myConfig.SOUNDS_HOUR_PIPS:
+            clash += 1
+
+        if clash < 2:                       #  Only one hour chime selected - all okay.
+            return
+
+        msg = CTkMessagebox(master, title="Hour Chime", message="More then one Hour chime selected",
+                        icon="warning",option_1="Westminster", option_2="Cuckoo", option_3="Pips")
+        response = msg.get()
+
+        match response:
+            case "Westminster":
+                self.myConfig.SOUNDS_WESTMINSTER = True
+                self.myConfig.SOUNDS_HOUR_CHIMES = True
+                self.myConfig.SOUNDS_CUCKOO      = False
+                self.myConfig.SOUNDS_HOUR_PIPS   = False
+            case "Cuckoo":
+                self.myConfig.SOUNDS_WESTMINSTER = False
+                self.myConfig.SOUNDS_CUCKOO      = True
+                self.myConfig.SOUNDS_HOUR_PIPS   = False
+            case "Pips":
+                self.myConfig.SOUNDS_WESTMINSTER = False
+                self.myConfig.SOUNDS_CUCKOO      = False
+                self.myConfig.SOUNDS_HOUR_PIPS   = True
+
+        self.myConfig.writeConfig()
 
 

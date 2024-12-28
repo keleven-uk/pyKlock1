@@ -67,6 +67,8 @@ class pyKlock(ctk.CTk):
         self.wm_attributes("-transparentcolor", myConfig.BACKGROUND)
         self.attributes("-topmost", True)
 
+        self.sounds.checkHourChimes(self)        #  There should be one and only one hour chime selected.
+
         #  Create the main menu.
         myLogger.info("  Creating Menu")
         self.menu = myMenu.myMenu(self, self.myConfig, self.myLogger, self.myTimer, self.eventsStore)

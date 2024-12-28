@@ -19,6 +19,8 @@
 
 import customtkinter as ctk
 
+import src.classes.sounds as snds
+
 class MySoundFrame(ctk.CTkFrame):
     """  A class that creates a frame that holds the user settings for the Application.
 
@@ -30,6 +32,7 @@ class MySoundFrame(ctk.CTkFrame):
         self.master     = master
         self.main       = main
         self.Config     = Config
+        self.sounds     = snds.Sounds(self.Config)
         self.foreColour = "white"
 
         self.__createWidgets()
@@ -94,6 +97,10 @@ class MySoundFrame(ctk.CTkFrame):
                                               fg_color=self.Config.BACKGROUND)
         self.lblCurVol.grid(row=5, column=3, padx=10, pady=10)
 
+        self.btnTest = ctk.CTkButton( self, text="Test Volume", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
+                                    corner_radius=12, width=100, command=self.__testVolume)
+        self.btnTest.grid(row=6, column=1, padx=10, pady=10, sticky="nsew")
+
     def __setSound(self):
         """  Called when sound is Enabled/disabled.
              If disabled, then tries to switch off all further sound options  [not working].
@@ -101,11 +108,9 @@ class MySoundFrame(ctk.CTkFrame):
         self.master.btnSave.configure(state="normal")
 
         if self.chkSound.get():
-            print("on")
             self.__switchOnSounds()
             self.Config.SOUNDS = True
         else:
-            print("off")
             self.__switchOffSounds()
             self.Config.SOUNDS = False
 
@@ -125,15 +130,30 @@ class MySoundFrame(ctk.CTkFrame):
 
     def __pips(self):
         """  Called when the pips is Enabled/disabled.
+
+             Can only be either Westminster,Cuckoo or pips chimes.
         """
         self.master.btnSave.configure(state="normal")
         clicked = self.chkPips.get()
-        self.Config.SOUNDS_HOUR_PIPS = True if clicked == 1 else False
+        if clicked:
+            self.Config.SOUNDS_HOUR_PIPS = True
+            self.lblCuckoo.configure(state="disabled")
+            self.chkCuckoo.configure(state="disabled")
+            self.lblWestminster.configure(state="disabled")
+            self.chkWestminster.configure(state="disabled")
+        else:
+            self.Config.SOUNDS_HOUR_PIPS = False
+            self.lblCuckoo.configure(state="normal")
+            self.chkCuckoo.configure(state="normal")
+            self.lblWestminster.configure(state="normal")
+            self.chkWestminster.configure(state="normal")
+
+        self.sounds.checkHourChimes(self)        #  There should be one and only one hour chime selected.
 
     def __westminsterChimes(self):
         """  Called when Westminster type chimes is Enabled/disabled.
 
-             Can only be either Westminster or Cuckoo chimes.
+             Can only be either Westminster,Cuckoo or pips chimes.
         """
         self.master.btnSave.configure(state="normal")
         clicked = self.chkWestminster.get()
@@ -142,15 +162,21 @@ class MySoundFrame(ctk.CTkFrame):
             self.Config.SOUNDS_WESTMINSTER = True
             self.lblCuckoo.configure(state="disabled")
             self.chkCuckoo.configure(state="disabled")
+            self.lblPips.configure(state="disabled")
+            self.chkPips.configure(state="disabled")
         else:
             self.Config.SOUNDS_WESTMINSTER = False
             self.lblCuckoo.configure(state="normal")
             self.chkCuckoo.configure(state="normal")
+            self.lblPips.configure(state="normal")
+            self.chkPips.configure(state="normal")
+
+        self.sounds.checkHourChimes(self)        #  There should be one and only one hour chime selected.
 
     def __cuckooChimes(self):
         """  Called when Cuckoo type chimes is Enabled/disabled.
 
-             Can only be either Westminster or Cuckoo chimes.
+             Can only be either Westminster,Cuckoo or pips chimes.
         """
         self.master.btnSave.configure(state="normal")
         clicked = self.chkCuckoo.get()
@@ -159,10 +185,16 @@ class MySoundFrame(ctk.CTkFrame):
             self.Config.SOUNDS_CUCKOO = True
             self.lblWestminster.configure(state="disabled")
             self.chkWestminster.configure(state="disabled")
+            self.lblPips.configure(state="disabled")
+            self.chkPips.configure(state="disabled")
         else:
             self.Config.SOUNDS_WESTMINSTER = False
             self.lblWestminster.configure(state="normal")
             self.chkWestminster.configure(state="normal")
+            self.lblPips.configure(state="normal")
+            self.chkPips.configure(state="normal")
+
+        self.sounds.checkHourChimes(self)        #  There should be one and only one hour chime selected.
 
     def __soundVolume(self, choice):
         """  Called when the sound volume is changed..
@@ -171,6 +203,11 @@ class MySoundFrame(ctk.CTkFrame):
         volume = self.sldVolume.get()
         self.lblCurVol.configure(text=f"Current Volume {volume:0.0f}")
         self.Config.SOUNDS_VOLUME = volume
+
+    def __testVolume(self):
+        """  Enable the pip to be played to test the volume.
+        """
+        self.sounds.playPips()
 
     def __setWidgets(self):
         """  Sets initial settings to sound controls.
@@ -218,8 +255,12 @@ class MySoundFrame(ctk.CTkFrame):
 
         if self.Config.SOUNDS_CUCKOO:
             self.chkCuckoo.select()
+            self.lblWestminster.configure(state="disabled")
+            self.chkWestminster.configure(state="disabled")
         else:
             self.chkCuckoo.deselect()
+            self.lblWestminster.configure(state="normal")
+            self.chkWestminster.configure(state="normal")
 
     def __switchOffSounds(self):
         """  Tries to switch off all sound settings.

@@ -48,7 +48,7 @@ if __name__ == "__main__":
     except (TimeoutError, AttributeError, NameError) as error:
         myLogger.debug(error)
 
-    myConfig    = Config.Config(pp.CONFIG_PATH, pp.VERSION_PATH, myLogger)         # Create the config.
+    myConfig = Config.Config(pp.CONFIG_PATH, pp.VERSION_PATH, myLogger)         # Create the config.
 
     myLogger.info(f"  Running {myConfig.NAME} Version {myConfig.VERSION} .::. Started at {myTimer.rightNow} ")
     myLogger.debug(f" {platform.uname()}")

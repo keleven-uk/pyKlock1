@@ -24,7 +24,6 @@ import datetime
 import pickle
 import toml
 
-
 class Config():
     """  A class that acts has a wrapper around the configure file - config.toml.
          The configure file is hard coded and lives in the same directory has the main script.
@@ -110,6 +109,7 @@ class Config():
         self.SOUNDS_HOUR_CHIMES    = other.SOUNDS_HOUR_CHIMES
         self.SOUNDS_QUARTER_CHIMES = other.SOUNDS_QUARTER_CHIMES
         self.SOUNDS_HOUR_PIPS      = other.SOUNDS_HOUR_PIPS
+        self.SOUNDS_CUCKOO         = other.SOUNDS_CUCKOO
         self.SOUNDS_VOLUME         = other.SOUNDS_VOLUME
 
     @property

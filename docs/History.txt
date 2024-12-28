@@ -33,12 +33,19 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.54	[28 December 2024]
+
+	Added a check that only one hour chime is selected - should never happen.
+	Added a test volume button to the sound settings tab.
+
+
 V2.24.53	[26 December 2024]
 	I had used the two terms Klock and pyKlock through out the codebase.
 	So, I cleaned it all up and now only use the term pyKlock.
 
 
 V2.24.52	[26 December 2024]
+
 	Added a second set of hour chimes - Cuckoo pyKlock.
 		These can be selected from the Sounds settings page.
 
