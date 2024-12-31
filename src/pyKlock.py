@@ -38,10 +38,10 @@ class pyKlock(ctk.CTk):
 
         self.myConfig    = myConfig
         self.myLogger    = myLogger
-        self.myTimer     = myTimer              #  Also starts the timer - used to determined pyKlock running time.
+        self.myTimer     = myTimer                             #  Also starts the timer - used to determined pyKlock running time.
         self.sounds      = snds.Sounds(self.myConfig)
-        self.eventsStore = es.eventsStore(self) #  This needs to be declared here and passed down the tree.
-                                                #  So the checks whether any of the events are due can be done all the time.
+        self.eventsStore = es.eventsStore(self, self.myConfig) #  This needs to be declared here and passed down the tree.
+                                                               #  So the checks whether any of the events are due can be done all the time.
 
         #  Sets the appearance of the window.
         #  Supported modes : Light, Dark, System.

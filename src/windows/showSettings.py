@@ -19,7 +19,7 @@
 
 import customtkinter as ctk
 
-import src.frames.showpyKlockSettings as mypyKlockSettings
+import src.frames.showpyKlockSettings as pyKlockSettings
 
 class showSettings(ctk.CTkToplevel):
     """  A class to display pyKlock's help file in pdf format.
@@ -38,5 +38,5 @@ class showSettings(ctk.CTkToplevel):
         self.resizable(False, False)
 
         #  Create the frame for the main time text.
-        self.settings = mypyKlockSettings.MySettings(self, self.myConfig, self.myLogger)
+        self.settings = pyKlockSettings.MySettings(self, self.myConfig, self.myLogger)
         self.settings.pack(expand=True)

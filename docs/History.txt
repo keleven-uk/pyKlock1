@@ -33,6 +33,12 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2.24.55	[31 December 2024]
+
+	Added a new settings tab - EVENTS.
+		This allows the setting of the stage days and colours.
+
+
 V2.24.54	[28 December 2024]
 
 	Added a check that only one hour chime is selected - should never happen.

@@ -85,24 +85,23 @@ class Sounds():
         if hours > 12:
             hours -= 12                         #  Work on a 12 hour klock.
 
-        if self.myConfig.SOUNDS_WESTMINSTER:
-            bsePath = f"{pp.RESOURCE_PATH}\\Sounds\\westminster"
-        if self.myConfig.SOUNDS_CUCKOO:
-            bsePath = f"{pp.RESOURCE_PATH}\\Sounds\\cuckoo"
-
         if self.myConfig.SOUNDS_HOUR_CHIMES or self.myConfig.SOUNDS_CUCKOO:
             if minutes == 0:
+                if self.myConfig.SOUNDS_WESTMINSTER:
+                    bsePath = f"{pp.RESOURCE_PATH}\\Sounds\\westminster"
+                if self.myConfig.SOUNDS_CUCKOO:
+                    bsePath = f"{pp.RESOURCE_PATH}\\Sounds\\cuckoo"
                 sndPath = f"{bsePath}\\{self.strHour[hours]}.mp3"
 
         if self.myConfig.SOUNDS_QUARTER_CHIMES:
             if minutes in [15, 30, 45]:
                 match minutes:
                     case 15:
-                        sndPath = f"{bsePath}\\quarterchime.mp3"
+                        sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\westminster\\quarterchime.mp3"
                     case 30:
-                        sndPath = f"{bsePath}\\halfchime.mp3"
+                        sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\westminster\\halfchime.mp3"
                     case 45:
-                        sndPath = f"{bsePath}\\threequarterchime.mp3"
+                        sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\westminster\\threequarterchime.mp3"
 
         if self.myConfig.SOUNDS_HOUR_PIPS and not self.myConfig.SOUNDS_HOUR_CHIMES:  #  If both enabled, just play hour chimes.
             if minutes == 0:

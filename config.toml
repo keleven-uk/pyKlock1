@@ -1,26 +1,26 @@
-#   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Saturday 28 December 2024  14:11:01
+#   Configure file for pyKlock.py
+#   (c) Kevin Scott   Written Tuesday 31 December 2024  21:22:11
 #
-#   true and false are lower case 
+#   true and false are lower case
 #
 [INFO]
-myVERSION = "2024.52"
+myVERSION = "2024.55"
 myNAME = "pyKlock"
 
 [SETTINGS]
-headers = [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",]
+headers = [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS", "EVENTS",]
 appearanceModeTypes = [ "Light", "Dark", "System",]
 colorThemeTypes = [ "green", "dark-blue", "blue",]
 
 [APPLICATION]
-appearanceMode = "System"
+appearanceMode = "Dark"
 colorTheme = "dark-blue"
 foreground = "#00ff00"
 background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 894
+x_pos = 829
 y_pos = -247
 Align_Right = true
 
@@ -33,7 +33,7 @@ visible = true
 
 [TIME_FONT]
 family = "Toy Train"
-size = 50
+size = 5
 weight = "normal"
 slant = false
 underline = false
@@ -71,3 +71,12 @@ quarter_chimes = true
 hour_pips = false
 cuckoo = true
 sound_volume = 14.0
+
+[EVENTS]
+stage1Days = 5
+stage2Days = 30
+stage3Days = 30
+stage1Colour = "#ffffff"
+stage2Colour = "#fff38e"
+stage3Colour = "green"
+nowColour = "#173fff"

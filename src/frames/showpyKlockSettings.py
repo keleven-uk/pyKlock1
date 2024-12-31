@@ -29,6 +29,7 @@ import src.frames.settings.menu as frmMenu
 import src.frames.settings.font as frmFont
 import src.frames.settings.klocks as frmpyKlocks
 import src.frames.settings.sounds as frmSound
+import src.frames.settings.events as frmEvents
 
 class MySettings(ctk.CTkFrame):
     """  A class that creates the frame for the settings.
@@ -82,6 +83,9 @@ class MySettings(ctk.CTkFrame):
                     frmKl.grid(row=1, column=0)
                 case "SOUNDS":
                     frmMn = frmSound.MySoundFrame(self, self.frmSettings["SOUNDS"], self.copyConfig)
+                    frmMn.grid(row=1, column=0)
+                case "EVENTS":
+                    frmMn = frmEvents.MyEventsFrame(self, self.frmSettings["EVENTS"], self.copyConfig)
                     frmMn.grid(row=1, column=0)
 
         self.btnExit = ctk.CTkButton(self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),

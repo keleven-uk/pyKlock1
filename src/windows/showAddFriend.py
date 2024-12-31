@@ -174,7 +174,8 @@ class FriendAddWindow(ctk.CTkToplevel):
                                     corner_radius=12, width=100, command=self.__exit)
         self.btnExt.grid(row=9, column=3, padx=10, pady=10, sticky="nsew")
 
-
+    #  https://www.geeksforgeeks.org/validating-entry-widget-in-python-tkinter/
+    # email_pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
     def __validateLastName(self):
         """  Validation the Last Name - which is mandatory.
 

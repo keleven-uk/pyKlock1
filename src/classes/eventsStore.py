@@ -51,8 +51,9 @@ class eventsStore():
     """
 
 # ------------------------------------------------------------------------------------- __init__ ----------------------
-    def __init__(self, master):
+    def __init__(self, master, myConfig):
         self.master     = master     #  Need to pass in a tk window, so the notifications work.
+        self.myConfig   = myConfig
         self.store      = {}         #  Create the store, an empty dictionary.
         self.Headers    = ["Name", "Date Due", "Time Due", "Category", "Recurring", "Notes", "Left"]
         self.Categories = ["", "Birthday", "Wedding Anniversary", "Anniversary", "Moto", "Holiday", "Appointment", "One Off Event", "Other"]
@@ -60,14 +61,14 @@ class eventsStore():
 
         self.loadEvents()
 
-        self.stage1 = 5  * 86400    #   5 days in seconds, is really soon
-        self.stage2 = 10 * 86400    #  10 days in seconds, Will very soon be here
-        self.stage3 = 30 * 86400    #  30 days in seconds, will soon be here
+        self.stage1 = self.myConfig.EVENTS_STAGE_1_DAYS  * 86400    #   5 days in seconds, is really soon
+        self.stage2 = self.myConfig.EVENTS_STAGE_2_DAYS * 86400     #  10 days in seconds, Will very soon be here
+        self.stage3 = self.myConfig.EVENTS_STAGE_3_DAYS * 86400     #  30 days in seconds, will soon be here
 
-        self.stage1Colour = "red"
-        self.stage2Colour = "yellow"
-        self.stage3Colour = "green"
-        self.nowColour    = "blue"
+        self.stage1Colour = self.myConfig.EVENTS_STAGE_1_COLOUR
+        self.stage2Colour = self.myConfig.EVENTS_STAGE_2_COLOUR
+        self.stage3Colour = self.myConfig.EVENTS_STAGE_3_COLOUR
+        self.nowColour    = self.myConfig.EVENTS_NOW_COLOUR
 
 # ------------------------------------------------------------------------------------- getHeaders --------------------
     @property
