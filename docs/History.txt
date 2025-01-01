@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    history.txt   Copyright (C) <2024>  <Kevin Scott>                                                        #
+#    history.txt   Copyright (C) <2024-25>  <Kevin Scott>                                                        #
 #                                                                                                             #
 #    History file for pyKlock                                                                                 #
 #                                                                                                             #
@@ -33,30 +33,37 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
-V2.24.55	[31 December 2024]
+V2025.56	[1 January 2025]
+
+	Added a new Klock - dial Klock.
+		The Klock uses tkdial to display hours, minutes and seconds as three Speedometer.
+		New settings in config.
+
+
+V2024.55	[31 December 2024]
 
 	Added a new settings tab - EVENTS.
 		This allows the setting of the stage days and colours.
 
 
-V2.24.54	[28 December 2024]
+V2024.54	[28 December 2024]
 
 	Added a check that only one hour chime is selected - should never happen.
 	Added a test volume button to the sound settings tab.
 
 
-V2.24.53	[26 December 2024]
+V2024.53	[26 December 2024]
 	I had used the two terms Klock and pyKlock through out the codebase.
 	So, I cleaned it all up and now only use the term pyKlock.
 
 
-V2.24.52	[26 December 2024]
+V2024.52	[26 December 2024]
 
 	Added a second set of hour chimes - Cuckoo pyKlock.
 		These can be selected from the Sounds settings page.
 
 
-V2.24.51	[24 December 2024]
+V2024.51	[24 December 2024]
 
 	Completed the logic of the settings window.
 		All settings tabs make changes to a copy of config and this copied to
@@ -64,12 +71,12 @@ V2.24.51	[24 December 2024]
 	Also, corrected a spelling mistake, COLOR_THEME - COLOUR_THEME
 
 
-V2.24.50	[21 December 2024]
+V2024.50	[21 December 2024]
 
 	Completed the layout of the settings window.
 
 
-V2.24.49	[19 December 2024]
+V2024.49	[19 December 2024]
 
 	Started work on a settings window.
 	This all set in a tab view in a separate window.
@@ -116,7 +123,7 @@ pyKlock1\docs\version.toml                                     2             19 
 SUM:                                                        995           1467           2752
 ----------------------------------------------------------------------------------------------
 
-V2.24.48	[17 December 2024]
+V2024.48	[17 December 2024]
 
 	Updated requirements.txt - tksheet and ruff.  Added audioplayer.
 	Updated requirements_dev.txt - auto-py-to-exe, setuptools.  Added the tk stuff.
@@ -135,7 +142,7 @@ V2.24.48	[17 December 2024]
 		Still a problem with PyMuPDF - see V2024.24 below.  Still a problem with 1.25.1, okay with 1.24.10.
 
 
-V2.24.47	[16 December 2024]
+V2024.47	[16 December 2024]
 
 	Added sound to pyKlock.
 	pyKlock can play Westminster type chimes on the quarter, half and on the hour.
@@ -146,25 +153,25 @@ V2.24.47	[16 December 2024]
 	Sound can enabled in the config file, as well as the sound volume.
 
 
-V2.24.46	[11 December 2024]
+V2024.46	[11 December 2024]
 
 	Merged textpyKlock branch back to main.
 
 
-V2.24.45	[11 December 2024] - in textpyKlock branch.
+V2024.45	[11 December 2024] - in textpyKlock branch.
 
 	When textpyKlock was built, it was built without a menu.
 	The window is closed by clicking on a red X in the top left hand corner.
 	This feature has been incorporated into VFDpyKlock.
 
 
-V2.24.44	[11 December 2024] - in textpyKlock branch.
+V2024.44	[11 December 2024] - in textpyKlock branch.
 
 	TextClock looking better, after more tweaking.
 		Now seems to handle noon and midnight.
 
 
-V2.24.43	[10 December 2024] - in textpyKlock branch.
+V2024.43	[10 December 2024] - in textpyKlock branch.
 
 	TextClock seems to be working, after some tweaking.
 
@@ -174,7 +181,7 @@ V2.24.43	[10 December 2024] - in textpyKlock branch.
 	Also, it appears the file showMenuButtons is no longer used - removed.
 
 
-V2.24.42	[10 December 2024] - in textpyKlock branch.
+V2024.42	[10 December 2024] - in textpyKlock branch.
 
 	Started working on a new sub pyKlock - textpyKlock.
 	The clock in a matrix of letters/words and the current time is displayed by highlighted text.
@@ -183,19 +190,19 @@ V2.24.42	[10 December 2024] - in textpyKlock branch.
 	Added new config option of textpyKlock [screen position, window size and text colours].
 
 
-V2.24.41	[7 December 2024]
+V2024.41	[7 December 2024]
 
 	Changed the menu name of Accessories to Things.
 	Changed the date picker in Add Friends to use Tkcalendar, this mirrors the change in Add Events.
 		CTkDatePicker source directory removed.
 
 
-V2.24.40	[4 December 2024]
+V2024.40	[4 December 2024]
 
 	Merged events branch back into main for further testing, enhancements and update of help.
 
 
-V2.24.39	[4 December 2024] - In Events branch.
+V2024.39	[4 December 2024] - In Events branch.
 
 	Modified the initial saved event, so that the stages reflect the actual days left before due.
 		This was to ensure events are notified at the correct time.
@@ -203,7 +210,7 @@ V2.24.39	[4 December 2024] - In Events branch.
 	Needs more testing, but perhaps by being used with some real world events.
 
 
-V2.24.38	[2 December 2024] - In Events branch.
+V2024.38	[2 December 2024] - In Events branch.
 
 	Added a new notification window, used to display due events.
 		The notification is display on the bottom left hand of the screen.
@@ -217,7 +224,7 @@ V2.24.38	[2 December 2024] - In Events branch.
 	Most of this work is done in the evenstStore.
 
 
-V2.24.37	[27 November 2024] - In Events branch.
+V2024.37	[27 November 2024] - In Events branch.
 
 	The event store update now calculates the target date/time for each event.
 	This is stored at the end of the event data and displayed in the table.
@@ -227,7 +234,7 @@ V2.24.37	[27 November 2024] - In Events branch.
 	the event store is now declared in the top pyKlock window and passed down to the event windows.
 
 
-V2.24.36	[21 November 2024] - In Events branch.
+V2024.36	[21 November 2024] - In Events branch.
 
 	Added a new option - recurring.
 		If an event is a recurring event, birthday, then the event will re-populate.
@@ -236,7 +243,7 @@ V2.24.36	[21 November 2024] - In Events branch.
 		Started work on this.
 
 
-V2.24.35	[20 November 2024] - In Events branch.
+V2024.35	[20 November 2024] - In Events branch.
 
 	Changed the date picker to use Tkcalendar, it's a bit quicker then CTkDatePicker.
 		Source directory will be removed when fitted into friends.
@@ -246,14 +253,14 @@ V2.24.35	[20 November 2024] - In Events branch.
 	Both pickers work with add, edit and delete.
 
 
-V2.24.34	[19 November 2024] - In Events branch.
+V2024.34	[19 November 2024] - In Events branch.
 
 	Completed the edit and delete buttons.  Seem to work.
 	Correct a bug in events where a duplicate is created if the key is edited.
 		Will need to be added to Friends.
 
 
-V2.24.33	[19 November 2024] - In Events branch.
+V2024.33	[19 November 2024] - In Events branch.
 
 	Started work on the events accessory, heavily modelled on the friends accessory.
 	The events should have a die date and/or due time - pyKlock will notify when event is due.
@@ -261,32 +268,32 @@ V2.24.33	[19 November 2024] - In Events branch.
 	The Add button seems to work.
 
 
-V2.24.32	[14 November 2024]
+V2024.32	[14 November 2024]
 
 	Updated Help.
 	Built stand alone executable and installer from main.
 		Still a problem with PyMuPDF - see V2024.24 below.
 
 
-V2.24.31	[14 November 2024]
+V2024.31	[14 November 2024]
 
 	Added a notes field to the add Friends window.
 		The notes is a Free-form text field, only extra spaces from the end are removed.
 
 
-V2.24.30	[13 November 2024]
+V2024.30	[13 November 2024]
 
 	Merged friends branch into main.
 
 
-V2.24.29	[13 November 2024] - In friends branch.
+V2024.29	[13 November 2024] - In friends branch.
 
 	Tested edited button, now okay.
 		Not switching on the Add button at the right time.
 		Not re-populating the friend window correctly.
 
 
-V2.24.28	[12 November 2024] - In friends branch.
+V2024.28	[12 November 2024] - In friends branch.
 
 	Tested delete button okay.
 	Tested add button, now okay.
@@ -297,7 +304,7 @@ V2.24.28	[12 November 2024] - In friends branch.
 		If a friend is added but not saved, a warning is issued if the add friends window is exited.
 
 
-V2.24.27	[10 November 2024] - In friends branch.
+V2024.27	[10 November 2024] - In friends branch.
 
 	Testing on friends in progress, corrected a few bugs.
 	Added some basic validation, so that first name, last name and mobile number are mandatory.

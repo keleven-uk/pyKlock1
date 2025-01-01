@@ -1,7 +1,7 @@
-#   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Tuesday 31 December 2024  21:22:11
+#   Configure file for pyKlock.py 
+#   (c) Kevin Scott   Written Wednesday 01 January 2025  23:42:31
 #
-#   true and false are lower case
+#   true and false are lower case 
 #
 [INFO]
 myVERSION = "2024.55"
@@ -20,7 +20,7 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 829
+x_pos = 826
 y_pos = -247
 Align_Right = true
 
@@ -33,7 +33,7 @@ visible = true
 
 [TIME_FONT]
 family = "Toy Train"
-size = 5
+size = 50
 weight = "normal"
 slant = false
 underline = false
@@ -50,8 +50,8 @@ overstrike = false
 [KLOCKS]
 vfd_width = 500
 vfd_height = 260
-vfd_x_pos = 416
-vfd_y_pos = 416
+vfd_x_pos = 803
+vfd_y_pos = -315
 vfd_foreground = "#34ff6c"
 vfd_background = "#000000"
 textKlock_width = 500
@@ -62,6 +62,13 @@ textKlock_on_Colour = "#ff313b"
 textKlock_off_Colour = "slate grey"
 textKlock_background = "#000000"
 textKlock_offColour = "#fff234"
+dialKlock_x_pos = 821
+dialKlock_y_pos = -376
+dialKlock_klockSize = 200
+dialKlock_background = "#000000"
+dialKlock_text_colour = "#00ff00"
+dialKlock_scale_colour = "#00ff00"
+dialKlock_needle_colour = "#00ff00"
 
 [SOUNDS]
 sounds = true

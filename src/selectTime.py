@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    selectTime.py   Copyright (C) <2017-24>  <Kevin Scott>                                                   #
+#    selectTime.py   Copyright (C) <2017-25>  <Kevin Scott>                                                   #
 #                                                                                                             #
 #    A class which allows the current time to be displays in various formats.                                 #
 #                                                                                                             #
@@ -67,8 +67,8 @@ class SelectTime:
 #
 # The time functions can't be made property's, this seems to upset the dictionary of functions - they are not callable.
 #
-    def __getNowTime(self):
-        """  returns now as hour, munutes and seconds"""
+    def getNowTime(self):
+        """  returns now as hour, minutes and seconds"""
         now = datetime.datetime.now()
 
         return now.hour, now.minute, now.second
@@ -92,7 +92,7 @@ class SelectTime:
         """ Returns current time as Fuzzy Time.
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
         __nrms = __mins - (__mins % 5)  # gets nearest five minutes
         __sRtn = ""
 
@@ -135,7 +135,7 @@ class SelectTime:
         """ Returns current time in words.
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
         __pasTo = "past"
 
         __ampm = "in the morning" if __hour < 12 else "pm"
@@ -234,7 +234,7 @@ class SelectTime:
               NB : :02d formats the number to be 2 digits with a leading zero if necessary.
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
 
         __noOfSeconds = (__hour * 3600) + (__mins * 60) + __secs
         __noOfDecimalSeconds = __noOfSeconds / 0.864
@@ -256,7 +256,7 @@ class SelectTime:
               NB : :02X formats the number to be 2 digits with a leading zero if necessary - but in hexadecimal.
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
 
         __noOfSeconds = (__hour * 3600) + (__mins * 60) + __secs
         __noOfHexSeconds = math.floor(__noOfSeconds * (65536 / 84600))
@@ -273,7 +273,7 @@ class SelectTime:
               This is only a hex representation of the current time
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
 
         return f"{__hour:02X}_{__mins:02X}_{__secs:02X}"
 
@@ -285,7 +285,7 @@ class SelectTime:
               NB : :02o formats the number to be 2 digits with a leading zero if necessary - but in octal.
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
 
         return f"{__hour:02o}_{__mins:02o}_{__secs:02o}"
 
@@ -299,7 +299,7 @@ class SelectTime:
                         Also, could of used bin(__hours); but output is 0b10011
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
 
         return f"{__hour:06b}_{__mins:06b}_{__secs:06b}"
 
@@ -308,7 +308,7 @@ class SelectTime:
         """   Returns the current [local] time in Roman numerals.
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
 
         __Rhour = tc.romanNumerals[__hour]
         __Rmins = tc.romanNumerals[__mins]
@@ -321,7 +321,7 @@ class SelectTime:
         """   Returns the current [local] time with each digit represented by a Morse code.
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
 
         if __hour < 10:
             __Mhour = "{0} {1}".format(tc.morseCode[0], tc.morseCode[__hour])
@@ -346,7 +346,7 @@ class SelectTime:
               i.e. [H,H,M,M,S,S]
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
         __digits = []
 
         if __hour < 10:
@@ -412,7 +412,7 @@ class SelectTime:
               A Quick conversion is takes 2/3 of the minute [or second] and add it to it's self.
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
         __mins *= (5/3)
         __secs *= (5/3)
 
@@ -424,7 +424,7 @@ class SelectTime:
               See http://raywinstead.com/metricclock.shtml
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
 
         __noOfSeconds = (__hour * 3600) + (__mins * 60) + __secs
         __percentSeconds = __noOfSeconds / 86400 * 100
@@ -439,7 +439,7 @@ class SelectTime:
               Only Kiloseconds are used here.
         """
 
-        __hour, __mins, __secs = self.__getNowTime()
+        __hour, __mins, __secs = self.getNowTime()
 
         __noOfSeconds = ((__hour * 3600) + (__mins * 60) + __secs) / 1000
 

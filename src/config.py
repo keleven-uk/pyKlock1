@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    myConfig.py    Copyright (C) <2024>  <Kevin Scott>                                                       #
+#    myConfig.py    Copyright (C) <2024-25>  <Kevin Scott>                                                    #
 #                                                                                                             #
 #    A class that acts has a wrapper around the configure file - config.toml.                                 #
 #    The configure file is first read, then the properties are made available.                                #
@@ -525,6 +525,90 @@ class Config():
         self.config["KLOCKS"]["textKlock_background"] = value
 
     @property
+    def DIALKLOCK_X_POS(self):
+        """  Returns the dialKlock x pos.
+        """
+        return self.config["KLOCKS"].get("dialKlock_x_pos", "500")
+
+    @DIALKLOCK_X_POS.setter
+    def DIALKLOCK_X_POS(self, value):
+        """  Sets the dialKlock x pos.
+        """
+        self.config["KLOCKS"]["dialKlock_x_pos"] = value
+
+    @property
+    def DIALKLOCK_Y_POS(self):
+        """  Returns the dialKlock y pos.
+        """
+        return self.config["KLOCKS"].get("dialKlock_y_pos", "400")
+
+    @DIALKLOCK_Y_POS.setter
+    def DIALKLOCK_Y_POS(self, value):
+        """  Sets the dialKlock y pos.
+        """
+        self.config["KLOCKS"]["dialKlock_y_pos"] = value
+
+    @property
+    def DIALKLOCK_SIZE(self):
+        """  Returns the dialKlock size.
+        """
+        return self.config["KLOCKS"].get("dialKlock_klockSize", "200")
+
+    @DIALKLOCK_SIZE.setter
+    def DIALLOCK_SIZE(self, value):
+        """  Sets the dialKlock size.
+        """
+        self.config["KLOCKS"]["dialKlock_klockSize"] = value
+
+    @property
+    def DIALKLOCK_BACKGROUND(self):
+        """  Returns the dialKlock background colour.
+        """
+        return self.config["KLOCKS"].get("dialKlock_background", "#000000")
+
+    @DIALKLOCK_BACKGROUND.setter
+    def DIALKLOCK_BACKGROUND(self, value):
+        """  Sets the dialKlock background colour.
+        """
+        self.config["KLOCKS"]["dialKlock_background"] = value
+
+    @property
+    def DIALKLOCK_TEXT_COLOUR(self):
+        """  Returns the dialKlock text colour.
+        """
+        return self.config["KLOCKS"].get("dialKlock_text_colour", "#00ff00")
+
+    @DIALKLOCK_TEXT_COLOUR.setter
+    def DIALKLOCK_TEXT_COLOUR(self, value):
+        """  Sets the dialKlock text colour.
+        """
+        self.config["KLOCKS"]["dialKlock_text_colour"] = value
+
+    @property
+    def DIALKLOCK_SCALE_COLOUR(self):
+        """  Returns the dialKlock scale colour.
+        """
+        return self.config["KLOCKS"].get("dialKlockscale_colour", "#00ff00")
+
+    @DIALKLOCK_SCALE_COLOUR.setter
+    def DIALKLOCK_SCALE_COLOUR(self, value):
+        """  Sets the dialKlock scalecolour.
+        """
+        self.config["KLOCKS"]["dialKlock_scale_color"] = value
+
+    @property
+    def DIALKLOCK_NEEDLE_COLOUR(self):
+        """  Returns the dialKlock scale colour.
+        """
+        return self.config["KLOCKS"].get("needle_colour", "#00ff00")
+
+    @DIALKLOCK_NEEDLE_COLOUR.setter
+    def DIALKLOCK_NEEDLE_COLOUR(self, value):
+        """  Sets the dialKlock scalecolour.
+        """
+        self.config["KLOCKS"]["needle_colour"] = value
+
+    @property
     def SOUNDS(self):
         """  Returns if sounds are enabled.
         """
@@ -709,6 +793,17 @@ class Config():
                     self.config["INFO"]["myVERSION"] = newVersion
                     self.logger.info(f"  ** pyKlock has been upgraded from version {oldVersion} to new version {newVersion} **")
 
+                    if self.config["KLOCKS"].get("dialKlock_x_pos" ) is None:
+                        #  New config options to be added at 2025.56 - dial klock
+                        self.logger.info("  ** New options for TEXT pyKlock added @ 2025.56**")
+                        self.config["KLOCKS"] = {"dialKlock_x_pos"         : 500,
+                                                 "dialKlock_y_pos"         : 260,
+                                                 "dialKlock_klockSize"     : 200,
+                                                 "dialKlock_background"    : "#000000",
+                                                 "dialKlock_text_colour"   : "#00ff00",
+                                                 "dialKlock_scale_colour"  : "#00ff00",
+                                                 "dialKlock_needle_colour" : "#00ff00"}
+
                     if "EVENTS" not in self.config:
                         #  New config options to be added at 2024.55 - Sounds
                         self.logger.info("  ** New options for Eventss added @ 2024.55**")
@@ -869,18 +964,25 @@ class Config():
                                "overstrike" : False}
 
         config["KLOCKS"] = {"vfd_width"              : 460,
-                            "vfd_height"             : 260,
-                            "vfd_x_pos"              : 400,
-                            "vfd_y_pos"              : 400,
-                            "vfd_foreground"         : "#82ccff",
-                            "vfd_background"         : "#000000",
-                            "textKlock_width"        : 500,
-                            "textKlock_height"       : 260,
-                            "textKlock_x_pos"        : 821,
-                            "textKlock_y_pos"        : 280,
-                            "textKlock_on_Colour"    : "springGreen2",
-                            "textKlock_off_Colour"   : "slate grey",
-                            "textKlock_background" : "#000000"}
+                            "vfd_height"               : 260,
+                            "vfd_x_pos"               : 400,
+                            "vfd_y_pos"               : 400,
+                            "vfd_foreground"          : "#82ccff",
+                            "vfd_background"          : "#000000",
+                            "textKlock_width"         : 500,
+                            "textKlock_height"        : 260,
+                            "textKlock_x_pos"         : 821,
+                            "textKlock_y_pos"         : 280,
+                            "textKlock_on_Colour"     : "springGreen2",
+                            "textKlock_off_Colour"    : "slate grey",
+                            "textKlock_background"    : "#000000",
+                            "dialKlock_x_pos"         : 500,
+                            "dialKlock_y_pos"         : 260,
+                            "dialKlock_klockSize"     : 200,
+                            "dialKlock_background"    : "#000000",
+                            "dialKlock_text_colour"   : "#00ff00",
+                            "dialKlock_scale_colour"  : "#00ff00",
+                            "dialKlock_needle_colour" : "#00ff00"}
 
         config["SOUNDS"] = {"sounds"        : True,
                             "westminster"   : True,

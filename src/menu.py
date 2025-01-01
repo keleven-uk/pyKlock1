@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    menu.py   Copyright (C) <2024>  <Kevin Scott>                                                            #
+#    menu.py   Copyright (C) <2024-25>  <Kevin Scott>                                                         #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    Menu used is from https://github.com/Akascape/CTkMenuBar.                                                #
@@ -34,6 +34,7 @@ import src.windows.SelectColourWindow as cw
 
 import src.klocks.vfdKlock as vfdKlock
 import src.klocks.textKlock as textKlock
+import src.klocks.dialKlock as dialKlock
 
 class myMenu(CTkmenu.CTkMenuBar):
     """  A class the creates the menu.
@@ -82,6 +83,7 @@ class myMenu(CTkmenu.CTkMenuBar):
                                                     width=menuWidth, font=("default", fontSize))
         self.dropdown2.add_option(option="vfdKlock",  command=self.__showVFDKlock)
         self.dropdown2.add_option(option="textKlock", command=self.__showTextKlock)
+        self.dropdown2.add_option(option="dialKlock", command=self.__showDialKlock)
 
         #  Things
         self.dropdown3  = CTkmenu.CustomDropdownMenu(widget=self.mnuThings, height=menuHeight,
@@ -111,6 +113,11 @@ class myMenu(CTkmenu.CTkMenuBar):
 
     def __showSettings(self):
         ss.showSettings(self.master, self.myConfig, self.myLogger)
+
+    def __showDialKlock(self):
+        self.master.overrideredirect(False)
+        self.master.state("iconic")
+        dialKlock.dialKlock(self.master, self.myConfig, self.myLogger)
 
     def __showTextKlock(self):
         self.master.overrideredirect(False)
