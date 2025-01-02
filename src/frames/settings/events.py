@@ -115,10 +115,10 @@ class MyEventsFrame(ctk.CTkFrame):
              The validation checks this and allows decimal numbers.
              This is called by all three stage days entry fields.
         """
-        print("__validateStageDay")
         valid = data.isdecimal()
-        print(f"valid = {valid} {data}")
+
         if valid:
+            self.master.btnSave.configure(state="normal")
             match stage:
                 case "1":
                     self.config.EVENTS_STAGE_1_DAYS = data

@@ -40,7 +40,7 @@ class dialKlock(ctk.CTkToplevel):
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
         ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)
 
-        winGeometry=f"{self.winHeight}+{self.winWidth}+{self.myConfig.DIALKLOCK_X_POS}x{myConfig.DIALKLOCK_Y_POS}"
+        winGeometry=f"{self.winWidth}x{self.winHeight}+{self.myConfig.DIALKLOCK_X_POS}+{myConfig.DIALKLOCK_Y_POS}"
         self.geometry(winGeometry)
 
         # Using tkinter direct to remove the default title bar. transparency and always on top.

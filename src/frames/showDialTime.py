@@ -64,14 +64,14 @@ class showDialKlock(ctk.CTkFrame):
         self.mtrMinutes = Meter(self, radius=self.klockSize, start=0, end=60, border_width=0,
                     fg=self.background, start_angle=self.startAngle, end_angle=self.endAngle,
                     text_font="DS-Digital 30", scale_color=self.scaleColour, needle_color=self.needleColour,
-                    major_divisions=5, text_color=self.textColour, bg=self.background)
+                    major_divisions=5, text_color=self.textColour, bg=self.background, state="Unbind")
         self.mtrMinutes.set_mark(50, 60) # set red marking from 140 to 160
         self.mtrMinutes.grid(row=0, column=1, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- Seconds --------------------
         self.mtrSeconds = Meter(self, radius=self.klockSize, start=0, end=60, border_width=0,
                     fg=self.background, start_angle=self.startAngle, end_angle=self.endAngle,
                     text_font="DS-Digital 30", scale_color=self.scaleColour, needle_color=self.needleColour,
-                    major_divisions=5, text_color=self.textColour, bg=self.background)
+                    major_divisions=5, text_color=self.textColour, bg=self.background, state="Unbind")
         self.mtrSeconds.set_mark(50, 60) # set red marking from 140 to 160
         self.mtrSeconds.grid(row=0, column=2, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- Exit -----------------------
@@ -127,12 +127,16 @@ class showDialKlock(ctk.CTkFrame):
         """  Updates the main time text.
         """
         hours, minutes, seconds = self.selectTime.getNowTime()
-        self.mtrHour.set(hours)      # set value
-        self.mtrMinutes.set(minutes) # set value
-        self.mtrSeconds.set(seconds) # set value
 
+        if minutes != 0:
+            hours = hours + (minutes / 60)
 
+        if seconds != 0:
+            minutes = minutes + (seconds / 60)
 
-
-
+        self.mtrHour.set(hours)                         # set value
+        self.mtrHour.configure(text=f"{int(hours)}")    # set the text
+        self.mtrMinutes.set(minutes)
+        self.mtrMinutes.configure(text=f"{int(minutes)}")
+        self.mtrSeconds.set(seconds)
 

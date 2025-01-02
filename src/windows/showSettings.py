@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showSettings.py   Copyright (C) <2024>  <Kevin Scott>                                                    #
+#    showSettings.py   Copyright (C) <2024-25>  <Kevin Scott>                                                 #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -22,7 +22,7 @@ import customtkinter as ctk
 import src.frames.showpyKlockSettings as pyKlockSettings
 
 class showSettings(ctk.CTkToplevel):
-    """  A class to display pyKlock's help file in pdf format.
+    """  A class to display pyKlock's settings.
     """
     def __init__(self, master, myConfig, myLogger):
         super().__init__(master)

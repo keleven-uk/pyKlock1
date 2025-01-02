@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    history.txt   Copyright (C) <2024-25>  <Kevin Scott>                                                        #
+#    history.txt   Copyright (C) <2024-25>  <Kevin Scott>                                                     #
 #                                                                                                             #
 #    History file for pyKlock                                                                                 #
 #                                                                                                             #
@@ -32,6 +32,10 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 
 If no branch indicated, assume main branch.
 
+
+V2025.57	[2 January 2025]
+
+	Added a new settings tab for the Dial Klock.
 
 V2025.56	[1 January 2025]
 

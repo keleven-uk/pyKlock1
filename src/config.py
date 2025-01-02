@@ -87,37 +87,42 @@ class Config():
             # don't attempt to copy unrelated types
             return NotImplemented
 
-        self.APPEARANCE_MODE       = other.APPEARANCE_MODE
-        self.COLOUR_THEME          = other.COLOUR_THEME
-        self.FOREGROUND            = other.FOREGROUND
-        self.BACKGROUND            = other.BACKGROUND
-        self.TRANSPARENT           = other.TRANSPARENT
-        self.ALIGN_RIGHT           = other.ALIGN_RIGHT
-        self.TIME_TYPE             = other.TIME_TYPE
-        self.TIME_CAPITALISE       = other.TIME_CAPITALISE
-        self.MENU_VISIBLE          = other.MENU_VISIBLE
-        self.TIME_FONT_FAMILY      = other.TIME_FONT_FAMILY
-        self.TIME_FONT_SIZE        = other.TIME_FONT_SIZE
-        self.STATUS_FONT_FAMILY    = other.STATUS_FONT_FAMILY
-        self.STATUS_FONT_SIZE      = other.STATUS_FONT_SIZE
-        self.VFD_FOREGROUND        = other.VFD_FOREGROUND
-        self.VFD_BACKGROUND        = other.VFD_BACKGROUND
-        self.TEXTKLOCK_ON_COLOUR   = other.TEXTKLOCK_ON_COLOUR
-        self.TEXTKLOCK_OFF_COLOUR  = other.TEXTKLOCK_OFF_COLOUR
-        self.TEXTKLOCK_BACKGROUND  = other.TEXTKLOCK_BACKGROUND
-        self.SOUNDS                = other.SOUNDS
-        self.SOUNDS_HOUR_CHIMES    = other.SOUNDS_HOUR_CHIMES
-        self.SOUNDS_QUARTER_CHIMES = other.SOUNDS_QUARTER_CHIMES
-        self.SOUNDS_HOUR_PIPS      = other.SOUNDS_HOUR_PIPS
-        self.SOUNDS_CUCKOO         = other.SOUNDS_CUCKOO
-        self.SOUNDS_VOLUME         = other.SOUNDS_VOLUME
-        self.EVENTS_STAGE_1_DAYS   = other.EVENTS_STAGE_1_DAYS
-        self.EVENTS_STAGE_2_DAYS   = other.EVENTS_STAGE_3_DAYS
-        self.EVENTS_STAGE_2_DAYS   = other.EVENTS_STAGE_3_DAYS
-        self.EVENTS_STAGE_1_COLOUR = other.EVENTS_STAGE_1_COLOUR
-        self.EVENTS_STAGE_2_COLOUR = other.EVENTS_STAGE_2_COLOUR
-        self.EVENTS_STAGE_3_COLOUR = other.EVENTS_STAGE_3_COLOUR
-        self.EVENTS_NOW_COLOUR     = other.EVENTS_NOW_COLOUR
+        self.APPEARANCE_MODE         = other.APPEARANCE_MODE
+        self.COLOUR_THEME            = other.COLOUR_THEME
+        self.FOREGROUND              = other.FOREGROUND
+        self.BACKGROUND              = other.BACKGROUND
+        self.TRANSPARENT             = other.TRANSPARENT
+        self.ALIGN_RIGHT             = other.ALIGN_RIGHT
+        self.TIME_TYPE               = other.TIME_TYPE
+        self.TIME_CAPITALISE         = other.TIME_CAPITALISE
+        self.MENU_VISIBLE            = other.MENU_VISIBLE
+        self.TIME_FONT_FAMILY        = other.TIME_FONT_FAMILY
+        self.TIME_FONT_SIZE          = other.TIME_FONT_SIZE
+        self.STATUS_FONT_FAMILY      = other.STATUS_FONT_FAMILY
+        self.STATUS_FONT_SIZE        = other.STATUS_FONT_SIZE
+        self.VFD_FOREGROUND          = other.VFD_FOREGROUND
+        self.VFD_BACKGROUND          = other.VFD_BACKGROUND
+        self.TEXTKLOCK_ON_COLOUR     = other.TEXTKLOCK_ON_COLOUR
+        self.TEXTKLOCK_OFF_COLOUR    = other.TEXTKLOCK_OFF_COLOUR
+        self.TEXTKLOCK_BACKGROUND    = other.TEXTKLOCK_BACKGROUND
+        self.DIALKLOCK_SIZE          = other.DIALKLOCK_SIZE
+        self.DIALKLOCK_BACKGROUND    = other.DIALKLOCK_BACKGROUND
+        self.DIALKLOCK_TEXT_COLOUR   = other.DIALKLOCK_TEXT_COLOUR
+        self.DIALKLOCK_SCALE_COLOUR  = other.DIALKLOCK_SCALE_COLOUR
+        self.DIALKLOCK_NEEDLE_COLOUR = other.DIALKLOCK_NEEDLE_COLOUR
+        self.SOUNDS                  = other.SOUNDS
+        self.SOUNDS_HOUR_CHIMES      = other.SOUNDS_HOUR_CHIMES
+        self.SOUNDS_QUARTER_CHIMES   = other.SOUNDS_QUARTER_CHIMES
+        self.SOUNDS_HOUR_PIPS        = other.SOUNDS_HOUR_PIPS
+        self.SOUNDS_CUCKOO           = other.SOUNDS_CUCKOO
+        self.SOUNDS_VOLUME           = other.SOUNDS_VOLUME
+        self.EVENTS_STAGE_1_DAYS     = other.EVENTS_STAGE_1_DAYS
+        self.EVENTS_STAGE_2_DAYS     = other.EVENTS_STAGE_3_DAYS
+        self.EVENTS_STAGE_2_DAYS     = other.EVENTS_STAGE_3_DAYS
+        self.EVENTS_STAGE_1_COLOUR   = other.EVENTS_STAGE_1_COLOUR
+        self.EVENTS_STAGE_2_COLOUR   = other.EVENTS_STAGE_2_COLOUR
+        self.EVENTS_STAGE_3_COLOUR   = other.EVENTS_STAGE_3_COLOUR
+        self.EVENTS_NOW_COLOUR       = other.EVENTS_NOW_COLOUR
 
 
     @property
@@ -555,7 +560,7 @@ class Config():
         return self.config["KLOCKS"].get("dialKlock_klockSize", "200")
 
     @DIALKLOCK_SIZE.setter
-    def DIALLOCK_SIZE(self, value):
+    def DIALKLOCK_SIZE(self, value):
         """  Sets the dialKlock size.
         """
         self.config["KLOCKS"]["dialKlock_klockSize"] = value
