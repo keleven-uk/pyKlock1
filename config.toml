@@ -1,5 +1,5 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Thursday 02 January 2025  21:32:08
+#   (c) Kevin Scott   Written Thursday 02 January 2025  23:10:26
 #
 #   true and false are lower case 
 #
@@ -8,7 +8,7 @@ myVERSION = "2025.56"
 myNAME = "pyKlock"
 
 [SETTINGS]
-headers = [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS", "EVENTS",]
+headers = [ "APPLICATION", "TIME", "MENU", "FONTS", "KLOCKS", "SOUNDS", "EVENTS",]
 appearanceModeTypes = [ "Light", "Dark", "System",]
 colorThemeTypes = [ "green", "dark-blue", "blue",]
 
@@ -20,8 +20,8 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 895
-y_pos = -247
+x_pos = 1315
+y_pos = -296
 Align_Right = true
 
 [TIME]
@@ -32,8 +32,8 @@ capitalise = true
 visible = true
 
 [TIME_FONT]
-family = "Toy Train"
-size = 50
+family = "backwards"
+size = 40
 weight = "normal"
 slant = false
 underline = false
@@ -69,6 +69,8 @@ dialKlock_background = "#000000"
 dialKlock_text_colour = "#00ff00"
 dialKlock_scale_colour = "#00ff00"
 dialKlock_needle_colour = "#00ff00"
+dialKlock_scale_color = "#00ff00"
+needle_colour = "#00ff00"
 
 [SOUNDS]
 sounds = true

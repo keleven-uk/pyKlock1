@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showpyKlockSettings   Copyright (C) <2024>  <Kevin Scott>                                                  #
+#    showpyKlockSettings   Copyright (C) <2024-25>  <Kevin Scott>                                             #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -26,7 +26,7 @@ import src.projectPaths as pp
 import src.frames.settings.application as frmApplication
 import src.frames.settings.time as frmTime
 import src.frames.settings.menu as frmMenu
-import src.frames.settings.font as frmFont
+import src.frames.settings.fonts as frmFonts
 import src.frames.settings.klocks as frmpyKlocks
 import src.frames.settings.sounds as frmSound
 import src.frames.settings.events as frmEvents
@@ -75,8 +75,8 @@ class MySettings(ctk.CTkFrame):
                 case "MENU":
                     frmMn = frmMenu.MyMenuFrame(self, self.frmSettings["MENU"], self.copyConfig)
                     frmMn.grid(row=1, column=0)
-                case "FONT":
-                    frmMn = frmFont.MyFontFrame(self, self.frmSettings["FONT"], self.copyConfig)
+                case "FONTS":
+                    frmMn = frmFonts.MyFontFrame(self, self.frmSettings["FONTS"], self.copyConfig)
                     frmMn.grid(row=1, column=0)
                 case "KLOCKS":
                     frmKl = frmpyKlocks.MypyKlocksFrame(self, self.frmSettings["KLOCKS"], self.copyConfig)

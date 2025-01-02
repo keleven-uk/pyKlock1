@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    menu.py   Copyright (C) <2024>  <Kevin Scott>                                                            #
+#    menu.py   Copyright (C) <2024-25>  <Kevin Scott>                                                         #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -22,14 +22,14 @@ import customtkinter as ctk
 class MyMenuFrame(ctk.CTkFrame):
     """  A class that creates a frame that holds the user settings for the Application.
 
-        Note : this frame uses a copy of the Config file i.e. not myConfig.
+        Note : this frame uses a copy of the config file i.e. not myconfig.
     """
-    def __init__(self, master, main, Config):
+    def __init__(self, master, main, config):
         super().__init__(main)
 
         self.master     = master
         self.main       = main
-        self.Config     = Config
+        self.config     = config
         self.foreColour = "white"
 
         self.__createWidgets()
@@ -38,22 +38,22 @@ class MyMenuFrame(ctk.CTkFrame):
     def __createWidgets(self):
         """  Create the main frame.
         """
-        self.configure(fg_color=self.Config.BACKGROUND)
-        self.lblTitle = ctk.CTkLabel(self, text="Menu Settings", text_color=self.foreColour,
-                                         fg_color=self.Config.BACKGROUND)
+        self.configure(fg_color=self.config.BACKGROUND)
+        self.lblTitle = ctk.CTkLabel(self, text="Menu Settings", text_color="yellow", fg_color=self.config.BACKGROUND)
         self.lblTitle.grid(row=0, column=3)
+        #---------------------------------------------------------------------------------------------- Menu Visable ---------------
         self.lblMenuVisable = ctk.CTkLabel(self, text="Menu Visable", text_color=self.foreColour,
-                                              fg_color=self.Config.BACKGROUND)
+                                              fg_color=self.config.BACKGROUND)
         self.lblMenuVisable.grid(row=1, column=0, padx=10, pady=10)
-        self.chkMenuVisable = ctk.CTkCheckBox(self, text="", fg_color=self.Config.BACKGROUND, border_color=self.foreColour,
+        self.chkMenuVisable = ctk.CTkCheckBox(self, text="", fg_color=self.config.BACKGROUND, border_color=self.foreColour,
                                               hover_color="gray", command=self.__setMenuVisable)
         self.chkMenuVisable.grid(row=1, column=1, padx=10, pady=10)
-        if self.Config.MENU_VISIBLE:
+        if self.config.MENU_VISIBLE:
             self.chkMenuVisable.select()
         else:
             self.chkMenuVisable.deselect()
         self.lblLabel = ctk.CTkLabel(self, text=" Setting not yet implemented", text_color=self.foreColour,
-                                         fg_color=self.Config.BACKGROUND)
+                                         fg_color=self.config.BACKGROUND)
         self.lblLabel.grid(row=1, column=3)
 
 
@@ -63,5 +63,5 @@ class MyMenuFrame(ctk.CTkFrame):
         """
         self.master.btnSave.configure(state="normal")
         clicked = self.chkMenuVisable.get()
-        self.Config.MENU_VISIBLE = True if clicked == 1 else False
+        self.config.MENU_VISIBLE = True if clicked == 1 else False
 

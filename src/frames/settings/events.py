@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    events.py   Copyright (C) <2024>  <Kevin Scott>                                                          #
+#    events.py   Copyright (C) <2024-25>  <Kevin Scott>                                                       #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -26,7 +26,7 @@ class MyEventsFrame(ctk.CTkFrame):
 
          The three stage days entry fields will only accept decimal numbers.
 
-        Note : this frame uses a copy of the Config file i.e. not config.
+        Note : this frame uses a copy of the config file i.e. not config.
     """
     def __init__(self, master, main, config):
         super().__init__(main)
@@ -43,12 +43,11 @@ class MyEventsFrame(ctk.CTkFrame):
         """  Create the main frame.
         """
         self.configure(fg_color=self.config.BACKGROUND)
-        self.grid_columnconfigure(0, weight=2)
-        self.grid_columnconfigure(1, weight=2)
+        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(1, weight=1)
         self.grid_columnconfigure(2, weight=1)
-        self.grid_columnconfigure(3, weight=2)
-        self.grid_columnconfigure(3, weight=2)
-        self.lblTitle = ctk.CTkLabel(self, text="Events Settings", text_color=self.foreColour,
+        self.grid_columnconfigure(3, weight=1)
+        self.lblTitle = ctk.CTkLabel(self, text="Events Settings", text_color="yellow",
                                          fg_color=self.config.BACKGROUND)
         self.lblTitle.grid(row=0, column=2)
         #---------------------------------------------------------------------------------------------- stage 1 ----------------------
@@ -63,9 +62,9 @@ class MyEventsFrame(ctk.CTkFrame):
                                          fg_color=self.config.BACKGROUND)
         self.lblStage1Colour.grid(row=1, column=2, padx=10, pady=10, sticky="news")
         self.btnStage1Colour = ctk.CTkButton(self, text="", command=self.__askStage1Colour,
-                                           fg_color=self.config.EVENTS_STAGE_1_COLOUR, hover_color="gray",
-                                           corner_radius=12, width=100, text_color=self.foreColour,
-                                           font=("Montserrat", 16))
+                                             fg_color=self.config.EVENTS_STAGE_1_COLOUR, hover_color="gray",
+                                             corner_radius=12, width=100, text_color=self.foreColour,
+                                             font=("Montserrat", 16))
         self.btnStage1Colour.grid(row=1, column=3, padx=10, pady=10, sticky="news")
         #---------------------------------------------------------------------------------------------- stage 2 ----------------------
         self.lblStage2Days = ctk.CTkLabel(self, text="Stage 2 Days", text_color=self.foreColour,
@@ -79,9 +78,9 @@ class MyEventsFrame(ctk.CTkFrame):
                                          fg_color=self.config.BACKGROUND)
         self.lblStage2Colour.grid(row=2, column=2, padx=10, pady=10, sticky="news")
         self.btnStage2Colour = ctk.CTkButton(self, text="", command=self.__askStage2Colour,
-                                           fg_color=self.config.EVENTS_STAGE_2_COLOUR, hover_color="gray",
-                                           corner_radius=12, width=100, text_color=self.foreColour,
-                                           font=("Montserrat", 16))
+                                             fg_color=self.config.EVENTS_STAGE_2_COLOUR, hover_color="gray",
+                                             corner_radius=12, width=100, text_color=self.foreColour,
+                                             font=("Montserrat", 16))
         self.btnStage2Colour.grid(row=2, column=3, padx=10, pady=10, sticky="news")
         #---------------------------------------------------------------------------------------------- stage 3 ----------------------
         self.lblStage3Days = ctk.CTkLabel(self, text="Stage 3 Days", text_color=self.foreColour,
@@ -95,18 +94,18 @@ class MyEventsFrame(ctk.CTkFrame):
                                          fg_color=self.config.BACKGROUND)
         self.lblStage3Colour.grid(row=3, column=2, padx=10, pady=10, sticky="news")
         self.btnStage3Colour = ctk.CTkButton(self, text="", command=self.__askStage3Colour,
-                                           fg_color=self.config.EVENTS_STAGE_3_COLOUR, hover_color="gray",
-                                           corner_radius=12, width=100, text_color=self.foreColour,
-                                           font=("Montserrat", 16))
+                                             fg_color=self.config.EVENTS_STAGE_3_COLOUR, hover_color="gray",
+                                             corner_radius=12, width=100, text_color=self.foreColour,
+                                             font=("Montserrat", 16))
         self.btnStage3Colour.grid(row=3, column=3, padx=10, pady=10, sticky="news")
         #---------------------------------------------------------------------------------------------- Due Now ----------------------
         self.lblDueNowColour = ctk.CTkLabel(self, text="Due Now Colour", text_color=self.foreColour,
                                          fg_color=self.config.BACKGROUND)
         self.lblDueNowColour.grid(row=4, column=2, padx=10, pady=10, sticky="news")
         self.btnDueNowColour = ctk.CTkButton(self, text="", command=self.__askDueNowColour,
-                                           fg_color=self.config.EVENTS_NOW_COLOUR, hover_color="gray",
-                                           corner_radius=12, width=100, text_color=self.foreColour,
-                                           font=("Montserrat", 16))
+                                             fg_color=self.config.EVENTS_NOW_COLOUR, hover_color="gray",
+                                             corner_radius=12, width=100, text_color=self.foreColour,
+                                             font=("Montserrat", 16))
         self.btnDueNowColour.grid(row=4, column=3, padx=10, pady=10, sticky="news")
 
 

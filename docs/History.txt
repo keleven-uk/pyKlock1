@@ -33,9 +33,16 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2025.58	[2 January 2025]
+
+	Refactored all the settings frames to have the same format and look.
+		Corrected a few bugs on the way.
+
+
 V2025.57	[2 January 2025]
 
 	Added a new settings tab for the Dial Klock.
+
 
 V2025.56	[1 January 2025]
 
