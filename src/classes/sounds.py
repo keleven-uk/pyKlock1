@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    sounds.py   Copyright (C) <2024>  <Kevin Scott>                                                          #
+#    sounds.py   Copyright (C) <2024-25>  <Kevin Scott>                                                       #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    A class for managing sounds.                                                                             #
@@ -23,7 +23,7 @@
 #      Current options -                                                                                      #
 #                       Play chimes ever hour.                                                                #
 #                       Play chimes ever quarter.                                                             #
-#                       Plat the pips on the hour.                                                            #
+#                       Play the pips on the hour.                                                            #
 #                                                                                                             #
 #      Probably needs volume control.                                                                         #
 #                                                                                                             #
@@ -67,7 +67,7 @@ class Sounds():
             10 : "ten",
             11 : "eleven",
             12 : "twelve"}
-
+# ------------------------------------------------------------------------------------- playSounds ----------------------
     def playSounds(self):
         """  Called to play the actual sounds.
              The config file should of been read in __init__.
@@ -85,13 +85,14 @@ class Sounds():
         if hours > 12:
             hours -= 12                         #  Work on a 12 hour klock.
 
-        if self.myConfig.SOUNDS_HOUR_CHIMES or self.myConfig.SOUNDS_CUCKOO:
+        if self.myConfig.SOUNDS_HOUR_CHIMES:
             if minutes == 0:
                 if self.myConfig.SOUNDS_WESTMINSTER:
-                    bsePath = f"{pp.RESOURCE_PATH}\\Sounds\\westminster"
+                    sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\westminster\\{self.strHour[hours]}.mp3"
                 if self.myConfig.SOUNDS_CUCKOO:
-                    bsePath = f"{pp.RESOURCE_PATH}\\Sounds\\cuckoo"
-                sndPath = f"{bsePath}\\{self.strHour[hours]}.mp3"
+                    sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\cuckoo\\{self.strHour[hours]}.mp3"
+                if self.myConfig.SOUNDS_HOUR_PIPS:
+                    sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\thepips.mp3"
 
         if self.myConfig.SOUNDS_QUARTER_CHIMES:
             if minutes in [15, 30, 45]:
@@ -103,10 +104,6 @@ class Sounds():
                     case 45:
                         sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\westminster\\threequarterchime.mp3"
 
-        if self.myConfig.SOUNDS_HOUR_PIPS and not self.myConfig.SOUNDS_HOUR_CHIMES:  #  If both enabled, just play hour chimes.
-            if minutes == 0:
-                sndPath = f"{pp.RESOURCE_PATH}\\Sounds\\thepips.mp3"
-
         if sndPath:
             # Playback stops when the object is destroyed (GC'ed), so save a reference to the object for non-blocking playback.
             try:
@@ -115,7 +112,7 @@ class Sounds():
                 player.play(block=True)
             except Exception as e:
                 print(f"Error {e}")
-
+# ------------------------------------------------------------------------------------- playPips ------------------------
     def playPips(self):
         """  Enable the pip to be played to test the volume.
         """
@@ -125,7 +122,7 @@ class Sounds():
             player.play(block=True)
         except Exception as e:
             print(f"Error {e}")
-
+# ------------------------------------------------------------------------------------- checkHourChimes -----------------
     def checkHourChimes(self, master):
         """  There should be one and only one hour chime selected.
              This should not happen, bur check anyways.

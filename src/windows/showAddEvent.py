@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    ShowAddEvent.py   Copyright (C) <2024>  <Kevin Scott>                                                   #
+#    ShowAddEvent.py   Copyright (C) <2024-25>  <Kevin Scott>                                                   #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    Colour picker used is from https://github.com/Akascape/CTkColorPicker.                                   #
@@ -56,7 +56,7 @@ class EventAddWindow(ctk.CTkToplevel):
 
         self.__createWidgets()
         if self.rowKey:                         #  if rowKey is not None, then in edit mode - load selected event details into the fields.
-            self.__populateFields(self.rowKey)   #  rowkey should hold the row number of the selected event.
+            self.__populateFields(self.rowKey)  #  rowkey should hold the row number of the selected event.
             self.oldKey = self.rowKey           #  Save away, just in case the key is changed.
 
 
@@ -84,23 +84,24 @@ class EventAddWindow(ctk.CTkToplevel):
                         locale="en_GB",
                         date_patternstr="%dd/%MM/%Y")
 
-
+        # ------------------------------------------------------------------------------------------------------ Name ---------------------
         self.lblName = ctk.CTkLabel(self, text="Name", text_color="#ffe9a6", font=("Verdana",20))
         self.lblName.grid(row=0, column=0,padx=10, pady=10)
-        self.entName = ctk.CTkEntry(self, placeholder_text="Event Name", text_color="white", fg_color="#030126", border_color="#030126",
-                                         validate="focusout", validatecommand=self.__validateName)
+        self.entName = ctk.CTkEntry(self, placeholder_text="Event Name", text_color="white", fg_color="#030126",
+                                    border_color="#030126", validate="focusout", validatecommand=self.__validateName)
         self.entName.grid(row=0, column=1,padx=10, pady=10)
-
+        # ----------------------------------------------------------------------------------------------------- Category ------------------
         self.lblCategory = ctk.CTkLabel(self, text="Category", text_color="#ffe9a6", font=("Verdana",20))
         self.lblCategory.grid(row=0, column=2, padx=10, pady=10)
-        self.cbxCategory = ctk.CTkComboBox(self, values=self.Categories, text_color="white", fg_color="#030126", border_color="#030126", command=self.setCategory)
+        self.cbxCategory = ctk.CTkComboBox(self, values=self.Categories, text_color="white", fg_color="#030126",
+                                           border_color="#030126", command=self.setCategory)
         self.cbxCategory.grid(row=0, column=3, padx=10, pady=10)
-
+        # ----------------------------------------------------------------------------------------------------- Date Due ------------------
         self.lblDateDue = ctk.CTkLabel(self, text="Date Due", text_color="#ffe9a6", font=("Verdana",20))
         self.lblDateDue.grid(row=3, column=0, padx=10, pady=10)
         self.dpDateDue = DateEntry(self, style="my.DateEntry", width=20)
         self.dpDateDue.grid(row=3, column=1, padx=10, pady=10)
-
+        # ----------------------------------------------------------------------------------------------------- Time Due ------------------
         self.lblTimeDue = ctk.CTkLabel(self, text="Time Due", text_color="#ffe9a6", font=("Verdana",20))
         self.lblTimeDue.grid(row=3, column=2, padx=10, pady=10)
         self.tpTimeDue = SpinTimePickerModern(self)
@@ -111,19 +112,19 @@ class EventAddWindow(ctk.CTkToplevel):
         self.tpTimeDue.configure_separator(bg="#404040", fg="#ffffff")
         self.tpTimeDue.set24Hrs(0)      #  set the hour to 0
         self.tpTimeDue.setMins(0)       #  set the minutes to 0
-
+        # ---------------------------------------------------------------------------------------------------- Recurring ------------------
         self.lblRecurring = ctk.CTkLabel(self, text="Recurring", text_color="#ffe9a6", font=("Verdana",20))
         self.lblRecurring.grid(row=4, column=0, padx=10, pady=10)
         self.chkRecurring = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color="#030126")
         self.chkRecurring.grid(row=4, column=1, padx=10, pady=10)
-
+        # ---------------------------------------------------------------------------------------------------- Notes ----------------------
         self.lblNotes = ctk.CTkLabel(self, text="Notes", text_color="#ffe9a6", font=("Verdana",20))
         self.lblNotes.grid(row=8, column=0,padx=10, pady=10)
         self.txtNotes = ctk.CTkTextbox(self, width=470, height = 100, text_color="white", fg_color="#030126", border_color="#030126",
                                        corner_radius=10, wrap="word")
         self.txtNotes.grid(row=8, column=1,padx=10, pady=10, columnspan=3)
 
-
+        # ---------------------------------------------------------------------------------------------------- Action Buttons -------------
         self.btnAdd = ctk.CTkButton( self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self.__add, state="disabled")
         self.btnAdd.grid(row=9, column=0, padx=10, pady=10, sticky="nsew")

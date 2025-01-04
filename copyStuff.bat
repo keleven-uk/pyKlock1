@@ -10,16 +10,10 @@ copy klock.iss output\pyKlock
 copy docs\history.txt output\pyKlock\
 copy docs\version.toml output\pyKlock
 
-mkdir output\klock\help
-copy help\klock.pdf output\pyKlock\help
-copy help\klock.chm output\pyKlock\help
+mkdir output\pyKlock\help
+copy help\pyKlock.pdf output\pyKlock\help
+copy help\pyKlock.chm output\pyKlock\help
 
-mkdir output\klock\resources
-copy resources\tea.ico output\pyKlock\resources
-
-mkdir output\klock\resources\Sounds
-xcopy resources\Sounds output\pyKlock\resources\Sounds
-
-
+robocopy resources output\pyKlock\resources /s /e
 
 

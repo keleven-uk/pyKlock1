@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showMainTime   Copyright (C) <2024>  <Kevin Scott>                                                       #
+#    showMainTime   Copyright (C) <2024-25>  <Kevin Scott>                                                    #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -25,7 +25,7 @@ import src.utils.klock_utils as utils
 class MyMainTimeFrame(ctk.CTkFrame):
     """  A class that creates the frame for the main time display.
 
-         mt = MyStatusBarFrame()
+         mt = MyMainTimeFrame()
          mt.update() - to update the main time colours.
     """
     def __init__(self, main, myConfig):

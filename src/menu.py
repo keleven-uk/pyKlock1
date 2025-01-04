@@ -112,19 +112,27 @@ class myMenu(CTkmenu.CTkMenuBar):
 
 
     def __showSettings(self):
+        """  Loads the Settings window.
+        """
         ss.showSettings(self.master, self.myConfig, self.myLogger)
 
     def __showDialKlock(self):
+        """  Loads the Dial Klock window.
+        """
         self.master.overrideredirect(False)
         self.master.state("iconic")
         dialKlock.dialKlock(self.master, self.myConfig, self.myLogger)
 
     def __showTextKlock(self):
+        """  Loads the Text Klock window.
+        """
         self.master.overrideredirect(False)
         self.master.state("iconic")
         textKlock.textKlock(self.master, self.myConfig, self.myLogger)
 
     def __showVFDKlock(self):
+        """  Loads the VFD Klock window.
+        """
         self.master.overrideredirect(False)
         self.master.state("iconic")
         vfdKlock.vfdKlock(self.master, self.myConfig, self.myLogger)

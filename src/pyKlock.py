@@ -54,9 +54,6 @@ class pyKlock(ctk.CTk):
 
         #  Dimensions of the window
 
-        self.myLogger.debug(f" Window Width  = {myConfig.WIN_WIDTH}")
-        self.myLogger.debug(f" Window Height = {myConfig.WIN_HEIGHT}")
-
         self.title("pyKlock")
         self.geometry(f"{myConfig.WIN_WIDTH}x{myConfig.WIN_HEIGHT}+{myConfig.X_POS}+{myConfig.Y_POS}")
         self.resizable(False, False)
@@ -68,11 +65,11 @@ class pyKlock(ctk.CTk):
         self.attributes("-topmost", True)
 
         self.sounds.checkHourChimes(self)        #  There should be one and only one hour chime selected.
-
+        # ------------------------------------------------------------------------------------- Creating Menu ---------------------
         #  Create the main menu.
         myLogger.info("  Creating Menu")
         self.menu = myMenu.myMenu(self, self.myConfig, self.myLogger, self.myTimer, self.eventsStore)
-
+        # ------------------------------------------------------------------------------------- Creating Main Time ----------------
         #  Create the frame for the main time text.
         myLogger.info("  Creating Main Time")
         self.mainTime = myMainTime.MyMainTimeFrame(self, self.myConfig)
@@ -80,7 +77,7 @@ class pyKlock(ctk.CTk):
 
         self.after(1000, self.__update)              #  Update the time and status bar.
         self.after(1000, self.__eventUpdate)         #  Update the events every minute.
-
+        # ------------------------------------------------------------------------------------- Creating Status Bar ---------------
         #  Create the frame for the status bar.
         myLogger.info("  Creating Status Bar")
         self.StatusBar = myStatusBar.MyStatusBarFrame(self, self.myConfig)

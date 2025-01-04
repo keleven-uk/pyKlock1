@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    ShowAddFriend.py   Copyright (C) <2024>  <Kevin Scott>                                                   #
+#    ShowAddFriend.py   Copyright (C) <2024-25>  <Kevin Scott>                                                #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    Colour picker used is from https://github.com/Akascape/CTkColorPicker.                                   #
@@ -84,86 +84,89 @@ class FriendAddWindow(ctk.CTkToplevel):
                         borderwidth=2,
                         locale="en_GB",
                         date_patternstr="%dd/%MM/%Y")
-
+        # ------------------------------------------------------------------------------------------------------ Title --------------------
         self.lblTitle = ctk.CTkLabel(self, text="Title", text_color="#ffe9a6", font=("Verdana",20))
         self.lblTitle.grid(row=0, column=0,padx=10, pady=10)
-        self.cbxTitle = ctk.CTkComboBox(self, values=self.titles, text_color="white", fg_color="#030126", border_color="#030126", command=self.setTitle)
+        self.cbxTitle = ctk.CTkComboBox(self, values=self.titles, text_color="white", fg_color="#030126",
+                                        border_color="#030126", command=self.setTitle)
         self.cbxTitle.grid(row=0, column=1,padx=10, pady=10)
-
-        self.lblFirstName = ctk.CTkLabel(self, text="FirstName", text_color="#ffe9a6", font=("Verdana",20))
+        # ------------------------------------------------------------------------------------------------------ First Name ---------------
+        self.lblFirstName = ctk.CTkLabel(self, text="First Name", text_color="#ffe9a6", font=("Verdana",20))
         self.lblFirstName.grid(row=1, column=0,padx=10, pady=10)
-        self.entFirstName = ctk.CTkEntry(self, placeholder_text="FirstName", text_color="white", fg_color="#030126", border_color="#030126",
-                                         validate="focusout", validatecommand=self.__validateFirstName)
+        self.entFirstName = ctk.CTkEntry(self, placeholder_text="First Name", text_color="white", fg_color="#030126",
+                                         border_color="#030126", validate="focusout", validatecommand=self.__validateFirstName)
         self.entFirstName.grid(row=1, column=1,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ Last Name ----------------
         self.lblLastName = ctk.CTkLabel(self, text="Last Name", text_color="#ffe9a6", font=("Verdana",20))
         self.lblLastName.grid(row=1, column=2,padx=10, pady=10)
-        self.entLastName = ctk.CTkEntry(self, placeholder_text="lastName", text_color="white", fg_color="#030126", border_color="#030126",
-                                        validate="focusout", validatecommand=self.__validateLastName)
+        self.entLastName = ctk.CTkEntry(self, placeholder_text="last Name", text_color="white", fg_color="#030126",
+                                        border_color="#030126", validate="focusout", validatecommand=self.__validateLastName)
         self.entLastName.grid(row=1, column=3,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ Mobile Number ------------
         self.lblMobileNumber = ctk.CTkLabel(self, text="Mobile Number", text_color="#ffe9a6", font=("Verdana",20))
         self.lblMobileNumber.grid(row=2, column=0,padx=10, pady=10)
-        self.entMobileNumber = ctk.CTkEntry(self, placeholder_text="mobileNumber", text_color="white", fg_color="#030126", border_color="#030126",
-                                            validate="focusout", validatecommand=self.__validateMobileNumber)
+        self.entMobileNumber = ctk.CTkEntry(self, placeholder_text="mobile Number", text_color="white",
+                                            fg_color="#030126", border_color="#030126", validate="focusout",
+                                            validatecommand=self.__validateMobileNumber)
         self.entMobileNumber.grid(row=2, column=1,padx=10, pady=10)
-
-        self.lblTelNumber = ctk.CTkLabel(self, text="Tel Number", text_color="#ffe9a6", font=("Verdana",20))
+        # ------------------------------------------------------------------------------------------------------ Telephone Number ---------
+        self.lblTelNumber = ctk.CTkLabel(self, text="Telephone Number", text_color="#ffe9a6", font=("Verdana",20))
         self.lblTelNumber.grid(row=2, column=2,padx=10, pady=10)
-        self.entTelNumber = ctk.CTkEntry(self, placeholder_text="Telephone Number", text_color="white", fg_color="#030126", border_color="#030126")
+        self.entTelNumber = ctk.CTkEntry(self, placeholder_text="Telephone Number", text_color="white",
+                                         fg_color="#030126", border_color="#030126")
         self.entTelNumber.grid(row=2, column=3,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ E-Mail -------------------
         self.lblEmail = ctk.CTkLabel(self, text="E-Mail", text_color="#ffe9a6", font=("Verdana",20))
         self.lblEmail.grid(row=3, column=0,padx=10, pady=10)
-        self.entEmail = ctk.CTkEntry(self, placeholder_text="eMail", text_color="white", fg_color="#030126", border_color="#030126")
+        self.entEmail = ctk.CTkEntry(self, placeholder_text="E-Mail", text_color="white", fg_color="#030126", border_color="#030126")
         self.entEmail.grid(row=3, column=1,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ Birthday -----------------
         self.lblBirthday = ctk.CTkLabel(self, text="Birthday", text_color="#ffe9a6", font=("Verdana",20))
         self.lblBirthday.grid(row=3, column=2,padx=10, pady=10)
         self.dpBirthday = DateEntry(self, style="my.DateEntry", width=20)
         self.dpBirthday.grid(row=3, column=3,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ House No / Name ----------
         self.lblHouseNo = ctk.CTkLabel(self, text="House No / Name", text_color="#ffe9a6", font=("Verdana",20))
         self.lblHouseNo.grid(row=4, column=0,padx=10, pady=10)
         self.entHouseNo = ctk.CTkEntry(self, placeholder_text="House no / Name", text_color="white", fg_color="#030126", border_color="#030126")
         self.entHouseNo.grid(row=4, column=1,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ Address Line 1 -----------
         self.lblAddLine1 = ctk.CTkLabel(self, text="Address Line 1", text_color="#ffe9a6", font=("Verdana",20))
         self.lblAddLine1.grid(row=5, column=0,padx=10, pady=10)
         self.entAddLine1 = ctk.CTkEntry(self, placeholder_text="Address Line 1", text_color="white", fg_color="#030126", border_color="#030126")
         self.entAddLine1.grid(row=5, column=1,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ Address Line 2 -----------
         self.lblAddLine2 = ctk.CTkLabel(self, text="Address Line 2", text_color="#ffe9a6", font=("Verdana",20))
         self.lblAddLine2.grid(row=5, column=2,padx=10, pady=10)
         self.entAddLine2 = ctk.CTkEntry(self, placeholder_text="Address Line 2", text_color="white", fg_color="#030126", border_color="#030126")
         self.entAddLine2.grid(row=5, column=3,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ City ---------------------
         self.lblCity = ctk.CTkLabel(self, text="City", text_color="#ffe9a6", font=("Verdana",20))
         self.lblCity.grid(row=6, column=0,padx=10, pady=10)
         self.entCity = ctk.CTkEntry(self, placeholder_text="City", text_color="white", fg_color="#030126", border_color="#030126")
         self.entCity.grid(row=6, column=1,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ County -------------------
         self.lblCounty = ctk.CTkLabel(self, text="County", text_color="#ffe9a6", font=("Verdana",20))
         self.lblCounty.grid(row=6, column=2,padx=10, pady=10)
         self.entCounty = ctk.CTkEntry(self, placeholder_text="County", text_color="white", fg_color="#030126", border_color="#030126")
         self.entCounty.grid(row=6, column=3,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ Post Code ----------------
         self.lblPostCode = ctk.CTkLabel(self, text="Post Code", text_color="#ffe9a6", font=("Verdana",20))
         self.lblPostCode.grid(row=7, column=0,padx=10, pady=10)
         self.entPostCode = ctk.CTkEntry(self, placeholder_text="Post Code", text_color="white", fg_color="#030126", border_color="#030126")
         self.entPostCode.grid(row=7, column=1,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ Country ------------------
         self.lblCountry = ctk.CTkLabel(self, text="Country", text_color="#ffe9a6", font=("Verdana",20))
         self.lblCountry.grid(row=7, column=2,padx=10, pady=10)
         self.entCountry = ctk.CTkEntry(self, placeholder_text="Country", text_color="white", fg_color="#030126", border_color="#030126")
         self.entCountry.grid(row=7, column=3,padx=10, pady=10)
-
+        # ------------------------------------------------------------------------------------------------------ Notes --------------------
         self.lblNotes = ctk.CTkLabel(self, text="Notes", text_color="#ffe9a6", font=("Verdana",20))
         self.lblNotes.grid(row=8, column=0,padx=10, pady=10)
         self.txtNotes = ctk.CTkTextbox(self, width=470, height = 100, text_color="white", fg_color="#030126", border_color="#030126",
                                        corner_radius=10, wrap="word")
         self.txtNotes.grid(row=8, column=1,padx=10, pady=10, columnspan=3)
-
+        # ------------------------------------------------------------------------------------------------------ Action Buttons -----------
         self.btnAdd = ctk.CTkButton( self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self.__add, state="disabled")
         self.btnAdd.grid(row=9, column=0, padx=10, pady=10, sticky="nsew")
@@ -251,18 +254,18 @@ class FriendAddWindow(ctk.CTkToplevel):
 
         self.lastName  = self.entLastName.get().title().strip()
         self.firstName = self.entFirstName.get().title().strip()
-        mobileNo  = self.entMobileNumber.get().strip()
-        telNumber = self.entTelNumber.get().strip()
-        eMail     = self.entEmail.get().strip()
-        birthday  = dateDue.strftime("%d/%m/%Y")
-        houseNo   = self.entHouseNo.get().title().strip()
-        addLine1  = self.entAddLine1.get().title().strip()
-        addLine2  = self.entAddLine2.get().title().strip()
-        city      = self.entCity.get().title().strip()
-        county    = self.entCounty.get().title().strip()
-        postCode  = self.entPostCode.get().upper().strip()
-        country   = self.entCountry.get().title().strip()
-        notes     = self.txtNotes.get("0.0", "end").strip()                #  return note as entered, extra spaces from the end are removed.
+        mobileNo       = self.entMobileNumber.get().strip()
+        telNumber      = self.entTelNumber.get().strip()
+        eMail          = self.entEmail.get().strip()
+        birthday       = dateDue.strftime("%d/%m/%Y")
+        houseNo        = self.entHouseNo.get().title().strip()
+        addLine1       = self.entAddLine1.get().title().strip()
+        addLine2       = self.entAddLine2.get().title().strip()
+        city           = self.entCity.get().title().strip()
+        county         = self.entCounty.get().title().strip()
+        postCode       = self.entPostCode.get().upper().strip()
+        country        = self.entCountry.get().title().strip()
+        notes          = self.txtNotes.get("0.0", "end").strip()                #  return note as entered, extra spaces from the end are removed.
 
         if self.lastName == "" and self.firstName == "" and mobileNo == "":
             CTkMessagebox(title="Error", message="First, Last Name and Mobile Number are mandatory", icon="cancel")
@@ -277,7 +280,7 @@ class FriendAddWindow(ctk.CTkToplevel):
             self.valFirstName    = False
             self.valLastName     = False
             self.valMobileNumber = False
-            self.addData         = True     #  data had been add/edited but not saved.3.12\__setslice__
+            self.addData         = True     #  data had been add/edited but not saved.
 
             self._clear()
             if self.rowKey:

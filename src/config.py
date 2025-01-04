@@ -828,7 +828,7 @@ class Config():
                     if "SETTINGS" not in self.config:
                         #  New config options to be added at 2024.49 - modes for settings
                         self.logger.info("  ** New options for Settings added @ 2024.49**")
-                        self.config["SETTINGS"] = {"headers"             : [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",],
+                        self.config["SETTINGS"] = {"headers"             : [ "APPLICATION", "TIME", "MENU", "FONTS", "KLOCKS", "SOUNDS",],
                                                    "appearanceModeTypes" : ["Light", "Dark", "System"],
                                                    "colorThemeTypes"     : ["green", "dark-blue", "blue"]}
 
@@ -839,7 +839,7 @@ class Config():
                                                  "westminster"   : True,
                                                  "hour_chimes"   : True,
                                                  "quarter_chimes": True,
-                                                 "hour_pips"     : True,
+                                                 "hour_pips"     : False,
                                                  "cuckoo"        : False,
                                                  "sound_volume"  : 25}
 

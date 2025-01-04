@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showAbout.py   Copyright (C) <2024>  <Kevin Scott>                                                        #
+#    showAbout.py   Copyright (C) <2024-25>  <Kevin Scott>                                                    #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -93,7 +93,7 @@ class topFrame(ctk.CTkFrame):
         lblAppDesc.grid(row=1, column=1, padx=20)
         lblEmail = ctk.CTkLabel(self, text="klock@keleven.co.uk", font=("default", 20), justify=("center"))
         lblEmail.grid(row=2, column=1, padx=20)
-        lblCopy = ctk.CTkLabel(self, text="(c) Kevin Scott 2024", font=("default", 20), justify=("center"))
+        lblCopy = ctk.CTkLabel(self, text="(c) Kevin Scott 2024-25", font=("default", 20), justify=("center"))
         lblCopy.grid(row=3, column=1, padx=20)
         lblVersion = ctk.CTkLabel(self, text=f"pyKlock Version : {myConfig.VERSION}", font=("default", 20), justify=("center"))
         lblVersion.grid(row=4, column=1, padx=20)

@@ -51,8 +51,7 @@ class MySettings(ctk.CTkFrame):
         """  Create the main time display.
         """
         self.configure(fg_color=self.myConfig.BACKGROUND)
-        self.lblName = ctk.CTkLabel(self, text=self.myConfig.NAME, text_color=self.foreColour,
-                                    fg_color=self.myConfig.BACKGROUND)
+        self.lblName = ctk.CTkLabel(self, text=self.myConfig.NAME, text_color=self.foreColour, fg_color=self.myConfig.BACKGROUND)
         self.lblName.grid(row=0, column=0)
         self.lblVersion = ctk.CTkLabel(self, text=f"Version {self.myConfig.VERSION}", text_color=self.foreColour,
                                        fg_color=self.myConfig.BACKGROUND)
@@ -105,10 +104,10 @@ class MySettings(ctk.CTkFrame):
                                     icon="question", option_1="Yes", option_2="No")
                 if msg.get()=="No":
                     return
+                self.myLogger.debug("  Exited setting window although there was unsaved data.")
         except NotImplemented as error:
             self.myLogger.error(f"  Problems with comparing configs for equality :: {error}")
 
-        self.myLogger.debug("  Exited setting window although there was unsaved data.")
         self.main.destroy()
 
     def __Save(self):

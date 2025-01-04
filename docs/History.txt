@@ -33,6 +33,18 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2025.59	[2 January 2025]
+
+	Refactored all code to have the same format and look [hopefully].
+
+	Made changes to satisfy pyinstaller.
+		I needed to copy a few more directories.
+		I needed to install pytz [not sure about tzdata though], although Babel seems to have its own.  Only on the executable though.
+
+	Made changes to satisfy Inno setup script.
+		Still a problem with PyMuPDF - see V2024.24 below.  Still a problem with 1.25.1, okay with 1.24.10.
+
+
 V2025.58	[2 January 2025]
 
 	Refactored all the settings frames to have the same format and look.

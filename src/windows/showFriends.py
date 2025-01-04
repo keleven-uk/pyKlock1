@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    ShowFriends.py   Copyright (C) <2024>  <Kevin Scott>                                                     #
+#    ShowFriends.py   Copyright (C) <2024-25>  <Kevin Scott>                                                  #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    Colour picker used is from https://github.com/Akascape/CTkColorPicker.                                   #
@@ -55,15 +55,15 @@ class FriendsWindow(ctk.CTkToplevel):
     def __createWidgets(self):
         """  Create the main friend display.
         """
-        self.tblFriends = Sheet(self, data=self.friendsStore.getFriends(), width=1000, height=300,
-                                align = "W", header_align = "w", row_index_align = "w",
-                                show_x_scrollbar=True, show_y_scrollbar=True)
+        # ------------------------------------------------------------------------------------------------------ Friends sheet -------------
+        self.tblFriends = Sheet(self, data=self.friendsStore.getFriends(), width=1000, height=300, align = "W", header_align = "w",
+                                row_index_align = "w", show_x_scrollbar=True, show_y_scrollbar=True)
         self.tblFriends.grid(row=0, column=0, padx=10, pady=10, sticky="nsew", columnspan=12)
         self.tblFriends.change_theme(self.myConfig.APPEARANCE_MODE)
         self.tblFriends.headers(self.friendsStore.getHeaders)
         self.tblFriends.enable_bindings()
         self.tblFriends.extra_bindings(("row_select", "cell_select"), self.selectRow)
-
+        # ------------------------------------------------------------------------------------------------------ Action Buttons -----------
         self.btnAdd = ctk.CTkButton(self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
                                     corner_radius=12, width=100, command=self.__add)
         self.btnAdd.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
@@ -126,7 +126,7 @@ class FriendsWindow(ctk.CTkToplevel):
         else:
             rowSelected = self.tblFriends.get_currently_selected()
             rowData     = self.tblFriends.get_row_data(rowSelected[0])
-            self.rowKey =  f"{rowData[1]} : {rowData[2]}"
+            self.rowKey = f"{rowData[1]} : {rowData[2]}"
             self.AddWindowRunning = saf.FriendAddWindow(self, self.myConfig, self.friendsStore, self.rowKey)
             self.rowKey = ""
 

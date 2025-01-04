@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showAbout.py   Copyright (C) <2024>  <Kevin Scott>                                                        #
+#    showTimeTypes.py   Copyright (C) <2024-25>  <Kevin Scott>                                                #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -57,8 +57,8 @@ class timeTypes(ctk.CTkToplevel):
         lblDesc = ctk.CTkLabel(self, text="Select the size for the time display.", corner_radius=6,
                                text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         lblDesc.grid(row=0, column=1, padx=10, pady=(10, 10), sticky="ew")
-        self.cbTimeType = ctk.CTkComboBox(self, values=self.selectTime.timeTypes, command=self.__changeTimeType, variable=self.timeType, hover=True,
-                                          text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
+        self.cbTimeType = ctk.CTkComboBox(self, values=self.selectTime.timeTypes, command=self.__changeTimeType, variable=self.timeType,
+                                          hover=True, text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
         self.cbTimeType.grid(row=1, column=0, padx=10, pady=(10, 10), sticky="ew")
         self.cbTimeSIze = ctk.CTkComboBox(self, values=TimeSize, command=self.__changeTimeSize, variable=TimeSize,
                                           text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)

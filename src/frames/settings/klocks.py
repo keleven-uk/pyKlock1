@@ -45,63 +45,50 @@ class MypyKlocksFrame(ctk.CTkFrame):
                                          fg_color=self.config.BACKGROUND)
         self.lblTitle.grid(row=0, column=1)
         #---------------------------------------------------------------------------------------------- VFD klock -------------------------
-        self.lblVFD = ctk.CTkLabel(self, text="VFD Klocks Settings", text_color="yellow",
-                                         fg_color=self.config.BACKGROUND)
+        self.lblVFD = ctk.CTkLabel(self, text="VFD Klocks Settings", text_color="yellow", fg_color=self.config.BACKGROUND)
         self.lblVFD.grid(row=1, column=1)
-        self.btnVFDForeColour = ctk.CTkButton(self, text="Foreground Colour", command=self.__askVFDForeColour,
-                                           fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                           text_color=self.config.VFD_FOREGROUND, font=("Montserrat", 16))
+        self.btnVFDForeColour = ctk.CTkButton(self, text="Foreground Colour", command=self.__askVFDForeColour, fg_color="blue",
+                                              hover_color="gray", corner_radius=12, width=100, text_color=self.config.VFD_FOREGROUND,
+                                              font=("Montserrat", 16))
         self.btnVFDForeColour.grid(row=2, column=0, padx=10, pady=10)
-        self.btnVFDBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askVFDBackColour,
-                                           fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                           text_color=self.config.VFD_BACKGROUND, font=("Montserrat", 16))
+        self.btnVFDBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askVFDBackColour, fg_color="blue",
+                                              hover_color="gray", corner_radius=12, width=100, text_color=self.config.VFD_BACKGROUND,
+                                              font=("Montserrat", 16))
         self.btnVFDBackColour.grid(row=2, column=1, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- text klock -----------------------
-        self.lblText = ctk.CTkLabel(self, text="Text Klocks Settings", text_color="yellow",
-                                         fg_color=self.config.BACKGROUND)
+        self.lblText = ctk.CTkLabel(self, text="Text Klocks Settings", text_color="yellow", fg_color=self.config.BACKGROUND)
         self.lblText.grid(row=3, column=1)
-        self.btnTextOnColour = ctk.CTkButton(self, text="On Colour", command=self.__askTextOnColour,
-                                           fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                           text_color=self.config.TEXTKLOCK_ON_COLOUR, font=("Montserrat", 16))
+        self.btnTextOnColour = ctk.CTkButton(self, text="On Colour", command=self.__askTextOnColour, fg_color="blue", hover_color="gray",
+                                             corner_radius=12, width=100, text_color=self.config.TEXTKLOCK_ON_COLOUR, font=("Montserrat", 16))
         self.btnTextOnColour.grid(row=4, column=0, padx=10, pady=10)
-        self.btnTextOffColour = ctk.CTkButton(self, text="Off Colour", command=self.__askTextOffColour,
-                                           fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                           text_color=self.config.TEXTKLOCK_OFF_COLOUR, font=("Montserrat", 16))
+        self.btnTextOffColour = ctk.CTkButton(self, text="Off Colour", command=self.__askTextOffColour, fg_color="blue", hover_color="gray",
+                                              corner_radius=12, width=100, text_color=self.config.TEXTKLOCK_OFF_COLOUR, font=("Montserrat", 16))
         self.btnTextOffColour.grid(row=4, column=1, padx=10, pady=10)
-        self.btnTextBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askTextBackColour,
-                                           fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                           text_color=self.config.TEXTKLOCK_BACKGROUND, font=("Montserrat", 16))
+        self.btnTextBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askTextBackColour, fg_color="blue",
+                                               hover_color="gray", corner_radius=12, width=100, text_color=self.config.TEXTKLOCK_BACKGROUND, font=("Montserrat", 16))
         self.btnTextBackColour.grid(row=4, column=2, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- dial klock -----------------------
-        self.lblDial = ctk.CTkLabel(self, text="Dial Klocks Settings", text_color="yellow",
-                                         fg_color=self.config.BACKGROUND)
+        self.lblDial = ctk.CTkLabel(self, text="Dial Klocks Settings", text_color="yellow", fg_color=self.config.BACKGROUND)
         self.lblDial.grid(row=5, column=1)
-        self.lblDialSize = ctk.CTkLabel(self, text="Dial Klock Size", text_color=self.foreColour,
-                                        fg_color=self.config.BACKGROUND)
+        self.lblDialSize = ctk.CTkLabel(self, text="Dial Klock Size", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblDialSize.grid(row=6, column=0, padx=10, pady=10)
-        self.entDialSize = ctk.CTkEntry(self, placeholder_text=self.config.DIALKLOCK_SIZE, width=50,
-                                        text_color=self.foreColour, fg_color="#030126", border_color=self.foreColour,
-                                        validate="focusout", validatecommand=(self.register(self.__validateStageDays), "%P"))
+        self.entDialSize = ctk.CTkEntry(self, placeholder_text=self.config.DIALKLOCK_SIZE, width=50, text_color=self.foreColour,
+                                        fg_color="#030126", border_color=self.foreColour, validate="focusout", validatecommand=(self.register(self.__validateStageDays), "%P"))
         self.entDialSize.grid(row=6, column=1,padx=10, pady=10)
-        self.btnDialBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askDialBackColour,
-                                              fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                              text_color=self.config.DIALKLOCK_BACKGROUND, font=("Montserrat", 16),
-                                              border_color="white")
+        self.btnDialBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askDialBackColour, fg_color="blue",
+                                               hover_color="gray", corner_radius=12, width=100, text_color=self.config.DIALKLOCK_BACKGROUND, font=("Montserrat", 16), border_color="white")
         self.btnDialBackColour.grid(row=7, column=0, padx=10, pady=10)
-        self.btnDialTextColour = ctk.CTkButton(self, text="Text Colour", command=self.__askDialTextColour,
-                                               fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                               text_color=self.config.DIALKLOCK_TEXT_COLOUR, font=("Montserrat", 16),
+        self.btnDialTextColour = ctk.CTkButton(self, text="Text Colour", command=self.__askDialTextColour, fg_color="blue", hover_color="gray",
+                                               corner_radius=12, width=100, text_color=self.config.DIALKLOCK_TEXT_COLOUR, font=("Montserrat", 16),
                                                border_color=self.foreColour)
         self.btnDialTextColour.grid(row=7, column=1, padx=10, pady=10)
-        self.btnDialScaleColour = ctk.CTkButton(self, text="Scale Colour", command=self.__askDialScaleColour,
-                                              fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                              text_color=self.config.DIALKLOCK_SCALE_COLOUR, font=("Montserrat", 16),
-                                              border_color=self.foreColour)
+        self.btnDialScaleColour = ctk.CTkButton(self, text="Scale Colour", command=self.__askDialScaleColour, fg_color="blue", hover_color="gray",
+                                                corner_radius=12, width=100, text_color=self.config.DIALKLOCK_SCALE_COLOUR, font=("Montserrat", 16),
+                                                border_color=self.foreColour)
         self.btnDialScaleColour.grid(row=7, column=2, padx=10, pady=10)
-        self.btnDialNeedleColour = ctk.CTkButton(self, text="Needle Colour", command=self.__askDialNeedleColour,
-                                               fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                               text_color=self.config.DIALKLOCK_NEEDLE_COLOUR, font=("Montserrat", 16),
-                                               border_color=self.foreColour)
+        self.btnDialNeedleColour = ctk.CTkButton(self, text="Needle Colour", command=self.__askDialNeedleColour, fg_color="blue", hover_color="gray",
+                                                 corner_radius=12, width=100, text_color=self.config.DIALKLOCK_NEEDLE_COLOUR, font=("Montserrat", 16),
+                                                 border_color=self.foreColour)
         self.btnDialNeedleColour.grid(row=7, column=3, padx=10, pady=10)
 
 

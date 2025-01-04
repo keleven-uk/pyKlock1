@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "pyKlock"
-#define MyAppVersion "2024.48"
+#define MyAppVersion "2024.55"
 #define MyAppPublisher "keleven"
 #define MyAppURL "www.keleven.co.uk"
 #define MyAppExeName "pyklock.exe"
@@ -57,9 +57,10 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Files]
-Source: "pyKlock.exe"    ; DestDir: "{app}"           ; Flags: ignoreversion; Check: Is64BitInstallMode    ; DestName: {#MyAppExeName}
+Source: "pyKlock.exe"  ; DestDir: "{app}"           ; Flags: ignoreversion; Check: Is64BitInstallMode    ; DestName: {#MyAppExeName}
 Source: "LICENSE.txt"  ; DestDir: "{app}"           ; Flags: ignoreversion
 Source: "history.txt"  ; DestDir: "{app}"           ; Flags: ignoreversion
+Source: "version.toml" ; DestDir: "{app}"           ; Flags: ignoreversion
 Source: "README.md"    ; DestDir: "{app}"           ; Flags: isreadme
 Source: "_internal\*"  ; DestDir: "{app}\_internal" ; Flags: recursesubdirs
 Source: "help\*"       ; DestDir: "{app}\help"      ; Flags: ignoreversion

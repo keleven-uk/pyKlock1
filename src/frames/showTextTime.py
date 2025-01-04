@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showTextime   Copyright (C) <2024>  <Kevin Scott>                                                        #
+#    showTextime   Copyright (C) <2024-25>  <Kevin Scott>                                                     #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -172,7 +172,6 @@ class showTextime(ctk.CTkFrame):
     def __setHours(self, hours, minutes):
         """  Switches on the appropriate text to display the hour.
         """
-        #print(f"__setHours : hours = {hours}  minutes = {minutes}")
         self.firstDic["IT"].configure(text_color=self.onColour)
         self.firstDic["IS"].configure(text_color=self.onColour)
         self.sixthDic["IN"].configure(text_color=self.onColour)
@@ -285,7 +284,7 @@ class showTextime(ctk.CTkFrame):
             self.secondDic["TO"].configure(text_color=self.onColour)
         else:
             self.thirdDic["PAST"].configure(text_color=self.onColour)
-        #print(f"__setMinutes : minutes = {minutes}")
+
         match minutes:
             case minutes if (0 <= minutes <= 2):
                 self.secondDic["TO"].configure(text_color=self.offColour)
@@ -342,11 +341,8 @@ class showTextime(ctk.CTkFrame):
         """
         self.__clear()
         timeText = self.selectTime.getTime("Local Time")
-        #timeText = "11:55"
         hours    = int(timeText[0:2])
         minutes  = int(timeText[3:5])
-
-        #print(f"timeText = {timeText}  hours= {hours}  minutes = {minutes}")
 
         self.__setHours(hours, minutes)
         self.__setMinutes(minutes)

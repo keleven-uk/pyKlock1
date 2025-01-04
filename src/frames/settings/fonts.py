@@ -31,7 +31,7 @@ class MyFontFrame(ctk.CTkFrame):
 
         self.master     = master
         self.main       = main
-        self.config   = config
+        self.config     = config
         self.foreColour = "white"
 
         self.__createWidgets()
@@ -44,22 +44,20 @@ class MyFontFrame(ctk.CTkFrame):
         self.lblTitle = ctk.CTkLabel(self, text="Font Settings", text_color="yellow", fg_color=self.config.BACKGROUND)
         self.lblTitle.grid(row=0, column=1)
         #---------------------------------------------------------------------------------------------- Main Time Font ---------------
-        self.btnTimeFont = ctk.CTkButton(self, text="Main Time Font", command=self.__askTimeFont,
-                                         fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                         text_color=self.foreColour, font=("Montserrat", 16))
+        self.btnTimeFont = ctk.CTkButton(self, text="Main Time Font", command=self.__askTimeFont, fg_color="blue", hover_color="gray",
+                                         corner_radius=12, width=100, text_color=self.foreColour, font=("Montserrat", 16))
         self.btnTimeFont.grid(row=1, column=0, padx=10, pady=10)
         timeFont = f"    Main Time Font Family {self.config.TIME_FONT_FAMILY} with size {self.config.TIME_FONT_SIZE}"
         self.lblCurrTime = ctk.CTkLabel(self, text=timeFont, text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblCurrTime.grid(row=1, column=1)
         #---------------------------------------------------------------------------------------------- Status Bar Font ---------------
-        self.btnStatusFont = ctk.CTkButton(self, text="Status Bar Font", command=self.__askStatusFont,
-                                           fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                           text_color=self.foreColour, font=("Montserrat", 16))
+        self.btnStatusFont = ctk.CTkButton(self, text="Status Bar Font", command=self.__askStatusFont, fg_color="blue",
+                                           hover_color="gray", corner_radius=12, width=100, text_color=self.foreColour,
+                                           font=("Montserrat", 16))
         self.btnStatusFont.grid(row=2, column=0, padx=10, pady=10)
         statusFont = f"    Main Time Font Family {self.config.STATUS_FONT_FAMILY} with size {self.config.STATUS_FONT_SIZE}"
         self.lblCurrStatus = ctk.CTkLabel(self, text=statusFont, text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblCurrStatus.grid(row=2, column=1)
-
 
     def __askTimeFont(self):
         """  Sets the font for the main text display.

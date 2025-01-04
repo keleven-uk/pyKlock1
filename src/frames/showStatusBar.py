@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showStatusBar   Copyright (C) <2024>  <Kevin Scott>                                                      #
+#    showStatusBar   Copyright (C) <2024-25>  <Kevin Scott>                                                   #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -48,8 +48,8 @@ class MyStatusBarFrame(ctk.CTkFrame):
         self.columnconfigure(index=2, weight=1)
         self.configure(fg_color=self.myConfig.BACKGROUND)
 
-        self.lblStatusBar = ctk.CTkLabel(master=self, text="status Bar", text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND,
-                                     font=self.statusFont)
+        self.lblStatusBar = ctk.CTkLabel(master=self, text="status Bar", text_color=self.myConfig.FOREGROUND,
+                                         fg_color=self.myConfig.BACKGROUND, font=self.statusFont)
         self.lblStatusBar.pack(expand=True)
 
 
@@ -76,9 +76,6 @@ class MyStatusBarFrame(ctk.CTkFrame):
         idleText   = idleText.rjust(noOfSpaces," ")
 
         statusBarText = f"{dateText} {statusText} {idleText}"
-
-        # if len(statusBarText) >= (self.master.winfo_width()):
-        #     print(f"oh no  statusBarText {len(statusBarText)}  windowWidth {windowWidth}  windt {self.master.winfo_width()}")
 
         self.lblStatusBar.configure(text=statusBarText, text_color=self.myConfig.FOREGROUND, fg_color=self.myConfig.BACKGROUND)
 

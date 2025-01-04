@@ -64,7 +64,6 @@ class SelectTime:
 
 
 # -------------------------------------------------------------------------------- time functions ----------------------
-#
 # The time functions can't be made property's, this seems to upset the dictionary of functions - they are not callable.
 #
     def getNowTime(self):

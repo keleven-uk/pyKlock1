@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    ShowEvents.py   Copyright (C) <2024>  <Kevin Scott>                                                     #
+#    ShowEvents.py   Copyright (C) <2024-25>  <Kevin Scott>                                                     #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    Colour picker used is from https://github.com/Akascape/CTkColorPicker.                                   #
@@ -53,29 +53,29 @@ class EventsWindow(ctk.CTkToplevel):
     def __createWidgets(self):
         """  Create the main event display.
         """
-        self.tblEvents = Sheet(self, data=self.eventsStore.getEvents(), width=1300, height=300,
-                               align = "W", header_align = "w", row_index_align = "w",
-                               show_x_scrollbar=True, show_y_scrollbar=True)
+        # ------------------------------------------------------------------------------------------------------ Events sheet -------------
+        self.tblEvents = Sheet(self, data=self.eventsStore.getEvents(), width=1300, height=300, align = "W", header_align = "w",
+                               row_index_align = "w", show_x_scrollbar=True, show_y_scrollbar=True)
         self.tblEvents.grid(row=0, column=0, padx=10, pady=10, sticky="nsew", columnspan=12)
         self.tblEvents.change_theme(self.myConfig.APPEARANCE_MODE)
         self.tblEvents.headers(self.eventsStore.getHeaders)
         self.tblEvents.enable_bindings()
         self.tblEvents.extra_bindings(("row_select", "cell_select"), self.selectRow)
-
-        self.btnAdd = ctk.CTkButton(self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, command=self.__add)
+        # ------------------------------------------------------------------------------------------------------ Action Buttons -----------
+        self.btnAdd = ctk.CTkButton(self, text="Add", fg_color="blue", hover_color="gray", font=("Montserrat", 16), corner_radius=12,
+                                    width=100, command=self.__add)
         self.btnAdd.grid(row=1, column=1, padx=10, pady=10, sticky="nsew")
-        self.btnEdit = ctk.CTkButton(self, text="Edit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                     corner_radius=12, width=100, state="disabled", command=self.__edit)
+        self.btnEdit = ctk.CTkButton(self, text="Edit", fg_color="blue", hover_color="gray", font=("Montserrat", 16), corner_radius=12,
+                                     width=100, state="disabled", command=self.__edit)
         self.btnEdit.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
-        self.btnDel = ctk.CTkButton(self, text="Delete", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, state="disabled", command=self.__delete)
+        self.btnDel = ctk.CTkButton(self, text="Delete", fg_color="blue", hover_color="gray", font=("Montserrat", 16), corner_radius=12,
+                                    width=100, state="disabled", command=self.__delete)
         self.btnDel.grid(row=1, column=3, padx=10, pady=10, sticky="nsew")
-        self.btnRefresh = ctk.CTkButton(self, text="Refresh", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                        corner_radius=12, width=100, command=self.__update)
+        self.btnRefresh = ctk.CTkButton(self, text="Refresh", fg_color="blue", hover_color="gray", font=("Montserrat", 16), corner_radius=12,
+                                        width=100, command=self.__update)
         self.btnRefresh.grid(row=1, column=4, padx=10, pady=10, sticky="nsew")
-        self.btnExt = ctk.CTkButton(self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16),
-                                    corner_radius=12, width=100, command=self.__exit)
+        self.btnExt = ctk.CTkButton(self, text="Exit", fg_color="blue", hover_color="gray", font=("Montserrat", 16), corner_radius=12,
+                                    width=100, command=self.__exit)
         self.btnExt.grid(row=1, column=5, padx=10, pady=10, sticky="nsew")
 
 
@@ -115,7 +115,7 @@ class EventsWindow(ctk.CTkToplevel):
         else:
             rowSelected           = self.tblEvents.get_currently_selected()
             rowData               = self.tblEvents.get_row_data(rowSelected[0])
-            self.rowKey           =  f"{rowData[0]}"
+            self.rowKey           = f"{rowData[0]}"
             self.AddWindowRunning = sae.EventAddWindow(self, self.myConfig, self.eventsStore, self.rowKey)
             self.rowKey           = ""
 

@@ -1,10 +1,10 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Thursday 02 January 2025  23:10:26
+#   (c) Kevin Scott   Written Saturday 04 January 2025  20:41:13
 #
 #   true and false are lower case 
 #
 [INFO]
-myVERSION = "2025.56"
+myVERSION = "2025.58"
 myNAME = "pyKlock"
 
 [SETTINGS]
@@ -20,8 +20,8 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1315
-y_pos = -296
+x_pos = 1346
+y_pos = -418
 Align_Right = true
 
 [TIME]
@@ -32,8 +32,8 @@ capitalise = true
 visible = true
 
 [TIME_FONT]
-family = "backwards"
-size = 40
+family = "Playwrite CU"
+size = 38
 weight = "normal"
 slant = false
 underline = false
@@ -62,8 +62,8 @@ textKlock_on_Colour = "#ffffff"
 textKlock_off_Colour = "slate grey"
 textKlock_background = "#000000"
 textKlock_offColour = "#fff234"
-dialKlock_x_pos = 1107
-dialKlock_y_pos = -234
+dialKlock_x_pos = 1158
+dialKlock_y_pos = -302
 dialKlock_klockSize = 200
 dialKlock_background = "#000000"
 dialKlock_text_colour = "#00ff00"

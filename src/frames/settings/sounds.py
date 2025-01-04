@@ -43,19 +43,16 @@ class MySoundFrame(ctk.CTkFrame):
         """  Create the main frame.
         """
         self.configure(fg_color=self.config.BACKGROUND)
-        self.lblTitle = ctk.CTkLabel(self, text="Sound Settings", text_color="yellow",
-                                         fg_color=self.config.BACKGROUND)
+        self.lblTitle = ctk.CTkLabel(self, text="Sound Settings", text_color="yellow", fg_color=self.config.BACKGROUND)
         self.lblTitle.grid(row=0, column=2)
         #---------------------------------------------------------------------------------------------- Sound Enabled -------------
-        self.lblSound = ctk.CTkLabel(self, text="Sound Enabled", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+        self.lblSound = ctk.CTkLabel(self, text="Sound Enabled", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblSound.grid(row=1, column=0, padx=10, pady=10)
         self.chkSound = ctk.CTkCheckBox(self, text="", fg_color=self.config.BACKGROUND, border_color=self.foreColour,
                                               hover_color="gray", command=self.__setSound)
         self.chkSound.grid(row=1, column=1, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- Hour Chimes ---------------
-        self.lblHrChimes = ctk.CTkLabel(self, text="Hour Chimes", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+        self.lblHrChimes = ctk.CTkLabel(self, text="Hour Chimes", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblHrChimes.grid(row=2, column=0, padx=10, pady=10)
         self.chkHrChimes = ctk.CTkCheckBox(self, text="", fg_color=self.config.BACKGROUND, border_color=self.foreColour,
                                               hover_color="gray", command=self.__hourChimes)
@@ -68,8 +65,7 @@ class MySoundFrame(ctk.CTkFrame):
                                               hover_color="gray", command=self.__qtrHourChimes)
         self.chkQtrChimes.grid(row=2, column=3, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- The Pips on the Hour ------
-        self.lblPips = ctk.CTkLabel(self, text="The Pips on the Hour", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+        self.lblPips = ctk.CTkLabel(self, text="The Pips on the Hour", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblPips.grid(row=3, column=0, padx=10, pady=10)
         self.chkPips = ctk.CTkCheckBox(self, text="", fg_color=self.config.BACKGROUND, border_color=self.foreColour,
                                               hover_color="gray", command=self.__pips)
@@ -82,19 +78,16 @@ class MySoundFrame(ctk.CTkFrame):
                                               hover_color="gray", command=self.__westminsterChimes)
         self.chkWestminster.grid(row=4, column=1, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- Cuckoo type chimes --------
-        self.lblCuckoo = ctk.CTkLabel(self, text="Cuckoo type chimes", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+        self.lblCuckoo = ctk.CTkLabel(self, text="Cuckoo type chimes", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblCuckoo.grid(row=4, column=2, padx=10, pady=10)
         self.chkCuckoo = ctk.CTkCheckBox(self, text="", fg_color=self.config.BACKGROUND, border_color=self.foreColour,
                                               hover_color="gray", command=self.__cuckooChimes)
         self.chkCuckoo.grid(row=4, column=3, padx=10, pady=10)
 
-        self.lblWarning = ctk.CTkLabel(self, text="Only One type.", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+        self.lblWarning = ctk.CTkLabel(self, text="Only One type.", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblWarning.grid(row=4, column=4, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- Sound Volume --------------
-        self.lblVolume = ctk.CTkLabel(self, text="Sound Volume", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+        self.lblVolume = ctk.CTkLabel(self, text="Sound Volume", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblVolume.grid(row=5, column=0, padx=10, pady=10)
         self.sldVolume= ctk.CTkSlider(self, from_=0, to=50, command=self.__soundVolume)
         self.sldVolume.grid(row=5, column=1, padx=10, pady=10, columnspan=2)

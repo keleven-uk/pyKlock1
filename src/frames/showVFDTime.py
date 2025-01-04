@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showVFDTime   Copyright (C) <2024>  <Kevin Scott>                                                        #
+#    showVFDTime   Copyright (C) <2024-25>  <Kevin Scott>                                                     #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -70,7 +70,7 @@ class showVFDime(ctk.CTkFrame):
                                     anchor="ne")
         self.lblExit.grid(row=0, column=4, padx=(0,0), pady=(0,0), sticky="ne")
 
-        #
+        #  un comments to have seconds.
         # self.secs0 = tkVFD.seg7(self, height=vfdHeight, use_CC=True, on_color=onColour, bg=bgColour)
         # self.secs0.grid(row=0, column=4, padx=(0,0), pady=(0,0))
         # self.secs0.char("8", DP=None, CC=0)

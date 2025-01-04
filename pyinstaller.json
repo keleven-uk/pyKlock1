@@ -15,7 +15,7 @@
   },
   {
    "optionDest": "console",
-   "value": false
+   "value": true
   },
   {
    "optionDest": "icon_file",
@@ -100,6 +100,10 @@
   {
    "optionDest": "datas",
    "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/babel;babel/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12_dev/Lib/site-packages/pytz;pytz/"
   }
  ],
  "nonPyinstallerOptions": {

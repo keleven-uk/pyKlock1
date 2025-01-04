@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    SelectColourWindow.py   Copyright (C) <2024>  <Kevin Scott>                                              #
+#    SelectColourWindow.py   Copyright (C) <2024-25>  <Kevin Scott>                                           #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 #    Colour picker used is from https://github.com/Akascape/CTkColorPicker.                                   #
@@ -50,22 +50,28 @@ class ColourWindow(ctk.CTkToplevel):
         """  Create the main time display.
         """
         self.configure(fg_color="black")
-        self.lblTitle = ctk.CTkLabel(master=self, text="Click on required button to set the colour.", fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        self.lblTitle = ctk.CTkLabel(master=self, text="Click on required button to set the colour.",
+                                     fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
         self.lblTitle.grid(row=0, column=0, padx=(20, 20), pady=(20, 20), columnspan=3)
-
-        self.btnForeColour = ctk.CTkButton(self, text="Foreground Colour", command=self.__askForeColour, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        # ----------------------------------------------------------------------------------------------------- Foreground Colour ---------
+        self.btnForeColour = ctk.CTkButton(self, text="Foreground Colour", command=self.__askForeColour,
+                                           fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
         self.btnForeColour.grid(row=1, column=0, padx=(0, 0), pady=(20, 20))
-
-        self.btnBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askBackColour, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        # ----------------------------------------------------------------------------------------------------- Background Colour ---------
+        self.btnBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askBackColour,
+                                           fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
         self.btnBackColour.grid(row=1, column=1, padx=(0, 0), pady=(20, 20))
-
-        self.btnApply = ctk.CTkButton(self, text="Apply", command=self.__applyInfo, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        # ----------------------------------------------------------------------------------------------------- Apply ---------------------
+        self.btnApply = ctk.CTkButton(self, text="Apply", command=self.__applyInfo, fg_color=self.myConfig.BACKGROUND,
+                                      text_color=self.myConfig.FOREGROUND)
         self.btnApply.grid(row=2, column=0, padx=(0, 0), pady=(20, 20))
-
-        self.btnReset = ctk.CTkButton(self, text="Reset", command=self.__resetInfo, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        # ----------------------------------------------------------------------------------------------------- Reset ---------------------
+        self.btnReset = ctk.CTkButton(self, text="Reset", command=self.__resetInfo, fg_color=self.myConfig.BACKGROUND,
+                                      text_color=self.myConfig.FOREGROUND)
         self.btnReset.grid(row=2, column=1, padx=(0, 0), pady=(20, 20))
-
-        self.btnCancel = ctk.CTkButton(self, text="Cancel", command=self.__cancel, fg_color=self.myConfig.BACKGROUND, text_color=self.myConfig.FOREGROUND)
+        # ----------------------------------------------------------------------------------------------------- Cancel --------------------
+        self.btnCancel = ctk.CTkButton(self, text="Cancel", command=self.__cancel, fg_color=self.myConfig.BACKGROUND,
+                                       text_color=self.myConfig.FOREGROUND)
         self.btnCancel.grid(row=2, column=2, padx=(0, 0), pady=(20, 20))
 
 

@@ -28,7 +28,7 @@ class showSettings(ctk.CTkToplevel):
         super().__init__(master)
 
         self.myConfig = myConfig
-        self.myLogger      = myLogger
+        self.myLogger = myLogger
 
         ctk.set_appearance_mode(self.myConfig.APPEARANCE_MODE)
         ctk.set_default_color_theme(self.myConfig.COLOUR_THEME)

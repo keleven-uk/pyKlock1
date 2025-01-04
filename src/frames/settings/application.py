@@ -45,16 +45,14 @@ class MyApplicationFrame(ctk.CTkFrame):
                                          fg_color=self.config.BACKGROUND)
         self.lblTitle.grid(row=0, column=2)
         #---------------------------------------------------------------------------------------------- Appearance Mode ------------------
-        self.lblAppearanceMode = ctk.CTkLabel(self, text="Appearance Mode", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+        self.lblAppearanceMode = ctk.CTkLabel(self, text="Appearance Mode", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblAppearanceMode.grid(row=1, column=0, padx=10, pady=10)
         self.cbxAppearanceMode = ctk.CTkComboBox(self, values=self.config.APPEARANCE_MODE_TYPES, text_color=self.foreColour,
                                                  fg_color="#030126", border_color="#030126", command=self.__setAppearanceMode)
         self.cbxAppearanceMode.grid(row=1, column=1, padx=10, pady=10)
         self.cbxAppearanceMode.set(self.config.APPEARANCE_MODE)
         #---------------------------------------------------------------------------------------------- Colour Theme ---------------------
-        self.lblColorThemeMode = ctk.CTkLabel(self, text="Color Theme", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+        self.lblColorThemeMode = ctk.CTkLabel(self, text="Color Theme", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblColorThemeMode.grid(row=1, column=2, padx=10, pady=10)
         self.cbxColorThemeMode = ctk.CTkComboBox(self, values=self.config.COLOUR_THEME_TYPES, text_color=self.foreColour,
                                                  fg_color="#030126", border_color="#030126", command=self.__setColourThemeTypes)
@@ -62,27 +60,26 @@ class MyApplicationFrame(ctk.CTkFrame):
         self.cbxColorThemeMode.set(self.config.COLOUR_THEME)
         #---------------------------------------------------------------------------------------------- Background Transparent -----------
         self.lblTransparent = ctk.CTkLabel(self, text="Background Transparent", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+                                           fg_color=self.config.BACKGROUND)
         self.lblTransparent.grid(row=2, column=0, padx=10, pady=10)
-        self.chkTransparent = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color=self.foreColour,
-                                              hover_color="gray", command=self.__setTransparent)
+        self.chkTransparent = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color=self.foreColour, hover_color="gray",
+                                              command=self.__setTransparent)
         self.chkTransparent.grid(row=2, column=1, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- Right Align pyKlock --------------
-        self.lblAlighnRight = ctk.CTkLabel(self, text="Right Align pyKlock", text_color=self.foreColour,
-                                              fg_color=self.config.BACKGROUND)
+        self.lblAlighnRight = ctk.CTkLabel(self, text="Right Align pyKlock", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblAlighnRight.grid(row=2, column=2, padx=10, pady=10)
-        self.chkAlighnRight = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color=self.foreColour,
-                                              hover_color="gray", command=self.__setAlighnRight)
+        self.chkAlighnRight = ctk.CTkCheckBox(self, text="", fg_color="#030126", border_color=self.foreColour, hover_color="gray",
+                                              command=self.__setAlighnRight)
         self.chkAlighnRight.grid(row=2, column=3, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- Foreground Colour ----------------
-        self.btnForeColour = ctk.CTkButton(self, text="Foreground Colour", command=self.__askForeColour,
-                                           fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                           text_color=self.config.FOREGROUND, font=("Montserrat", 16))
+        self.btnForeColour = ctk.CTkButton(self, text="Foreground Colour", command=self.__askForeColour, fg_color="blue",
+                                           hover_color="gray", corner_radius=12, width=100, text_color=self.config.FOREGROUND,
+                                           font=("Montserrat", 16))
         self.btnForeColour.grid(row=3, column=0, padx=10, pady=10)
         #---------------------------------------------------------------------------------------------- Background Colour ----------------
-        self.btnBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askForeColour,
-                                           fg_color="blue", hover_color="gray", corner_radius=12, width=100,
-                                           text_color=self.config.BACKGROUND, font=("Montserrat", 16))
+        self.btnBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askForeColour, fg_color="blue",
+                                           hover_color="gray", corner_radius=12, width=100, text_color=self.config.BACKGROUND,
+                                           font=("Montserrat", 16))
         self.btnBackColour.grid(row=3, column=1, padx=10, pady=10)
 
 

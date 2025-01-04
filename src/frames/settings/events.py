@@ -51,60 +51,47 @@ class MyEventsFrame(ctk.CTkFrame):
                                          fg_color=self.config.BACKGROUND)
         self.lblTitle.grid(row=0, column=2)
         #---------------------------------------------------------------------------------------------- stage 1 ----------------------
-        self.lblStage1Days = ctk.CTkLabel(self, text="Stage 1 Days", text_color=self.foreColour,
-                                         fg_color=self.config.BACKGROUND)
+        self.lblStage1Days = ctk.CTkLabel(self, text="Stage 1 Days", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblStage1Days.grid(row=1, column=0, padx=10, pady=10, sticky="news")
         self.entStage1Days = ctk.CTkEntry(self, placeholder_text=self.config.EVENTS_STAGE_1_DAYS, width=50,
                                           text_color=self.foreColour, fg_color="#030126", border_color=self.foreColour,
                                           validate="focusout", validatecommand=(self.register(self.__validateStageDays), "%P", "1"))
         self.entStage1Days.grid(row=1, column=1,padx=10, pady=10)
-        self.lblStage1Colour = ctk.CTkLabel(self, text="Stage 1 Colour", text_color=self.foreColour,
-                                         fg_color=self.config.BACKGROUND)
+        self.lblStage1Colour = ctk.CTkLabel(self, text="Stage 1 Colour", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblStage1Colour.grid(row=1, column=2, padx=10, pady=10, sticky="news")
-        self.btnStage1Colour = ctk.CTkButton(self, text="", command=self.__askStage1Colour,
-                                             fg_color=self.config.EVENTS_STAGE_1_COLOUR, hover_color="gray",
-                                             corner_radius=12, width=100, text_color=self.foreColour,
+        self.btnStage1Colour = ctk.CTkButton(self, text="", command=self.__askStage1Colour, fg_color=self.config.EVENTS_STAGE_1_COLOUR,
+                                             hover_color="gray", corner_radius=12, width=100, text_color=self.foreColour,
                                              font=("Montserrat", 16))
         self.btnStage1Colour.grid(row=1, column=3, padx=10, pady=10, sticky="news")
         #---------------------------------------------------------------------------------------------- stage 2 ----------------------
-        self.lblStage2Days = ctk.CTkLabel(self, text="Stage 2 Days", text_color=self.foreColour,
-                                         fg_color=self.config.BACKGROUND)
+        self.lblStage2Days = ctk.CTkLabel(self, text="Stage 2 Days", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblStage2Days.grid(row=2, column=0, padx=10, pady=10, sticky="news")
-        self.entStage2Days = ctk.CTkEntry(self, placeholder_text=self.config.EVENTS_STAGE_2_DAYS, width=50,
-                                          text_color=self.foreColour, fg_color="#030126", border_color=self.foreColour,
-                                          validate="focusout", validatecommand=(self.register(self.__validateStageDays), "%P", "2"))
+        self.entStage2Days = ctk.CTkEntry(self, placeholder_text=self.config.EVENTS_STAGE_2_DAYS, width=50, text_color=self.foreColour,
+                                          fg_color="#030126", border_color=self.foreColour, validate="focusout", validatecommand=(self.register(self.__validateStageDays), "%P", "2"))
         self.entStage2Days.grid(row=2, column=1,padx=10, pady=10)
-        self.lblStage2Colour = ctk.CTkLabel(self, text="Stage 2 Colour", text_color=self.foreColour,
-                                         fg_color=self.config.BACKGROUND)
+        self.lblStage2Colour = ctk.CTkLabel(self, text="Stage 2 Colour", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblStage2Colour.grid(row=2, column=2, padx=10, pady=10, sticky="news")
-        self.btnStage2Colour = ctk.CTkButton(self, text="", command=self.__askStage2Colour,
-                                             fg_color=self.config.EVENTS_STAGE_2_COLOUR, hover_color="gray",
-                                             corner_radius=12, width=100, text_color=self.foreColour,
+        self.btnStage2Colour = ctk.CTkButton(self, text="", command=self.__askStage2Colour, fg_color=self.config.EVENTS_STAGE_2_COLOUR,
+                                             hover_color="gray", corner_radius=12, width=100, text_color=self.foreColour,
                                              font=("Montserrat", 16))
         self.btnStage2Colour.grid(row=2, column=3, padx=10, pady=10, sticky="news")
         #---------------------------------------------------------------------------------------------- stage 3 ----------------------
-        self.lblStage3Days = ctk.CTkLabel(self, text="Stage 3 Days", text_color=self.foreColour,
-                                         fg_color=self.config.BACKGROUND)
+        self.lblStage3Days = ctk.CTkLabel(self, text="Stage 3 Days", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblStage3Days.grid(row=3, column=0, padx=10, pady=10, sticky="news")
-        self.entStage3Days = ctk.CTkEntry(self, placeholder_text=self.config.EVENTS_STAGE_3_DAYS, width=50,
-                                          text_color=self.foreColour, fg_color="#030126", border_color=self.foreColour,
-                                          validate="focusout", validatecommand=(self.register(self.__validateStageDays), "%P", "3"))
+        self.entStage3Days = ctk.CTkEntry(self, placeholder_text=self.config.EVENTS_STAGE_3_DAYS, width=50, text_color=self.foreColour,
+                                          fg_color="#030126", border_color=self.foreColour, validate="focusout", validatecommand=(self.register(self.__validateStageDays), "%P", "3"))
         self.entStage3Days.grid(row=3, column=1,padx=10, pady=10)
-        self.lblStage3Colour = ctk.CTkLabel(self, text="Stage 3 Colour", text_color=self.foreColour,
-                                         fg_color=self.config.BACKGROUND)
+        self.lblStage3Colour = ctk.CTkLabel(self, text="Stage 3 Colour", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblStage3Colour.grid(row=3, column=2, padx=10, pady=10, sticky="news")
-        self.btnStage3Colour = ctk.CTkButton(self, text="", command=self.__askStage3Colour,
-                                             fg_color=self.config.EVENTS_STAGE_3_COLOUR, hover_color="gray",
-                                             corner_radius=12, width=100, text_color=self.foreColour,
+        self.btnStage3Colour = ctk.CTkButton(self, text="", command=self.__askStage3Colour, fg_color=self.config.EVENTS_STAGE_3_COLOUR,
+                                             hover_color="gray", corner_radius=12, width=100, text_color=self.foreColour,
                                              font=("Montserrat", 16))
         self.btnStage3Colour.grid(row=3, column=3, padx=10, pady=10, sticky="news")
         #---------------------------------------------------------------------------------------------- Due Now ----------------------
-        self.lblDueNowColour = ctk.CTkLabel(self, text="Due Now Colour", text_color=self.foreColour,
-                                         fg_color=self.config.BACKGROUND)
+        self.lblDueNowColour = ctk.CTkLabel(self, text="Due Now Colour", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblDueNowColour.grid(row=4, column=2, padx=10, pady=10, sticky="news")
-        self.btnDueNowColour = ctk.CTkButton(self, text="", command=self.__askDueNowColour,
-                                             fg_color=self.config.EVENTS_NOW_COLOUR, hover_color="gray",
-                                             corner_radius=12, width=100, text_color=self.foreColour,
+        self.btnDueNowColour = ctk.CTkButton(self, text="", command=self.__askDueNowColour, fg_color=self.config.EVENTS_NOW_COLOUR,
+                                             hover_color="gray", corner_radius=12, width=100, text_color=self.foreColour,
                                              font=("Montserrat", 16))
         self.btnDueNowColour.grid(row=4, column=3, padx=10, pady=10, sticky="news")
 
