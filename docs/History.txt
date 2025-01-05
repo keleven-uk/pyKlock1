@@ -33,6 +33,14 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2025.60	[5 January 2025]
+
+	Added a new Klock - Binary Klock.
+		The Klock display the current time as Binary enCoded Decimal.
+			i.e. each digit of the time is displayed as a binary representation.
+		New settings in config.
+
+
 V2025.59	[2 January 2025]
 
 	Refactored all code to have the same format and look [hopefully].
@@ -40,6 +48,8 @@ V2025.59	[2 January 2025]
 	Made changes to satisfy pyinstaller.
 		I needed to copy a few more directories.
 		I needed to install pytz [not sure about tzdata though], although Babel seems to have its own.  Only on the executable though.
+		Also had a problem making a GUI based executable - Windows kept saying had a virus.
+		So I had to make a console based until I figure it out, loads a black console window on start up.
 
 	Made changes to satisfy Inno setup script.
 		Still a problem with PyMuPDF - see V2024.24 below.  Still a problem with 1.25.1, okay with 1.24.10.
@@ -53,7 +63,7 @@ V2025.58	[2 January 2025]
 
 V2025.57	[2 January 2025]
 
-	Added a new settings tab for the Dial Klock.
+	Added a new settings for the Dial Klock to the Klock tab..
 
 
 V2025.56	[1 January 2025]

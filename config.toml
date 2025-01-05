@@ -1,16 +1,16 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Saturday 04 January 2025  20:41:13
+#   (c) Kevin Scott   Written Sunday 05 January 2025  19:29:13
 #
 #   true and false are lower case 
 #
+[SETTINGS]
+headers = [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",]
+appearanceModeTypes = [ "Light", "Dark", "System",]
+colorThemeTypes = [ "green", "dark-blue", "blue",]
+
 [INFO]
 myVERSION = "2025.58"
 myNAME = "pyKlock"
-
-[SETTINGS]
-headers = [ "APPLICATION", "TIME", "MENU", "FONTS", "KLOCKS", "SOUNDS", "EVENTS",]
-appearanceModeTypes = [ "Light", "Dark", "System",]
-colorThemeTypes = [ "green", "dark-blue", "blue",]
 
 [APPLICATION]
 appearanceMode = "Dark"
@@ -20,20 +20,20 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1346
-y_pos = -418
+x_pos = 1600
+y_pos = -183
 Align_Right = true
 
 [TIME]
-type = "Fuzzy Time"
+type = "GMT Time"
 capitalise = true
 
 [MENU]
 visible = true
 
 [TIME_FONT]
-family = "Playwrite CU"
-size = 38
+family = "Pendule Ornamental"
+size = 100
 weight = "normal"
 slant = false
 underline = false
@@ -48,44 +48,45 @@ underline = false
 overstrike = false
 
 [KLOCKS]
-vfd_width = 500
+vfd_width = 460
 vfd_height = 260
-vfd_x_pos = 803
-vfd_y_pos = -315
-vfd_foreground = "#34ff6c"
+vfd_x_pos = 400
+vfd_y_pos = 400
+vfd_foreground = "#82ccff"
 vfd_background = "#000000"
 textKlock_width = 500
 textKlock_height = 260
-textKlock_x_pos = 673
-textKlock_y_pos = -398
-textKlock_on_Colour = "#ffffff"
+textKlock_x_pos = 821
+textKlock_y_pos = 280
+textKlock_on_Colour = "springGreen2"
 textKlock_off_Colour = "slate grey"
 textKlock_background = "#000000"
-textKlock_offColour = "#fff234"
-dialKlock_x_pos = 1158
-dialKlock_y_pos = -302
-dialKlock_klockSize = 200
+dialKlock_x_pos = 1177
+dialKlock_y_pos = -337
+dialKlock_Size = 200
 dialKlock_background = "#000000"
 dialKlock_text_colour = "#00ff00"
 dialKlock_scale_colour = "#00ff00"
 dialKlock_needle_colour = "#00ff00"
-dialKlock_scale_color = "#00ff00"
-needle_colour = "#00ff00"
+binaryKlock_x_pos = 453
+binaryKlock_y_pos = -333
+binaryKlock_Size = 50
+binaryKlock_background = "#000000"
 
 [SOUNDS]
 sounds = true
-westminster = false
-hour_chimes = false
+westminster = true
+hour_chimes = true
 quarter_chimes = true
 hour_pips = false
-cuckoo = true
-sound_volume = 14.0
+cuckoo = false
+sound_volume = 25
 
 [EVENTS]
 stage1Days = 5
-stage2Days = 30
+stage2Days = 10
 stage3Days = 30
-stage1Colour = "#ffffff"
-stage2Colour = "#fff38e"
+stage1Colour = "red"
+stage2Colour = "yellow"
 stage3Colour = "green"
-nowColour = "#173fff"
+nowColour = "blue"

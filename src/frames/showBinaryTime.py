@@ -1,5 +1,5 @@
 ###############################################################################################################
-#    showVFDTime   Copyright (C) <2024-25>  <Kevin Scott>                                                     #
+#    showBinaryTime   Copyright (C) <2025>  <Kevin Scott>                                                     #
 #    For changes see history.txt                                                                              #
 #                                                                                                             #
 ###############################################################################################################
@@ -19,78 +19,64 @@
 
 import customtkinter as ctk
 
-import tkVFD
+from PIL import Image
 
 import src.selectTime as st
+import src.projectPaths as pp
+import src.utils.timeCodes as tc
 
+class showBinaryKlock(ctk.CTkFrame):
+    """  A class that creates a frame to display current time in a binary kjlock.
 
-class showVFDime(ctk.CTkFrame):
-    """  A class that creates the frame for the main time display.
-
-         vfd = showVFDime()
-         cfd.update() - to update the time and status bar.
+         showBinaryKlock as BinaryKlock
+         BinaryKlock.update() - to update the time.
     """
     def __init__(self, main, master, myConfig, myLogger):
         super().__init__(main)
 
-        self.main       = main
-        self.master     = master
-        self.myConfig   = myConfig
-        self.myLogger   = myLogger
-        self.selectTime = st.SelectTime()
-        self.configure(fg_color=self.myConfig.VFD_BACKGROUND)
+        self.main         = main
+        self.master       = master
+        self.myConfig     = myConfig
+        self.myLogger     = myLogger
+        self.selectTime   = st.SelectTime()
+        self.klockSize    = self.myConfig.BINARYKLOCK_SIZE
+        self.background   = self.myConfig.BINARYKLOCK_BACKGROUND
+
         self.__createWidgets()
-        self.after(1000, self.__update)              #  Will update the time.
 
     def __createWidgets(self):
         """  Create the main time display.
         """
-        vfdHeight  = 200
+        self.configure(fg_color=self.myConfig.DIALKLOCK_BACKGROUND)
 
-        #  Oncolour expects a RGB row vector, bgcolour will take a normal TK colour code though.
-        onColour = [int(self.myConfig.VFD_FOREGROUND[1:3], 16), int(self.myConfig.VFD_FOREGROUND[3:5], 16),
-                    int(self.myConfig.VFD_FOREGROUND[5:7], 16)]
-        bgColour = self.myConfig.VFD_BACKGROUND
+        self.img1Digit = ctk.CTkImage(dark_image=Image.open(f"{pp.RESOURCE_PATH}\\binaryKlock\\one.jpg"),
+                                      size=(self.klockSize, self.klockSize))
+        self.img0Digit = ctk.CTkImage(dark_image=Image.open(f"{pp.RESOURCE_PATH}\\binaryKlock\\zero.jpg"),
+                                      size=(self.klockSize, self.klockSize))
 
-        self.hour0 = tkVFD.seg7(self, height=vfdHeight, use_CC=False, on_color=onColour, bg=bgColour)
-        self.hour0.grid(row=0, column=0, padx=(0,0), pady=(0,0))
-        self.hour0.char("8", DP=None, CC=0)
-        self.hour1 = tkVFD.seg7(self, height=vfdHeight, use_CC=True, on_color=onColour, bg=bgColour)
-        self.hour1.grid(row=0, column=1, padx=(0,0), pady=(0,0))
-        self.hour1.char("8", DP=None, CC=0)
+        self.digits = {}
+        for x in range(6):
+            for y in range(4):
+                self.digits[x, y] = self.image_label = ctk.CTkLabel(self, image=self.img1Digit, text="")  # display image with a CTkLabel
+                self.digits[x, y].grid(row=y, column=x)
 
-        self.mins0 = tkVFD.seg7(self, height=vfdHeight, use_CC=False, on_color=onColour, bg=bgColour)
-        self.mins0.grid(row=0, column=2, padx=(0,0), pady=(0,0))
-        self.mins0.char("8", DP=None, CC=0)
-        self.mins1 = tkVFD.seg7(self, height=vfdHeight, use_CC=False, on_color=onColour, bg=bgColour)
-        self.mins1.grid(row=0, column=3, padx=(0,0), pady=(0,0))
-        self.mins1.char("8", DP=None, CC=0)
-
-        self.lblExit = ctk.CTkLabel(self, text="X", text_color="red", fg_color=self.myConfig.VFD_BACKGROUND,
-                                    anchor="ne")
-        self.lblExit.grid(row=0, column=4, padx=(0,0), pady=(0,0), sticky="ne")
-
-        #  un comments to have seconds.
-        # self.secs0 = tkVFD.seg7(self, height=vfdHeight, use_CC=True, on_color=onColour, bg=bgColour)
-        # self.secs0.grid(row=0, column=4, padx=(0,0), pady=(0,0))
-        # self.secs0.char("8", DP=None, CC=0)
-        # self.secs1 = tkVFD.seg7(self, height=vfdHeight, use_CC=True, on_color=onColour, bg=bgColourD)
-        # self.secs1.grid(row=0, column=5, padx=(0,0), pady=(0,0))
-        # self.secs1.char("8", DP=None, CC=0)
+        #---------------------------------------------------------------------------------------------- Exit -----------------------
+        self.lblExit = ctk.CTkLabel(self, text="X", text_color="red", fg_color=self.background, anchor="ne")
+        self.lblExit.grid(row=0, column=6, padx=(0,0), pady=(0,0), sticky="ne")
 
         #  Bind the top right X to close.
         self.lblExit.bind("<Button-1>", self.__close)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.
-        self.hour0.bind("<Button-1>",        self.__startMove)
-        self.hour0.bind("<ButtonRelease-1>", self.__stopMove)
-        self.hour0.bind("<B1-Motion>",       self.__moveWindow)
+        self.digits[0, 0].bind("<Button-1>",        self.__startMove)
+        self.digits[0, 0].bind("<ButtonRelease-1>", self.__stopMove)
+        self.digits[0, 0].bind("<B1-Motion>",       self.__moveWindow)
 
     def __close(self, event):
         self.master.update_idletasks()              #  To make sure the app location had been updated.
 
-        self.myConfig.VFD_X_POS = self.winfo_rootx()
-        self.myConfig.VFD_Y_POS = self.winfo_rooty()
+        self.myConfig.BINARYKLOCK_X_POS = self.winfo_rootx()
+        self.myConfig.BINARYKLOCK_Y_POS = self.winfo_rooty()
 
         self.myConfig.writeConfig()
 
@@ -127,19 +113,20 @@ class showVFDime(ctk.CTkFrame):
         """
         return self.selectTime.getTime("Digit Time")
 
-    def __update(self):
+    def update(self):
         """  Updates the main time text.
         """
         timeText = self.__timeString()
-        self.hour0.char(timeText[0], DP=None, CC=0)
-        self.hour1.char(timeText[1], DP=None, CC=1)
-        self.mins0.char(timeText[2], DP=None, CC=0)
-        self.mins1.char(timeText[3], DP=None, CC=0)
-        # self.secs0.char(timeText[4], DP=None, CC=0)
-        # self.secs1.char(timeText[5], DP=None, CC=1)
 
+        for columns in range(6):
+            rows = tc.binaryCodes[timeText[columns]]
 
-
+            for pos, row in enumerate(rows):
+                row = int(row)
+                if row == 1:
+                    self.digits[columns, pos].configure(image=self.img1Digit)
+                else:
+                    self.digits[columns, pos].configure(image=self.img0Digit)
 
 
 

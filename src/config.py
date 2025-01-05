@@ -110,6 +110,8 @@ class Config():
         self.DIALKLOCK_TEXT_COLOUR   = other.DIALKLOCK_TEXT_COLOUR
         self.DIALKLOCK_SCALE_COLOUR  = other.DIALKLOCK_SCALE_COLOUR
         self.DIALKLOCK_NEEDLE_COLOUR = other.DIALKLOCK_NEEDLE_COLOUR
+        self.BINARYKLOCK_SIZE        = other.BINARYKLOCK_SIZE
+        self.BINARYKLOCK_BACKGROUND  = other.BINARYKLOCK_BACKGROUND
         self.SOUNDS                  = other.SOUNDS
         self.SOUNDS_HOUR_CHIMES      = other.SOUNDS_HOUR_CHIMES
         self.SOUNDS_QUARTER_CHIMES   = other.SOUNDS_QUARTER_CHIMES
@@ -124,13 +126,7 @@ class Config():
         self.EVENTS_STAGE_3_COLOUR   = other.EVENTS_STAGE_3_COLOUR
         self.EVENTS_NOW_COLOUR       = other.EVENTS_NOW_COLOUR
 
-
-    @property
-    def SETTINGS_HEADERS(self):
-        """  Returns the setting headers.
-        """
-        return self.config["SETTINGS"].get("headers", [])
-
+#---------------------------------------------------------------------------------------------- INFO -----------------------
     @property
     def NAME(self):
         """  Returns the application name.
@@ -142,7 +138,29 @@ class Config():
         """  Returns the application Version.
         """
         return self.config["INFO"]["myVERSION"]
+#---------------------------------------------------------------------------------------------- SETTINGS -----------------------
+    @property
+    def SETTINGS_HEADERS(self):
+        """  Returns the setting headers.
+        """
+        return self.config["SETTINGS"].get("headers", [])
 
+    @property
+    def COLOUR_THEME_TYPES(self):
+        """  Returns the window background colour types.
+             Supported themes : green, dark-blue, blue.
+        """
+        value = self.config["SETTINGS"].get("colorThemeTypes", [ "green", "dark-blue", "blue",])
+        return value
+
+    @property
+    def APPEARANCE_MODE_TYPES(self):
+        """  Returns the application appearance mode types.
+             Supported modes : Light, Dark, System.
+        """
+        value = self.config["SETTINGS"].get("appearanceModeTypes", [ "Light", "Dark", "System",])
+        return value
+#---------------------------------------------------------------------------------------------- APPLICATION -----------------------
     @property
     def APPEARANCE_MODE(self):
         """  Returns the application appearance mode.
@@ -158,14 +176,6 @@ class Config():
         self.config["APPLICATION"]["appearanceMode"] = value
 
     @property
-    def APPEARANCE_MODE_TYPES(self):
-        """  Returns the application appearance mode types.
-             Supported modes : Light, Dark, System.
-        """
-        value = self.config["SETTINGS"].get("appearanceModeTypes", [ "Light", "Dark", "System",])
-        return value
-
-    @property
     def COLOUR_THEME(self):
         """  Returns the window background colour.
              Supported themes : green, dark-blue, blue.
@@ -178,14 +188,6 @@ class Config():
         """  Sets the window background colour.
         """
         self.config["APPLICATION"]["colorTheme"] = value
-
-    @property
-    def COLOUR_THEME_TYPES(self):
-        """  Returns the window background colour types.
-             Supported themes : green, dark-blue, blue.
-        """
-        value = self.config["SETTINGS"].get("colorThemeTypes", [ "green", "dark-blue", "blue",])
-        return value
 
     @property
     def FOREGROUND(self):
@@ -284,7 +286,7 @@ class Config():
         """  Sets the Y co-ordinate of the top right hand corner of the window.
         """
         self.config["APPLICATION"]["Align_Right"] = value
-
+#---------------------------------------------------------------------------------------------- TIME -----------------------
     @property
     def TIME_TYPE(self):
         """  Return the type [format] of the displayed time.
@@ -308,7 +310,7 @@ class Config():
         """  Sets if the main time should be in title case.
         """
         self.config["TIME"]["capitalise"] = value
-
+#---------------------------------------------------------------------------------------------- MENU -----------------------
     @property
     def MENU_VISIBLE(self):
         """  Return the if menu visible.
@@ -320,8 +322,7 @@ class Config():
         """  Return the if menu visible.
         """
         self.config["MENU"]["visible"] = value
-
-    #  Time Font config options.
+#---------------------------------------------------------------------------------------------- TIME FONT -----------------------
     @property
     def TIME_FONT_FAMILY(self):
         """  Return the main time display family.
@@ -345,8 +346,7 @@ class Config():
         """  Sets the main time display font size.
         """
         self.config["TIME_FONT"]["size"] = value
-
-    #  Status bar font config options.
+#---------------------------------------------------------------------------------------------- STATUS BAR FONT -----------------------
     @property
     def STATUS_FONT_FAMILY(self):
         """  Return the status bar font family.
@@ -370,8 +370,7 @@ class Config():
         """  Sets the status bar font size.
         """
         self.config["STATUS_FONT"]["size"] = value
-
-    #  VFD pyKlock config options.
+#---------------------------------------------------------------------------------------------- VFD_WIDTH -----------------------
     @property
     def VFD_WIDTH(self):
         """  Returns the vfdpyKlock width.
@@ -443,8 +442,7 @@ class Config():
         """  Sets the vfdpyKlock background colour.
         """
         self.config["KLOCKS"]["vfd_background"] = value
-
-    #  Text pyKlock config options.
+#---------------------------------------------------------------------------------------------- TEXTKLOCK -----------------------
     @property
     def TEXTKLOCK_WIDTH(self):
         """  Returns the textKlock width.
@@ -528,7 +526,7 @@ class Config():
         """  Sets the textKlock background colour.
         """
         self.config["KLOCKS"]["textKlock_background"] = value
-
+#---------------------------------------------------------------------------------------------- DIALKLOCK -----------------------
     @property
     def DIALKLOCK_X_POS(self):
         """  Returns the dialKlock x pos.
@@ -557,13 +555,13 @@ class Config():
     def DIALKLOCK_SIZE(self):
         """  Returns the dialKlock size.
         """
-        return self.config["KLOCKS"].get("dialKlock_klockSize", "200")
+        return self.config["KLOCKS"].get("dialKlock_Size", "200")
 
     @DIALKLOCK_SIZE.setter
     def DIALKLOCK_SIZE(self, value):
         """  Sets the dialKlock size.
         """
-        self.config["KLOCKS"]["dialKlock_klockSize"] = value
+        self.config["KLOCKS"]["dialKlock_Size"] = value
 
     @property
     def DIALKLOCK_BACKGROUND(self):
@@ -605,14 +603,62 @@ class Config():
     def DIALKLOCK_NEEDLE_COLOUR(self):
         """  Returns the dialKlock scale colour.
         """
-        return self.config["KLOCKS"].get("needle_colour", "#00ff00")
+        return self.config["KLOCKS"].get("dialKlock_needle_colour", "#00ff00")
 
     @DIALKLOCK_NEEDLE_COLOUR.setter
     def DIALKLOCK_NEEDLE_COLOUR(self, value):
         """  Sets the dialKlock scalecolour.
         """
-        self.config["KLOCKS"]["needle_colour"] = value
+        self.config["KLOCKS"]["dialKlock_needle_colour"] = value
+#---------------------------------------------------------------------------------------------- BINARYKLOCK -----------------------
+    @property
+    def BINARYKLOCK_X_POS(self):
+        """  Returns the binaryKlock x pos.
+        """
+        return self.config["KLOCKS"].get("binaryKlock_x_pos", "500")
 
+    @BINARYKLOCK_X_POS.setter
+    def BINARYKLOCK_X_POS(self, value):
+        """  Sets the  binaryKlock x pos.
+        """
+        self.config["KLOCKS"]["binaryKlock_x_pos"] = value
+
+    @property
+    def BINARYKLOCK_Y_POS(self):
+        """  Returns the  binaryKlock y pos.
+        """
+        return self.config["KLOCKS"].get("binaryKlock_y_pos", "400")
+
+    @BINARYKLOCK_Y_POS.setter
+    def BINARYKLOCK_Y_POS(self, value):
+        """  Sets the  binaryKlock y pos.
+        """
+        self.config["KLOCKS"]["binaryKlock_y_pos"] = value
+
+    @property
+    def BINARYKLOCK_SIZE(self):
+        """  Returns the  binaryKlock size.
+        """
+        return self.config["KLOCKS"].get("binaryKlock_Size", 30)
+
+    @BINARYKLOCK_SIZE.setter
+    def BINARYKLOCK_SIZE(self, value):
+        """  Sets the  binaryKlock size.
+        """
+        self.config["KLOCKS"]["binaryKlock_Size"] = value
+
+    @property
+    def BINARYKLOCK_BACKGROUND(self):
+        """  Returns the binaryKlock background colour.
+        """
+        return self.config["KLOCKS"].get("binaryKlock_background", "white")
+
+    @BINARYKLOCK_BACKGROUND.setter
+    def BINARYKLOCK_BACKGROUND(self, value):
+        """  Sets the binaryKlock background colour.
+        """
+        self.config["KLOCKS"]["binaryKlock_background"] = value
+#---------------------------------------------------------------------------------------------- SOUNDS -----------------------
     @property
     def SOUNDS(self):
         """  Returns if sounds are enabled.
@@ -696,7 +742,7 @@ class Config():
         """  Sets sound volume.
         """
         self.config["SOUNDS"]["sound_volume"] = value
-
+#---------------------------------------------------------------------------------------------- EVENTS -----------------------
     @property
     def EVENTS_STAGE_1_DAYS(self):
         """  Returns the number of days due for stage 1.
@@ -781,7 +827,7 @@ class Config():
         """
         self.config["EVENTS"]["nowColour"] = value
 
-    #  ------------------------------------------------------------------------------------------------------------------------
+#---------------------------------------------------------------------------------------------------------------------------
 
     def __CheckVersion(self):
         """  Checks pyKlocks version against a version file - if they diff, an upgrade has been performed.
@@ -798,9 +844,17 @@ class Config():
                     self.config["INFO"]["myVERSION"] = newVersion
                     self.logger.info(f"  ** pyKlock has been upgraded from version {oldVersion} to new version {newVersion} **")
 
+                    if self.config["KLOCKS"].get("binarylock_x_pos" ) is None:
+                        #  New config options to be added at 2025.60 - binary klock
+                        self.logger.info("  ** New options for Binary Klock added @ 2025.60**")
+                        self.config["KLOCKS"] = {"binarylock_x_pos"       : 500,
+                                                 "binarylock_y_pos"       : 260,
+                                                 "binarylock_klockSize"   : 30,
+                                                 "binaryKlock_background" : "#000000"}
+
                     if self.config["KLOCKS"].get("dialKlock_x_pos" ) is None:
                         #  New config options to be added at 2025.56 - dial klock
-                        self.logger.info("  ** New options for TEXT pyKlock added @ 2025.56**")
+                        self.logger.info("  ** New options for TEXT Klock added @ 2025.56**")
                         self.config["KLOCKS"] = {"dialKlock_x_pos"         : 500,
                                                  "dialKlock_y_pos"         : 260,
                                                  "dialKlock_klockSize"     : 200,
@@ -987,13 +1041,17 @@ class Config():
                             "dialKlock_background"    : "#000000",
                             "dialKlock_text_colour"   : "#00ff00",
                             "dialKlock_scale_colour"  : "#00ff00",
-                            "dialKlock_needle_colour" : "#00ff00"}
+                            "dialKlock_needle_colour" : "#00ff00",
+                            "binarylock_x_pos"        : 500,
+                            "binarylock_y_pos"        : 260,
+                            "binarylock_klockSize"    : 30,
+                            "binaryKlock_background"   : "#000000"}
 
         config["SOUNDS"] = {"sounds"        : True,
                             "westminster"   : True,
                             "hour_chimes"   : True,
                             "quarter_chimes": True,
-                            "hour_pips"     : True,
+                            "hour_pips"     : False,
                             "cuckoo"        : False,
                             "sound_volume"  : 25}
 

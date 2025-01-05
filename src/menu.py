@@ -35,6 +35,7 @@ import src.windows.SelectColourWindow as cw
 import src.klocks.vfdKlock as vfdKlock
 import src.klocks.textKlock as textKlock
 import src.klocks.dialKlock as dialKlock
+import src.klocks.binaryKlock as binaryKlock
 
 class myMenu(CTkmenu.CTkMenuBar):
     """  A class the creates the menu.
@@ -81,9 +82,10 @@ class myMenu(CTkmenu.CTkMenuBar):
         #pyKlocks
         self.dropdown2 = CTkmenu.CustomDropdownMenu(widget=self.mnupyKlocks, height=menuHeight,
                                                     width=menuWidth, font=("default", fontSize))
-        self.dropdown2.add_option(option="vfdKlock",  command=self.__showVFDKlock)
-        self.dropdown2.add_option(option="textKlock", command=self.__showTextKlock)
-        self.dropdown2.add_option(option="dialKlock", command=self.__showDialKlock)
+        self.dropdown2.add_option(option="VFD Klock",  command=self.__showVFDKlock)
+        self.dropdown2.add_option(option="Text Klock", command=self.__showTextKlock)
+        self.dropdown2.add_option(option="Dial Klock", command=self.__showDialKlock)
+        self.dropdown2.add_option(option="Binary Klock", command=self.__showBinaryKlock)
 
         #  Things
         self.dropdown3  = CTkmenu.CustomDropdownMenu(widget=self.mnuThings, height=menuHeight,
@@ -115,6 +117,13 @@ class myMenu(CTkmenu.CTkMenuBar):
         """  Loads the Settings window.
         """
         ss.showSettings(self.master, self.myConfig, self.myLogger)
+
+    def __showBinaryKlock(self):
+        """  Loads the Binary Klock window.
+        """
+        self.master.overrideredirect(False)
+        self.master.state("iconic")
+        binaryKlock.binaryKlock(self.master, self.myConfig, self.myLogger)
 
     def __showDialKlock(self):
         """  Loads the Dial Klock window.
