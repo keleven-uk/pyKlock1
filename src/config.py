@@ -984,7 +984,7 @@ class Config():
         written = strNow.strftime("%A %d %B %Y  %H:%M:%S")
         config  = dict()
 
-        config["SETTINGS"] = {"headers"             : [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",],
+        config["SETTINGS"] = {"headers"             : [ "APPLICATION", "TIME", "MENU", "FONTS", "KLOCKS", "SOUNDS",],
                               "appearanceModeTypes" : [ "Light", "Dark", "System",],
                               "colorThemeTypes"     : [ "green", "dark-blue", "blue",]
                               }

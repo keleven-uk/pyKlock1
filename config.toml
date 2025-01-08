@@ -1,10 +1,10 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Sunday 05 January 2025  19:29:13
+#   (c) Kevin Scott   Written Wednesday 08 January 2025  16:19:02
 #
 #   true and false are lower case 
 #
 [SETTINGS]
-headers = [ "APPLICATION", "TIME", "MENU", "FONT", "KLOCKS", "SOUNDS",]
+headers = [ "APPLICATION", "TIME", "MENU", "FONTS", "KLOCKS", "SOUNDS",]
 appearanceModeTypes = [ "Light", "Dark", "System",]
 colorThemeTypes = [ "green", "dark-blue", "blue",]
 
@@ -20,20 +20,20 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1600
-y_pos = -183
+x_pos = 1282
+y_pos = -231
 Align_Right = true
 
 [TIME]
-type = "GMT Time"
+type = "Fuzzy Time"
 capitalise = true
 
 [MENU]
 visible = true
 
 [TIME_FONT]
-family = "Pendule Ornamental"
-size = 100
+family = "Kingthings Christmas 2"
+size = 50
 weight = "normal"
 slant = false
 underline = false
@@ -68,8 +68,8 @@ dialKlock_background = "#000000"
 dialKlock_text_colour = "#00ff00"
 dialKlock_scale_colour = "#00ff00"
 dialKlock_needle_colour = "#00ff00"
-binaryKlock_x_pos = 453
-binaryKlock_y_pos = -333
+binaryKlock_x_pos = 1127
+binaryKlock_y_pos = -284
 binaryKlock_Size = 50
 binaryKlock_background = "#000000"
 

@@ -47,6 +47,7 @@ class showBinaryKlock(ctk.CTkFrame):
     def __createWidgets(self):
         """  Create the main time display.
         """
+        self.rowconfigure((0, 1, 2, 3), weight=1)
         self.configure(fg_color=self.myConfig.DIALKLOCK_BACKGROUND)
 
         self.img1Digit = ctk.CTkImage(dark_image=Image.open(f"{pp.RESOURCE_PATH}\\binaryKlock\\one.jpg"),
@@ -57,7 +58,7 @@ class showBinaryKlock(ctk.CTkFrame):
         self.digits = {}
         for x in range(6):
             for y in range(4):
-                self.digits[x, y] = self.image_label = ctk.CTkLabel(self, image=self.img1Digit, text="")  # display image with a CTkLabel
+                self.digits[x, y] = self.image_label = ctk.CTkLabel(self, text="")  # display image with a CTkLabel
                 self.digits[x, y].grid(row=y, column=x)
 
         #---------------------------------------------------------------------------------------------- Exit -----------------------
@@ -68,9 +69,9 @@ class showBinaryKlock(ctk.CTkFrame):
         self.lblExit.bind("<Button-1>", self.__close)
 
         #  Using tkinter direct to bind the move window function to the left moue button press.
-        self.digits[0, 0].bind("<Button-1>",        self.__startMove)
-        self.digits[0, 0].bind("<ButtonRelease-1>", self.__stopMove)
-        self.digits[0, 0].bind("<B1-Motion>",       self.__moveWindow)
+        self.digits[0, 3].bind("<Button-1>",        self.__startMove)
+        self.digits[0, 3].bind("<ButtonRelease-1>", self.__stopMove)
+        self.digits[0, 3].bind("<B1-Motion>",       self.__moveWindow)
 
     def __close(self, event):
         self.master.update_idletasks()              #  To make sure the app location had been updated.
@@ -119,14 +120,25 @@ class showBinaryKlock(ctk.CTkFrame):
         timeText = self.__timeString()
 
         for columns in range(6):
-            rows = tc.binaryCodes[timeText[columns]]
+            rows = tc.binaryCodes[timeText[columns]]        #  Converts the time digit into binary format.
 
             for pos, row in enumerate(rows):
-                row = int(row)
-                if row == 1:
-                    self.digits[columns, pos].configure(image=self.img1Digit)
+
+                row     = int(row)                          #  Converts binary digit from string to int.
+                display = True
+
+                if columns == 0 and pos < 2:               #  For each columns, only display required images.
+                    display = False
+                elif columns in[2, 4] and pos < 1:
+                    display = False
+
+                if display:                                                         #  Only process digit if required.
+                    if row == 1:
+                        self.digits[columns, pos].configure(image=self.img1Digit)   #  Display the 1 image.
+                    else:
+                        self.digits[columns, pos].configure(image=self.img0Digit)   #  Display the 0 image.
                 else:
-                    self.digits[columns, pos].configure(image=self.img0Digit)
+                    self.digits[columns, pos].configure(image=None)                 #  Display a blank image.
 
 
 

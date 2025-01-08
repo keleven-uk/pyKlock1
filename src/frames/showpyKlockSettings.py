@@ -78,7 +78,7 @@ class MySettings(ctk.CTkFrame):
                     frmMn = frmFonts.MyFontFrame(self, self.frmSettings["FONTS"], self.copyConfig)
                     frmMn.grid(row=1, column=0)
                 case "KLOCKS":
-                    frmKl = frmpyKlocks.MypyKlocksFrame(self, self.frmSettings["KLOCKS"], self.copyConfig)
+                    frmKl = frmpyKlocks.MyKlocksFrame(self, self.frmSettings["KLOCKS"], self.copyConfig)
                     frmKl.grid(row=1, column=0)
                 case "SOUNDS":
                     frmMn = frmSound.MySoundFrame(self, self.frmSettings["SOUNDS"], self.copyConfig)

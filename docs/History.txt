@@ -33,6 +33,14 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2025.61	[8 January 2025]
+
+	Refined the binary Klock, so that Only images that are needed are displayed.
+		So for column - only needs 2 rows [00 to 10].
+	Added setting for binary Klock the Klocks settings tab.
+		Only added binary Klock size.
+
+
 V2025.60	[5 January 2025]
 
 	Added a new Klock - Binary Klock.

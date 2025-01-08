@@ -21,7 +21,7 @@ import customtkinter as ctk
 
 import CTkColorPicker as ctk_cp
 
-class MypyKlocksFrame(ctk.CTkFrame):
+class MyKlocksFrame(ctk.CTkFrame):
     """  A class that creates a frame that holds the user settings for the Application.
 
          Note : this frame uses a copy of the config file i.e. not myconfig.
@@ -73,7 +73,7 @@ class MypyKlocksFrame(ctk.CTkFrame):
         self.lblDialSize = ctk.CTkLabel(self, text="Dial Klock Size", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
         self.lblDialSize.grid(row=6, column=0, padx=10, pady=10)
         self.entDialSize = ctk.CTkEntry(self, placeholder_text=self.config.DIALKLOCK_SIZE, width=50, text_color=self.foreColour,
-                                        fg_color="#030126", border_color=self.foreColour, validate="focusout", validatecommand=(self.register(self.__validateStageDays), "%P"))
+                                        fg_color="#030126", border_color=self.foreColour, validate="focusout", validatecommand=(self.register(self.__validateSIze), "%P", "D"))
         self.entDialSize.grid(row=6, column=1,padx=10, pady=10)
         self.btnDialBackColour = ctk.CTkButton(self, text="Background Colour", command=self.__askDialBackColour, fg_color="blue",
                                                hover_color="gray", corner_radius=12, width=100, text_color=self.config.DIALKLOCK_BACKGROUND, font=("Montserrat", 16), border_color="white")
@@ -90,19 +90,30 @@ class MypyKlocksFrame(ctk.CTkFrame):
                                                  corner_radius=12, width=100, text_color=self.config.DIALKLOCK_NEEDLE_COLOUR, font=("Montserrat", 16),
                                                  border_color=self.foreColour)
         self.btnDialNeedleColour.grid(row=7, column=3, padx=10, pady=10)
+        #---------------------------------------------------------------------------------------------- binary klock -----------------------
+        self.lblDial = ctk.CTkLabel(self, text="Binary Klocks Settings", text_color="yellow", fg_color=self.config.BACKGROUND)
+        self.lblDial.grid(row=8, column=1)
+        self.lblBinarySize = ctk.CTkLabel(self, text="Binary Klock Size", text_color=self.foreColour, fg_color=self.config.BACKGROUND)
+        self.lblBinarySize.grid(row=9, column=0, padx=10, pady=10)
+        self.entBinarySize = ctk.CTkEntry(self, placeholder_text=self.config.BINARYKLOCK_SIZE, width=50, text_color=self.foreColour,
+                                          fg_color="#030126", border_color=self.foreColour, validate="focusout", validatecommand=(self.register(self.__validateSIze), "%P", "B"))
+        self.entBinarySize.grid(row=9, column=1,padx=10, pady=10)
 
 
-
-    def __validateStageDays(self, data):
-        """  Stage days has to be an integer number.
-             The validation checks this and allows decimal numbers.
+    def __validateSIze(self, data, type):
+        """  Size has to be an integer number.
+             The validation checks this and only allows decimal numbers.
              This is called by all three stage days entry fields.
         """
         valid = data.isdecimal()
 
         if valid:
             self.master.btnSave.configure(state="normal")
-            self.config.DIALKLOCK_SIZE = int(data)
+            match type:
+                case "D":
+                    self.config.DIALKLOCK_SIZE = int(data)
+                case "B":
+                    self.config.BINARYKLOCK_SIZE = int(data)
 
         return valid
 
@@ -110,7 +121,7 @@ class MypyKlocksFrame(ctk.CTkFrame):
         """  Sets the background colour of the Dial Klock.
         """
         self.master.btnSave.configure(state="normal")
-        pickColor = ctk_cp.AskColor()                                                     # open the colour picker
+        pickColor = ctk_cp.AskColor()                                                      # open the colour picker
         self.config.DIALKLOCK_NEEDLE_COLOUR = pickColor.get()                              # get the colour string
         self.btnDialNeedleColour.configure(text_color=self.config.DIALKLOCK_NEEDLE_COLOUR)
 
