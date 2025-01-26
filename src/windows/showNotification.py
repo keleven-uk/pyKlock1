@@ -75,10 +75,10 @@ class notification(ctk.CTkToplevel):
         self.lblMessage = ctk.CTkLabel(self, text=self.message, text_color="black", fg_color="transparent")
         self.lblMessage.grid(row=0, column=0, padx=10, pady=10, sticky="nsew", columnspan=2)
         self.btnAcknowledge = ctk.CTkButton(self, text="Acknowledge", text_color="black", fg_color="transparent", font=("Montserrat", 16),
-                                    hover=False, corner_radius=12, width=100, command=self._Acknowledge)
+                                    hover=False, corner_radius=12, width=100, command=self.__Acknowledge)
         self.btnAcknowledge.grid(row=1, column=1, padx=10, pady=10, sticky="nsew")
         self.btnMute = ctk.CTkButton(self, text="Mute", text_color="black", fg_color="transparent", font=("Montserrat", 16),
-                                     hover=False, corner_radius=12, width=100, command=self._mute)
+                                     hover=False, corner_radius=12, width=100, command=self.__mute)
         self.btnMute.grid(row=1, column=2, padx=10, pady=10, sticky="nsew")
 
     def __fadeIn(self):

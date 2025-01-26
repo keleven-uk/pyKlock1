@@ -1,5 +1,5 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Wednesday 08 January 2025  16:19:02
+#   (c) Kevin Scott   Written Sunday 26 January 2025  20:51:56
 #
 #   true and false are lower case 
 #
@@ -20,7 +20,7 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1282
+x_pos = 1440
 y_pos = -231
 Align_Right = true
 
@@ -32,7 +32,7 @@ capitalise = true
 visible = true
 
 [TIME_FONT]
-family = "Kingthings Christmas 2"
+family = "It Lives In The Swamp BRK"
 size = 50
 weight = "normal"
 slant = false
@@ -48,33 +48,15 @@ underline = false
 overstrike = false
 
 [KLOCKS]
-vfd_width = 460
+vfd_width = 500
 vfd_height = 260
 vfd_x_pos = 400
 vfd_y_pos = 400
 vfd_foreground = "#82ccff"
 vfd_background = "#000000"
-textKlock_width = 500
-textKlock_height = 260
-textKlock_x_pos = 821
-textKlock_y_pos = 280
-textKlock_on_Colour = "springGreen2"
-textKlock_off_Colour = "slate grey"
-textKlock_background = "#000000"
-dialKlock_x_pos = 1177
-dialKlock_y_pos = -337
-dialKlock_Size = 200
-dialKlock_background = "#000000"
-dialKlock_text_colour = "#00ff00"
-dialKlock_scale_colour = "#00ff00"
-dialKlock_needle_colour = "#00ff00"
-binaryKlock_x_pos = 1127
-binaryKlock_y_pos = -284
-binaryKlock_Size = 50
-binaryKlock_background = "#000000"
 
 [SOUNDS]
-sounds = true
+sounds = false
 westminster = true
 hour_chimes = true
 quarter_chimes = true
@@ -84,7 +66,7 @@ sound_volume = 25
 
 [EVENTS]
 stage1Days = 5
-stage2Days = 10
+stage2Days = 30
 stage3Days = 30
 stage1Colour = "red"
 stage2Colour = "yellow"

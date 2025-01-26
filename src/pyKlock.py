@@ -39,7 +39,7 @@ class pyKlock(ctk.CTk):
         self.myConfig    = myConfig
         self.myLogger    = myLogger
         self.myTimer     = myTimer                             #  Also starts the timer - used to determined pyKlock running time.
-        self.sounds      = snds.Sounds(self.myConfig)
+        self.sounds      = snds.Sounds(self.myConfig, self.myLogger)
         self.eventsStore = es.eventsStore(self, self.myConfig) #  This needs to be declared here and passed down the tree.
                                                                #  So the checks whether any of the events are due can be done all the time.
 

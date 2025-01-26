@@ -94,7 +94,7 @@ class EventAddWindow(ctk.CTkToplevel):
         self.lblCategory = ctk.CTkLabel(self, text="Category", text_color="#ffe9a6", font=("Verdana",20))
         self.lblCategory.grid(row=0, column=2, padx=10, pady=10)
         self.cbxCategory = ctk.CTkComboBox(self, values=self.Categories, text_color="white", fg_color="#030126",
-                                           border_color="#030126", command=self.setCategory)
+                                           border_color="#030126", command=self.__setCategory)
         self.cbxCategory.grid(row=0, column=3, padx=10, pady=10)
         # ----------------------------------------------------------------------------------------------------- Date Due ------------------
         self.lblDateDue = ctk.CTkLabel(self, text="Date Due", text_color="#ffe9a6", font=("Verdana",20))
@@ -151,7 +151,7 @@ class EventAddWindow(ctk.CTkToplevel):
         if self.valName:
             self.btnAdd.configure(state="normal")
 
-    def setCategory(self, choice):
+    def __setCategory(self, choice):
         """  Saves the choice of the combo box [title] for use elsewhere.
         """
         self.chosen = choice
@@ -167,15 +167,15 @@ class EventAddWindow(ctk.CTkToplevel):
              mobileNumber must be numeric [can contain a space].
         """
 
-        if self.rowKey:                                     #  If in edit more, use the existing Category.
+        if self.rowKey:                                                     #  If in edit more, use the existing Category.
             Category = self.event[3]
-        else:                                               #  If in add mode, use the new Category.
+        else:                                                               #  If in add mode, use the new Category.
             Category = self.chosen
-        self.name = self.entName.get().title().strip()       #  Needs to be self. because used in _populateFields()
-        dateDue   = self.dpDateDue.get_date()                #  datetime.date
+        self.name = self.__capitaliseName(self.entName.get().strip())       #  Needs to be self. because used in _populateFields()
+        dateDue   = self.dpDateDue.get_date()                               #  datetime.date
         timeDue   = self.tpTimeDue.time()
-        recurring = self.chkRecurring.get()                  #  returns 1 for True and 0 for False.
-        notes     = self.txtNotes.get("0.0", "end").strip()  #  return note as entered, extra spaces from the end are removed.
+        recurring = self.chkRecurring.get()                                 #  returns 1 for True and 0 for False.
+        notes     = self.txtNotes.get("0.0", "end").strip()                 #  return note as entered, extra spaces from the end are removed.
 
         strDateDue   = dateDue.strftime("%d/%m/%Y")
         strTimeDue   = f"{timeDue[0]:02}:{timeDue[1]:02}"
@@ -188,8 +188,8 @@ class EventAddWindow(ctk.CTkToplevel):
             CTkMessagebox(title="Error", message="Name is mandatory", icon="cancel")
         else:
             key = f"{self.name}"
-            item = [self.name, strDateDue, strTimeDue, Category, strRecurring, notes, "", "False", "False", "False"]
-            item = self._setItemStages(item, strDateDue)
+            item = [self.name, strDateDue, strTimeDue, Category, strRecurring, notes, "False", "False", "False"]
+            item = self.__setItemStages(item, strDateDue)
 
             self.eventsStore.addEvent(key, item)
             self.btnSave.configure(state="normal")
@@ -202,6 +202,13 @@ class EventAddWindow(ctk.CTkToplevel):
                 self.__populateFields(self.rowKey)   #  If in edit more, refresh fields.
                 self.rowKey = self.name                  #  save the new name i.e key.
 
+
+    def __capitaliseName(self, name):
+        """  Used instead of .title() - this capitalise the letter after an apostrophe.
+             I used a fix found at https://stackoverflow.com/questions/8347048/how-to-convert-string-to-title-case-in-python
+             Thanks to the author.
+        """
+        return " ".join("".join([word[0].upper(), word[1:].lower()]) for word in name.split())
 
     def __setItemStages(self, item, dateDue):
         """  Sets the stages relevant to the number of days left of the event.

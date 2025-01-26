@@ -135,7 +135,7 @@ class eventsStore():
         """
         now = datetime.datetime.now()
 
-        for key in self.store:
+        for key in self.store.copy():
             dateDue = self.store[key][1]
             dateDue = self.checkYear(dateDue, now)
             timeDue = self.store[key][2]
@@ -169,7 +169,7 @@ class eventsStore():
             dueYear = curYear
         if dueMonth < curMonth:
             dueYear = curYear + 1
-        if dueDay < curDay:
+        if dueYear == curYear and dueMonth == curMonth and dueDay < curDay:  #  Event has just passed this month.
             dueYear = curYear + 1
 
         return f"{dueDay}/{dueMonth}/{dueYear}"
@@ -185,8 +185,6 @@ class eventsStore():
                 stage 1 becomes active after 1 day.
                 Now becomes active with 1 minute to go - mainly intended for event with a time.
         """
-        #now = datetime.datetime.now()
-        #print(f"check event {now} : key {key} :: secondsLeft {secondsLeft}")
         self.store[key][6] = self.__formatSeconds(secondsLeft)      #  Time left in seconds.
 
         match secondsLeft:
@@ -213,11 +211,9 @@ class eventsStore():
         eventDue  = event[6]
         eventName = event[0]
 
-        print(f"event Due {key} {stage}")
         match stage:
             case "Stage 3":
                 message = f" {eventName} in {eventDue}"
-                print(message)
                 eventNot = toast.notification(self.master, message, self.stage3Colour)
                 response = eventNot.get()
                 if response == "Acknowledge":
@@ -226,7 +222,6 @@ class eventsStore():
 
             case "Stage 2":
                 message = f" {eventName} in {eventDue}"
-                print(message)
                 eventNot = toast.notification(self.master, message, self.stage2Colour)
                 response = eventNot.get()
                 if response == "Acknowledge":
@@ -235,7 +230,6 @@ class eventsStore():
 
             case "Stage 1":
                 message = f" {eventName} in {eventDue}"
-                print(message)
                 eventNot = toast.notification(self.master, message, self.stage1Colour)
                 response = eventNot.get()
                 if response == "Acknowledge":
@@ -244,7 +238,6 @@ class eventsStore():
 
             case "Now":
                 message = f" {eventName} Now"
-                print(message)
                 eventNot = toast.notification(self.master, message, self.nowColour)
                 response = eventNot.get()
                 # if response == "Acknowledge":

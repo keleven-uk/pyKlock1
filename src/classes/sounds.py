@@ -49,8 +49,9 @@ class Sounds():
          If SOUNDS_HOUR_PIPS is called then the BBC type pips are played on the hour.
     """
 
-    def __init__(self, myConfig):
+    def __init__(self, myConfig, myLogger):
         self.myConfig   = myConfig
+        self.myLogger   = myLogger
         self.selectTime = st.SelectTime()
 
         self.strHour = {
@@ -111,7 +112,7 @@ class Sounds():
                 player.volume = self.myConfig.SOUNDS_VOLUME
                 player.play(block=True)
             except Exception as e:
-                print(f"Error {e}")
+                myLogger.error(f"Error {e}")
 # ------------------------------------------------------------------------------------- playPips ------------------------
     def playPips(self):
         """  Enable the pip to be played to test the volume.
@@ -121,7 +122,7 @@ class Sounds():
             player.volume = self.myConfig.SOUNDS_VOLUME
             player.play(block=True)
         except Exception as e:
-            print(f"Error {e}")
+            myLogger.error(f"Error {e}")
 # ------------------------------------------------------------------------------------- checkHourChimes -----------------
     def checkHourChimes(self, master):
         """  There should be one and only one hour chime selected.

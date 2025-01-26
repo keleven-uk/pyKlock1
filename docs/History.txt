@@ -33,6 +33,14 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2025.62	[26 January 2025]
+
+	Corrected a but where the due year was not handled correctly if the month was later then current month.
+	Corrected a but where the event store throw up and error when the dictionary was changed during calculation due time.
+	Corrected some more errors not calling __modules correctly.
+	The error messages in the sound class will now be written to the logger.
+
+
 V2025.61	[8 January 2025]
 
 	Refined the binary Klock, so that Only images that are needed are displayed.
