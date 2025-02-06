@@ -989,7 +989,7 @@ class Config():
                               "colorThemeTypes"     : [ "green", "dark-blue", "blue",]
                               }
 
-        config["INFO"] = {"myVERSION": "2024.62",
+        config["INFO"] = {"myVERSION": "2025.63",
                           "myNAME"   : "pyKlock"}
 
         config["APPLICATION"] = {"appearanceMode" : "Dark",

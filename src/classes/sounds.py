@@ -112,7 +112,7 @@ class Sounds():
                 player.volume = self.myConfig.SOUNDS_VOLUME
                 player.play(block=True)
             except Exception as e:
-                myLogger.error(f"Error {e}")
+                self.myLogger.error(f"Error {e}")
 # ------------------------------------------------------------------------------------- playPips ------------------------
     def playPips(self):
         """  Enable the pip to be played to test the volume.
@@ -122,7 +122,7 @@ class Sounds():
             player.volume = self.myConfig.SOUNDS_VOLUME
             player.play(block=True)
         except Exception as e:
-            myLogger.error(f"Error {e}")
+            self.myLogger.error(f"Error {e}")
 # ------------------------------------------------------------------------------------- checkHourChimes -----------------
     def checkHourChimes(self, master):
         """  There should be one and only one hour chime selected.

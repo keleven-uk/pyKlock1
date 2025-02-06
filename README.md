@@ -33,9 +33,9 @@ pyKlock will store a number of events that are displayed in a table.
 These events have a date due attached to them, pyKlock will give notifications when up and coming.
 
 Added sound to pyKlock.
-	pyKlock can play Westminster type chimes on the quarter, half and on the hour.
-	pyKlock can also imitate a Cuckoo pyKlock.
-	pyKlock can also play "the pips" on the hour.
+    pyKlock can play Westminster type chimes on the quarter, half and on the hour.
+    pyKlock can also imitate a Cuckoo pyKlock.
+    pyKlock can also play "the pips" on the hour.
 
 The foreground and background colours can be selected.
 
@@ -53,4 +53,4 @@ To install all dependencies pip install -r requirements.txt - r requirements_dev
 
 For changes see history.txt
 
-Kevin Scott (C) 2024-25 :: pyKlock V2025.62
+Kevin Scott (C) 2024-25 :: pyKlock V2025.63

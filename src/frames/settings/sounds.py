@@ -26,13 +26,14 @@ class MySoundFrame(ctk.CTkFrame):
 
         Note : this frame uses a copy of the config file i.e. not myconfig.
     """
-    def __init__(self, master, main, config):
+    def __init__(self, master, main, config, myLogger):
         super().__init__(main)
 
         self.master     = master
         self.main       = main
         self.config     = config
-        self.sounds     = snds.Sounds(self.config)
+        self.myLogger   = myLogger
+        self.sounds     = snds.Sounds(self.config, self.myLogger)
         self.foreColour = "white"
 
         self.__createWidgets()

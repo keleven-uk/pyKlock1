@@ -49,7 +49,6 @@ class eventsStore():
          The key is a string - Name.
          The item is a list  - Name, Date Due, Time, Due, Category, Notes, Time Left, Stage 1, stage 2, stage 3.
     """
-
 # ------------------------------------------------------------------------------------- __init__ ----------------------
     def __init__(self, master, myConfig):
         self.master     = master     #  Need to pass in a tk window, so the notifications work.
@@ -69,27 +68,23 @@ class eventsStore():
         self.stage2Colour = self.myConfig.EVENTS_STAGE_2_COLOUR
         self.stage3Colour = self.myConfig.EVENTS_STAGE_3_COLOUR
         self.nowColour    = self.myConfig.EVENTS_NOW_COLOUR
-
 # ------------------------------------------------------------------------------------- getHeaders --------------------
     @property
     def getHeaders(self):
         """  Returns a list of accepted event Headers i.e. Name, Date Due, Time Due etc.
         """
         return self.Headers
-
 # ------------------------------------------------------------------------------------- getCategories -----------------
     @property
     def getCategories(self):
         """  Returns a list of accepted event Categories i.e. Birthday, Anniversary, Moto etc.
         """
         return self.Categories
-
 # ------------------------------------------------------------------------------------- addEvent ----------------------
     def addEvent(self, key, item):
         """   Stores event data into the store.
         """
         self.store[key] = item
-
 # ------------------------------------------------------------------------------------- deleteEvent -------------------
     def deleteEvent(self, key):
         """   Deletes a event from the store if it exist, if not ignore.
@@ -98,14 +93,12 @@ class eventsStore():
         if key in self.store:
             del self.store[key]
             self.saveEvents()
-
 # ------------------------------------------------------------------------------------- numberOfEvents ----------------
     @property
     def numberOfEvents(self):
         """  Returns the number of events in the store.
         """
         return len(self.store)
-
 # ------------------------------------------------------------------------------------- getEvent ----------------------
     def getEvent(self, key):
         """  Retrieves a single event in list format.
@@ -116,7 +109,6 @@ class eventsStore():
         except KeyError:
             return ["", "", "", "", "", "Record not found", ""]             #  May need to extend for extra fields,
                                                                              #  so the error message is always in the notes field.
-
 # ------------------------------------------------------------------------------------- getEvents ---------------------
     def getEvents(self):
         """  Retrieves events in list format.
@@ -126,7 +118,6 @@ class eventsStore():
             lstEvent.append(self.store[key][0:7])                           #  Don't return stage flags.'
 
         return lstEvent
-
 # ------------------------------------------------------------------------------------- updateEvents ------------------
     def updateEvents(self):
         """  For each event in the store, calculate the time between the due date and now.
@@ -143,7 +134,6 @@ class eventsStore():
             dtLeft  = int((dtDue - now).total_seconds())                                    #  Convert timedelta to seconds.
 
             self.__checkEvent(key, dtLeft)
-
 # ------------------------------------------------------------------------------------- _checkYear --------------------
     def checkYear(self, dateDue, now):
         """  Rule 1 : If the year if before the current year [i.e. original birthday year] use current year.
@@ -173,7 +163,6 @@ class eventsStore():
             dueYear = curYear + 1
 
         return f"{dueDay}/{dueMonth}/{dueYear}"
-
 # ------------------------------------------------------------------------------------- _checkEvent -------------------
     def __checkEvent(self, key, secondsLeft):
         """  For each event, calculate the time left in seconds.
@@ -198,7 +187,6 @@ class eventsStore():
                 self.__eventDue(key, "Stage 2")
             case secondsLeft if (secondsLeft <= self.stage1 and self.store[key][7] == "False"):
                 self.__eventDue(key, "Stage 1")
-
 # ------------------------------------------------------------------------------------- _eventDue ---------------------
     def __eventDue(self, key, stage):
         """  Called when an event is found to be due.
@@ -242,7 +230,6 @@ class eventsStore():
                 response = eventNot.get()
                 # if response == "Acknowledge":
                 #     self.deleteEvent(key)
-
 # ------------------------------------------------------------------------------------- saveEvents --------------------
     def saveEvents(self):
         """  Saves the event store to a text file in csv format.
@@ -251,7 +238,6 @@ class eventsStore():
             writer =csv.writer(csvFile, quoting=csv.QUOTE_ALL)
             for key in sorted(self.store):
                 writer.writerow(self.store[key])
-
 # ------------------------------------------------------------------------------------- loadEvents --------------------
     def loadEvents(self):
         """  Loads the event store from a text file in csv format.
@@ -266,7 +252,6 @@ class eventsStore():
 
         except FileNotFoundError:
             print("Event store not found, using empty sore.")
-
 # ------------------------------------------------------------------------------------- _formatSeconds ----------------
     def __formatSeconds(self, seconds):
         """  Formats number of seconds into a human readable form i.e. hours:minutes:seconds

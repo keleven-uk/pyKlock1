@@ -33,6 +33,13 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2025.63	[6 February 2025]
+
+	Tested under Python V3.13.2 - all okay.
+		Re-loaded requirements.txt.
+	Corrected bug that the logger was not being passed to the sound class when loaded from the settings frame.
+
+
 V2025.62	[26 January 2025]
 
 	Corrected a but where the due year was not handled correctly if the month was later then current month.

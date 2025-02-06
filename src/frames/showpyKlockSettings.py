@@ -81,7 +81,7 @@ class MySettings(ctk.CTkFrame):
                     frmKl = frmpyKlocks.MyKlocksFrame(self, self.frmSettings["KLOCKS"], self.copyConfig)
                     frmKl.grid(row=1, column=0)
                 case "SOUNDS":
-                    frmMn = frmSound.MySoundFrame(self, self.frmSettings["SOUNDS"], self.copyConfig)
+                    frmMn = frmSound.MySoundFrame(self, self.frmSettings["SOUNDS"], self.copyConfig, self.myLogger)
                     frmMn.grid(row=1, column=0)
                 case "EVENTS":
                     frmMn = frmEvents.MyEventsFrame(self, self.frmSettings["EVENTS"], self.copyConfig)
