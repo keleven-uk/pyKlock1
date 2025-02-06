@@ -1,7 +1,7 @@
-#   Configure file for pyKlock.py
-#   (c) Kevin Scott   Written Thursday 06 February 2025  10:36:13
+#   Configure file for pyKlock.py 
+#   (c) Kevin Scott   Written Thursday 06 February 2025  10:45:29
 #
-#   true and false are lower case
+#   true and false are lower case 
 #
 [SETTINGS]
 headers = [ "APPLICATION", "TIME", "MENU", "FONTS", "KLOCKS", "SOUNDS",]
@@ -9,7 +9,7 @@ appearanceModeTypes = [ "Light", "Dark", "System",]
 colorThemeTypes = [ "green", "dark-blue", "blue",]
 
 [INFO]
-myVERSION = "2025.63"
+myVERSION = "2025.58"
 myNAME = "pyKlock"
 
 [APPLICATION]
@@ -20,7 +20,7 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1254
+x_pos = 1328
 y_pos = -231
 Align_Right = true
 

@@ -1,5 +1,5 @@
 audioplayer==0.6
-babel==2.16.0
+babel==2.17.0
 colour==0.1.5
 CTkColorPicker==0.9.0
 CTkMenuBar==0.8
@@ -7,16 +7,16 @@ CTkMessagebox==2.7
 customtkinter==5.2.2
 darkdetect==0.8.0
 packaging==24.2
-pillow==11.0.0
+pillow==11.1.0
 platformdirs==4.3.6
 psutil==6.1.1
-PyMuPDF==1.25.1
+PyMuPDF==1.25.2
 pywin32==308
-ruff==0.8.5
+ruff==0.9.4
 tkcalendar==1.6.1
 tkdial==0.0.7
 tkfontchooser==2.0.2
-tksheet==7.3.0
+tksheet==7.3.4
 tkTimePicker==2.0.2
 tkVFD==1.1.0
 toml==0.10.2

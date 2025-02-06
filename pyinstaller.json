@@ -59,15 +59,15 @@
   },
   {
    "optionDest": "datas",
-   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/customtkinter;customtkinter/"
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.13/Lib/site-packages/customtkinter;customtkinter/"
   },
   {
    "optionDest": "datas",
-   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/CTkColorPicker;CTkColorPicker/"
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.13/Lib/site-packages/CTkColorPicker;CTkColorPicker/"
   },
   {
    "optionDest": "datas",
-   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/CTkMenuBar;CTkMenuBar/"
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.13/Lib/site-packages/CTkMenuBar;CTkMenuBar/"
   },
   {
    "optionDest": "datas",
@@ -87,23 +87,23 @@
   },
   {
    "optionDest": "datas",
-   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/tkVFD/Graphics;tkVFD/c/Graphics/"
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.13/Lib/site-packages/tkVFD/Graphics;tkVFD/c/Graphics/"
   },
   {
    "optionDest": "datas",
-   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/audioplayer;audioplayer/"
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.13/Lib/site-packages/audioplayer;audioplayer/"
   },
   {
    "optionDest": "datas",
-   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/tkcalendar;tkcalendar/"
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.13/Lib/site-packages/tkcalendar;tkcalendar/"
   },
   {
    "optionDest": "datas",
-   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12/Lib/site-packages/babel;babel/"
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.13/Lib/site-packages/babel;babel/"
   },
   {
    "optionDest": "datas",
-   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.12_dev/Lib/site-packages/pytz;pytz/"
+   "value": "D:/My/shed/Projects/python/pyKlock1/env_3.13_dev/Lib/site-packages/pytz;pytz/"
   }
  ],
  "nonPyinstallerOptions": {
