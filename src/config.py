@@ -399,7 +399,7 @@ class Config():
     def VFD_X_POS(self):
         """  Returns the vfdpyKlock x pos.
         """
-        return self.config["KLOCKS"].get("vfd_x_pos", "400")
+        return self.config["KLOCKS"].get("vfd_x_pos", "410")
 
     @VFD_X_POS.setter
     def VFD_X_POS(self, value):
@@ -411,7 +411,7 @@ class Config():
     def VFD_Y_POS(self):
         """  Returns the vfdpyKlock y pos.
         """
-        return self.config["KLOCKS"].get("vfd_y_pos", "400")
+        return self.config["KLOCKS"].get("vfd_y_pos", "100")
 
     @VFD_Y_POS.setter
     def VFD_Y_POS(self, value):
@@ -471,7 +471,7 @@ class Config():
     def TEXTKLOCK_X_POS(self):
         """  Returns the textKlock x pos.
         """
-        return self.config["KLOCKS"].get("textKlock_x_pos", "400")
+        return self.config["KLOCKS"].get("textKlock_x_pos", "100")
 
     @TEXTKLOCK_X_POS.setter
     def TEXTKLOCK_X_POS(self, value):
@@ -483,7 +483,7 @@ class Config():
     def TEXTKLOCK_Y_POS(self):
         """  Returns the textKlock y pos.
         """
-        return self.config["KLOCKS"].get("textKlock_y_pos", "400")
+        return self.config["KLOCKS"].get("textKlock_y_pos", "100")
 
     @TEXTKLOCK_Y_POS.setter
     def TEXTKLOCK_Y_POS(self, value):
@@ -531,7 +531,7 @@ class Config():
     def DIALKLOCK_X_POS(self):
         """  Returns the dialKlock x pos.
         """
-        return self.config["KLOCKS"].get("dialKlock_x_pos", "500")
+        return self.config["KLOCKS"].get("dialKlock_x_pos", "100")
 
     @DIALKLOCK_X_POS.setter
     def DIALKLOCK_X_POS(self, value):
@@ -543,7 +543,7 @@ class Config():
     def DIALKLOCK_Y_POS(self):
         """  Returns the dialKlock y pos.
         """
-        return self.config["KLOCKS"].get("dialKlock_y_pos", "400")
+        return self.config["KLOCKS"].get("dialKlock_y_pos", "100")
 
     @DIALKLOCK_Y_POS.setter
     def DIALKLOCK_Y_POS(self, value):
@@ -615,7 +615,7 @@ class Config():
     def BINARYKLOCK_X_POS(self):
         """  Returns the binaryKlock x pos.
         """
-        return self.config["KLOCKS"].get("binaryKlock_x_pos", "500")
+        return self.config["KLOCKS"].get("binaryKlock_x_pos", "100")
 
     @BINARYKLOCK_X_POS.setter
     def BINARYKLOCK_X_POS(self, value):
@@ -627,7 +627,7 @@ class Config():
     def BINARYKLOCK_Y_POS(self):
         """  Returns the  binaryKlock y pos.
         """
-        return self.config["KLOCKS"].get("binaryKlock_y_pos", "400")
+        return self.config["KLOCKS"].get("binaryKlock_y_pos", "100")
 
     @BINARYKLOCK_Y_POS.setter
     def BINARYKLOCK_Y_POS(self, value):

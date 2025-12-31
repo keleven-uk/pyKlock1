@@ -33,6 +33,12 @@ Note : I use the correct spelling of colour on my side of the code.  :-)
 If no branch indicated, assume main branch.
 
 
+V2025.65	[31 December 2025]
+
+	Tested on python V3.14.0 and CustomTKinter 5.2.2
+	Updates requirements.txt.
+
+
 V2025.64	[6 February 2025]
 
 	Created the stand alone executable, using auto-py-to-exe and inno installer.

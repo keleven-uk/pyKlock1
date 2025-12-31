@@ -1,5 +1,5 @@
 #   Configure file for pyKlock.py 
-#   (c) Kevin Scott   Written Thursday 06 February 2025  10:45:29
+#   (c) Kevin Scott   Written Wednesday 31 December 2025  14:17:12
 #
 #   true and false are lower case 
 #
@@ -9,7 +9,7 @@ appearanceModeTypes = [ "Light", "Dark", "System",]
 colorThemeTypes = [ "green", "dark-blue", "blue",]
 
 [INFO]
-myVERSION = "2025.58"
+myVERSION = "2025.63"
 myNAME = "pyKlock"
 
 [APPLICATION]
@@ -20,8 +20,8 @@ background = "#000000"
 transparent = true
 width = 300
 height = 160
-x_pos = 1328
-y_pos = -231
+x_pos = 2684
+y_pos = 148
 Align_Right = true
 
 [TIME]
@@ -50,10 +50,14 @@ overstrike = false
 [KLOCKS]
 vfd_width = 500
 vfd_height = 260
-vfd_x_pos = 400
-vfd_y_pos = 400
+vfd_x_pos = 108
+vfd_y_pos = 108
 vfd_foreground = "#82ccff"
 vfd_background = "#000000"
+binaryKlock_x_pos = 111
+binaryKlock_y_pos = 100
+textKlock_x_pos = 126
+textKlock_y_pos = 100
 
 [SOUNDS]
 sounds = false
